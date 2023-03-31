@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: #f6f6f6;
+  @apply
+  text-slate-500
+}
+
+*::-webkit-scrollbar {
+  /* background-color: transparent; */
+  /* width: 20px; */
+  background-color: rgba(0, 0, 0, 0.03);
+  width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(101, 101, 101, 0.2);
+  border-radius: 12px;
+}
+
+
+/* Badge */
+.badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 0 6.5px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  line-height: 20px;
+}
+
+
+.badge.badge-success {
+  background: #20c997;
+  @apply
+  text-white
+}

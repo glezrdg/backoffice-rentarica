@@ -1,0 +1,23 @@
+.dropdown-messages {
+  width: 340px;
+  position: absolute;
+  left: -310px;
+  top: 40px;
+  background-color: white;
+}
+
+.dropdown-messages .dropdown-messages__title {
+  background: #f4f5f7;
+  width: 100%;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  min-height: 50px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
