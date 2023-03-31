@@ -73,6 +73,7 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
       >
         <i className='fa fa-sign-out' /> Sign Out
       </Link>
+      <div data-popper-arrow></div>
     </div>
   )
 }
