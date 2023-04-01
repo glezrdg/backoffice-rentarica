@@ -6,7 +6,7 @@ import './styles.css'
 interface IButtonProps {
   children?: React.ReactNode
   className?: string
-  color?: 'primary' | 'success' | 'warning' | 'info' | 'danger'
+  color?: 'primary' | 'success' | 'warning' | 'info' | 'danger' | 'white'
   type?: 'fill' | 'outline'
   rounded?: boolean
   text?: string

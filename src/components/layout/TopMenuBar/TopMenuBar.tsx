@@ -15,7 +15,7 @@ interface ITopMenuBarProps {
 const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen }) => {
   return (
     <>
-      <div className='flex items-center justify-between relative h-[70px] px-5 bg-white z-[1000] '>
+      <div className=' fixed right-0 left-0 flex items-center justify-between h-[70px] px-5 bg-white z-[1000] '>
         <div
           className='flex items-center cursor-pointer'
           onClick={() => handleOpen()}

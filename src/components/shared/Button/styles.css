@@ -21,6 +21,14 @@
   text-white
 }
 
+.btn.fill.white {
+  @apply
+  bg-white
+  shadow-[0_4px_9px_-4px_#f5f5f5]
+  text-slate-500
+  hover:shadow-md
+}
+
 .btn.fill.primary {
   @apply
   bg-primary

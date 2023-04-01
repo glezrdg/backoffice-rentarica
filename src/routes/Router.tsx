@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import Layout from '../components/layout/Layout'
 import { routerType } from '../types/router.types'
 import pagesData from './pagesData'
 
@@ -7,7 +8,11 @@ const Router = () => {
     return <Route key={title} path={`/${path}`} element={element} />
   })
 
-  return <Routes>{pageRoutes}</Routes>
+  return (
+    <Layout>
+      <Routes>{pageRoutes}</Routes>
+    </Layout>
+  )
 }
 
 export default Router
