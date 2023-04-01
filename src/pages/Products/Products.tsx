@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import './styles.css'
 
+// Utility
+import { products } from '../../utility/data'
+
 // Components
 import Button from '../../components/shared/Button'
 import { DataTable } from 'primereact/datatable'
@@ -10,44 +13,6 @@ import { SideCreateProduct } from './components'
 interface IProductsProps {
   children?: React.ReactNode
 }
-
-const products = [
-  {
-    id: 1,
-    img: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/15f901c90a9549d29104aae700d27efb_9366/Superstar_Shoes_Black_EG4959_01_standard.jpg',
-    name: 'Tenis adidas',
-    qty: 12,
-    price: 2500,
-  },
-  {
-    id: 2,
-    img: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/15f901c90a9549d29104aae700d27efb_9366/Superstar_Shoes_Black_EG4959_01_standard.jpg',
-    name: 'Tenis adidas',
-    qty: 12,
-    price: 2500,
-  },
-  {
-    id: 3,
-    img: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/15f901c90a9549d29104aae700d27efb_9366/Superstar_Shoes_Black_EG4959_01_standard.jpg',
-    name: 'Tenis adidas',
-    qty: 12,
-    price: 2500,
-  },
-  {
-    id: 4,
-    img: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/15f901c90a9549d29104aae700d27efb_9366/Superstar_Shoes_Black_EG4959_01_standard.jpg',
-    name: 'Tenis adidas',
-    qty: 12,
-    price: 2500,
-  },
-  {
-    id: 5,
-    img: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/15f901c90a9549d29104aae700d27efb_9366/Superstar_Shoes_Black_EG4959_01_standard.jpg',
-    name: 'Tenis adidas',
-    qty: 12,
-    price: 2500,
-  },
-]
 
 const Products: React.FC<IProductsProps> = (props) => {
   const [createProduct, setCreateProduct] = useState(false)
@@ -147,6 +112,12 @@ const Products: React.FC<IProductsProps> = (props) => {
             field='qty'
             header='Cantidad'
             style={{ width: '25%' }}
+            headerClassName=''
+            body={(data) => (
+              <div className='p-4 px-5 bg-green-400 w-fit text-white rounded-full'>
+                {data.qty}
+              </div>
+            )}
           ></Column>
           <Column
             field='price'
