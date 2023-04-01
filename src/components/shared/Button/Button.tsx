@@ -12,6 +12,7 @@ interface IButtonProps {
   text?: string
   icon?: string
   iconButton?: boolean
+  onClick?: () => void
 }
 
 const Button: React.FC<IButtonProps> = ({
@@ -22,6 +23,7 @@ const Button: React.FC<IButtonProps> = ({
   icon,
   iconButton,
   text,
+  onClick,
 }) => {
   // Function that returns a class dependind on props
   const showClases = () => {
@@ -39,6 +41,7 @@ const Button: React.FC<IButtonProps> = ({
       data-te-ripple-init
       data-te-ripple-color={type === 'fill' ? 'light' : 'dark'}
       className={`btn ${type} ${color} ${className} ${showClases()}`}
+      onClick={onClick}
     >
       {icon && <i className={`h-4 w-4 ${icon} ${text && 'mr-1 '}`} />}
       {text}

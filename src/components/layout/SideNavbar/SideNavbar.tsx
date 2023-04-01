@@ -26,6 +26,9 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
           <MenuItem icon='fa fa-bag-shopping' title='Ordenes'>
             <SubMenuItem title='Dashboard' />
           </MenuItem>
+          <MenuItem icon='fa fa-bag-shopping' title='Inventario'>
+            <SubMenuItem title='Dashboard' />
+          </MenuItem>
 
           <MenuItem icon='fa fa-users' title='Clientes' />
         </ul>

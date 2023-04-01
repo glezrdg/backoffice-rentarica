@@ -1,12 +1,14 @@
 .btn {
   @apply
-  inline-block
   rounded
   px-6
   pt-2.5
   pb-2
   text-xs
   font-medium
+  flex
+  justify-center
+  items-center
   uppercase
   leading-normal  
   transition-all
