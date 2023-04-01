@@ -5,6 +5,7 @@ import './styles.css'
 import Button from '../../components/shared/Button'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
+import { InputText } from 'primereact/inputtext'
 import { MultiSelect } from 'primereact/multiselect'
 import { orders } from '../../utility/data'
 import { Dropdown } from 'primereact/dropdown'
@@ -48,12 +49,15 @@ const Orders: React.FC<IOrdersProps> = (props) => {
       </div>
 
       <div className='flex items-center p-2 mb-6'>
-        <div className='flex items-center self-end bg-white px-2 rounded-2xl h-fit w-fit mr-20 flex-1'>
-          <i className=' fa fa-search' />
-          <input
-            placeholder='Buscar por nombre...'
-            className='rounded-lg placeholder:text-xs outline-none p-2 w-full'
-          />
+        <div className='flex items-center self-end px-2 rounded-2xl h-fit w-fit mr-20 flex-1'>
+          <span className='p-input-icon-left w-full'>
+            <i className=' fa fa-search' />
+
+            <InputText
+              placeholder='Buscar por nombre...'
+              className='rounded-lg placeholder:text-xs outline-none p-2 w-full'
+            />
+          </span>
         </div>
 
         <div className='flex items-center'>
