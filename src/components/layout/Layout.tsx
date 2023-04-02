@@ -1,11 +1,11 @@
 import React, { ReactNode, useState } from 'react'
 
-import { rechartData } from '../../utility/data'
 import { BarChart } from '../charts'
 
 // Components
 
 import Button from '../shared/Button'
+import { FloatToolbar } from './FloatToolbar'
 import { SideNavbar } from './SideNavbar'
 import { TopMenuBar } from './TopMenuBar'
 
@@ -20,6 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <TopMenuBar handleOpen={() => setSidenav(!sidenav)} />
       <SideNavbar active={sidenav} />
+      <FloatToolbar />
       <main
         className={`p-4 pt-[75px] transition-all ${
           sidenav ? 'ml-[280px]' : ''

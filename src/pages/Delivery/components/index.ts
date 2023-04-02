@@ -1,2 +1,2 @@
-export * from './SideCreateDelivery';
+export * from './SideCreateOfert';
 export * from './index';
