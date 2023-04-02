@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
 import { Column } from 'primereact/column'
 import { DataTable } from 'primereact/datatable'
-import { Dropdown } from 'primereact/dropdown'
 import { InputText } from 'primereact/inputtext'
 import { MultiSelect } from 'primereact/multiselect'
+import React, { useState } from 'react'
 import Button from '../../components/shared/Button'
-import { orders, products } from '../../utility/data'
-import './styles.css'
+import { orders } from '../../utility/data'
 import { SideCreateOfert } from './components'
+import './styles.css'
 
 interface IOfertsProps {
   children?: React.ReactNode
