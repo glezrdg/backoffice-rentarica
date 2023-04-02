@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { SubMenuItem } from '../SubMenuItem'
 import './styles.css'
 
@@ -6,13 +7,17 @@ interface IMenuItemProps {
   children?: React.ReactNode
   title: string
   icon: string
+  url: string
 }
 
-const MenuItem: React.FC<IMenuItemProps> = ({ children, title, icon }) => {
+const MenuItem: React.FC<IMenuItemProps> = ({ children, title, icon, url }) => {
   const [openMenu, setOpenMenu] = useState(false)
 
   return (
-    <li className='sidenav-menu__submenu cursor-pointer transition-all'>
+    <Link
+      to={url}
+      className='sidenav-menu__submenu cursor-pointer transition-all'
+    >
       <div
         onClick={() => setOpenMenu(!openMenu)}
         className={`sidenav-menu__submenu_title h-[3rem] ${
@@ -35,7 +40,7 @@ const MenuItem: React.FC<IMenuItemProps> = ({ children, title, icon }) => {
           {children}
         </ul>
       )}
-    </li>
+    </Link>
   )
 }
 

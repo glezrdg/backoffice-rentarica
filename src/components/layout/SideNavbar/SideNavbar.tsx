@@ -17,25 +17,24 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
       >
         <p className='uppercase text-xs mb-4'>Main menu</p>
         <ul className='sidenav-menu'>
-          <MenuItem icon='fa fa-home' title='Dashboard'>
-            <SubMenuItem title='Dashboard' />
-            <SubMenuItem title='Dashboard' />
-            <SubMenuItem title='Dashboard' />
-            <SubMenuItem title='Dashboard' />
-          </MenuItem>
-          <MenuItem icon='fa fa-bag-shopping' title='Ordenes'>
-            <SubMenuItem title='Dashboard' />
-          </MenuItem>
-          <MenuItem icon='fa fa-box' title='Inventario'>
-            <SubMenuItem title='Dashboard' />
-          </MenuItem>
+          <MenuItem url='admin/dashboard' icon='fa fa-home' title='Dashboard' />
+          <MenuItem
+            url='admin/orders'
+            icon='fa fa-bag-shopping'
+            title='Ordenes'
+          />
+          <MenuItem url='admin/products' icon='fa fa-box' title='Inventario' />
 
-          <MenuItem icon='fa fa-user' title='Clientes' />
-          <MenuItem icon='fa fa-folder' title='Reportes' />
-          <MenuItem icon='fa fa-percent' title='Ofertas' />
-          <MenuItem icon='fa fa-truck' title='Delivery' />
-          <MenuItem icon='fa fa-code-branch' title='Marcas y categorias' />
-          <MenuItem icon='fa fa-note-sticky' title='Notas' />
+          <MenuItem url='admin/clients' icon='fa fa-user' title='Clientes' />
+          <MenuItem url='admin/reports' icon='fa fa-folder' title='Reportes' />
+          <MenuItem url='admin/oferts' icon='fa fa-percent' title='Ofertas' />
+          <MenuItem url='admin/delivery' icon='fa fa-truck' title='Delivery' />
+          <MenuItem
+            url='admin/category_brand'
+            icon='fa fa-code-branch'
+            title='Marcas y categorias'
+          />
+          <MenuItem url='admin/notes' icon='fa fa-note-sticky' title='Notas' />
         </ul>
       </div>
     </>

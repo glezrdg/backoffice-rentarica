@@ -9,13 +9,26 @@ import Button from '../../components/shared/Button'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { SideCreateProduct } from './components'
+import { MultiSelect } from 'primereact/multiselect'
+import { Dropdown } from 'primereact/dropdown'
+import { InputText } from 'primereact/inputtext'
 
 interface IProductsProps {
   children?: React.ReactNode
 }
 
 const Products: React.FC<IProductsProps> = (props) => {
+  const [selectedCities, setSelectedCities] = useState(null)
+  const [selectedCity, setSelectedCity] = useState(null)
   const [createProduct, setCreateProduct] = useState(false)
+
+  const cities = [
+    { name: 'New York', code: 'NY' },
+    { name: 'Rome', code: 'RM' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Istanbul', code: 'IST' },
+    { name: 'Paris', code: 'PRS' },
+  ]
 
   return (
     <>
@@ -39,46 +52,67 @@ const Products: React.FC<IProductsProps> = (props) => {
       </div>
 
       <div className='flex items-center p-2 mb-6'>
-        <div className='flex items-center bg-white px-2 rounded-2xl w-fit mr-20 flex-1'>
-          <i className=' fa fa-search' />
-          <input
-            placeholder='Buscar por nombre...'
-            className='rounded-lg placeholder:text-xs outline-none p-2 w-full'
-          />
+        <div className='flex items-center self-end px-2 rounded-2xl h-fit w-fit mr-20 flex-1'>
+          <span className='p-input-icon-left w-full'>
+            <i className=' fa fa-search' />
+
+            <InputText
+              placeholder='Buscar por nombre...'
+              className='rounded-lg placeholder:text-xs outline-none p-2 w-full'
+            />
+          </span>
         </div>
 
         <div className='flex items-center'>
           <div className='flex flex-col mr-3'>
-            <label className='text-xs mb-1'>Categorias</label>
-            <select className='rounded-lg text-sm p-1'>
-              <option>Camisas</option>
-              <option>Pantalones</option>
-              <option>Camisas</option>
-            </select>
+            <label className='text-xs mb-1'>Provincias</label>
+            <MultiSelect
+              value={selectedCities}
+              onChange={(e) => setSelectedCities(e.value)}
+              options={cities}
+              optionLabel='name'
+              display='chip'
+              placeholder='Provincias'
+              maxSelectedLabels={3}
+              className='w-full max-w-[150px] md:w-20rem'
+            />
           </div>
           <div className='flex flex-col mr-3'>
-            <label className='text-xs mb-1'>Precio</label>
-            <select className='rounded-lg text-sm p-1'>
-              <option>Camisas</option>
-              <option>Pantalones</option>
-              <option>Camisas</option>
-            </select>
+            <label className='text-xs mb-1'>Monto</label>
+            <Dropdown
+              value={selectedCity}
+              onChange={(e) => setSelectedCity(e.value)}
+              options={cities}
+              optionLabel='name'
+              placeholder='Monto'
+              className='w-full md:w-14rem'
+            />
           </div>
           <div className='flex flex-col mr-3'>
-            <label className='text-xs mb-1'>Size</label>
-            <select className='rounded-lg p-1 text-sm'>
-              <option className='text-sm'>Camisas</option>
-              <option className='text-sm'>Pantalones</option>
-              <option className='text-sm'>Camisas</option>
-            </select>
+            <label className='text-xs mb-1'>Estado</label>
+            <MultiSelect
+              value={selectedCities}
+              onChange={(e) => setSelectedCities(e.value)}
+              options={cities}
+              optionLabel='name'
+              display='chip'
+              placeholder='Estado'
+              maxSelectedLabels={3}
+              className='w-full max-w-[150px] md:w-20rem'
+            />
           </div>
           <div className='flex flex-col'>
-            <label className='text-xs mb-1'>Cantidad</label>
-            <select className='rounded-lg text-sm p-1'>
-              <option>Camisas</option>
-              <option>Pantalones</option>
-              <option>Camisas</option>
-            </select>
+            <label className='text-xs mb-1'>Compras</label>
+            <MultiSelect
+              value={selectedCities}
+              onChange={(e) => setSelectedCities(e.value)}
+              options={cities}
+              optionLabel='name'
+              display='chip'
+              placeholder='Compras'
+              maxSelectedLabels={3}
+              className='w-full max-w-[150px] md:w-20rem'
+            />
           </div>
         </div>
       </div>
@@ -99,7 +133,7 @@ const Products: React.FC<IProductsProps> = (props) => {
               <img
                 src={data.img}
                 alt=''
-                className=' w-20 h-20 object-cover rounded-lg'
+                className=' w-16 h-16 object-cover rounded-lg'
               />
             )}
           ></Column>
@@ -114,7 +148,7 @@ const Products: React.FC<IProductsProps> = (props) => {
             style={{ width: '25%' }}
             headerClassName=''
             body={(data) => (
-              <div className='p-4 px-5 bg-green-400 w-fit text-white rounded-full'>
+              <div className='p-2 px-3 bg-green-400 w-fit text-white rounded-full'>
                 {data.qty}
               </div>
             )}

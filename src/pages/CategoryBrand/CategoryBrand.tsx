@@ -84,7 +84,7 @@ const CategoryBrand: React.FC<ICategoryBrandProps> = (props) => {
             <h4 className='text-lg text-slate-700 uppercase'>Categorias</h4>
             <i className='fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full text-purple-500 bg-purple-200 hover:text-purple-700 hover:bg-purple-300'></i>
           </div>
-          <Accordion activeIndex={0} className='mt-4'>
+          <Accordion className='mt-4'>
             <AccordionTab header='Hombres'>
               <ul className='ml-4'>
                 <li>Pantalones</li>
