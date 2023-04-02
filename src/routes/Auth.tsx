@@ -10,11 +10,12 @@ import {
   Clients,
   Delivery,
 } from '../pages'
+import { CategoryBrand } from '../pages/CategoryBrand'
 
 export const authPages: routerType[] = [
   {
     path: '',
-    element: <Delivery />,
+    element: <CategoryBrand />,
     title: 'home',
   },
 ]
