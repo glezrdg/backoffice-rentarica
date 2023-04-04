@@ -22,8 +22,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <SideNavbar active={sidenav} />
       <FloatToolbar />
       <main
-        className={`p-4 pt-[75px] transition-all ${
-          sidenav ? 'ml-[280px]' : ''
+        className={`md:px-6 pt-[75px] transition-all ${
+          sidenav ? 'lg:ml-[280px]' : ''
         }`}
       >
         <div className='p-4'>{children}</div>

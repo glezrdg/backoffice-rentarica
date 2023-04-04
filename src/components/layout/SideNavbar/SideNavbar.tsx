@@ -11,7 +11,7 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
   return (
     <>
       <div
-        className={`sidenav bg-slate-50 w-[280px] h-[100vh] p-4 transition-all ${
+        className={`sidenav hidden lg:block bg-slate-50 w-[280px] h-[100vh] p-4 transition-all ${
           active ? 'active' : ''
         }`}
       >
