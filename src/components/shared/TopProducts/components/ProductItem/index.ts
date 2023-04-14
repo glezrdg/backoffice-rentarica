@@ -1,1 +1,2 @@
-export { default } from './ProductItem';
+export { default as ProductItem } from './ProductItem';
+export * from './index';

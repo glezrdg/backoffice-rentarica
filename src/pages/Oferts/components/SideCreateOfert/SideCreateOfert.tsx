@@ -3,8 +3,8 @@ import React from 'react'
 import './styles.css'
 
 // Components
+import { Button } from '../../../../components/shared'
 import { FileUpload } from 'primereact/fileupload'
-import Button from '../../../../components/shared/Button'
 
 interface ISideCreateOfertProps {
   children?: React.ReactNode

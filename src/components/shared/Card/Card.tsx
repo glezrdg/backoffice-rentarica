@@ -1,6 +1,6 @@
 import React from 'react'
 import { LineChart } from '../../charts'
-import Toolbar from './components/Toolbar'
+import { Toolbar } from './components/Toolbar'
 import './styles.css'
 
 interface ICardProps {

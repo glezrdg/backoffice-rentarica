@@ -2,15 +2,7 @@ import React, { useState } from 'react'
 import './styles.css'
 
 // Components
-import Button from '../../components/shared/Button'
-import { DataTable } from 'primereact/datatable'
-import { Column } from 'primereact/column'
-import { Avatar } from 'primereact/avatar'
-import { InputText } from 'primereact/inputtext'
-import { MultiSelect } from 'primereact/multiselect'
-import { TabView, TabPanel } from 'primereact/tabview'
-import { orders, products } from '../../utility/data'
-import { Dropdown } from 'primereact/dropdown'
+import { Button } from '../../components/shared/Button'
 import PieChart from '../../components/charts/PieChart'
 
 interface IReportsProps {
@@ -18,16 +10,6 @@ interface IReportsProps {
 }
 
 const Reports: React.FC<IReportsProps> = (props) => {
-  const [selectedCities, setSelectedCities] = useState(null)
-  const [selectedCity, setSelectedCity] = useState(null)
-  const cities = [
-    { name: 'New York', code: 'NY' },
-    { name: 'Rome', code: 'RM' },
-    { name: 'London', code: 'LDN' },
-    { name: 'Istanbul', code: 'IST' },
-    { name: 'Paris', code: 'PRS' },
-  ]
-
   return (
     <>
       {/* Header */}

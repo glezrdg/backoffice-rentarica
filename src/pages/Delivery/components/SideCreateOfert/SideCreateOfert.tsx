@@ -4,7 +4,7 @@ import './styles.css'
 
 // Components
 import { FileUpload } from 'primereact/fileupload'
-import Button from '../../../../components/shared/Button'
+import { Button } from '../../../../components/shared'
 
 interface ISideCreateDeliveryProps {
   children?: React.ReactNode

@@ -1,5 +1,6 @@
 export * from './FloatToolbar';
 export { default as Layout } from './Layout';
+export * from './PageHeader';
 export * from './SideNavbar/components/MenuItem';
 export * from './SideNavbar/components/SubMenuItem';
 export * from './SideNavbar/components';
@@ -9,3 +10,4 @@ export * from './TopMenuBar/components/DropdownNotifications';
 export * from './TopMenuBar/components/DropdownProfile';
 export * from './TopMenuBar/components';
 export * from './TopMenuBar';
+export * from './index';

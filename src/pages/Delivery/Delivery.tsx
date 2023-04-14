@@ -1,16 +1,17 @@
+import React, { useState } from 'react'
+import './styles.css'
+
+import { BarChart } from '../../components/charts'
 import { Avatar } from 'primereact/avatar'
 import { Column } from 'primereact/column'
 import { DataTable } from 'primereact/datatable'
 import { InputText } from 'primereact/inputtext'
 import { MultiSelect } from 'primereact/multiselect'
 import { TabPanel, TabView } from 'primereact/tabview'
-import React, { useState } from 'react'
-import { BarChart } from '../../components/charts'
 import PieChart from '../../components/charts/PieChart'
-import Button from '../../components/shared/Button'
+import { Button } from '../../components/shared'
 import { orders, products } from '../../utility/data'
 import { SideCreateDelivery } from './components'
-import './styles.css'
 
 interface IDeliveryProps {
   children?: React.ReactNode

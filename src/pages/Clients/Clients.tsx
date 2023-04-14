@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './styles.css'
 
 // Components
-import Button from '../../components/shared/Button'
+import { Button } from '../../components/shared'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { Avatar } from 'primereact/avatar'

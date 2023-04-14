@@ -2,7 +2,7 @@ import React from 'react'
 import './styles.css'
 
 // Components
-import Button from '../../shared/Button'
+import { Button } from '../../shared'
 
 interface IPageHeaderProps {
   children?: React.ReactNode

@@ -1,12 +1,11 @@
-import { Column } from 'primereact/column'
-import { DataTable } from 'primereact/datatable'
+import React, { useState } from 'react'
+import './styles.css'
+
+// Components
+import { Accordion, AccordionTab } from 'primereact/accordion'
 import { InputText } from 'primereact/inputtext'
 import { MultiSelect } from 'primereact/multiselect'
-import { Accordion, AccordionTab } from 'primereact/accordion'
-import React, { useState } from 'react'
-import Button from '../../components/shared/Button'
-import { orders } from '../../utility/data'
-import './styles.css'
+import { Button } from '../../components/shared/'
 
 interface ICategoryBrandProps {
   children?: React.ReactNode

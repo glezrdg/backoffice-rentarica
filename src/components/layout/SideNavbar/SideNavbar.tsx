@@ -11,11 +11,11 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
   return (
     <>
       <div
-        className={`sidenav hidden lg:block bg-slate-50 w-[280px] h-[100vh] p-4 transition-all ${
+        className={` hidden md:block overflow-visible sidenav w-[3.5rem]  lg:w-[16rem] lg:block bg-slate-50 h-[100vh] p-4 transition-all ${
           active ? 'active' : ''
         }`}
       >
-        <p className='uppercase text-xs mb-4'>Main menu</p>
+        <p className='hidden lg:block uppercase text-xs mb-4'>Main menu</p>
         <ul className='sidenav-menu'>
           <MenuItem url='admin/dashboard' icon='fa fa-home' title='Dashboard' />
           <MenuItem

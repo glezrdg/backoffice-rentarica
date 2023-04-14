@@ -5,7 +5,7 @@ import './styles.css'
 import { products } from '../../utility/data'
 
 // Components
-import Button from '../../components/shared/Button'
+import { Button } from '../../components/shared'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { SideCreateProduct } from './components'

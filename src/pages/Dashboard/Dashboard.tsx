@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { LineChart } from '../../components/charts'
-import PageHeader from '../../components/layout/PageHeader'
 
 // Components
 import { WidgetCard } from './components/WidgetCard'
 import { Card } from '../../components/shared/Card'
+import { LineChart } from '../../components/charts'
 import TopProducts from '../../components/shared/TopProducts/TopProducts'
 import ShowMoney from './components/ShowMoney/ShowMoney'
 import RecentOrdersTable from './components/tables/RecentOrdersTable'
+import { PageHeader } from '../../components/layout'
 
 interface IDashboardProps {
   children?: React.ReactNode

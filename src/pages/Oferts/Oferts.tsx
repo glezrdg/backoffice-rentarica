@@ -1,12 +1,14 @@
+import React, { useState } from 'react'
+import './styles.css'
+
+// Components
+import { Button } from '../../components/shared'
 import { Column } from 'primereact/column'
 import { DataTable } from 'primereact/datatable'
 import { InputText } from 'primereact/inputtext'
 import { MultiSelect } from 'primereact/multiselect'
-import React, { useState } from 'react'
-import Button from '../../components/shared/Button'
 import { orders } from '../../utility/data'
 import { SideCreateOfert } from './components'
-import './styles.css'
 
 interface IOfertsProps {
   children?: React.ReactNode
@@ -14,7 +16,6 @@ interface IOfertsProps {
 
 const Oferts: React.FC<IOfertsProps> = (props) => {
   const [selectedCities, setSelectedCities] = useState(null)
-  const [selectedCity, setSelectedCity] = useState(null)
   const [createOfert, setCreateOfert] = useState(false)
 
   const cities = [
