@@ -18,7 +18,7 @@ const SideCreateOfert: React.FC<ISideCreateOfertProps> = ({
 }) => {
   return (
     <div
-      className={`fixed  overflow-y-auto top-0 z-[2000] w-[40%] h-[100vh] bg-slate-100 shadow-md px-6 transition-all duration-300 ${
+      className={`fixed  overflow-y-auto top-0 z-[2000] w-[100vw] lg:w-[40%] h-[100vh] bg-slate-100 shadow-md px-6 transition-all duration-300 ${
         active ? 'right-0' : '-right-full'
       }`}
     >
@@ -35,11 +35,6 @@ const SideCreateOfert: React.FC<ISideCreateOfertProps> = ({
 
       {/* FORM */}
       <form className='mt-3 relative flex flex-col'>
-        <div className='absolute top-0 -left-10 cursor-pointer flex flex-col '>
-          <div className='bg-green-400 rounded-tl-lg text-white grid hover:left-[-50px] place-items-center  rounded-bl-lg z-[1] transition-all h-16 w-4 fixed hover:scale-110'>
-            1
-          </div>
-        </div>
         <div className='grid grid-cols-2 gap-5 mb-5'>
           <div className='flex flex-col'>
             <label className='mb-2 text-xs'>Codigo</label>
