@@ -10,8 +10,6 @@ export interface CategoryFormProps {
 }
 
 const CategoryForm: React.FC<CategoryFormProps> = ({ close }) => {
-  1
-
   const { addCategory } = useCategoryBrandState()
   const [header, setHeader] = useState('')
   const [category, setCategory] = useState('')

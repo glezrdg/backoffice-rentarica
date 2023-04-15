@@ -24,7 +24,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
     <>
       <div className='items-center hidden lg:flex'>
         <div className='flex flex-col mr-3'>
-          <label className='text-xs mb-1'>Provincias</label>
+          <label className='text-xs mb-1'>Categorias</label>
           <MultiSelect
             value={selectedCities}
             onChange={(e) => setSelectedCities(e.value)}
@@ -37,7 +37,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
           />
         </div>
         <div className='flex flex-col mr-3'>
-          <label className='text-xs mb-1'>Monto</label>
+          <label className='text-xs mb-1'>Marcas</label>
           <Dropdown
             value={selectedCity}
             onChange={(e) => setSelectedCity(e.value)}
@@ -48,7 +48,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
           />
         </div>
         <div className='flex flex-col mr-3'>
-          <label className='text-xs mb-1'>Estado</label>
+          <label className='text-xs mb-1'>Precio</label>
           <MultiSelect
             value={selectedCities}
             onChange={(e) => setSelectedCities(e.value)}
@@ -61,7 +61,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
           />
         </div>
         <div className='flex flex-col'>
-          <label className='text-xs mb-1'>Metodo de pago</label>
+          <label className='text-xs mb-1'>Sizes</label>
           <MultiSelect
             value={selectedCities}
             onChange={(e) => setSelectedCities(e.value)}
