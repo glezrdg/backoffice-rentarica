@@ -8,6 +8,7 @@ interface IButtonProps {
   className?: string
   color?: 'primary' | 'success' | 'warning' | 'info' | 'danger' | 'white'
   type?: 'fill' | 'outline'
+  buttonType?: 'submit' | 'button'
   rounded?: boolean
   text?: string
   icon?: string
@@ -24,6 +25,7 @@ const Button: React.FC<IButtonProps> = ({
   iconButton,
   text,
   onClick,
+  buttonType,
 }) => {
   // Function that returns a class dependind on props
   const showClases = () => {
@@ -42,6 +44,7 @@ const Button: React.FC<IButtonProps> = ({
       data-te-ripple-color={type === 'fill' ? 'light' : 'dark'}
       className={`btn ${type} ${color} ${className} ${showClases()}`}
       onClick={onClick}
+      type={buttonType}
     >
       {icon && <i className={`h-4 w-4 ${icon} ${text && 'mr-1 '}`} />}
       {text}

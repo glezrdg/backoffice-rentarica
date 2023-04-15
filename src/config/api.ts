@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { getItem } from '../utility/localStorageControl';
 
 const API_ENDPOINT = process.env.API_ENDPOINT;
@@ -14,6 +14,7 @@ const client: AxiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
 
 class DataService {
   static get(path = '') {

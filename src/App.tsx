@@ -1,5 +1,6 @@
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useRef } from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { Toast, ToastProps } from 'primereact/toast'
 import './App.css'
 
 // Components
@@ -8,21 +9,27 @@ import Spin from './components/shared/Spin'
 //Router
 import Router from './routes/Router'
 
+export let toast: any
+
 function App() {
   const [count, setCount] = useState(0)
+  toast = useRef(null)
 
   return (
-    <BrowserRouter>
-      <Suspense
-        fallback={
-          <div className='spin'>
-            <Spin />
-          </div>
-        }
-      >
-        <Router />
-      </Suspense>
-    </BrowserRouter>
+    <>
+      <Toast ref={toast} />
+      <BrowserRouter>
+        <Suspense
+          fallback={
+            <div className='spin'>
+              <Spin />
+            </div>
+          }
+        >
+          <Router />
+        </Suspense>
+      </BrowserRouter>
+    </>
   )
 }
 

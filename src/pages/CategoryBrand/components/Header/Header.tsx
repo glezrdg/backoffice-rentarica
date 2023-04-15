@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './styles.css'
+
+// Components
 import { InputText } from 'primereact/inputtext'
-import { MobileFilter } from '../MobileFilter'
-import { Filters } from '../Filters'
 
 interface IHeaderProps {
   children?: React.ReactNode
@@ -31,12 +31,6 @@ const Header: React.FC<IHeaderProps> = (props) => {
         >
           <i className='fa fa-filter' />
         </button>
-
-        {/* MOBILE FILTER */}
-        <MobileFilter visible={mobileFilter} />
-
-        {/* Filters */}
-        <Filters />
       </div>
     </>
   )
