@@ -16,6 +16,7 @@ interface IProductsProps {
 
 const Products: React.FC<IProductsProps> = (props) => {
   const [createProduct, setCreateProduct] = useState(false)
+  const [productModal, setProductModal] = useState(false)
 
   return (
     <InventoryProvider>

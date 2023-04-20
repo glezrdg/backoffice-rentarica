@@ -80,7 +80,7 @@ const OrdersTable = () => {
                 <button
                   type='button'
                   data-te-toggle='modal'
-                  data-te-target='#exampleModalCenter'
+                  data-te-target='#clientModal'
                   data-te-ripple-init
                   data-te-ripple-color='light'
                 >

@@ -3,12 +3,14 @@ import './styles.css'
 import { InputText } from 'primereact/inputtext'
 import { MobileFilter } from '../MobileFilter'
 import { Filters } from '../Filters'
+import { useOfertState } from '../../context'
 
 interface IHeaderProps {
   children?: React.ReactNode
 }
 
 const Header: React.FC<IHeaderProps> = (props) => {
+  const { setSearch } = useOfertState()
   const [mobileFilter, setMobileFilter] = useState(false)
 
   return (
@@ -19,6 +21,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
             <i className=' fa fa-search' />
 
             <InputText
+              onChange={(e) => setSearch(e.target.value)}
               placeholder='Buscar por nombre o codigo...'
               className='rounded-lg placeholder:text-xs outline-none p-2 w-full min-w-[200px]'
             />

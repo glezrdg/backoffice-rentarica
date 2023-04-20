@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('styles/tailwindChanges.css');
+/* @import url('styles/tailwindChanges.css'); */
 
 body {
   background-color: #F3F4F6;

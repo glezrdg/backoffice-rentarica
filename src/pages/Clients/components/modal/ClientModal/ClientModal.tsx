@@ -18,7 +18,7 @@ const ClientModal: React.FC<IClientModalProps> = (props) => {
     <div
       data-te-modal-init
       className='fixed top-0 left-0 z-[5000] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none'
-      id='exampleModalCenter'
+      id='clientModal'
       aria-labelledby='exampleModalCenterTitle'
       aria-hidden='true'
       role='dialog'

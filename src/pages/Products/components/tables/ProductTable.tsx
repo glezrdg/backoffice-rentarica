@@ -5,6 +5,7 @@ import commaNumber from 'comma-number'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { useInventoryState } from '../../context'
+import { ProductModal } from '../modal/ClientModal'
 
 interface ProductTableProps {
   openCreate: () => void
@@ -55,14 +56,21 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
           style={{ width: '15%' }}
           body={(data) => (
             <div className='flex'>
+              <div onClick={() => setProduct(data)}>
+                <i
+                  className='fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'
+                  data-te-toggle='modal'
+                  data-te-target='#productModal'
+                ></i>
+                <ProductModal />
+              </div>
               <i
                 onClick={() => {
                   setProduct(data)
                   openCreate()
                 }}
-                className='fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'
+                className='fa fa-regular fa-edit cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'
               ></i>
-              <i className='fa fa-regular fa-edit cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
               <i className='fa fa-ellipsis-vertical cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
             </div>
           )}
