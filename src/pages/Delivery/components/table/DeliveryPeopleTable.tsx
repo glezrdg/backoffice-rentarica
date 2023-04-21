@@ -1,16 +1,21 @@
-import { DataTable } from 'primereact/datatable'
 import React from 'react'
+import { useDeliveryState } from '../../context'
 import { orders, products } from '../../../../utility/data'
+
+// Components
+import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { Avatar } from 'primereact/avatar'
 import { TabPanel, TabView } from 'primereact/tabview'
 import { InputText } from 'primereact/inputtext'
 
 const DeliveryPeopleTable = () => {
+  const { deliveries } = useDeliveryState()
+
   return (
     <div className='p-4 bg-white rounded-lg shadow-sm w-full h-fit'>
       <DataTable
-        value={orders}
+        value={deliveries}
         paginator
         rows={5}
         rowsPerPageOptions={[5, 10, 25, 50]}
@@ -18,30 +23,28 @@ const DeliveryPeopleTable = () => {
         className='hover:bg-slate-200'
       >
         <Column
-          field='client'
+          field='name'
           header='Nombre'
           style={{ width: '18%' }}
           className='text-sm'
         ></Column>
         <Column
-          field='createdAt'
-          header='Telefono'
+          field='mobile'
+          header='Celular'
           className='text-sm'
-          body={(data) => <p>849-408-7034</p>}
           style={{ width: '18%' }}
         ></Column>
         <Column
-          field='qty'
-          header='Pedidos realizados'
+          field='cedula'
+          header='Cedula'
           className='text-sm m-auto'
           style={{ width: '23%' }}
         ></Column>
 
         <Column
-          field='totalAmount'
-          header='Monto'
+          field='placa'
+          header='Placa'
           className='text-sm m-auto'
-          body={(data) => <p>${data.totalAmount}</p>}
           style={{ width: '15%' }}
         ></Column>
         <Column
@@ -101,13 +104,13 @@ const DeliveryPeopleTable = () => {
                             xmlns='http://www.w3.org/2000/svg'
                             fill='none'
                             viewBox='0 0 24 24'
-                            stroke-width='1.5'
+                            strokeWidth='1.5'
                             stroke='currentColor'
                             className='h-6 w-6'
                           >
                             <path
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
                               d='M6 18L18 6M6 6l12 12'
                             />
                           </svg>
