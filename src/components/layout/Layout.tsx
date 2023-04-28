@@ -3,11 +3,10 @@ import React, { ReactNode, useState } from 'react'
 import { BarChart } from '../charts'
 
 // Components
-
-import Button from '../shared/Button'
 import { FloatToolbar } from './FloatToolbar'
 import { SideNavbar } from './SideNavbar'
 import { TopMenuBar } from './TopMenuBar'
+import { NotesModal } from '../../pages/Notes/components/NotesModal'
 
 export interface LayoutProps {
   children: ReactNode
@@ -20,7 +19,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <TopMenuBar handleOpen={() => setSidenav(!sidenav)} />
       <SideNavbar active={sidenav} />
-      <FloatToolbar />
+      <div>
+        <FloatToolbar />
+        <NotesModal />
+      </div>
       <main
         className={`md:px-4 pt-[75px] ml-0 md:ml-[3rem] transition-all ${
           sidenav ? 'lg:ml-[16rem]' : 'md:ml-[3.5rem]'

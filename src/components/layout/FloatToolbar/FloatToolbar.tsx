@@ -8,7 +8,11 @@ interface IFloatToolbarProps {
 const FloatToolbar: React.FC<IFloatToolbarProps> = (props) => {
   return (
     <div className='fixed right-0 top-[50%] z-[5000]'>
-      <div className='bg-blue-500 cursor-pointer p-4 hover:scale-[1.05] transition text-white rounded-full grid place-items-center'>
+      <div
+        data-te-toggle='modal'
+        data-te-target='#createNoteModal'
+        className='bg-blue-500 cursor-pointer p-4 hover:scale-[1.05] transition text-white rounded-full grid place-items-center'
+      >
         <i className='fa fa-note-sticky' />
       </div>
     </div>

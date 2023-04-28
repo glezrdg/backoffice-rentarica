@@ -5,12 +5,7 @@ import './styles.css'
 import PieChart from '../../components/charts/PieChart'
 import { PageHeader } from '../../components/layout'
 import { Button, Card } from '../../components/shared'
-import {
-  ClientsTable,
-  Header,
-  OrdersTable,
-  PaymentMethodsTable,
-} from './components'
+import { ClientsTable, Header, PaymentMethodsTable } from './components'
 import { ClientProvider } from './context'
 
 interface IClientsProps {
@@ -52,7 +47,7 @@ const Clients: React.FC<IClientsProps> = (props) => {
           <Card
             title='Provincias'
             eye
-            className=' h-[inherit] mt-6'
+            className='h-[inherit] mt-6'
             bodyClassName='p-2 grid place-items-center pt-12'
           >
             <PieChart />
