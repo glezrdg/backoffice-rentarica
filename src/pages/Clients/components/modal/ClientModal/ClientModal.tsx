@@ -1,6 +1,9 @@
+import React from 'react'
+// Components
+
 import { Avatar } from 'primereact/avatar'
 import { TabPanel, TabView } from 'primereact/tabview'
-import React from 'react'
+import { useClientstate } from '../../../context'
 import {
   LatestBuy,
   ClientCart,
@@ -14,6 +17,8 @@ interface IClientModalProps {
 }
 
 const ClientModal: React.FC<IClientModalProps> = (props) => {
+  const { client } = useClientstate()
+
   return (
     <div
       data-te-modal-init
@@ -75,7 +80,7 @@ const ClientModal: React.FC<IClientModalProps> = (props) => {
                   }}
                 />
                 <div>
-                  <p className='text-xl mb-1'>Carlos Bueno Tavares</p>
+                  <p className='text-xl mb-1'>{client?.name}</p>
                   <span className='text-sm text-slate-500'>36 compras</span>
                 </div>
               </div>
