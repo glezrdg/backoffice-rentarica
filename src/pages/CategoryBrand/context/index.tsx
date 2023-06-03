@@ -9,12 +9,12 @@ import { ICategory } from '../models/ICategory'
 import { IBrand } from '../models/IBrand'
 
 // Services
-import { getCategories } from '../services'
-import { getBrands } from '../services/brand'
+import { getCategories, addCategory as postCategory } from '../services'
+import { getBrands, addBrand as postBrand } from '../services/brand'
 
 const initialState: InitialStateProps = {
   categories: [],
-  category: { header: '', categories: [''] },
+  category: { name: '', subcategories: [''] },
   brands: [],
   brand: { name: '' },
   addBrand: () => {},
@@ -50,11 +50,17 @@ export const CategoryBrandProvider: React.FC<CategoryBrandProviderProps> = ({
     } catch (error) {}
   }
 
-  const addBrand = (body: IBrand) => {
-    setBrands((prev) => [...prev, { _id: `${prev.length + 1}`, ...body }])
+  const addBrand = async (body: IBrand) => {
+    try {
+      let brand = await postBrand(body)
+      setBrands((prev) => [brand, ...prev])
+    } catch (error) {}
   }
-  const addCategory = (body: ICategory) => {
-    setCategories((prev) => [...prev, { _id: `${prev.length + 1}`, ...body }])
+  const addCategory = async (body: ICategory) => {
+    try {
+      let category = await postCategory(body)
+      setCategories((prev) => [category, ...prev])
+    } catch (error) {}
   }
 
   return (

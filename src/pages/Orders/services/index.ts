@@ -1,12 +1,19 @@
 import { DataService } from "../../../config/api";
 import { IOrder } from "../models/IOrder";
-import { orders } from "../utils/data";
 
 export const getOrders = async (): Promise<IOrder[]> => {
   try {
-    // const { data } = await DataService.get('/Companys')
-    // return data as IOrder[] || Companys
-    return orders
+    const { data } = await DataService.get('/orders')
+    return data as IOrder[]
+  } catch (error: any) {
+    throw new Error(error.data.response.error || error.message)
+  }
+}
+
+export const getOneOrder = async (id: string): Promise<IOrder> => {
+  try {
+    const { data } = await DataService.get('/orders/' + id)
+    return data as IOrder
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }
@@ -14,9 +21,8 @@ export const getOrders = async (): Promise<IOrder[]> => {
 
 export const addOrder = async (body: IOrder): Promise<IOrder> => {
   try {
-    // const { data } = await DataService.post('/orders', body)
-    // return data as IOrder
-    return orders[0]
+    const { data } = await DataService.post('/orders', body)
+    return data as IOrder
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }
@@ -33,7 +39,7 @@ export const updateOrder = async (id: string, body: IOrder): Promise<IOrder> => 
 
 export const deliverOrder = async (id: string): Promise<IOrder> => {
   try {
-    const { data } = await DataService.get(`/orders/deliver/:${id}`)
+    const { data } = await DataService.patch(`/orders/${id}/deliver`)
     return data as IOrder
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)

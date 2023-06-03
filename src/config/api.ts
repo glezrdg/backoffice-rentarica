@@ -1,14 +1,13 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { getItem } from '../utility/localStorageControl';
 
-const API_ENDPOINT = process.env.API_ENDPOINT;
+const API_ENDPOINT = 'http://localhost:3000/api';
 
 const authHeader = () => ({
   Authorization: `Bearer ${getItem('access_token')}`,
 });
 
 const client: AxiosInstance = axios.create({
-  baseURL: API_ENDPOINT,
   headers: {
     Authorization: `Bearer ${getItem('access_token')}`,
     'Content-Type': 'application/json',
@@ -20,7 +19,7 @@ class DataService {
   static get(path = '') {
     return client({
       method: 'GET',
-      url: path,
+      url: API_ENDPOINT + path,
       headers: { ...authHeader() },
     });
   }
@@ -28,7 +27,7 @@ class DataService {
   static post(path = '', data = {}, optionalHeader = {}) {
     return client({
       method: 'POST',
-      url: path,
+      url: API_ENDPOINT + path,
       data,
       headers: { ...authHeader(), ...optionalHeader },
     });
@@ -37,7 +36,7 @@ class DataService {
   static patch(path = '', data = {}) {
     return client({
       method: 'PATCH',
-      url: path,
+      url: API_ENDPOINT + path,
       data: JSON.stringify(data),
       headers: { ...authHeader() },
     });
@@ -46,7 +45,7 @@ class DataService {
   static delete(path = '', data = {}) {
     return client({
       method: 'DELETE',
-      url: path,
+      url: API_ENDPOINT + path,
       data: JSON.stringify(data),
       headers: { ...authHeader() },
     });
@@ -55,7 +54,7 @@ class DataService {
   static put(path = '', data = {}) {
     return client({
       method: 'PUT',
-      url: path,
+      url: API_ENDPOINT + path,
       data: JSON.stringify(data),
       headers: { ...authHeader() },
     });

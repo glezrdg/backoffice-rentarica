@@ -16,6 +16,8 @@
   ease-in-out
   focus:outline-none
   focus:ring-0
+  disabled:!bg-opacity-40
+  disabled:cursor-not-allowed
 }
 
 .btn.fill {

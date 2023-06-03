@@ -4,9 +4,8 @@ import { categories } from "../../utils/data";
 
 export const getCategories = async (): Promise<ICategory[]> => {
   try {
-    // const { data } = await DataService.get('/categories')
-    // return data as ICategory[] || categories
-    return categories
+    const { data } = await DataService.get('/categories')
+    return data as ICategory[]
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }
@@ -14,9 +13,8 @@ export const getCategories = async (): Promise<ICategory[]> => {
 
 export const addCategory = async (body: ICategory): Promise<ICategory> => {
   try {
-    // const { data } = await DataService.post('/categories', body)
-    // return data as ICategory
-    return categories[0]
+    const { data } = await DataService.post('/categories', body)
+    return data as ICategory
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }

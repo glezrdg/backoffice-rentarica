@@ -6,21 +6,20 @@ import { Button } from '../../../../../../components/shared'
 import { Checkbox } from 'primereact/checkbox'
 import { MultiSelect } from 'primereact/multiselect'
 import { Calendar } from 'primereact/calendar'
+import { useDeliveryState } from '../../../../context'
 
 interface DeliveryFormProps {
-  onClose?: () => void
+  onClose: () => void
 }
 
 const DeliveryForm: React.FC<DeliveryFormProps> = ({ onClose }) => {
   // const { ofert, removeOfert, setOfert } = useOfertState()
+  const { addDelivery } = useDeliveryState()
 
-  const [code, setCode] = useState('')
-  const [description, setDescription] = useState('')
-  const [brand, setBrand] = useState('')
-  const [category, setCategory] = useState('')
-  const [provinces, setProvinces] = useState<any[]>([])
-  const [discount, setDiscount] = useState('')
-  const [expireDate, setExpireDate] = useState<string>('')
+  const [name, setName] = useState('')
+  const [cedula, setCedula] = useState('')
+  const [phone, setPhone] = useState('')
+  const [placa, setPlaca] = useState('')
   const [disable, setDisable] = useState(false)
 
   // const ofertService = new Service(
@@ -50,11 +49,17 @@ const DeliveryForm: React.FC<DeliveryFormProps> = ({ onClose }) => {
   //   }
   // }, [ofert])
 
-  // const handleCreateOfert = (e: any) => {
-  //   ofertService.handleCreateOfert(e)
-  //   cleanInputs()
-  //   onClose()
-  // }
+  const handleCreateOfert = (e: any) => {
+    e.preventDefault()
+    addDelivery({
+      name,
+      cedula,
+      phone,
+      placa,
+    })
+    cleanInputs()
+    onClose()
+  }
 
   // const handleUpdateOfert = (e: any) => {
   //   ofertService.handleUpdateOfert(e)
@@ -68,28 +73,24 @@ const DeliveryForm: React.FC<DeliveryFormProps> = ({ onClose }) => {
   //   onClose()
   // }
 
-  // const cleanInputs = () => {
-  //   setCode('')
-  //   setDescription('')
-  //   setCategory('')
-  //   setBrand('')
-  //   setDescription('')
-  //   setProvinces([])
-  //   setDiscount('')
-  //   setExpireDate('')
-  //   setDisable(false)
-  // }
+  const cleanInputs = () => {
+    setName('')
+    setCedula('')
+    setPhone('')
+    setPlaca('')
+    setDisable(false)
+  }
 
   return (
     <form
       className='mt-3 relative flex flex-col'
-      // onSubmit={(e) => handleCreateOfert(e)}
+      onSubmit={(e) => handleCreateOfert(e)}
     >
       <div className='flex flex-col'>
         <label className='mb-2 text-xs'>Nombre</label>
         <input
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           className='outline-none rounded-md p-2 border focus:border-purple-300'
         />
       </div>
@@ -97,16 +98,16 @@ const DeliveryForm: React.FC<DeliveryFormProps> = ({ onClose }) => {
         <div className='flex flex-col'>
           <label className='mb-2 text-xs'>Cedula</label>
           <input
-            value={discount}
-            onChange={(e) => setDiscount(e.target.value)}
+            value={cedula}
+            onChange={(e) => setCedula(e.target.value)}
             className='outline-none rounded-md p-2 border focus:border-purple-300'
           />
         </div>
         <div className='flex flex-col'>
           <label className='mb-2 text-xs'>Celular</label>
           <input
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             className='outline-none rounded-md p-2 border focus:border-purple-300'
           />
         </div>
@@ -115,8 +116,8 @@ const DeliveryForm: React.FC<DeliveryFormProps> = ({ onClose }) => {
       <div className='flex flex-col'>
         <label className='mb-2 text-xs'>Placa</label>
         <input
-          value={discount}
-          onChange={(e) => setDiscount(e.target.value)}
+          value={placa}
+          onChange={(e) => setPlaca(e.target.value)}
           className='outline-none rounded-md p-2 border focus:border-purple-300'
         />
       </div>

@@ -1,3 +1,4 @@
+import { IProduct } from "src/pages/Products/models/IProduct"
 import { IShipping } from "../../../models"
 
 export interface IOrder {
@@ -17,7 +18,7 @@ export interface IOrder {
 }
 
 export interface IOrderItem {
-  product: string
+  product: IProduct
   qty: number
   size: string
 }

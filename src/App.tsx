@@ -8,6 +8,7 @@ import Spin from './components/shared/Spin'
 
 //Router
 import Router from './routes/Router'
+import { CategoryBrandProvider } from './pages/CategoryBrand/context'
 
 export let toast: any
 
@@ -26,7 +27,9 @@ function App() {
             </div>
           }
         >
-          <Router />
+          <CategoryBrandProvider>
+            <Router />
+          </CategoryBrandProvider>
         </Suspense>
       </BrowserRouter>
     </>

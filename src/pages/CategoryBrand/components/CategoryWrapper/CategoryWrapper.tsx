@@ -21,12 +21,12 @@ const CategoryWrapper: React.FC<ICategoryWrapperProps> = (props) => {
             headerClassName='relative'
             header={
               <div className='flex justify-between items-center w-full'>
-                <h2>{category.header}</h2>
+                <h2>{category.name}</h2>
               </div>
             }
           >
             <ul className='ml-4'>
-              {category.categories.map((i) => (
+              {category.subcategories?.map((i) => (
                 <li>{i}</li>
               ))}
             </ul>

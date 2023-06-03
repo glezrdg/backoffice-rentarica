@@ -3,38 +3,51 @@ import commaNumber from 'comma-number'
 
 import { Column } from 'primereact/column'
 import { DataTable } from 'primereact/datatable'
+import { useOrderState } from '../../context'
 
 const data = [
   {
     name: 'Tarjeta',
-    cantidad: 1269,
+    cantidad: 0,
     monto: 65895,
   },
   {
     name: 'Transferencia',
-    cantidad: 941,
+    cantidad: 0,
     monto: 52158,
   },
   {
     name: 'Efectivo',
-    cantidad: 512,
+    cantidad: 0,
     monto: 36500,
   },
   {
     name: 'Paypal',
-    cantidad: 86,
+    cantidad: 0,
     monto: 26450,
   },
 ]
 
 const PaymentMethosTable = () => {
+  const { orders } = useOrderState()
+
   return (
     <>
       {/* TABLE */}
       <div className='py-4 md:p-4 bg-white rounded-lg shadow-sm w-full h-fit'>
         <div className='overflow-hidden rounded-xl'>
           <DataTable
-            value={data}
+            value={data.map((i) => {
+              let info = orders.filter(
+                (order) => order.paymentMethod === i.name
+              )
+
+              return {
+                ...i,
+                cantidad: info.length,
+                monto: info.reduce((acc, curr) => acc + curr.totalPrice, 0),
+              }
+            })}
             paginator
             rows={5}
             // tableStyle={{ minWidth: '50rem' }}

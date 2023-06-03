@@ -4,7 +4,7 @@ import './styles.css'
 
 // Components
 import { CompanyForm, DeliveryForm } from './components/forms'
-import { ICompany } from '../../models'
+import { ICompany, IDelivery } from '../../models'
 import { useDeliveryState } from '../../context'
 
 interface ISideCreateProps {
@@ -15,7 +15,7 @@ interface ISideCreateProps {
 }
 
 const SideCreate: React.FC<ISideCreateProps> = ({ active, close, type }) => {
-  const { setCompany } = useDeliveryState()
+  const { setCompany, setDelivery } = useDeliveryState()
 
   return (
     <div
@@ -46,7 +46,12 @@ const SideCreate: React.FC<ISideCreateProps> = ({ active, close, type }) => {
           }}
         />
       ) : (
-        <DeliveryForm />
+        <DeliveryForm
+          onClose={() => {
+            setDelivery({} as IDelivery)
+            close()
+          }}
+        />
       )}
     </div>
   )

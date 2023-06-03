@@ -38,8 +38,8 @@ const NotesModal: React.FC<INotesModalProps> = () => {
   return (
     <>
       <div
-        data-te-modal-init
         className='fixed top-0 left-0 z-[1100] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none'
+        data-te-modal-init
         id='createNoteModal'
         tabIndex={-1}
         aria-labelledby='exampleModalCenterTitle'

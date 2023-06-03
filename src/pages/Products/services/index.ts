@@ -1,39 +1,46 @@
 import { DataService } from "../../../config/api";
+import axios from 'axios'
 import { IProduct } from "../models/IProduct";
 import { products } from "../utils/data";
+import { ProductQueries } from "../models/ProductQueries";
 
 export const getproducts = async (): Promise<IProduct[]> => {
+
   try {
-    // const { data } = await DataService.get('/products')
-    // return data as IProduct[] || products
-    return products
+    const { data } = await DataService.get('/products')
+    return data
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }
 }
 
-export const addProduct = async (body: IProduct): Promise<IProduct> => {
+export const postProduct = async (body: IProduct): Promise<IProduct> => {
   try {
-    // const { data } = await DataService.post('/products', body)
-    // return data as IProduct
-    return products[0]
-  } catch (error: any) {
-    throw new Error(error.data.response.error || error.message)
-  }
-}
+    const { data: product } = await DataService.post('/products', body)
+    const { data } = await axios.post(`http://localhost:3000/api/products/${product._id}/images`, { images: body.images }, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
 
-export const updateProduct = async (id: string, body: IProduct): Promise<IProduct> => {
-  try {
-    const { data } = await DataService.put(`/products/:${id}`, body)
     return data as IProduct
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }
 }
 
-export const removeProduct = async (id: string): Promise<IProduct> => {
+export const updateProduct = async (body: IProduct): Promise<IProduct> => {
   try {
-    const { data } = await DataService.delete(`/products/:${id}`)
+    const { data } = await DataService.put(`/products/${body._id}`, body)
+    return data as IProduct
+  } catch (error: any) {
+    throw new Error(error.data.response.error || error.message)
+  }
+}
+
+export const deleteProduct = async (id: string): Promise<IProduct> => {
+  try {
+    const { data } = await DataService.delete(`/products/${id}`)
     return data as IProduct
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)

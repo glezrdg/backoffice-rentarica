@@ -18,13 +18,9 @@ const getProvincesQty = (orders: IOrder[]) => {
       qty: 0,
     }
 
-    let searched = orders.filter((o) => o.shippingAddress.province === search)
-
-    item.qty = searched.reduce(
-      (acc, curr) =>
-        curr.orderItems.reduce((acc, curr) => curr.qty + acc, 0) + acc,
-      0
-    )
+    item.qty = orders.filter(
+      (o) => o.shippingAddress.province === search
+    ).length
 
     data.push(item)
   }
@@ -35,7 +31,6 @@ const getProvincesQty = (orders: IOrder[]) => {
 const PieChart = memo(function PieChart(props: any) {
   const { orders } = useOrderState()
   const [data, setData] = useState<{ province: string; qty: number }[]>([])
-  console.log(orders)
 
   useEffect(() => {
     setData(getProvincesQty(orders))
@@ -43,7 +38,7 @@ const PieChart = memo(function PieChart(props: any) {
 
   const [pieOptions, setPieOptions] = useState<any>({
     maintainAspectRatio: false,
-    aspectRatio: props.aspectRatio || 1.12,
+    aspectRatio: props.aspectRatio || 1,
     animation: true,
     plugins: {
       legend: {

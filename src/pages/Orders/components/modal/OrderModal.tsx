@@ -16,6 +16,8 @@ interface IOrderModalProps {
 const OrderModal: React.FC<IOrderModalProps> = (props) => {
   const { order, deliverOrder } = useOrderState()
 
+  console.log(order)
+
   return (
     <div
       data-te-modal-init
@@ -97,17 +99,17 @@ const OrderModal: React.FC<IOrderModalProps> = (props) => {
                 <li className='shadow-sm flex justify-between items-center mb-2'>
                   <div className='flex items-center'>
                     <img
-                      src={products[0].img}
-                      alt={products[0].name}
+                      src={'http://localhost:3000/' + item.product?.images[0]}
+                      alt={item.product?.name}
                       className='w-[5rem]'
                     />
                     <div className='ml-2'>
-                      <h3 className='mb-2'>{products[0].name}</h3>
+                      <h3 className='mb-2'>{item.product?.name}</h3>
                       <p>Qty: {item.qty}</p>
                     </div>
                   </div>
                   <h2 className='text-xl'>
-                    ${commaNumber(products[0].price * item.qty)}
+                    ${commaNumber(item.product?.price * item.qty)}
                   </h2>
                 </li>
               ))}
@@ -170,6 +172,7 @@ const OrderModal: React.FC<IOrderModalProps> = (props) => {
               icon='fa fa-truck text-base !h-initial !w-initial'
               className='h-10 w-10 mx-4'
               color='warning'
+              disabled={order?.isDelivered}
               onClick={() => deliverOrder(order?._id!)}
             ></Button>
             <Button

@@ -6,7 +6,14 @@ import React, {
   useEffect,
 } from 'react'
 import { IProduct } from '../models/IProduct'
-import { getproducts } from '../services'
+import {
+  getproducts,
+  postProduct,
+  deleteProduct,
+  updateProduct as putProduct,
+} from '../services'
+import { ProductQueries } from '../models/ProductQueries'
+import { toast } from '../../../App'
 
 // Services
 
@@ -14,7 +21,8 @@ const initialState: InitialStateProps = {
   products: [],
   searchProducts: [],
   product: null,
-  addProduct: () => {},
+  getProducts: async () => {},
+  addProduct: async () => {},
   updateProduct: () => {},
   removeProduct: () => {},
   setSearch: () => {},
@@ -30,7 +38,7 @@ export interface InventoryProviderProps {
 export const InventoryProvider: React.FC<InventoryProviderProps> = ({
   children,
 }) => {
-  const [products, setProducts] = useState<IProduct[]>(initialState.products)
+  const [products, setProducts] = useState<IProduct[]>([])
   const [searchProducts, setSearchProducts] = useState<IProduct[]>([])
   const [search, setSearch] = useState<string>('')
   const [product, setProduct] = useState<IProduct | null>(initialState.product)
@@ -55,6 +63,12 @@ export const InventoryProvider: React.FC<InventoryProviderProps> = ({
     setSearchProducts(searched)
   }
 
+  const getProducts = async () => {
+    try {
+      const productsData = await getproducts()
+      setProducts(productsData)
+    } catch (error) {}
+  }
   const getInitialState = async () => {
     try {
       const productsData = await getproducts()
@@ -62,16 +76,44 @@ export const InventoryProvider: React.FC<InventoryProviderProps> = ({
     } catch (error) {}
   }
 
-  const addProduct = (body: IProduct) => {
-    setProducts((prev) => [...prev, { _id: `${prev.length + 1}`, ...body }])
+  const addProduct = async (body: IProduct) => {
+    try {
+      const product = await postProduct(body)
+      if (product) setProducts((prev) => [product, ...prev])
+      toast.current?.show({
+        severity: 'success',
+        summary: 'Producto agregado',
+        detail: `Has agregado el producto ${name} exitosamente!`,
+      })
+    } catch (error: any) {
+      console.log('CONTEXT ADD PRODUCT', error.message)
+    }
   }
 
-  const updateProduct = (body: IProduct) => {
-    setProducts((prev) => prev.map((p) => (p._id === body._id ? body : p)))
+  const updateProduct = async (body: IProduct) => {
+    try {
+      const updatedProduct = await putProduct(body)
+      setProducts((prev) =>
+        prev.map((i) => (i._id === body._id ? { ...updatedProduct } : i))
+      )
+      toast.current?.show({
+        severity: 'success',
+        summary: 'Producto actualizado',
+        detail: `Has actualizado el producto ${updatedProduct.name} exitosamente!`,
+      })
+    } catch (error) {}
   }
 
-  const removeProduct = (id: string) => {
-    setProducts((prev) => prev.filter((i) => i._id !== id))
+  const removeProduct = async (id: string) => {
+    try {
+      const deletedProduct = await deleteProduct(id)
+      setProducts((prev) => prev.filter((i) => i._id !== deletedProduct._id))
+      toast.current?.show({
+        severity: 'success',
+        summary: 'Producto borrado',
+        detail: `Has borrado el producto ${deletedProduct.name} exitosamente!`,
+      })
+    } catch (error) {}
   }
 
   return (
@@ -79,6 +121,7 @@ export const InventoryProvider: React.FC<InventoryProviderProps> = ({
       value={{
         product,
         products: activeProducts,
+        getProducts,
         addProduct,
         updateProduct,
         setProduct,
@@ -98,7 +141,8 @@ interface InitialStateProps {
   products: IProduct[]
   searchProducts: IProduct[]
   product: IProduct | null
-  addProduct: (product: IProduct) => void
+  getProducts: (queries: ProductQueries) => Promise<void>
+  addProduct: (product: IProduct) => Promise<void>
   updateProduct: (product: IProduct) => void
   removeProduct: (id: string) => void
   setSearch: (string: string) => void

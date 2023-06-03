@@ -3,11 +3,11 @@ export interface IProduct {
   name: string
   price: number
   description: string
-  size: ISizes[]
+  sizes: ISizes[]
   category: string
   brand: string
   ofert: string
-  images: string[]
+  images: File
   qty: number
 }
 

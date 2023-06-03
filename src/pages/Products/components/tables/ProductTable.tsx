@@ -14,6 +14,8 @@ interface ProductTableProps {
 const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
   const { products, setProduct } = useInventoryState()
 
+  console.log(products)
+
   return (
     <div>
       <DataTable
@@ -28,9 +30,9 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
           style={{ width: '10%' }}
           body={(data) => (
             <img
-              src={data.images[0]}
+              src={'http://localhost:3000/' + data.images[0]}
               alt=''
-              className=' w-16 h-16 object-cover rounded-lg'
+              className=' w-16 h-16 object-contain rounded-lg'
             />
           )}
         ></Column>
@@ -41,8 +43,8 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
           style={{ width: '25%' }}
           headerClassName=''
           body={(data) => (
-            <div className='p-2 px-3 bg-purple-400 w-fit text-white rounded-md'>
-              {data.qty}
+            <div className='p-2 px-3 bg-purple-400 w-8 h-8 text-white rounded-md'>
+              {data.sizes.reduce((acc: any, cur: any) => acc + cur.qty, 0)}
             </div>
           )}
         ></Column>

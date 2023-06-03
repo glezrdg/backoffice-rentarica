@@ -29,7 +29,7 @@ const DeliveryPeopleTable = () => {
           className='text-sm'
         ></Column>
         <Column
-          field='mobile'
+          field='phone'
           header='Celular'
           className='text-sm'
           style={{ width: '18%' }}

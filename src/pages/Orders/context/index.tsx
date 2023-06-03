@@ -8,12 +8,17 @@ import React, {
 import { IOrder } from '../models/IOrder'
 
 // Services
-import { getOrders } from '../services'
+import {
+  getOrders,
+  getOneOrder,
+  deliverOrder as fetchDeliverOrder,
+} from '../services'
 import { toast } from '../../../App'
 
 const initialState: InitialStateProps = {
   orders: [],
   order: null,
+  selectOrder: () => {},
   addOrder: () => {},
   updateOrder: () => {},
   removeOrder: () => {},
@@ -35,6 +40,7 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
   const [searchOrders, setSearchOrders] = useState<IOrder[]>([])
   const [search, setSearch] = useState<string>('')
   const [order, setOrder] = useState<IOrder | null>(initialState.order)
+  const [selectedOrder, setSelectedOrder] = useState('')
 
   let activeOrder = search ? searchOrders : orders
 
@@ -47,6 +53,12 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
       handleSearchOrder()
     }
   }, [search])
+
+  useEffect(() => {
+    if (selectedOrder) {
+      fetchOneOrder()
+    }
+  }, [selectedOrder])
 
   const handleSearchOrder = () => {
     let searched = orders.filter((p) =>
@@ -63,6 +75,13 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
     } catch (error) {}
   }
 
+  const fetchOneOrder = async () => {
+    try {
+      const orderData = await getOneOrder(selectedOrder)
+      setOrder(orderData)
+    } catch (error) {}
+  }
+
   const addOrder = (body: IOrder) => {
     setOrders((prev) => [...prev, { _id: `${prev.length + 1}`, ...body }])
   }
@@ -71,22 +90,24 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
     setOrders((prev) => prev.map((p) => (p._id === body._id ? body : p)))
   }
 
-  const deliverOrder = (id: string) => {
-    const delivery = {
-      isDelivered: true,
-      deliveredAt: new Date().toISOString(),
-    }
-    setOrders((prev) =>
-      prev.map((p) => (p._id === id ? { ...p, ...delivery } : p))
-    )
+  const deliverOrder = async (id: string) => {
+    try {
+      await fetchDeliverOrder(id)
+      const delivery = {
+        isDelivered: true,
+        deliveredAt: new Date().toISOString(),
+      }
+      setOrders((prev) =>
+        prev.map((p) => (p._id === id ? { ...p, ...delivery } : p))
+      )
+      setOrder({ ...order, ...delivery } as IOrder)
 
-    setOrder({ ...order, ...delivery } as IOrder)
-
-    toast.current?.show({
-      severity: 'success',
-      summary: 'Orden enviada!',
-      detail: `Has enviado 1 orden exitosamente`,
-    })
+      toast.current?.show({
+        severity: 'success',
+        summary: 'Orden enviada!',
+        detail: `Has enviado 1 orden exitosamente`,
+      })
+    } catch (error) {}
   }
 
   const removeOrder = (id: string) => {
@@ -97,6 +118,7 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
     <OrderContext.Provider
       value={{
         orders: activeOrder,
+        selectOrder: setSelectedOrder,
         order,
         addOrder,
         updateOrder,
@@ -116,6 +138,7 @@ export const useOrderState = () => useContext(OrderContext)
 export interface InitialStateProps {
   orders: IOrder[]
   order: IOrder | null
+  selectOrder: (id: string) => void
   addOrder: (product: IOrder) => void
   updateOrder: (product: IOrder) => void
   removeOrder: (id: string) => void

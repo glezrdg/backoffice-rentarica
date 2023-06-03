@@ -9,6 +9,8 @@ import { Button, Card } from '../../components/shared'
 import { DeliveryPeopleTable, Header, SideCreate } from './components'
 import { DeliveryProvider, useDeliveryState } from './context'
 import DeliveryTable from './components/table/DeliveryTable'
+import ProvincesTable from './components/table/ProvincesTable'
+import MunicipiosTable from './components/table/MunicipiosTable'
 
 interface IDeliveryProps {
   children?: React.ReactNode
@@ -80,6 +82,12 @@ const Delivery: React.FC<IDeliveryProps> = (props) => {
         <Card title='Delivery personal' className='mt-6'>
           <DeliveryPeopleTable />
         </Card>
+
+        <h2 className='mt-10 text-3xl '>Provincias y Municipios</h2>
+        <div className='grid grid-cols-2 gap-4 mt-6'>
+          <ProvincesTable />
+          <MunicipiosTable />
+        </div>
       </>
     </DeliveryProvider>
   )

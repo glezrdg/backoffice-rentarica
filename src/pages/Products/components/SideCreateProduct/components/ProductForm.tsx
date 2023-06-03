@@ -7,7 +7,8 @@ import { Button } from '../../../../../components/shared'
 import { ISizes } from '../../../models/IProduct'
 import { InputNumber } from 'primereact/inputnumber'
 import { useInventoryState } from '../../../context'
-import { sizes } from '../../../utils/data'
+import { sizes as sizesData } from '../../../utils/data'
+import { useCategoryBrandState } from '../../../../CategoryBrand/context'
 
 interface ProductFormProps {
   close: () => void
@@ -16,18 +17,20 @@ interface ProductFormProps {
 const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
   const { product, addProduct, updateProduct, removeProduct } =
     useInventoryState()
+  const { brands, categories } = useCategoryBrandState()
 
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
   const [qty, setQty] = useState(0)
   const [category, setCategory] = useState('')
-  const [brand, setBrand] = useState('')
-  const [ofert, setOfert] = useState('')
-  const [size, setSize] = useState<ISizes[]>(sizes)
+  const [brand, setBrand] = useState(brands[0]?._id!)
+  const [ofert, setOfert] = useState(categories[0]?._id!)
+  const [sizes, setSize] = useState<ISizes[]>(sizesData)
   const [description, setDescription] = useState('')
   const [images, setImages] = useState([
     'https://phantom-marca.unidadeditorial.es/8c9bc73dd0d66d63d97f5eca8b5753c3/resize/1320/f/jpg/assets/multimedia/imagenes/2023/01/23/16744636883962.jpg',
   ])
+  const [file, setFile] = useState<File>()
 
   useEffect(() => {
     if (product?._id) {
@@ -36,15 +39,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
       setCategory(product.category)
       setBrand(product.brand)
       setDescription(product.description)
-      setSize(product.size)
+      setSize(product.sizes)
       setOfert(product.ofert)
-      setImages(product.images)
     } else {
       cleanInputs()
     }
   }, [product])
 
-  const handleCreateProduct = (e: any) => {
+  const handleCreateProduct = async (e: any) => {
     e.preventDefault()
     if (!name) {
       toast.current?.show({
@@ -53,28 +55,23 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
         detail: `Debes de llenar el campo para agregar una categoria!`,
       })
     } else {
-      addProduct({
+      await addProduct({
         name,
         price,
         description,
         category,
         brand,
-        images,
+        images: file!,
         ofert,
-        size,
-        qty: size.reduce((acc, cur) => acc + cur.qty, 0),
-      })
-      toast.current?.show({
-        severity: 'success',
-        summary: 'Producto agregado',
-        detail: `Has agregado el producto ${name} exitosamente!`,
+        sizes: sizes.filter((i) => i.qty > 0),
+        qty: sizes.reduce((acc, cur) => acc + cur.qty, 0),
       })
       cleanInputs()
       close()
     }
   }
 
-  const handleUpdateProduct = (e: any) => {
+  const handleUpdateProduct = async (e: any) => {
     e.preventDefault()
     if (!name) {
       toast.current?.show({
@@ -83,22 +80,17 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
         detail: `Debes de llenar el campo para agregar una categoria!`,
       })
     } else {
-      updateProduct({
+      await updateProduct({
         _id: product?._id,
         name,
         price,
         description,
         category,
         brand,
-        images,
+        images: product?.images!,
         ofert,
-        size,
-        qty: size.reduce((acc, cur) => acc + cur.qty, 0),
-      })
-      toast.current?.show({
-        severity: 'success',
-        summary: 'Producto agregado',
-        detail: `Has agregado el producto ${name} exitosamente!`,
+        sizes: sizes.filter((i) => i.qty > 0),
+        qty: sizes.reduce((acc, cur) => acc + cur.qty, 0),
       })
       cleanInputs()
       close()
@@ -113,10 +105,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
         detail: `Debes de llenar el campo para agregar una categoria!`,
       })
     } else {
-      let newSizes = size.map((s) =>
-        s.name === item.name ? { ...s, qty: qty } : s
+      let newSizes = sizes.map((s) =>
+        s.name === item.name ? { ...s, qty } : s
       )
 
+      console.log(newSizes)
       setSize(newSizes)
     }
   }
@@ -133,9 +126,35 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
     setCategory('')
     setBrand('')
     setDescription('')
-    setSize(sizes)
+    setSize(sizesData)
     setOfert('')
     setImages([''])
+  }
+
+  // IMAGE JS
+
+  const addImgHandler = () => {
+    const imgInputHelper: any = document.getElementById('add-single-img')!
+    const imgInputHelperLabel = document.getElementById('add-img-label')!
+    const imgContainer = document.querySelector('.custom__image-container')!
+    const imgFiles: File[] = []
+
+    const fileInput = imgInputHelper.files[0]
+    if (!fileInput) return
+    // Generate img preview
+    const reader = new FileReader()
+    reader.readAsDataURL(fileInput)
+    reader.onload = () => {
+      const newImg = document.createElement('img')
+      newImg.src = String(reader.result)
+      imgContainer.insertBefore(newImg, imgInputHelperLabel)
+    }
+    // Store img file
+    imgFiles.push(fileInput)
+    setFile(imgFiles[0])
+    // Reset image input
+    imgInputHelper.value = ''
+    return
   }
 
   return (
@@ -181,7 +200,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
         </div>
 
         <div className='my-10 flex'>
-          {size?.map((s) => (
+          {sizes?.map((s) => (
             <div
               key={s.name}
               className='bg-white uppercase p-3 px-6 mr-5 text-center'
@@ -208,9 +227,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
               onChange={(e) => setCategory(e.target.value)}
               className='outline-none border-none rounded-md p-3 border !focus:border-purple-300 text-sm'
             >
-              <option>Camisas</option>
-              <option>Tenis</option>
-              <option>Pantalones</option>
+              {categories?.map((category) => (
+                <option value={category._id}>{category.name}</option>
+              ))}
             </select>
           </div>
           <div className='flex flex-col'>
@@ -220,9 +239,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
               onChange={(e) => setBrand(e.target.value)}
               className='outline-none border-none rounded-md p-3 border !focus:border-purple-300 text-sm'
             >
-              <option>Adidas</option>
-              <option>Nike</option>
-              <option>Forever 21</option>
+              {brands?.map((brand) => (
+                <option value={brand._id}>{brand.name}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -244,8 +263,33 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
         </div>
 
         <div className='flex flex-col my-5'>
-          <label className='mb-2 text-xs'>Imagenes</label>
-          <FileUpload
+          <div className='custom__form'>
+            <label className='mb-2 text-xs'>Imagenes</label>
+            <div className='custom__image-container'>
+              <label id='add-img-label' htmlFor='add-single-img'>
+                +
+              </label>
+              <input
+                type='file'
+                id='add-single-img'
+                accept='image/jpeg'
+                onChange={addImgHandler}
+              />
+            </div>
+            <input
+              type='file'
+              id='image-input'
+              name='photos'
+              accept='image/jpeg'
+              multiple
+            />
+            <br />
+            <div className='form__controls'>
+              <button type='submit'>Submit</button>
+            </div>
+          </div>
+
+          {/* <FileUpload
             name='demo[]'
             url={'/api/upload'}
             multiple
@@ -254,7 +298,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
             emptyTemplate={
               <p className='m-0'>Drag and drop files to here to upload.</p>
             }
-          />
+          /> */}
         </div>
 
         {product ? (

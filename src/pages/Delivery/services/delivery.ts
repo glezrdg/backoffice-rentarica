@@ -6,19 +6,17 @@ import { deliveries } from "../utils/data";
 
 export const getDeliveries = async (): Promise<IDelivery[]> => {
   try {
-    // const { data } = await DataService.get('/Companys')
-    // return data as IDelivery[] || Companys
-    return deliveries
+    const { data } = await DataService.get('/delivery')
+    return data as IDelivery[]
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }
 }
 
-export const addDelivery = async (body: IDelivery): Promise<IDelivery> => {
+export const postDelivery = async (body: IDelivery): Promise<IDelivery> => {
   try {
-    // const { data } = await DataService.post('/deliveries', body)
-    // return data as IDelivery
-    return deliveries[0]
+    const { data } = await DataService.post('/delivery', body)
+    return data as IDelivery
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }
@@ -26,7 +24,7 @@ export const addDelivery = async (body: IDelivery): Promise<IDelivery> => {
 
 export const updateDelivery = async (id: string, body: IDelivery): Promise<IDelivery> => {
   try {
-    const { data } = await DataService.put(`/deliveries/:${id}`, body)
+    const { data } = await DataService.put(`/delivery/:${id}`, body)
     return data as IDelivery
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
@@ -35,7 +33,7 @@ export const updateDelivery = async (id: string, body: IDelivery): Promise<IDeli
 
 export const removeDelivery = async (id: string): Promise<IDelivery> => {
   try {
-    const { data } = await DataService.delete(`/deliveries/:${id}`)
+    const { data } = await DataService.delete(`/delivery/:${id}`)
     return data as IDelivery
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)

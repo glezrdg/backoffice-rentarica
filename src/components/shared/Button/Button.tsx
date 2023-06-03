@@ -13,11 +13,13 @@ interface IButtonProps {
   text?: string
   icon?: string
   iconButton?: boolean
+  disabled?: boolean
   onClick?: () => void
 }
 
 const Button: React.FC<IButtonProps> = ({
   color = 'primary',
+  disabled = false,
   type = 'fill',
   className,
   rounded,
@@ -45,6 +47,7 @@ const Button: React.FC<IButtonProps> = ({
       className={`btn ${type} ${color} ${className} ${showClases()}`}
       onClick={onClick}
       type={buttonType}
+      disabled={disabled}
     >
       {icon && <i className={`h-4 w-4 ${icon} ${text && 'mr-1 '}`} />}
       {text}

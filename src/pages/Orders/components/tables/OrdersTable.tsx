@@ -11,7 +11,7 @@ import { IOrder } from '../../models/IOrder'
 import { OrderModal } from '../modal'
 
 const OrdersTable = () => {
-  const { orders, setOrder } = useOrderState()
+  const { orders, selectOrder } = useOrderState()
   const [selectedOrder, setSelectedOrder] = useState([])
 
   return (
@@ -22,15 +22,14 @@ const OrdersTable = () => {
         rows={5}
         rowsPerPageOptions={[5, 10, 25, 50]}
         tableStyle={{ minWidth: '50rem' }}
-        selectionMode='multiple'
         selection={selectedOrder}
         onSelectionChange={(e: any) => setSelectedOrder(e.value)}
         className='hover:bg-slate-200'
       >
-        <Column
+        {/* <Column
           selectionMode='multiple'
           headerStyle={{ width: '3rem' }}
-        ></Column>
+        ></Column> */}
         <Column field='_id' header='#Numero' className='text-sm'></Column>
         <Column field='client' header='Cliente' className='text-sm'></Column>
         <Column
@@ -62,11 +61,17 @@ const OrdersTable = () => {
           field='status'
           header='Enviado'
           className='text-sm'
-          body={(data) => (
-            <div className='text-xs bg-red-400 text-white rounded-2xl p-[0.4rem] text-center'>
-              Pendiente
-            </div>
-          )}
+          body={(data) =>
+            data.isDelivered ? (
+              <div className='text-xs bg-green-400 text-white rounded-2xl p-[0.4rem] text-center'>
+                Enviado
+              </div>
+            ) : (
+              <div className='text-xs bg-red-400 text-white rounded-2xl p-[0.4rem] text-center'>
+                Pendiente
+              </div>
+            )
+          }
         ></Column>
         <Column
           field='createdAt'
@@ -79,7 +84,7 @@ const OrdersTable = () => {
         <Column
           body={(data) => (
             <div className='flex'>
-              <div onClick={() => setOrder(data)}>
+              <div onClick={() => selectOrder(data._id)}>
                 <i
                   data-te-toggle='modal'
                   data-te-target='#orderModal'

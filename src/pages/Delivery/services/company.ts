@@ -6,19 +6,17 @@ import { companies } from "../utils/data";
 
 export const getCompanies = async (): Promise<ICompany[]> => {
   try {
-    // const { data } = await DataService.get('/Companys')
-    // return data as ICompany[] || Companys
-    return companies
+    const { data } = await DataService.get('/delivery/agent')
+    return data as ICompany[]
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }
 }
 
-export const addCompany = async (body: ICompany): Promise<ICompany> => {
+export const postCompany = async (body: ICompany): Promise<ICompany> => {
   try {
-    // const { data } = await DataService.post('/companies', body)
-    // return data as ICompany
-    return companies[0]
+    const { data } = await DataService.post('/delivery/agent', body)
+    return data as ICompany
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }
@@ -26,7 +24,7 @@ export const addCompany = async (body: ICompany): Promise<ICompany> => {
 
 export const updateCompany = async (id: string, body: ICompany): Promise<ICompany> => {
   try {
-    const { data } = await DataService.put(`/companies/:${id}`, body)
+    const { data } = await DataService.put(`/delivery/agent/:${id}`, body)
     return data as ICompany
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
@@ -35,7 +33,7 @@ export const updateCompany = async (id: string, body: ICompany): Promise<ICompan
 
 export const removeCompany = async (id: string): Promise<ICompany> => {
   try {
-    const { data } = await DataService.delete(`/companies/:${id}`)
+    const { data } = await DataService.delete(`/delivery/agent/:${id}`)
     return data as ICompany
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)

@@ -6,8 +6,8 @@ import React, {
   useEffect,
 } from 'react'
 import { ICompany, IDelivery } from '../models'
-import { getCompanies } from '../services/company'
-import { getDeliveries } from '../services/delivery'
+import { getCompanies, postCompany } from '../services/company'
+import { getDeliveries, postDelivery } from '../services/delivery'
 
 // Services
 
@@ -83,8 +83,11 @@ export const DeliveryProvider: React.FC<InventoryProviderProps> = ({
     } catch (error) {}
   }
 
-  const addCompany = (body: ICompany) => {
-    setCompanies((prev) => [...prev, { _id: `${prev.length + 1}`, ...body }])
+  const addCompany = async (body: ICompany) => {
+    try {
+      const company = await postCompany(body)
+      setCompanies((prev) => [company, ...prev])
+    } catch (error) {}
   }
 
   const updateCompany = (body: ICompany) => {
@@ -97,8 +100,11 @@ export const DeliveryProvider: React.FC<InventoryProviderProps> = ({
 
   // DELIVERY
 
-  const addDelivery = (body: IDelivery) => {
-    setDeliveries((prev) => [...prev, { _id: `${prev.length + 1}`, ...body }])
+  const addDelivery = async (body: IDelivery) => {
+    try {
+      const delivery = await postDelivery(body)
+      setDeliveries((prev) => [delivery, ...prev])
+    } catch (error) {}
   }
 
   const updateDelivery = (body: IDelivery) => {
