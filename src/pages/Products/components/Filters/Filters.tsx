@@ -6,6 +6,7 @@ import { MultiSelect } from 'primereact/multiselect'
 import { Dropdown } from 'primereact/dropdown'
 import { useCategoryBrandState } from '../../../CategoryBrand/context'
 import { useInventoryState } from '../../context'
+import { sizes } from '../../utils/data'
 
 interface IFiltersProps {
   children?: React.ReactNode
@@ -15,8 +16,34 @@ const Filters: React.FC<IFiltersProps> = (props) => {
   const { brands, categories } = useCategoryBrandState()
   const { getProducts } = useInventoryState()
 
-  const [selectedCategory, setSelectedCategory] = useState('')
-  const [selectedBrand, setSelectedBrand] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState([])
+  const [selectedBrand, setSelectedBrand] = useState([])
+  const [selectedPrice, setSelectedPrice] = useState('')
+  const [selectedSizes, setSelectedSizes] = useState([])
+
+  const prices = [
+    { name: 'Mayores', value: 'asc' },
+    { name: 'Menores', value: 'desc' },
+  ]
+
+  useEffect(() => {
+    let query: any = {}
+
+    if (selectedCategory.length) query.categories = selectedCategory.join(',')
+    if (selectedBrand.length) query.brand = selectedBrand.join(',')
+    if (selectedSizes.length) query.sizes = selectedSizes.join(',')
+    if (selectedPrice) query.price = selectedPrice
+
+    handleGetProducts(query)
+  }, [selectedCategory, selectedBrand, selectedPrice, selectedSizes])
+
+  const handleGetProducts = async (query: any) => {
+    try {
+      await getProducts(query)
+    } catch (error: any) {
+      console.log('FETCH FROM FILTERS:', error.message)
+    }
+  }
 
   return (
     <>
@@ -37,36 +64,38 @@ const Filters: React.FC<IFiltersProps> = (props) => {
         </div>
         <div className='flex flex-col mr-3'>
           <label className='text-xs mb-1'>Marcas</label>
-          <Dropdown
+          <MultiSelect
             value={selectedBrand}
             onChange={(e) => setSelectedBrand(e.value)}
             options={brands}
             optionLabel='name'
             optionValue='_id'
-            placeholder='Monto'
-            className='w-full md:w-14rem text-xs'
+            display='chip'
+            placeholder='Marcas'
+            maxSelectedLabels={3}
+            className='w-full max-w-[150px] text-xs md:w-20rem'
           />
         </div>
         <div className='flex flex-col mr-3'>
           <label className='text-xs mb-1'>Precio</label>
-          <MultiSelect
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.value)}
-            options={categories}
+          <Dropdown
+            value={selectedPrice}
+            onChange={(e) => setSelectedPrice(e.value)}
+            options={prices}
             optionLabel='name'
-            display='chip'
-            placeholder='Estado'
-            maxSelectedLabels={3}
-            className='w-full max-w-[150px] text-xs md:w-20rem'
+            optionValue='value'
+            placeholder='Orden'
+            className='w-full md:w-14rem text-xs'
           />
         </div>
         <div className='flex flex-col'>
           <label className='text-xs mb-1'>Sizes</label>
           <MultiSelect
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.value)}
-            options={brands}
+            value={selectedSizes}
+            onChange={(e) => setSelectedSizes(e.value)}
+            options={sizes}
             optionLabel='name'
+            optionValue='name'
             display='chip'
             placeholder='Metodo de pago'
             maxSelectedLabels={3}

@@ -9,7 +9,7 @@ import { IOrder } from '../models/IOrder'
 
 // Services
 import {
-  getOrders,
+  getOrders as fetchOrders,
   getOneOrder,
   deliverOrder as fetchDeliverOrder,
 } from '../services'
@@ -18,6 +18,7 @@ import { toast } from '../../../App'
 const initialState: InitialStateProps = {
   orders: [],
   order: null,
+  getOrders: () => {},
   selectOrder: () => {},
   addOrder: () => {},
   updateOrder: () => {},
@@ -45,7 +46,7 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
   let activeOrder = search ? searchOrders : orders
 
   useEffect(() => {
-    getInitialState()
+    getOrders()
   }, [])
 
   useEffect(() => {
@@ -68,9 +69,10 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
     setSearchOrders(searched)
   }
 
-  const getInitialState = async () => {
+  const getOrders = async (queries?: any) => {
     try {
-      const ordersData = await getOrders()
+      const ordersData = await fetchOrders(queries)
+      console.log('OORFORFOER', ordersData)
       setOrders(ordersData)
     } catch (error) {}
   }
@@ -119,6 +121,7 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
       value={{
         orders: activeOrder,
         selectOrder: setSelectedOrder,
+        getOrders,
         order,
         addOrder,
         updateOrder,
@@ -138,6 +141,7 @@ export const useOrderState = () => useContext(OrderContext)
 export interface InitialStateProps {
   orders: IOrder[]
   order: IOrder | null
+  getOrders: (queries?: any) => void
   selectOrder: (id: string) => void
   addOrder: (product: IOrder) => void
   updateOrder: (product: IOrder) => void

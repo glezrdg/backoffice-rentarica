@@ -196,3 +196,10 @@ export const provinces = [
   "	SANTO DOMINGO",
   "	VALVERDE",
 ]
+
+export const paymentMethods = [
+  'Tarjeta',
+  'Transferencia',
+  'Efectivo',
+  'Paypal'
+]

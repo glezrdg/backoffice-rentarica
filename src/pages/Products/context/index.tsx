@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import { IProduct } from '../models/IProduct'
 import {
-  getproducts,
+  getproducts as fetchProducts,
   postProduct,
   deleteProduct,
   updateProduct as putProduct,
@@ -63,15 +63,15 @@ export const InventoryProvider: React.FC<InventoryProviderProps> = ({
     setSearchProducts(searched)
   }
 
-  const getProducts = async () => {
+  const getProducts = async (queries?: any) => {
     try {
-      const productsData = await getproducts()
+      const productsData = await fetchProducts(queries)
       setProducts(productsData)
     } catch (error) {}
   }
   const getInitialState = async () => {
     try {
-      const productsData = await getproducts()
+      const productsData = await fetchProducts()
       setProducts(productsData)
     } catch (error) {}
   }

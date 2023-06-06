@@ -105,11 +105,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
         detail: `Debes de llenar el campo para agregar una categoria!`,
       })
     } else {
-      let newSizes = sizes.map((s) =>
+      let newSizes = sizes?.map((s) =>
         s.name === item.name ? { ...s, qty } : s
       )
-
-      console.log(newSizes)
       setSize(newSizes)
     }
   }
@@ -228,7 +226,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
               className='outline-none border-none rounded-md p-3 border !focus:border-purple-300 text-sm'
             >
               {categories?.map((category) => (
-                <option value={category._id}>{category.name}</option>
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
               ))}
             </select>
           </div>
@@ -240,7 +240,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
               className='outline-none border-none rounded-md p-3 border !focus:border-purple-300 text-sm'
             >
               {brands?.map((brand) => (
-                <option value={brand._id}>{brand.name}</option>
+                <option key={brand._id} value={brand._id}>
+                  {brand.name}
+                </option>
               ))}
             </select>
           </div>

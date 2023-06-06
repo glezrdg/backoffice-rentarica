@@ -22,8 +22,10 @@ const TopProducts: React.FC<ITopProductsProps> = (props) => {
           </button>
         }
       >
-        {Array.from(Array(5)).map((e, i) => (
-          <ProductItem />
+        {Array?.from(Array(5)).map((e, i) => (
+          <div key={i}>
+            <ProductItem />
+          </div>
         ))}
       </Card>
     </>

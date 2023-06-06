@@ -19,7 +19,7 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
   return (
     <div>
       <DataTable
-        value={products}
+        value={products || []}
         paginator
         rows={5}
         rowsPerPageOptions={[5, 10, 25, 50]}

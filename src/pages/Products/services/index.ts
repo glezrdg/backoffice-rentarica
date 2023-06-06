@@ -1,13 +1,21 @@
+import axios from 'axios';
 import { DataService } from "../../../config/api";
-import axios from 'axios'
 import { IProduct } from "../models/IProduct";
-import { products } from "../utils/data";
-import { ProductQueries } from "../models/ProductQueries";
 
-export const getproducts = async (): Promise<IProduct[]> => {
+export const getproducts = async (query?: any): Promise<IProduct[]> => {
+
+  let keys = Object.keys(query)
+  let queryString: string = ''
+
+  if (keys.length) {
+    queryString += '?'
+
+    keys?.map((item, i) => queryString += `${item}=${query[keys[i]]}&`)
+  }
+
 
   try {
-    const { data } = await DataService.get('/products')
+    const { data } = await DataService.get('/products' + queryString)
     return data
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)

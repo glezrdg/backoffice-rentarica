@@ -1,24 +1,53 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './styles.css'
 
 // Components
 import { MultiSelect } from 'primereact/multiselect'
 import { Dropdown } from 'primereact/dropdown'
+import { paymentMethods, provinces } from '../../../../utility/data'
+import { useOrderState } from '../../context'
 
 interface IFiltersProps {
   children?: React.ReactNode
 }
 
 const Filters: React.FC<IFiltersProps> = (props) => {
-  const [selectedCities, setSelectedCities] = useState(null)
-  const [selectedCity, setSelectedCity] = useState(null)
-  const cities = [
-    { name: 'New York', code: 'NY' },
-    { name: 'Rome', code: 'RM' },
-    { name: 'London', code: 'LDN' },
-    { name: 'Istanbul', code: 'IST' },
-    { name: 'Paris', code: 'PRS' },
+  const { getOrders } = useOrderState()
+
+  const [selectedProvinces, setSelectedProvinces] = useState([])
+  const [selectedState, setSelectedState] = useState('')
+  const [selectedAmount, setSelectedAmount] = useState('')
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState([])
+
+  const prices = [
+    { name: 'Mayores', value: 'desc' },
+    { name: 'Menores', value: 'asc' },
   ]
+
+  const states = [
+    { name: 'Enviados', value: 't' },
+    { name: 'Pendientes', value: 'f' },
+  ]
+
+  useEffect(() => {
+    let query: any = {}
+
+    if (selectedProvinces.length) query.provinces = selectedProvinces.join(',')
+    if (selectedPaymentMethod.length)
+      query.method = selectedPaymentMethod.join(',')
+    if (selectedAmount) query.amount = selectedAmount
+    if (selectedState) query.state = selectedState
+
+    handleGetOrders(query)
+  }, [selectedAmount, selectedPaymentMethod, selectedProvinces, selectedState])
+
+  const handleGetOrders = async (query: any) => {
+    try {
+      await getOrders(query)
+    } catch (error: any) {
+      console.log('FETCH FROM FILTERS ORDERS:', error.message)
+    }
+  }
 
   return (
     <>
@@ -26,10 +55,10 @@ const Filters: React.FC<IFiltersProps> = (props) => {
         <div className='flex flex-col mr-3'>
           <label className='text-xs mb-1'>Provincias</label>
           <MultiSelect
-            value={selectedCities}
-            onChange={(e) => setSelectedCities(e.value)}
-            options={cities}
-            optionLabel='name'
+            value={selectedProvinces}
+            filter
+            onChange={(e) => setSelectedProvinces(e.value)}
+            options={provinces}
             display='chip'
             placeholder='Provincias'
             maxSelectedLabels={3}
@@ -39,34 +68,33 @@ const Filters: React.FC<IFiltersProps> = (props) => {
         <div className='flex flex-col mr-3'>
           <label className='text-xs mb-1'>Monto</label>
           <Dropdown
-            value={selectedCity}
-            onChange={(e) => setSelectedCity(e.value)}
-            options={cities}
+            value={selectedAmount}
+            onChange={(e) => setSelectedAmount(e.value)}
+            options={prices}
             optionLabel='name'
+            optionValue='value'
             placeholder='Monto'
             className='w-full md:w-14rem text-xs'
           />
         </div>
         <div className='flex flex-col mr-3'>
           <label className='text-xs mb-1'>Estado</label>
-          <MultiSelect
-            value={selectedCities}
-            onChange={(e) => setSelectedCities(e.value)}
-            options={cities}
+          <Dropdown
+            value={selectedState}
+            onChange={(e) => setSelectedState(e.value)}
+            options={states}
             optionLabel='name'
-            display='chip'
-            placeholder='Estado'
-            maxSelectedLabels={3}
-            className='w-full max-w-[150px] text-xs md:w-20rem'
+            optionValue='value'
+            placeholder='Monto'
+            className='w-full md:w-14rem text-xs'
           />
         </div>
         <div className='flex flex-col'>
           <label className='text-xs mb-1'>Metodo de pago</label>
           <MultiSelect
-            value={selectedCities}
-            onChange={(e) => setSelectedCities(e.value)}
-            options={cities}
-            optionLabel='name'
+            value={selectedPaymentMethod}
+            onChange={(e) => setSelectedPaymentMethod(e.value)}
+            options={paymentMethods}
             display='chip'
             placeholder='Metodo de pago'
             maxSelectedLabels={3}
