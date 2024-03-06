@@ -1,6 +1,6 @@
 import React from 'react'
 import './styles.css'
-import { usenotestate } from '../../context'
+import { useNoteState } from '../../context'
 
 //Components
 import NoteItem from './components/NoteItem/NoteItem'
@@ -11,7 +11,7 @@ interface INotesContainerProps {
 }
 
 const NotesContainer: React.FC<INotesContainerProps> = (props) => {
-  const { notes } = usenotestate()
+  const { notes } = useNoteState()
 
   return (
     <>

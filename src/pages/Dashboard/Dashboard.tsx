@@ -3,17 +3,20 @@ import React, { useState } from 'react'
 // Components
 import { WidgetCard } from './components/WidgetCard'
 import { Card } from '../../components/shared/Card'
-import { LineChart } from '../../components/charts'
+import { BarChart, LineChart } from '../../components/charts'
 import TopProducts from '../../components/shared/TopProducts/TopProducts'
 import ShowMoney from './components/ShowMoney/ShowMoney'
 import RecentOrdersTable from './components/tables/RecentOrdersTable'
 import { PageHeader } from '../../components/layout'
+import { ProfitsSemester } from './components/charts/ProfitsSemester'
+import { useReportState } from '../Reports/context'
 
 interface IDashboardProps {
   children?: React.ReactNode
 }
 
 const Dashboard: React.FC<IDashboardProps> = (props) => {
+  const { reports, report } = useReportState()
   const [sidenav, setSidenav] = useState(false)
 
   return (
@@ -24,10 +27,10 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       <div
         className={`w-full grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4 lg:gap-6`}
       >
-        <WidgetCard />
-        <WidgetCard />
-        <WidgetCard />
-        <WidgetCard />
+        <WidgetCard title={'Ordenes'} />
+        <WidgetCard title={'Compras'} />
+        <WidgetCard title={'Nuevos Usuarios'} />
+        <WidgetCard title={'Ordenes Enviadas'} />
       </div>
 
       {/* PROFIT */}
@@ -35,19 +38,19 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
         <div className='my-8 flex justify-evenly sm:justify-center'>
           <ShowMoney
             title='Periodo actual'
-            money={35000}
+            money={report?.sellsReport.totalAmonutSell!}
             titleClassName='text-purple-500'
             badgeClassName='bg-purple-500'
           />
-          <ShowMoney title='Periodo actual' money={24856} />
+          {/* <ShowMoney title='Periodo actual' money={24856} /> */}
         </div>
-        <LineChart />
+        <ProfitsSemester color='purple' />
       </Card>
 
       {/* TOP */}
-      <TopProducts />
+      <TopProducts value={report?.sellsReport.productsQty} />
 
-      <div className='grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-10 mt-6 lg:mt-10'>
+      {/* <div className='grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-10 mt-6 lg:mt-10'>
         <Card title='Ordenes recientes' eye>
           <RecentOrdersTable />
         </Card>
@@ -55,7 +58,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
         <Card title='Usuarios Registrados' eye>
           <RecentOrdersTable />
         </Card>
-      </div>
+      </div> */}
     </>
   )
 }

@@ -11,7 +11,7 @@ export class NoteService {
     this.noteState = noteState
   }
 
-  handleCreateNote = (e: any) => {
+  handleCreateNote = async (e: any) => {
     const {
       title,
       description,
@@ -26,17 +26,25 @@ export class NoteService {
         detail: `Debes de llenar el campo para agregar una categoria!`,
       })
     } else {
-      this.noteState.addNote({
-        title,
-        description,
-        label,
-        favorite
-      })
-      toast.current?.show({
-        severity: 'success',
-        summary: 'Nota agregada!',
-        detail: `Has agregado una nota ${title}`,
-      })
+      try {
+        await this.noteState.addNote({
+          title,
+          description,
+          label,
+          favorite
+        })
+        toast.current?.show({
+          severity: 'success',
+          summary: 'Nota agregada!',
+          detail: `Has agregado una nota ${title}`,
+        })
+      } catch (error: any) {
+        toast.current?.show({
+          severity: 'error',
+          summary: 'Error al crear',
+          detail: error.message,
+        })
+      }
     }
   }
 

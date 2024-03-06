@@ -13,7 +13,6 @@ export const getproducts = async (query?: any): Promise<IProduct[]> => {
     keys?.map((item, i) => queryString += `${item}=${query[keys[i]]}&`)
   }
 
-
   try {
     const { data } = await DataService.get('/products' + queryString)
     return data

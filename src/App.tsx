@@ -9,6 +9,7 @@ import Spin from './components/shared/Spin'
 //Router
 import Router from './routes/Router'
 import { CategoryBrandProvider } from './pages/CategoryBrand/context'
+import { ReportProvider } from './pages/Reports/context'
 
 export let toast: any
 
@@ -27,9 +28,11 @@ function App() {
             </div>
           }
         >
-          <CategoryBrandProvider>
-            <Router />
-          </CategoryBrandProvider>
+          <ReportProvider>
+            <CategoryBrandProvider>
+              <Router />
+            </CategoryBrandProvider>
+          </ReportProvider>
         </Suspense>
       </BrowserRouter>
     </>

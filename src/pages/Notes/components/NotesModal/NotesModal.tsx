@@ -5,7 +5,7 @@ import './styles.css'
 import { InputText } from 'primereact/inputtext'
 import { InputTextarea } from 'primereact/inputtextarea'
 import { NoteService } from './services'
-import { usenotestate } from '../../context'
+import { useNoteState } from '../../context'
 
 interface INotesModalProps {
   children?: React.ReactNode
@@ -19,13 +19,11 @@ const NotesModal: React.FC<INotesModalProps> = () => {
 
   const noteService = new NoteService(
     { title, description, label, favorite },
-    usenotestate()
+    useNoteState()
   )
 
   const handleAddNote = (e: any) => {
     noteService.handleCreateNote(e)
-    cleanInputs()
-    close()
   }
 
   const cleanInputs = () => {
@@ -108,9 +106,9 @@ const NotesModal: React.FC<INotesModalProps> = () => {
                     onChange={(e) => setLabel(e.target.value)}
                     className='outline-none !border-50 rounded-md p-3 !focus:border-purple-300 text-sm'
                   >
-                    <option>ok</option>
-                    <option>ok</option>
-                    <option>ok</option>
+                    <option>Compras</option>
+                    <option>Ventas</option>
+                    <option>Ordenes</option>
                   </select>
                 </div>
                 <i
@@ -136,7 +134,6 @@ const NotesModal: React.FC<INotesModalProps> = () => {
                 onClick={(e) => handleAddNote(e)}
                 className='ml-1 inline-block rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]'
                 data-te-ripple-init
-                data-te-modal-dismiss
                 data-te-ripple-color='light'
               >
                 Guardar

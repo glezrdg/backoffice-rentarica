@@ -5,14 +5,14 @@ import './styles.css'
 import { InputText } from 'primereact/inputtext'
 import { InputTextarea } from 'primereact/inputtextarea'
 import { NoteService } from '../NotesModal/services'
-import { usenotestate } from '../../context'
+import { useNoteState } from '../../context'
 
 interface IItemModalProps {
   children?: React.ReactNode
 }
 
 const ItemModal: React.FC<IItemModalProps> = (props) => {
-  const { note } = usenotestate()
+  const { note } = useNoteState()
   const [title, setTitle] = useState(note?.title || '')
   const [description, setDescription] = useState(note?.description || '')
   const [label, setLabel] = useState(note?.label || '')
@@ -20,7 +20,7 @@ const ItemModal: React.FC<IItemModalProps> = (props) => {
 
   const noteService = new NoteService(
     { title, description, label, favorite },
-    usenotestate()
+    useNoteState()
   )
 
   useEffect(() => {

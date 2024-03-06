@@ -27,7 +27,7 @@ export function barChartData(color: Colors) {
   }
 }
 
-function getColor(color: string) {
+export function getColor(color: Colors) {
   switch (color) {
     case 'red':
       return 'rgb(255,240,246)'

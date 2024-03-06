@@ -1,7 +1,7 @@
-import React, { useState, memo, useEffect } from 'react'
 import { Chart } from 'primereact/chart'
-import { IOrder } from '../../pages/Orders/models/IOrder'
+import { memo, useState } from 'react'
 import { useOrderState } from '../../pages/Orders/context'
+import { IOrder } from '../../pages/Orders/models/IOrder'
 
 const getProvincesQty = (orders: IOrder[]) => {
   let provinces = new Set<string>()
@@ -24,17 +24,13 @@ const getProvincesQty = (orders: IOrder[]) => {
 
     data.push(item)
   }
-  console.log(data)
+  console.log('Province Data', data)
   return data
 }
 
-const PieChart = memo(function PieChart(props: any) {
+const ProvinceChart = memo(function ProvinceChart(props: any) {
   const { orders } = useOrderState()
-  const [data, setData] = useState<{ province: string; qty: number }[]>([])
-
-  useEffect(() => {
-    setData(getProvincesQty(orders))
-  }, [])
+  console.log('props', props)
 
   const [pieOptions, setPieOptions] = useState<any>({
     maintainAspectRatio: false,
@@ -51,10 +47,10 @@ const PieChart = memo(function PieChart(props: any) {
   })
 
   const pieData = {
-    labels: data.map((i) => i.province),
+    labels: props.provinces?.map((i: any) => i.province),
     datasets: [
       {
-        data: data.map((i) => i.qty),
+        data: props.provinces?.map((i: any) => i.qty),
         backgroundColor: [
           'rgb(107,111,243, 0.6',
           'rgb(32,201,151, 0.6)',
@@ -74,10 +70,10 @@ const PieChart = memo(function PieChart(props: any) {
         type='pie'
         data={pieData}
         options={pieOptions}
-        style={{ width: '100%' }}
+        style={{ width: '500px' }}
       />
     </div>
   )
 })
 
-export default PieChart
+export default ProvinceChart

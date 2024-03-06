@@ -2,7 +2,7 @@ import React from 'react'
 import './styles.css'
 
 // Components
-import { usenotestate } from '../../../../context'
+import { useNoteState } from '../../../../context'
 import { INotes } from '../../../../models/INotes'
 
 interface INoteItemProps {
@@ -12,7 +12,7 @@ interface INoteItemProps {
 }
 
 const NoteItem: React.FC<INoteItemProps> = ({ color = 'blue', note }) => {
-  const { setNote, removeNote } = usenotestate()
+  const { setNote, removeNote } = useNoteState()
   const { title, description, favorite, _id } = note
 
   return (

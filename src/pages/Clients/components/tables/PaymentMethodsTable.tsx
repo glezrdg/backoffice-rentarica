@@ -27,15 +27,14 @@ const data = [
   },
 ]
 
-const PaymentMethosTable = () => {
+const PaymentMethosTable = (props: any) => {
   return (
     <>
       {/* TABLE */}
       <div className='py-4 md:p-4 bg-white rounded-lg shadow-sm w-full h-fit'>
         <div className='overflow-hidden rounded-xl'>
           <DataTable
-            value={data}
-            paginator
+            value={props.data}
             rows={5}
             // tableStyle={{ minWidth: '50rem' }}
             className='hover:bg-slate-200'
@@ -47,17 +46,17 @@ const PaymentMethosTable = () => {
               style={{ width: '50%' }}
             ></Column>
             <Column
-              field='cantidad'
+              field='qty'
               header='Cantidad'
               className='text-[10px] md:text-sm'
               style={{ width: '30%' }}
             ></Column>
             <Column
-              field='monto'
+              field='amount'
               header='Monto'
               className='text-[10px] md:text-sm'
               style={{ width: '25%' }}
-              body={(data) => <p>${commaNumber(data.monto)}</p>}
+              body={(data) => <p>${commaNumber(data.amount)}</p>}
             ></Column>
             <Column
               body={(data) => (

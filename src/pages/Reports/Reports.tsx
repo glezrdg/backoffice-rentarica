@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './styles.css'
+import { useReportState } from './context'
 
 // Components
 import { Button } from '../../components/shared/Button'
@@ -15,6 +16,8 @@ interface IReportsProps {
 }
 
 const Reports: React.FC<IReportsProps> = (props) => {
+  const { report } = useReportState()
+
   return (
     <>
       {/* Header */}
@@ -40,9 +43,13 @@ const Reports: React.FC<IReportsProps> = (props) => {
 
       <div className='my-6'>
         <div className='grid sm:grid-cols-3 gap-5 w-full'>
-          <CardWidget color='green' title='Neto' />
-          <CardWidget color='indigo' title='Venta' />
-          <CardWidget color='blue' title='Compra' />
+          <CardWidget color='green' title='Neto' value={0} />
+          <CardWidget
+            color='indigo'
+            title='Venta'
+            value={report?.sellsReport?.totalAmonutSell!}
+          />
+          <CardWidget color='blue' title='Compra' value={0} />
         </div>
       </div>
 
@@ -54,17 +61,22 @@ const Reports: React.FC<IReportsProps> = (props) => {
         <Card
           title='Provincias'
           className='h-full'
-          bodyClassName='flex justify-center items-center h-[90%]'
+          bodyClassName='flex justify-center items-center'
           eye
         >
-          <PieChart />
+          <PieChart
+            provinces={report?.sellsReport.provincesQty.map((i) => ({
+              province: i.name,
+              qty: i.qty,
+            }))}
+          />
         </Card>
         <Card title='Metodos de pago'>
-          <PaymentMethodsTable />
+          <PaymentMethodsTable data={report?.sellsReport.paymentMethodQty} />
         </Card>
       </div>
 
-      <TopProducts />
+      <TopProducts value={report?.sellsReport.productsQty} />
     </>
   )
 }

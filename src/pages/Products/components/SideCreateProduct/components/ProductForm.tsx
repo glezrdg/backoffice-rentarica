@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
 // Componentes
-import { toast } from '../../../../../App'
-import { FileUpload } from 'primereact/fileupload'
-import { Button } from '../../../../../components/shared'
-import { ISizes } from '../../../models/IProduct'
 import { InputNumber } from 'primereact/inputnumber'
-import { useInventoryState } from '../../../context'
-import { sizes as sizesData } from '../../../utils/data'
+import { toast } from '../../../../../App'
+import { Button } from '../../../../../components/shared'
 import { useCategoryBrandState } from '../../../../CategoryBrand/context'
+import { useInventoryState } from '../../../context'
+import { ISizes } from '../../../models/IProduct'
+import { sizes as sizesData } from '../../../utils/data'
 
 interface ProductFormProps {
   close: () => void
@@ -207,7 +206,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
               <InputNumber
                 value={s.qty}
                 mode='decimal'
-                min={1}
+                min={0}
                 size={14}
                 inputClassName='p-4 h-8 w-12 text-center'
                 incrementButtonClassName='h-4'

@@ -7,7 +7,7 @@ export interface IProduct {
   category: string
   brand: string
   ofert: string
-  images: File
+  images: string
   qty: number
 }
 

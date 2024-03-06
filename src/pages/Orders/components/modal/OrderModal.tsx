@@ -8,6 +8,7 @@ import commaNumber from 'comma-number'
 import { Button, Card } from '../../../../components/shared'
 import OrderState from './components/OrderState/OrderState'
 import OrderTimeProcess from './components/OrderTimeProcess/OrderTimeProcess'
+import { IOrderItem } from '../../models/IOrder'
 
 interface IOrderModalProps {
   children?: React.ReactNode
@@ -95,7 +96,7 @@ const OrderModal: React.FC<IOrderModalProps> = (props) => {
 
           <main className='px-6'>
             <ul>
-              {order?.orderItems.map((item) => (
+              {order?.orderItems.map((item: IOrderItem) => (
                 <li className='shadow-sm flex justify-between items-center mb-2'>
                   <div className='flex items-center'>
                     <img

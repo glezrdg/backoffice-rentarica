@@ -1,20 +1,26 @@
 import React from 'react'
 import './styles.css'
+import commaNumber from 'comma-number'
 
 interface ICardWidgetProps {
   children?: React.ReactNode
   color: string
   title: string
+  value: number
 }
 
-const CardWidget: React.FC<ICardWidgetProps> = ({ color, title }) => {
+const CardWidget: React.FC<ICardWidgetProps> = ({
+  color,
+  title,
+  value = 0,
+}) => {
   return (
     <>
       <div className='flex-1 bg-white text-xl pt-8 px-10 pb-4 rounded-2xl'>
         <div
           className={`text-${color}-400 text-xl md:text-2xl lg:text-3xl font-medium`}
         >
-          <p>$78,250</p>
+          <p>${commaNumber(value)}</p>
         </div>
         <label className='uppercase block mt-1 mb-4 text-sm font-medium text-slate-400'>
           {title}

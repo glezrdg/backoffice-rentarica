@@ -12,6 +12,8 @@ import {
   Products,
   Reports,
 } from '../../pages'
+import { OrderProvider } from '../../pages/Orders/context'
+import { ReportProvider } from '../../pages/Reports/context'
 
 export const adminPages: routerType[] = [
   {
@@ -26,7 +28,11 @@ export const adminPages: routerType[] = [
   },
   {
     path: '/admin/orders',
-    element: <Orders />,
+    element: (
+      <OrderProvider>
+        <Orders />
+      </OrderProvider>
+    ),
     title: 'home',
   },
   {

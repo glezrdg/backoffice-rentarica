@@ -1,12 +1,10 @@
 import { DataService } from "../../../config/api";
 import { INotes } from "../models/INotes";
-import { notes } from "../utils/data";
 
 export const getNotes = async (): Promise<INotes[]> => {
   try {
-    // const { data } = await DataService.get('/Companys')
-    // return data as INotes[] || Companys
-    return notes
+    const { data } = await DataService.get('/notes')
+    return data as INotes[]
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }
@@ -14,9 +12,10 @@ export const getNotes = async (): Promise<INotes[]> => {
 
 export const addNotes = async (body: INotes): Promise<INotes> => {
   try {
-    // const { data } = await DataService.post('/notes', body)
-    // return data as INotes
-    return notes[0]
+    console.log('aqui 3');
+
+    const { data } = await DataService.post('/notes', body)
+    return data as INotes
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }

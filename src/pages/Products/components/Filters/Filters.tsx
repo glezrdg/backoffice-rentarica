@@ -37,7 +37,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
     handleGetProducts(query)
   }, [selectedCategory, selectedBrand, selectedPrice, selectedSizes])
 
-  const handleGetProducts = async (query: any) => {
+  const handleGetProducts: any = async (query: any) => {
     try {
       await getProducts(query)
     } catch (error: any) {
