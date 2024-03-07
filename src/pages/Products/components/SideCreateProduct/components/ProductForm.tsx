@@ -29,7 +29,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
   const [images, setImages] = useState([
     'https://phantom-marca.unidadeditorial.es/8c9bc73dd0d66d63d97f5eca8b5753c3/resize/1320/f/jpg/assets/multimedia/imagenes/2023/01/23/16744636883962.jpg',
   ])
-  const [file, setFile] = useState<File>()
+  const [file, setFile] = useState<any>()
 
   useEffect(() => {
     if (product?._id) {

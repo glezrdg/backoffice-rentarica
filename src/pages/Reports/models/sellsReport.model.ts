@@ -4,6 +4,7 @@ export interface ISellsReport {
   _id: string
   ordersQty: number
   totalAmonutSell: number
+  totalAmonutWin: number
   productsQty: [{
     product: IProduct
     qty: number

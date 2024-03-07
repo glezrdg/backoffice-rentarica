@@ -38,7 +38,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
         <div className='my-8 flex justify-evenly sm:justify-center'>
           <ShowMoney
             title='Periodo actual'
-            money={report?.sellsReport.totalAmonutSell!}
+            money={report?.sellsReport?.totalAmonutSell! || 0}
             titleClassName='text-purple-500'
             badgeClassName='bg-purple-500'
           />
@@ -48,7 +48,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       </Card>
 
       {/* TOP */}
-      <TopProducts value={report?.sellsReport.productsQty} />
+      <TopProducts value={report?.sellsReport?.productsQty} />
 
       {/* <div className='grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-10 mt-6 lg:mt-10'>
         <Card title='Ordenes recientes' eye>

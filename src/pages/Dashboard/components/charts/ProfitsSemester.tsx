@@ -21,7 +21,7 @@ export const ProfitsSemester: React.FC<ProfitsSemesterProps> = memo(
             {
               label: 'Ganancias',
               data: reports?.map(
-                (report) => report.sellsReport.totalAmonutSell
+                (report) => report?.sellsReport?.totalAmonutSell
               ),
               fill: true,
               borderColor: '#6184AA',

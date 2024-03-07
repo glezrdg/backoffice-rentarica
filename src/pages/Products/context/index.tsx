@@ -71,7 +71,7 @@ export const InventoryProvider: React.FC<InventoryProviderProps> = ({
   }
   const getInitialState = async () => {
     try {
-      const productsData = await fetchProducts()
+      const productsData = await fetchProducts({})
       setProducts(productsData)
     } catch (error) {}
   }

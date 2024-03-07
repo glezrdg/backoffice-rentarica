@@ -72,7 +72,7 @@ const TopProducts: React.FC<ITopProductsProps> = ({ orders, value }) => {
         value.map((i) => ({
           product: i.product,
           qty: i.qty,
-          amount: i.product.price * i.qty,
+          amount: i.product?.price * i.qty,
         }))
       )
     }

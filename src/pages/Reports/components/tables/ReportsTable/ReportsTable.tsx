@@ -30,10 +30,10 @@ const ReportsTable: React.FC<IReportsTableProps> = (props) => {
             {reports?.map((report) => (
               <div className='bg-purple-50 cursor-pointer transition text-slate-600 rounded-lg h-14 mb-3 grid grid-cols-6 place-items-center hover:scale-[1.01] hover:shadow-md hover:font-medium hover:text-purple-700'>
                 <p>{dateFormat(new Date(report.createdAt), 'date')}</p>
-                <p>{commaNumber(report.sellsReport.ordersQty)}</p>
-                <p>${commaNumber(report.sellsReport.totalAmonutSell)}</p>
-                <p>$55,000</p>
-                <p>240</p>
+                <p>{commaNumber(report?.sellsReport?.ordersQty) || 0}</p>
+                <p>${commaNumber(report?.sellsReport?.totalAmonutSell) || 0}</p>
+                <p>${commaNumber(report?.sellsReport?.totalAmonutWin) || 0}</p>
+                <p>0</p>
                 <p>
                   <i className='fa fa-eye transition cursor-pointer text-slate-600 hover:bg-purple-300 p-2 rounded-full mr-1 md:mr-2' />
                   <i className='fa fa-file-export transition cursor-pointer text-slate-600 hover:bg-purple-300 p-2 rounded-full' />

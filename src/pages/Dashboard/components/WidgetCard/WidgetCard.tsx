@@ -17,16 +17,10 @@ const WidgetCard: React.FC<IWidgetCardProps> = (props) => {
   }
 
   if (props.title === 'Ordenes') {
-    info.value = report?.sellsReport.ordersQty
+    info.value = report?.sellsReport?.ordersQty || 0
   }
   if (props.title === 'Compras') {
-    info.value = 0
-  }
-  if (props.title === 'Ordenes') {
-    info.value = report?.sellsReport.ordersQty
-  }
-  if (props.title === 'Ordenes') {
-    info.value = report?.sellsReport.ordersQty
+    info.value = report?.shoppingReport?.shoppingQty || 0
   }
 
   return (

@@ -23,7 +23,8 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
             icon='fa fa-bag-shopping'
             title='Ordenes'
           />
-          <MenuItem url='admin/products' icon='fa fa-box' title='Inventario' />
+          <MenuItem url='admin/inventory' icon='fa fa-box' title='Inventario' />
+          <MenuItem url='admin/shopping' icon='fa fa-tag' title='Compras' />
 
           <MenuItem url='admin/clients' icon='fa fa-user' title='Clientes' />
           <MenuItem url='admin/reports' icon='fa fa-folder' title='Reportes' />

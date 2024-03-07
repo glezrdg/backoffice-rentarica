@@ -18,6 +18,8 @@ interface IReportsProps {
 const Reports: React.FC<IReportsProps> = (props) => {
   const { report } = useReportState()
 
+  console.log(report)
+
   return (
     <>
       {/* Header */}
@@ -43,13 +45,21 @@ const Reports: React.FC<IReportsProps> = (props) => {
 
       <div className='my-6'>
         <div className='grid sm:grid-cols-3 gap-5 w-full'>
-          <CardWidget color='green' title='Neto' value={0} />
+          <CardWidget
+            color='green'
+            title='Ganancias'
+            value={report?.sellsReport?.totalAmonutWin!}
+          />
           <CardWidget
             color='indigo'
-            title='Venta'
+            title='Ventas'
             value={report?.sellsReport?.totalAmonutSell!}
           />
-          <CardWidget color='blue' title='Compra' value={0} />
+          <CardWidget
+            color='blue'
+            title='Compras'
+            value={report?.shoppingReport?.totalAmountBuy!}
+          />
         </div>
       </div>
 
@@ -65,18 +75,18 @@ const Reports: React.FC<IReportsProps> = (props) => {
           eye
         >
           <PieChart
-            provinces={report?.sellsReport.provincesQty.map((i) => ({
+            provinces={report?.sellsReport?.provincesQty.map((i) => ({
               province: i.name,
               qty: i.qty,
             }))}
           />
         </Card>
         <Card title='Metodos de pago'>
-          <PaymentMethodsTable data={report?.sellsReport.paymentMethodQty} />
+          <PaymentMethodsTable data={report?.sellsReport?.paymentMethodQty} />
         </Card>
       </div>
 
-      <TopProducts value={report?.sellsReport.productsQty} />
+      <TopProducts value={report?.sellsReport?.productsQty} />
     </>
   )
 }

@@ -11,9 +11,11 @@ import {
   Orders,
   Products,
   Reports,
+  Shopping,
 } from '../../pages'
 import { OrderProvider } from '../../pages/Orders/context'
-import { ReportProvider } from '../../pages/Reports/context'
+import { NoteProvider } from '../../pages/Notes/context'
+import ShoppingProvider from '../../pages/Shopping/context'
 
 export const adminPages: routerType[] = [
   {
@@ -22,8 +24,17 @@ export const adminPages: routerType[] = [
     title: 'home',
   },
   {
-    path: '/admin/products',
+    path: '/admin/inventory',
     element: <Products />,
+    title: 'home',
+  },
+  {
+    path: '/admin/shopping',
+    element: (
+      <ShoppingProvider>
+        <Shopping />
+      </ShoppingProvider>
+    ),
     title: 'home',
   },
   {
@@ -62,7 +73,11 @@ export const adminPages: routerType[] = [
   },
   {
     path: '/admin/notes',
-    element: <Notes />,
+    element: (
+      <NoteProvider>
+        <Notes />
+      </NoteProvider>
+    ),
     title: 'home',
   },
 ]
