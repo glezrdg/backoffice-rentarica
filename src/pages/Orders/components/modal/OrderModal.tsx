@@ -27,7 +27,6 @@ const OrderModal: React.FC<IOrderModalProps> = (props) => {
       aria-labelledby='exampleModalCenterTitle'
       aria-hidden='true'
       role='dialog'
-      tabIndex={1}
     >
       <div
         data-te-modal-dialog-ref
@@ -80,7 +79,7 @@ const OrderModal: React.FC<IOrderModalProps> = (props) => {
                   }}
                 />
                 <div>
-                  <p className='text-xl mb-1'>{order?.client!}</p>
+                  <p className='text-xl mb-1'>{order?.client?.fullname}</p>
                   <span className='text-sm text-slate-500'>
                     {order?.shippingAddress.province}
                   </span>
@@ -173,6 +172,7 @@ const OrderModal: React.FC<IOrderModalProps> = (props) => {
               icon='fa fa-truck text-base !h-initial !w-initial'
               className='h-10 w-10 mx-4'
               color='warning'
+              tooltip='Enviar pedido'
               disabled={order?.isDelivered}
               onClick={() => deliverOrder(order?._id!)}
             ></Button>
@@ -180,6 +180,7 @@ const OrderModal: React.FC<IOrderModalProps> = (props) => {
               iconButton
               icon='fa fa-ban text-base !h-initial !w-initial'
               color='danger'
+              tooltip='Cancelar pedido'
               className='h-10 w-10 !mr-4'
             ></Button>
             <Button
@@ -187,6 +188,7 @@ const OrderModal: React.FC<IOrderModalProps> = (props) => {
               icon='fa fa-circle-check text-base !h-initial !w-initial'
               color='success'
               className='h-10 w-10'
+              tooltip='Completar pedido'
             ></Button>
             {/* <button
               type='button'

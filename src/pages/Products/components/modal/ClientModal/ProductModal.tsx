@@ -1,22 +1,29 @@
+import { useReportState } from '../../../../../pages/Reports/context'
+import commaNumber from 'comma-number'
 import { Avatar } from 'primereact/avatar'
 import { TabPanel, TabView } from 'primereact/tabview'
 import React from 'react'
+import { useInventoryState } from '../../../context'
 import {
-  LatestBuy,
+  ClientAddress,
   ClientCart,
   ClientWishList,
-  ClientAddress,
+  LatestBuy,
 } from './components'
 import './styles.css'
-import { useInventoryState } from '../../../context'
-import commaNumber from 'comma-number'
+import Sizes from '../../Sizes'
 
 interface IProductModalProps {
   children?: React.ReactNode
 }
 
 const ProductModal: React.FC<IProductModalProps> = (props) => {
+  const { report } = useReportState()
   const { product } = useInventoryState()
+
+  let productReport = report?.sellsReport?.productsQty.find(
+    (i) => i.product._id === product?._id
+  )
 
   return (
     <div
@@ -72,7 +79,7 @@ const ProductModal: React.FC<IProductModalProps> = (props) => {
                 <div className='flex items-center'>
                   <Avatar
                     label='U'
-                    image={product?.images[0]}
+                    image={'http://localhost:3000/' + product?.images[0]}
                     size='xlarge'
                     className='p-overlay-badge mr-3'
                     style={{
@@ -82,7 +89,9 @@ const ProductModal: React.FC<IProductModalProps> = (props) => {
                   />
                   <div>
                     <p className='text-xl mb-1'>{product?.name}</p>
-                    <span className='text-sm text-slate-500'>36 compras</span>
+                    <span className='text-sm text-slate-500'>
+                      {productReport?.qty || 0} compras en este mes
+                    </span>
                   </div>
                 </div>
                 <h2 className='text-3xl text-green-500 font-medium'>
@@ -91,18 +100,20 @@ const ProductModal: React.FC<IProductModalProps> = (props) => {
               </div>
 
               {/* Sections */}
-              <TabView>
-                <TabPanel headerClassName='text-sm' header='Ultimas compras'>
-                  <LatestBuy />
-                </TabPanel>
-                <TabPanel headerClassName='text-sm' header='Carrito'>
-                  <ClientCart />
-                </TabPanel>
-                <TabPanel headerClassName='text-sm' header='Wishlist'>
-                  <ClientWishList />
-                </TabPanel>
-                <TabPanel headerClassName='text-sm' header='Direccion'>
-                  <ClientAddress />
+              <TabView className='bg-slate-50'>
+                <TabPanel
+                  headerClassName='text-sm bg-slate-100'
+                  header='Informacion'
+                  className=''
+                >
+                  <div className='mb-4'>
+                    <label className='font-bold block mb-4'>Descripcion</label>
+                    <p>{product.description}</p>
+                  </div>
+                  <div>
+                    <label className='font-bold'>Sizes</label>
+                    <Sizes sizes={product.sizes} my={6} />
+                  </div>
                 </TabPanel>
               </TabView>
             </div>
@@ -117,14 +128,6 @@ const ProductModal: React.FC<IProductModalProps> = (props) => {
                 data-te-ripple-color='light'
               >
                 Close
-              </button>
-              <button
-                type='button'
-                className='ml-1 inline-block rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]'
-                data-te-ripple-init
-                data-te-ripple-color='light'
-              >
-                Save changes
               </button>
             </div>
           </div>

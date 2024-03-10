@@ -8,12 +8,17 @@ import React, {
 import { IClients } from '../models/IClients'
 
 // Services
-import { getClients } from '../services'
+import { getClientOrders, getClients, getProvincesReport } from '../services'
+import { IOrder } from '../../../pages/Orders/models/IOrder'
+import { IProvincesReport } from '@/models/ProvincesReport.model'
 
 const initialState: InitialStateProps = {
   clients: [],
   client: null,
+  provincesReport: null,
+  clientOrders: [],
   addClient: () => {},
+  fetchClientOrders: () => {},
   updateClient: () => {},
   removeClient: () => {},
   setSearch: () => {},
@@ -30,9 +35,14 @@ export const ClientProvider: React.FC<InventoryProviderProps> = ({
   children,
 }) => {
   const [clients, setClients] = useState<IClients[]>(initialState.clients)
+  const [provincesReport, setProvincesReport] =
+    useState<IProvincesReport | null>(null)
   const [searchClients, setSearchClient] = useState<IClients[]>([])
   const [search, setSearch] = useState<string>('')
   const [client, setClient] = useState<IClients | null>(initialState.client)
+  const [clientOrders, setClientOrders] = useState<IOrder[]>(
+    initialState.clientOrders
+  )
 
   let activeClient = search ? searchClients : clients
 
@@ -48,7 +58,7 @@ export const ClientProvider: React.FC<InventoryProviderProps> = ({
 
   const handleSearchClient = () => {
     let searched = clients.filter((p) =>
-      p.name.toLowerCase().includes(search.toLowerCase())
+      p.fullname.toLowerCase().includes(search.toLowerCase())
     )
 
     setSearchClient(searched)
@@ -57,8 +67,20 @@ export const ClientProvider: React.FC<InventoryProviderProps> = ({
   const getInitialState = async () => {
     try {
       const clientsData = await getClients()
+      const provincesReportData = await getProvincesReport()
+
       setClients(clientsData)
+      setProvincesReport(provincesReportData)
     } catch (error) {}
+  }
+
+  const fetchClientOrders = async () => {
+    try {
+      const clientsData = await getClientOrders(client?._id || '')
+      setClientOrders(clientsData)
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
   }
 
   const addClient = (body: IClients) => {
@@ -77,7 +99,10 @@ export const ClientProvider: React.FC<InventoryProviderProps> = ({
     <ClientContext.Provider
       value={{
         clients: activeClient,
+        provincesReport,
         client,
+        clientOrders,
+        fetchClientOrders,
         addClient,
         updateClient,
         removeClient,
@@ -95,9 +120,12 @@ export const useClientstate = () => useContext(ClientContext)
 export interface InitialStateProps {
   clients: IClients[]
   client: IClients | null
+  provincesReport: IProvincesReport | null
+  clientOrders: IOrder[]
   addClient: (product: IClients) => void
   updateClient: (product: IClients) => void
   removeClient: (id: string) => void
   setSearch: (string: string) => void
   setClient: (product: IClients) => void
+  fetchClientOrders: () => void
 }

@@ -30,8 +30,17 @@ const OrdersTable = () => {
           selectionMode='multiple'
           headerStyle={{ width: '3rem' }}
         ></Column> */}
-        <Column field='_id' header='#Numero' className='text-sm'></Column>
-        <Column field='client' header='Cliente' className='text-sm'></Column>
+        <Column
+          field='_id'
+          body={(data) => <p>1</p>}
+          header='#Numero'
+          className='text-sm'
+        ></Column>
+        <Column
+          field='client.fullname'
+          header='Cliente'
+          className='text-sm'
+        ></Column>
         <Column
           field='shippingAddress.province'
           header='Provincia'
@@ -90,7 +99,6 @@ const OrdersTable = () => {
                   data-te-target='#orderModal'
                   className='fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'
                 ></i>
-                <OrderModal />
               </div>
               <i className='fa fa-regular fa-edit cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
               <i className='fa fa-ellipsis-vertical cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
@@ -98,6 +106,8 @@ const OrdersTable = () => {
           )}
         ></Column>
       </DataTable>
+
+      <OrderModal />
     </div>
   )
 }

@@ -29,12 +29,12 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       >
         <WidgetCard title={'Ordenes'} />
         <WidgetCard title={'Compras'} />
+        <WidgetCard title={'Ganancias'} />
         <WidgetCard title={'Nuevos Usuarios'} />
-        <WidgetCard title={'Ordenes Enviadas'} />
       </div>
 
       {/* PROFIT */}
-      <Card title='Total ganancias' className='mt-6 md:mt-10' toolbar>
+      <Card title='Total vendido' className='mt-6 md:mt-10' toolbar>
         <div className='my-8 flex justify-evenly sm:justify-center'>
           <ShowMoney
             title='Periodo actual'

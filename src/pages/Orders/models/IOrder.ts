@@ -3,7 +3,7 @@ import { IShipping } from "../../../models"
 
 export interface IOrder {
   _id?: string
-  client: string
+  client: any
   orderItems: IOrderItem[]
   shippingAddress: IShipping
   paymentMethod: string

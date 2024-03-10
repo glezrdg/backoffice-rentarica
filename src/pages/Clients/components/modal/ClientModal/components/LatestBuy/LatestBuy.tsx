@@ -3,17 +3,21 @@ import './styles.css'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { orders } from '../../../../../../../utility/data'
+import { IOrder } from '../../../../../../../pages/Orders/models/IOrder'
+import commaNumber from 'comma-number'
+import { dateFormat } from '../../../../../../../utility/dateFormat'
 
 interface ILatestBuyProps {
   children?: React.ReactNode
+  orders: IOrder[]
 }
 
-const LatestBuy: React.FC<ILatestBuyProps> = (props) => {
+const LatestBuy: React.FC<ILatestBuyProps> = ({ orders }) => {
   return (
     <>
       <div className='rounded-xl overflow-hidden w-full'>
         <DataTable
-          value={orders}
+          value={orders || 0}
           paginator
           rows={5}
           rowsPerPageOptions={[5, 10, 25, 50]}
@@ -24,25 +28,40 @@ const LatestBuy: React.FC<ILatestBuyProps> = (props) => {
           <Column
             field='number'
             header='#Number'
-            style={{ width: '20%' }}
+            body={() => <p>192</p>}
+            style={{ width: '15%' }}
           ></Column>
           <Column
             field='paymentMethod'
             header='Tipo'
-            style={{ width: '20%' }}
+            style={{ width: '18%' }}
           ></Column>
           <Column
             field='qty'
             header='Cantidad'
-            style={{ width: '25%' }}
+            style={{ width: '18%' }}
             headerClassName=''
-            body={(data) => <div>{data.qty}</div>}
+            body={(data) => (
+              <div>
+                {data.orderItems.reduce(
+                  (acc: any, curr: any) => acc + curr.qty,
+                  0
+                )}
+              </div>
+            )}
           ></Column>
           <Column
-            field='price'
+            field='totalPrice'
             header='Monto'
             style={{ width: '18%' }}
-            body={(data) => <p>${data.price}</p>}
+            body={(data) => <p>${commaNumber(data.totalPrice)}</p>}
+          ></Column>
+          <Column
+            field='totalPrice'
+            header='Fecha'
+            body={(data) => (
+              <p>${dateFormat(new Date(data.createdAt), 'date')}</p>
+            )}
           ></Column>
           <Column
             field='price'

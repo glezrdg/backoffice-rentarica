@@ -15,6 +15,7 @@ import {
 } from '../../pages'
 import { OrderProvider } from '../../pages/Orders/context'
 import { NoteProvider } from '../../pages/Notes/context'
+import { ClientProvider } from '../../pages/Clients/context'
 import ShoppingProvider from '../../pages/Shopping/context'
 
 export const adminPages: routerType[] = [
@@ -48,7 +49,11 @@ export const adminPages: routerType[] = [
   },
   {
     path: '/admin/clients',
-    element: <Clients />,
+    element: (
+      <ClientProvider>
+        <Clients />
+      </ClientProvider>
+    ),
     title: 'home',
   },
   {

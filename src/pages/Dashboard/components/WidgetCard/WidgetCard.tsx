@@ -12,6 +12,8 @@ interface IWidgetCardProps {
 const WidgetCard: React.FC<IWidgetCardProps> = (props) => {
   const { report } = useReportState()
 
+  console.log(report)
+
   const info: any = {
     value: 0,
   }
@@ -21,6 +23,14 @@ const WidgetCard: React.FC<IWidgetCardProps> = (props) => {
   }
   if (props.title === 'Compras') {
     info.value = report?.shoppingReport?.shoppingQty || 0
+  }
+
+  if (props.title === 'Ganancias') {
+    info.value = report?.sellsReport?.totalAmonutWin || 0
+  }
+
+  if (props.title === 'Nuevos Usuarios') {
+    info.value = report?.clientsQty || 0
   }
 
   return (

@@ -11,6 +11,7 @@ interface IButtonProps {
   buttonType?: 'submit' | 'button'
   rounded?: boolean
   text?: string
+  tooltip?: string
   icon?: string
   iconButton?: boolean
   disabled?: boolean
@@ -26,6 +27,7 @@ const Button: React.FC<IButtonProps> = ({
   icon,
   iconButton,
   text,
+  tooltip,
   onClick,
   buttonType,
 }) => {
@@ -44,13 +46,23 @@ const Button: React.FC<IButtonProps> = ({
     <button
       data-te-ripple-init
       data-te-ripple-color={type === 'fill' ? 'light' : 'dark'}
-      className={`btn ${type} ${color} ${className} ${showClases()}`}
+      className={`group btn ${type} ${color} ${className} ${showClases()}`}
       onClick={onClick}
       type={buttonType}
       disabled={disabled}
     >
       {icon && <i className={`h-4 w-4 ${icon} ${text && 'mr-1 '}`} />}
       {text}
+      {tooltip && (
+        <div className='group-hover:[transform:perspective(0px)_translateZ(0)_rotateX(0deg)] absolute bottom-8 mb-6 origin-bottom transform rounded text-white opacity-0 transition-all duration-300 group-hover:opacity-100'>
+          <div className='flex max-w-xs flex-col items-center'>
+            <div className='rounded bg-gray-900 p-2 text-xs text-center shadow-lg'>
+              {tooltip}
+            </div>
+            <div className='clip-bottom h-2 w-4 bg-gray-900'></div>
+          </div>
+        </div>
+      )}
     </button>
   )
 }

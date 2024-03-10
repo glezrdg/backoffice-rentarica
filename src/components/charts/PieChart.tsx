@@ -47,7 +47,9 @@ const ProvinceChart = memo(function ProvinceChart(props: any) {
   })
 
   const pieData = {
-    labels: props.provinces?.map((i: any) => i.province),
+    labels: props.provinces
+      ?.filter((i: any) => i.qty > 0)
+      .map((i: any) => i.province || i.name),
     datasets: [
       {
         data: props.provinces?.map((i: any) => i.qty),

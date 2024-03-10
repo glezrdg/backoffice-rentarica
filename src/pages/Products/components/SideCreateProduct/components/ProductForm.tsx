@@ -8,6 +8,7 @@ import { useCategoryBrandState } from '../../../../CategoryBrand/context'
 import { useInventoryState } from '../../../context'
 import { ISizes } from '../../../models/IProduct'
 import { sizes as sizesData } from '../../../utils/data'
+import Sizes from '../../Sizes'
 
 interface ProductFormProps {
   close: () => void
@@ -196,25 +197,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
           />
         </div>
 
-        <div className='my-10 flex'>
-          {sizes?.map((s) => (
-            <div
-              key={s.name}
-              className='bg-white uppercase p-3 px-6 mr-5 text-center'
-            >
-              <p>{s.name}</p>
-              <InputNumber
-                value={s.qty}
-                mode='decimal'
-                min={0}
-                size={14}
-                inputClassName='p-4 h-8 w-12 text-center'
-                incrementButtonClassName='h-4'
-                onChange={(e) => handleChangeSize(s, e.value as number)}
-              />
-            </div>
-          ))}
-        </div>
+        <Sizes sizes={sizes} handleChangeSize={handleChangeSize} />
 
         <div className='grid grid-cols-2 gap-5'>
           <div className='flex flex-col'>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 // Components
 
 import { Avatar } from 'primereact/avatar'
@@ -11,13 +11,20 @@ import {
   ClientAddress,
 } from './components'
 import './styles.css'
+import commaNumber from 'comma-number'
 
 interface IClientModalProps {
   children?: React.ReactNode
 }
 
 const ClientModal: React.FC<IClientModalProps> = (props) => {
-  const { client } = useClientstate()
+  const { client, fetchClientOrders, clientOrders } = useClientstate()
+
+  useEffect(() => {
+    fetchClientOrders()
+  }, [client])
+
+  console.log(clientOrders)
 
   return (
     <div
@@ -80,23 +87,24 @@ const ClientModal: React.FC<IClientModalProps> = (props) => {
                   }}
                 />
                 <div>
-                  <p className='text-xl mb-1'>{client?.name}</p>
-                  <span className='text-sm text-slate-500'>36 compras</span>
+                  <p className='text-xl mb-1'>{client?.fullname}</p>
+                  <span className='text-sm text-slate-500'>
+                    {clientOrders.length} compras
+                  </span>
                 </div>
               </div>
-              <h2 className='text-3xl text-green-500 font-medium'>$7.500</h2>
+              <h2 className='text-3xl text-green-500 font-medium'>
+                $
+                {commaNumber(
+                  clientOrders?.reduce((acc, cur) => acc + cur.totalPrice, 0)
+                )}
+              </h2>
             </div>
 
             {/* Sections */}
             <TabView>
               <TabPanel headerClassName='text-sm' header='Ultimas compras'>
-                <LatestBuy />
-              </TabPanel>
-              <TabPanel headerClassName='text-sm' header='Carrito'>
-                <ClientCart />
-              </TabPanel>
-              <TabPanel headerClassName='text-sm' header='Wishlist'>
-                <ClientWishList />
+                <LatestBuy orders={clientOrders} />
               </TabPanel>
               <TabPanel headerClassName='text-sm' header='Direccion'>
                 <ClientAddress />

@@ -21,39 +21,27 @@ const ClientsTable = () => {
         className='hover:bg-slate-200'
       >
         <Column
-          field='name'
+          field='fullname'
           header='Nombre'
-          style={{ width: '18%' }}
+          style={{ width: '50%' }}
           className='text-sm'
         ></Column>
         <Column
           field='shippingAddress.province'
+          body={(data) => (
+            <p>
+              {data?.shippingAddress?.province
+                ? data?.shippingAddress?.province
+                : 'Sin registrar'}
+            </p>
+          )}
           header='Provincia'
           className='text-sm'
-          style={{ width: '20%' }}
-        ></Column>
-        <Column
-          field='shippingAddress.delivery'
-          header='Delivery'
-          className='text-sm m-auto'
-          style={{ width: '15%' }}
-        ></Column>
-        <Column
-          field='status'
-          header='Estado'
-          className='text-sm'
-          style={{ width: '20%' }}
-          body={(data) => (
-            <div className='text-xs bg-green-400 w-[80%] text-white rounded-2xl p-[0.4rem] text-center'>
-              active
-            </div>
-          )}
         ></Column>
         <Column
           field='createdAt'
           header='Fecha de registro'
           className='text-sm '
-          style={{ width: '18%' }}
           body={(data) => (
             <div>{dateFormat(new Date(data.createdAt), 'date')}</div>
           )}
@@ -72,14 +60,13 @@ const ClientsTable = () => {
                 >
                   <i className='fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
                 </button>
-                <ClientModal />
               </div>
-              <i className='fa fa-regular fa-edit cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
               <i className='fa fa-ellipsis-vertical cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
             </div>
           )}
         ></Column>
       </DataTable>
+      <ClientModal />
     </div>
   )
 }
