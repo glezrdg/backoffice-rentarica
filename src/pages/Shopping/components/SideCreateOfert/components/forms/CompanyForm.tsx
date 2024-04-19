@@ -13,6 +13,7 @@ import { ShoppingService } from '../../services/shopping'
 import { ISizes } from '../../../../../../pages/Products/models/IProduct'
 import { sizes as sizesData } from '../../../../../../pages/Products/utils/data'
 import { toast } from '../../../../../../App'
+import Sizes from '../../../../../../pages/Products/components/Sizes'
 
 interface CompanyFormProps {
   onClose: () => void
@@ -27,7 +28,7 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onClose }) => {
   const [shoppingList, setShoppingList] = useState<ShoppingList[]>([])
   const [sizes, setSize] = useState<ISizes[]>(sizesData)
   const [name, setName] = useState('')
-  const [product, setProduct] = useState('')
+  const [product, setProduct] = useState(products[0]?._id || '')
   const [price, setPrice] = useState<any>(0)
   const [qty, setQty] = useState<any>(1)
   const [disable, setDisable] = useState(false)
@@ -62,17 +63,23 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onClose }) => {
   }
 
   const handleAddShoppingList = () => {
+    const selectedProduct = products.find((i) => i._id === product)!
+    let qtyType: any = {}
+
+    if (selectedProduct.productType === 'sizes') {
+      qtyType.sizes = sizes.filter((i) => i.qty > 0)
+      qtyType.qty = sizes.reduce((acc, cur) => acc + cur.qty, 0)
+    } else qtyType.qty = qty
+
     setShoppingList((prev) => [
       ...prev,
       {
         price,
-        qty,
         product: product || products[0]?._id,
-        available: qty,
-        sizes: sizes.filter((i) => i.qty > 0),
+        available: sizes.reduce((acc, cur) => acc + cur.qty, 0) || qty,
+        ...qtyType,
       },
     ])
-    console.log('ShoppingList', shoppingList)
 
     cleanInputs()
   }
@@ -92,13 +99,24 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onClose }) => {
     }
   }
 
+  const DisplayQty = () => {
+    const selectedProduct = products.find((i) => i._id === product)!
+
+    if (selectedProduct?.productType === 'product') {
+      return (
+        <InputNumber
+          className='w-full'
+          min={1}
+          value={qty}
+          onChange={(e) => setQty(e.value)}
+        />
+      )
+    } else
+      return <Sizes sizes={sizes} handleChangeSize={handleChangeSize} my={2} />
+  }
+
   return (
-    <form
-      className='mt-3 relative flex flex-col'
-      onSubmit={(e) =>
-        !shopping?._id ? handleCreateCompany(e) : handleUpdateCompany(e)
-      }
-    >
+    <form className='mt-3 relative flex flex-col'>
       <div className='flex flex-col'>
         <label className='mb-2 text-xs'>Producto</label>
         <select
@@ -114,41 +132,18 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onClose }) => {
         </select>
       </div>
 
-      <div className='my-10 flex'>
-        {sizes?.map((s) => (
-          <div
-            key={s.name}
-            className='bg-white uppercase p-3 px-6 mr-5 text-center'
-          >
-            <p>{s.name}</p>
-            <InputNumber
-              value={s.qty}
-              mode='decimal'
-              min={0}
-              size={14}
-              inputClassName='p-4 h-8 w-12 text-center'
-              incrementButtonClassName='h-4'
-              onChange={(e) => handleChangeSize(s, e.value as number)}
-            />
-          </div>
-        ))}
+      <div className='mt-6'>
+        <label className='mb-4 text-xs'>Cantidad</label>
+        <DisplayQty />
       </div>
 
-      <div className='grid grid-cols-2 gap-5 mb-5 mt-3'>
+      <div className='grid grid-cols-2 mb-5 mt-3'>
         <div className='flex flex-col'>
           <label className='mb-2 text-xs'>Precio</label>
           <InputNumber
             value={price}
             onChange={(e) => setPrice(e.value)}
-            className='outline-none rounded-md p-2'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='mb-2 text-xs'>Cantidad</label>
-          <InputNumber
-            value={qty}
-            onChange={(e) => setQty(e.value)}
-            className='outline-none rounded-md p-2'
+            className='outline-none rounded-md'
           />
         </div>
       </div>
@@ -201,7 +196,13 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onClose }) => {
             icon='fa fa-plus'
             onClick={handleAddShoppingList}
           />
-          <Button text='Guardar' icon='fa fa-floppy-disk' />
+          <Button
+            text='Guardar'
+            icon='fa fa-floppy-disk'
+            onClick={(e) =>
+              !shopping?._id ? handleCreateCompany(e) : handleUpdateCompany(e)
+            }
+          />
         </div>
       )}
     </form>

@@ -15,7 +15,7 @@ interface IButtonProps {
   icon?: string
   iconButton?: boolean
   disabled?: boolean
-  onClick?: () => void
+  onClick?: (e: any) => void
 }
 
 const Button: React.FC<IButtonProps> = ({
@@ -47,7 +47,7 @@ const Button: React.FC<IButtonProps> = ({
       data-te-ripple-init
       data-te-ripple-color={type === 'fill' ? 'light' : 'dark'}
       className={`group btn ${type} ${color} ${className} ${showClases()}`}
-      onClick={onClick}
+      onClick={(e) => onClick && onClick(e)}
       type={buttonType}
       disabled={disabled}
     >

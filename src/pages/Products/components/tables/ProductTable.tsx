@@ -44,7 +44,9 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
           headerClassName=''
           body={(data) => (
             <div className='p-2 px-3 bg-purple-400 w-8 h-8 text-white rounded-md'>
-              {data.sizes.reduce((acc: any, cur: any) => acc + cur.qty, 0)}
+              {!data.sizes || (!data.sizes.length && data.qty > 0)
+                ? data.qty
+                : data.sizes.reduce((acc: any, cur: any) => acc + cur.qty, 0)}
             </div>
           )}
         ></Column>
@@ -64,7 +66,6 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
                   data-te-toggle='modal'
                   data-te-target='#productModal'
                 ></i>
-                <ProductModal />
               </div>
               <i
                 onClick={() => {
@@ -78,6 +79,7 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
           )}
         ></Column>
       </DataTable>
+      <ProductModal />
     </div>
   )
 }

@@ -8,6 +8,7 @@ export interface IProduct {
   brand: string
   ofert: string
   images: string
+  productType: string
   qty: number
 }
 

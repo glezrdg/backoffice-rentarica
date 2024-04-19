@@ -12,6 +12,7 @@ import {
 } from './components'
 import './styles.css'
 import Sizes from '../../Sizes'
+import { InputNumber } from 'primereact/inputnumber'
 
 interface IProductModalProps {
   children?: React.ReactNode
@@ -110,10 +111,17 @@ const ProductModal: React.FC<IProductModalProps> = (props) => {
                     <label className='font-bold block mb-4'>Descripcion</label>
                     <p>{product.description}</p>
                   </div>
-                  <div>
-                    <label className='font-bold'>Sizes</label>
-                    <Sizes sizes={product.sizes} my={6} />
-                  </div>
+                  {product.productType === 'product' ? (
+                    <div>
+                      <label className='font-bold mr-4'>Cantidad:</label>
+                      <InputNumber value={product.qty} />
+                    </div>
+                  ) : (
+                    <div>
+                      <label className='font-bold'>Sizes</label>
+                      <Sizes sizes={product.sizes} my={6} />
+                    </div>
+                  )}
                 </TabPanel>
               </TabView>
             </div>

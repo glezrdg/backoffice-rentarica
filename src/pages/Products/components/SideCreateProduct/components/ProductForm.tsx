@@ -9,6 +9,7 @@ import { useInventoryState } from '../../../context'
 import { ISizes } from '../../../models/IProduct'
 import { sizes as sizesData } from '../../../utils/data'
 import Sizes from '../../Sizes'
+import { Checkbox } from 'primereact/checkbox'
 
 interface ProductFormProps {
   close: () => void
@@ -20,6 +21,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
   const { brands, categories } = useCategoryBrandState()
 
   const [name, setName] = useState('')
+  const [productType, setProductType] = useState('product')
   const [price, setPrice] = useState(0)
   const [qty, setQty] = useState(0)
   const [category, setCategory] = useState('')
@@ -48,6 +50,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
 
   const handleCreateProduct = async (e: any) => {
     e.preventDefault()
+
+    let qtyType: any = {}
+
+    if (productType === 'sizes') {
+      qtyType.sizes = sizes.filter((i) => i.qty > 0)
+      qtyType.qty = sizes.reduce((acc, cur) => acc + cur.qty, 0)
+    } else qtyType.qty = qty
+
     if (!name) {
       toast.current?.show({
         severity: 'error',
@@ -63,8 +73,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
         brand,
         images: file!,
         ofert,
-        sizes: sizes.filter((i) => i.qty > 0),
-        qty: sizes.reduce((acc, cur) => acc + cur.qty, 0),
+        ...qtyType,
+        productType,
       })
       cleanInputs()
       close()
@@ -91,6 +101,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
         ofert,
         sizes: sizes.filter((i) => i.qty > 0),
         qty: sizes.reduce((acc, cur) => acc + cur.qty, 0),
+        productType,
       })
       cleanInputs()
       close()
@@ -197,7 +208,50 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
           />
         </div>
 
-        <Sizes sizes={sizes} handleChangeSize={handleChangeSize} />
+        <div className='mt-5'>
+          <label className='mb-3 text-xs block'>
+            Administrar cantidad por:
+          </label>
+          <div className='flex'>
+            <div className='flex items-center mr-4'>
+              <Checkbox
+                inputId='producto'
+                name='producto'
+                value='producto'
+                onChange={() => setProductType('product')}
+                checked={productType === 'product'}
+              />
+              <label htmlFor='producto' className='ml-2'>
+                Producto
+              </label>
+            </div>
+            <div className='flex items-center'>
+              <Checkbox
+                inputId='sizes'
+                name='sizes'
+                value='sizes'
+                onChange={() => setProductType('sizes')}
+                checked={productType === 'sizes'}
+              />
+              <label htmlFor='sizes' className='ml-2'>
+                Sizes
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div className='min-h-28'>
+          {productType === 'sizes' ? (
+            <Sizes sizes={sizes} handleChangeSize={handleChangeSize} />
+          ) : (
+            <InputNumber
+              className='w-full my-8'
+              value={qty}
+              min={1}
+              onChange={(e) => setQty(e.value!)}
+            />
+          )}
+        </div>
 
         <div className='grid grid-cols-2 gap-5'>
           <div className='flex flex-col'>
