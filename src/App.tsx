@@ -7,13 +7,16 @@ import './App.css'
 import Spin from './components/shared/Spin'
 
 //Router
+import ProtectedRouter from './routes/ProtectedRouter'
 import Router from './routes/Router'
 import { CategoryBrandProvider } from './pages/CategoryBrand/context'
 import { ReportProvider } from './pages/Reports/context'
+import { useAppSelector } from './redux/store'
 
 export let toast: any
 
 function App() {
+  const { user } = useAppSelector((state) => state.auth)
   const [count, setCount] = useState(0)
   toast = useRef(null)
 
@@ -28,11 +31,15 @@ function App() {
             </div>
           }
         >
-          <ReportProvider>
-            <CategoryBrandProvider>
-              <Router />
-            </CategoryBrandProvider>
-          </ReportProvider>
+          {user ? (
+            <ReportProvider>
+              <CategoryBrandProvider>
+                <ProtectedRouter />
+              </CategoryBrandProvider>
+            </ReportProvider>
+          ) : (
+            <Router />
+          )}
         </Suspense>
       </BrowserRouter>
     </>

@@ -1,8 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // css
 import './styles.css'
+import { useAppDispatch, useAppSelector } from '../../../../../redux/store'
+import { logOut } from '../../../../../redux/reducers/auth'
 
 interface IDropdownProfileProps {
   children?: React.ReactNode
@@ -10,6 +12,10 @@ interface IDropdownProfileProps {
 }
 
 const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const { user } = useAppSelector((state) => state.auth)
+
   return (
     <div
       data-popover
@@ -19,7 +25,7 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
     >
       <figure className='user-dropdwon__info'>
         <figcaption>
-          <h5>Abdullah Bin Talha</h5>
+          <h5>{user.fullname}</h5>
           <p>UI Expert</p>
         </figcaption>
       </figure>
@@ -67,12 +73,15 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
           </Link>
         </li>
       </ul>
-      <Link
+      <button
         className='user-dropdwon__bottomAction text-slate-400 bg-slate-50 w-full hover:text-purple-500 hover:shadow-sm'
-        to='#'
+        onClick={() => {
+          dispatch(logOut())
+          navigate('/home')
+        }}
       >
         <i className='fa fa-sign-out' /> Sign Out
-      </Link>
+      </button>
       <div data-popper-arrow></div>
     </div>
   )

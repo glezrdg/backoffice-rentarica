@@ -3,5 +3,5 @@ export interface IDelivery {
   name: string
   phone: string
   cedula: string
-  placa: string
+  role: string | 'empleado' | 'administrador'
 } 

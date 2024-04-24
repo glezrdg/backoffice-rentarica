@@ -7,6 +7,7 @@ import { Checkbox } from 'primereact/checkbox'
 import { MultiSelect } from 'primereact/multiselect'
 import { Calendar } from 'primereact/calendar'
 import { useDeliveryState } from '../../../../context'
+import { Dropdown } from 'primereact/dropdown'
 
 interface DeliveryFormProps {
   onClose: () => void
@@ -19,7 +20,7 @@ const DeliveryForm: React.FC<DeliveryFormProps> = ({ onClose }) => {
   const [name, setName] = useState('')
   const [cedula, setCedula] = useState('')
   const [phone, setPhone] = useState('')
-  const [placa, setPlaca] = useState('')
+  const [role, setRole] = useState<string>('empleado')
   const [disable, setDisable] = useState(false)
 
   // const ofertService = new Service(
@@ -55,7 +56,7 @@ const DeliveryForm: React.FC<DeliveryFormProps> = ({ onClose }) => {
       name,
       cedula,
       phone,
-      placa,
+      role,
     })
     cleanInputs()
     onClose()
@@ -77,7 +78,6 @@ const DeliveryForm: React.FC<DeliveryFormProps> = ({ onClose }) => {
     setName('')
     setCedula('')
     setPhone('')
-    setPlaca('')
     setDisable(false)
   }
 
@@ -96,7 +96,7 @@ const DeliveryForm: React.FC<DeliveryFormProps> = ({ onClose }) => {
       </div>
       <div className='grid grid-cols-2 gap-5 my-5'>
         <div className='flex flex-col'>
-          <label className='mb-2 text-xs'>Cedula</label>
+          <label className='mb-2 text-xs'>Email</label>
           <input
             value={cedula}
             onChange={(e) => setCedula(e.target.value)}
@@ -114,21 +114,20 @@ const DeliveryForm: React.FC<DeliveryFormProps> = ({ onClose }) => {
       </div>
 
       <div className='flex flex-col'>
-        <label className='mb-2 text-xs'>Placa</label>
-        <input
-          value={placa}
-          onChange={(e) => setPlaca(e.target.value)}
-          className='outline-none rounded-md p-2 border focus:border-purple-300'
-        />
+        <label className='mb-2 text-xs'>Role</label>
+        {/* <Dropdown
+          options={['administrador', 'empleado']}
+          
+        /> */}
+        <select
+          className='outline-none border-none rounded-md p-3 border !focus:border-purple-300 text-sm'
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <option value={'empleado'}>Empleado</option>
+          <option value={'administrador'}>Administrador</option>
+        </select>
       </div>
-
-      <label className='text-base flex items-center mt-5'>
-        <Checkbox
-          onChange={(e) => setDisable(e.target.checked!)}
-          checked={disable}
-        ></Checkbox>
-        <span className='ml-2'>no habilitar</span>
-      </label>
 
       {true ? (
         <div className='grid grid-cols-2 gap-1 mb-5 mt-8'>

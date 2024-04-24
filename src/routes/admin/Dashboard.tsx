@@ -17,6 +17,8 @@ import { OrderProvider } from '../../pages/Orders/context'
 import { NoteProvider } from '../../pages/Notes/context'
 import { ClientProvider } from '../../pages/Clients/context'
 import ShoppingProvider from '../../pages/Shopping/context'
+import Caja from '../../pages/Employee/Caja'
+import Cuadre from '../../pages/Employee/Cuadre'
 
 export const adminPages: routerType[] = [
   {
@@ -83,6 +85,16 @@ export const adminPages: routerType[] = [
         <Notes />
       </NoteProvider>
     ),
+    title: 'home',
+  },
+  {
+    path: '/empleado/caja',
+    element: <Caja />,
+    title: 'home',
+  },
+  {
+    path: '/empleado/cuadre',
+    element: <Cuadre />,
     title: 'home',
   },
 ]

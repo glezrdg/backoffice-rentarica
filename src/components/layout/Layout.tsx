@@ -1,12 +1,10 @@
 import React, { ReactNode, useState } from 'react'
 
-import { BarChart } from '../charts'
-
 // Components
+import { NotesModal } from '../../pages/Notes/components/NotesModal'
 import { FloatToolbar } from './FloatToolbar'
 import { SideNavbar } from './SideNavbar'
 import { TopMenuBar } from './TopMenuBar'
-import { NotesModal } from '../../pages/Notes/components/NotesModal'
 
 export interface LayoutProps {
   children: ReactNode

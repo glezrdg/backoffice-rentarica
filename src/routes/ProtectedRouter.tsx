@@ -1,19 +1,20 @@
 import { Route, Routes } from 'react-router-dom'
+import Layout from '../components/layout/Layout'
 import { routerType } from '../types/router.types'
-import { authPages } from './Auth'
+import { adminPages } from './admin/Dashboard'
 
-const pagesData: routerType[] = [...authPages]
+const pagesData: routerType[] = [...adminPages]
 
-const Router = () => {
+const ProtectedRouter = () => {
   const pageRoutes = pagesData.map(({ path, title, element }: routerType) => {
     return <Route key={title} path={`/${path}`} element={element} />
   })
 
   return (
-    <div className='bg-white grid place-items-center w-full h-[100vh]'>
+    <Layout>
       <Routes>{pageRoutes}</Routes>
-    </div>
+    </Layout>
   )
 }
 
-export default Router
+export default ProtectedRouter

@@ -3,16 +3,11 @@ import { IShipping } from "../../../models"
 
 export interface IOrder {
   _id?: string
-  client: any
+  user: any
   orderItems: IOrderItem[]
-  shippingAddress: IShipping
   paymentMethod: string
-  taxPrice: number
-  shippingPrice: number
+  amount: number
   totalPrice: number
-  isDelivered: boolean
-  deliveredAt?: string
-  completed?: boolean
   createdAt?: string
   updatedAt?: string
 }

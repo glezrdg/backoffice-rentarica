@@ -34,7 +34,7 @@ export const ReportProvider: React.FC<ReportProviderProps> = ({ children }) => {
     try {
       const reportsData = await service.getReports({})
       setReports(reportsData)
-      setReport(reportsData[0])
+      setReport(reportsData[reportsData.length - 1])
     } catch (error: any) {
       console.log('ERROR', error)
     }

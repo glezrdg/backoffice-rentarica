@@ -38,21 +38,13 @@ const SideCreate: React.FC<ISideCreateProps> = ({ active, close, type }) => {
       </div>
 
       {/* FORM */}
-      {type === 'company' ? (
-        <CompanyForm
-          onClose={() => {
-            setCompany({} as ICompany)
-            close()
-          }}
-        />
-      ) : (
-        <DeliveryForm
-          onClose={() => {
-            setDelivery({} as IDelivery)
-            close()
-          }}
-        />
-      )}
+
+      <DeliveryForm
+        onClose={() => {
+          setDelivery({} as IDelivery)
+          close()
+        }}
+      />
     </div>
   )
 }

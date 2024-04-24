@@ -4,12 +4,12 @@ import { getItem } from '../utility/localStorageControl';
 const API_ENDPOINT = 'http://localhost:3000/api';
 
 const authHeader = () => ({
-  Authorization: `Bearer ${getItem('access_token')}`,
+  Authorization: `Bearer ${getItem('auth')?.token}`,
 });
 
 const client: AxiosInstance = axios.create({
   headers: {
-    Authorization: `Bearer ${getItem('access_token')}`,
+    Authorization: `Bearer ${getItem('auth')?.token}`,
     'Content-Type': 'application/json',
   },
 });

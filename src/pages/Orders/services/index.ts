@@ -1,6 +1,17 @@
 import { DataService } from "../../../config/api";
 import { IOrder } from "../models/IOrder";
 
+export const postOrder = async (body: any) => {
+  try {
+    const { data } = await DataService.post('/orders', body)
+    console.log('error', data)
+    return data
+  } catch (error: any) {
+    console.log('error', error)
+    throw new Error(error.response.data.message || error.message)
+  }
+}
+
 export const getOrders = async (query?: any): Promise<IOrder[]> => {
   let keys = Object.keys(query)
   let queryString: string = ''
@@ -29,7 +40,7 @@ export const getOneOrder = async (id: string): Promise<IOrder> => {
   }
 }
 
-export const addOrder = async (body: IOrder): Promise<IOrder> => {
+export const addOrder = async (body: any): Promise<IOrder> => {
   try {
     const { data } = await DataService.post('/orders', body)
     return data as IOrder

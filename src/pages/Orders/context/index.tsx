@@ -12,6 +12,7 @@ import {
   getOrders as fetchOrders,
   getOneOrder,
   deliverOrder as fetchDeliverOrder,
+  postOrder,
 } from '../services'
 import { toast } from '../../../App'
 
@@ -72,7 +73,7 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
   const getOrders = async (queries?: any) => {
     try {
       const ordersData = await fetchOrders(queries)
-      console.log('OORFORFOER', ordersData)
+
       setOrders(ordersData)
     } catch (error) {}
   }
@@ -84,8 +85,21 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
     } catch (error) {}
   }
 
-  const addOrder = (body: IOrder) => {
-    setOrders((prev) => [...prev, { _id: `${prev.length + 1}`, ...body }])
+  const addOrder = async () => {
+    try {
+      const order = await postOrder({
+        client: '',
+        orderItems: [],
+        paymentMethod: '',
+        shippingPrice: 200,
+        taxPrice: 65,
+        totalPrice: '',
+      })
+      toast.success('Compra realizada!')
+      return order
+    } catch (error: any) {
+      toast.error(error.message)
+    }
   }
 
   const updateOrder = (body: IOrder) => {
