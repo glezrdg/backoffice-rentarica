@@ -6,6 +6,7 @@ import {
   DropdownNotifications,
 } from './components'
 import './styles.css'
+import { useAppSelector } from '../../../redux/store'
 
 interface ITopMenuBarProps {
   children?: React.ReactNode
@@ -13,6 +14,7 @@ interface ITopMenuBarProps {
 }
 
 const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen }) => {
+  const { user } = useAppSelector((state) => state.auth)
   return (
     <>
       <div className=' fixed right-0 left-0 flex items-center justify-between h-[70px] px-5 bg-white z-[1000] '>
@@ -22,7 +24,7 @@ const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen }) => {
         >
           <i className='fa fa-bars lg:text-2xl mr-1 md:mr-2 lg:mr-4 text-slate-400' />
           <h1 className='font-mono text-lg  md:text-xl lg:text-2xl text-slate-600'>
-            BuenoDev
+            SantoPago
           </h1>
         </div>
         <div className='w-[60%] flex items-center mx-4 border p-2 lg:p-3 rounded-lg box-border transition hover:shadow-sm'>
@@ -32,6 +34,7 @@ const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen }) => {
             className='outline-none w-[95%] h-full text-slate-500 placeholder:italic placeholder:text-slate-400 placeholder:text-sm'
           />
         </div>
+
         <div
           data-popover-target='dropdow_messages_profile-mobile'
           className='block sm:hidden relative cursor-pointer bg-slate-50 px-2 py-1 rounded-full'
@@ -39,7 +42,12 @@ const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen }) => {
           <i className='text-sm md:text-lg xl:text-xl fa fa-light fa-user text-slate-400'></i>
           <DropdownProfile id='dropdow_messages_profile-mobile' />
         </div>
-        <div className='w-[180px] justify-between hidden sm:flex'>
+        <div className='gap-4 justify-between items-center hidden sm:flex'>
+          {!user?.subscribeId && (
+            <div className='border border-purple-500 rounded-lg text-purple-500 p-3 mr-8'>
+              Prueba gratis
+            </div>
+          )}
           {/* Messages */}
           <div
             data-popover-target='dropdow_messages_message'

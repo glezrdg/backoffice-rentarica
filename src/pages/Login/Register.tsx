@@ -3,9 +3,11 @@ import { FC, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from '../../App'
 import { Button } from '../../components/shared'
-import { signup } from './services'
-import { useAppDispatch, useAppSelector } from '../../redux/store'
+import useQuery from '../../hooks/useQuery'
 import { setAuth } from '../../redux/reducers/auth'
+import { useAppDispatch, useAppSelector } from '../../redux/store'
+import { signup } from './services'
+import { getItem } from '../../utility/localStorageControl'
 
 export interface PageLoginProps {
   className?: string
@@ -28,14 +30,25 @@ const PageRegister: FC<PageLoginProps> = ({ className = '' }) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { user } = useAppSelector((state) => state.auth)
+  const query = useQuery()
 
   const [fullname, setFullname] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const stripe_url = getItem('stripe_url')
+  console.log('PARAMS: ', stripe_url)
+
   useEffect(() => {
-    if (user) {
-      navigate('/admin/dashboard')
+    console.log('toooo', stripe_url)
+    if (user && stripe_url) {
+      console.log('TO: ', stripe_url)
+      localStorage.removeItem('stripe_url')
+      window.location.replace(stripe_url)
+    }
+    if (user && !stripe_url) {
+      console.log('FUCK: ', stripe_url)
+      // window.location.href = '/admin/dashboard'
     }
   }, [user])
 
@@ -54,6 +67,7 @@ const PageRegister: FC<PageLoginProps> = ({ className = '' }) => {
         password,
         fullname,
         role: 'administrador',
+        sessionId: query.get('sessionId') || '',
       })
       localStorage.setItem('auth', JSON.stringify(loggedUser))
       dispatch(setAuth(loggedUser))
@@ -71,7 +85,7 @@ const PageRegister: FC<PageLoginProps> = ({ className = '' }) => {
   }
 
   return (
-    <div className={`nc-PageRegister ${className}`} data-nc-id='PageRegister'>
+    <div className={`nc-PageRegister ${className}`}>
       <div className='container'>
         <h2 className='my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center'>
           Crear cuenta
@@ -151,7 +165,7 @@ const PageRegister: FC<PageLoginProps> = ({ className = '' }) => {
           {/* ==== */}
           <span className='block text-center text-neutral-700 dark:text-neutral-300'>
             Tienes cuenta? {` `}
-            <Link className='text-green-600' to='/signup'>
+            <Link className='text-green-600' to='/login'>
               iniciar sesion
             </Link>
           </span>

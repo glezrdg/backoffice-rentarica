@@ -19,6 +19,8 @@ import { ClientProvider } from '../../pages/Clients/context'
 import ShoppingProvider from '../../pages/Shopping/context'
 import Caja from '../../pages/Employee/Caja'
 import Cuadre from '../../pages/Employee/Cuadre'
+import Planes from '../../pages/Planes'
+import SuccessSubscription from '../../pages/SuccessSubscription'
 
 export const adminPages: routerType[] = [
   {
@@ -88,13 +90,28 @@ export const adminPages: routerType[] = [
     title: 'home',
   },
   {
-    path: '/empleado/caja',
+    path: '/admin/caja',
     element: <Caja />,
     title: 'home',
   },
   {
-    path: '/empleado/cuadre',
+    path: '/admin/cuadre',
     element: <Cuadre />,
+    title: 'home',
+  },
+  {
+    path: '/admin/planes',
+    element: <Planes />,
+    title: 'home',
+  },
+  {
+    path: '/success_payment',
+    element: <SuccessSubscription />,
+    title: 'home',
+  },
+  {
+    path: '*',
+    element: <Dashboard />,
     title: 'home',
   },
 ]

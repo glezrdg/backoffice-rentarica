@@ -31,15 +31,13 @@ function App() {
             </div>
           }
         >
-          {user ? (
-            <ReportProvider>
-              <CategoryBrandProvider>
-                <ProtectedRouter />
-              </CategoryBrandProvider>
-            </ReportProvider>
-          ) : (
-            <Router />
-          )}
+          <ReportProvider>
+            <CategoryBrandProvider>
+              <ProtectedRouter />
+            </CategoryBrandProvider>
+          </ReportProvider>
+
+          {/* <Router /> */}
         </Suspense>
       </BrowserRouter>
     </>

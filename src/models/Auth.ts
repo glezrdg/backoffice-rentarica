@@ -2,6 +2,8 @@ export interface Auth {
   _id: string
   fullname: string
   email: string
+  token: string
+  subscriptionId: string
 }
 
 export interface LoginDto {
@@ -14,4 +16,5 @@ export interface CreateAuthDtop {
   email: string
   password: string
   role: string
+  sessionId: string
 }

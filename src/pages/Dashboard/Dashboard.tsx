@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 
 // Components
-import { WidgetCard } from './components/WidgetCard'
-import { Card } from '../../components/shared/Card'
-import { BarChart, LineChart } from '../../components/charts'
-import TopProducts from '../../components/shared/TopProducts/TopProducts'
-import ShowMoney from './components/ShowMoney/ShowMoney'
-import RecentOrdersTable from './components/tables/RecentOrdersTable'
 import { PageHeader } from '../../components/layout'
-import { ProfitsSemester } from './components/charts/ProfitsSemester'
+import { Card } from '../../components/shared/Card'
+import TopProducts from '../../components/shared/TopProducts/TopProducts'
 import { useReportState } from '../Reports/context'
+import ShowMoney from './components/ShowMoney/ShowMoney'
+import { WidgetCard } from './components/WidgetCard'
+import { ProfitsSemester } from './components/charts/ProfitsSemester'
 
 interface IDashboardProps {
   children?: React.ReactNode
