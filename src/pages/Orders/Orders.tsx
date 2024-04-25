@@ -18,35 +18,8 @@ const Orders: React.FC<IOrdersProps> = (props) => {
   const [data, setData] = useState<any>()
   const { orders } = useOrderState()
 
-  const getProvincesQty = () => {
-    let provinces = new Set<string>()
-
-    orders.map((order) => provinces.add(order.shippingAddress.province))
-    let choosenProvinces = Array.from(provinces)
-    let data = []
-
-    for (let index = 0; index < choosenProvinces.length; index++) {
-      const search = choosenProvinces[index]
-      let item = {
-        province: search,
-        qty: 0,
-      }
-
-      item.qty = orders.filter(
-        (o) => o.shippingAddress.province === search
-      ).length
-
-      data.push(item)
-    }
-
-    setData(data)
-    console.log('DATA', data)
-  }
-
   useEffect(() => {
     if (orders) {
-      getProvincesQty()
-      console.log('DATA 2 ', data)
     }
   }, [orders])
 
@@ -81,22 +54,13 @@ const Orders: React.FC<IOrdersProps> = (props) => {
 
       {/* GRAPHS */}
       <div className='grid md:grid-cols-2 h-fit gap-5 mt-8'>
-        <Card
-          title='provincias'
-          eye
-          className='h-full'
-          bodyClassName='grid place-items-center h-[80%] w-[100%] '
-        >
-          {data?.length ? <PieChart provinces={data} /> : <Spin />}
-        </Card>
+        <TopProducts orders={orders} />
 
         {/* Payment methos */}
         <Card title='Metodos de pago' eye>
           <PaymentMethodsTable />
         </Card>
       </div>
-
-      <TopProducts orders={orders} />
     </>
   )
 }

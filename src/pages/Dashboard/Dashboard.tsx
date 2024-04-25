@@ -46,7 +46,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       </Card>
 
       {/* TOP */}
-      <TopProducts value={report?.sellsReport?.productsQty} />
+      <TopProducts className=' mt-8' value={report?.sellsReport?.productsQty} />
 
       {/* <div className='grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-10 mt-6 lg:mt-10'>
         <Card title='Ordenes recientes' eye>

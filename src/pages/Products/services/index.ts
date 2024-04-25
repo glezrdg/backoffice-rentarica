@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { DataService } from "../../../config/api";
 import { IProduct } from "../models/IProduct";
+import { getItem } from '../../../utility/localStorageControl';
 
 export const getproducts = async (query?: any): Promise<IProduct[]> => {
 
@@ -26,6 +27,7 @@ export const postProduct = async (body: IProduct): Promise<IProduct> => {
     const { data: product } = await DataService.post('/products', body)
     const { data } = await axios.post(`http://localhost:3000/api/products/${product._id}/images`, { images: body.images }, {
       headers: {
+        Authorization: `Bearer ${getItem('auth')?.token}`,
         'Content-Type': 'multipart/form-data'
       }
     })

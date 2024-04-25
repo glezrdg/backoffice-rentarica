@@ -5,14 +5,15 @@ import './styles.css'
 import { MultiSelect } from 'primereact/multiselect'
 import { Dropdown } from 'primereact/dropdown'
 import { paymentMethods, provinces } from '../../../../utility/data'
-import { useOrderState } from '../../context'
+import { Calendar } from 'primereact/calendar'
+// import { useOrderState } from '../../context'
 
 interface IFiltersProps {
   children?: React.ReactNode
 }
 
 const Filters: React.FC<IFiltersProps> = (props) => {
-  const { getOrders } = useOrderState()
+  // const { getOrders } = useOrderState()
 
   const [selectedProvinces, setSelectedProvinces] = useState([])
   const [selectedState, setSelectedState] = useState('')
@@ -43,16 +44,20 @@ const Filters: React.FC<IFiltersProps> = (props) => {
 
   const handleGetOrders = async (query: any) => {
     try {
-      await getOrders(query)
+      // await getOrders(query)
     } catch (error: any) {
       console.log('FETCH FROM FILTERS ORDERS:', error.message)
     }
   }
 
   return (
-    <>
-      <div className='items-center hidden lg:flex'>
-        <div className='flex flex-col mr-3'>
+    <div className='flex justify-between items-center'>
+      <div className='flex flex-col flex-1'>
+        <label className='text-xs mb-1'>Plazos de tiempo</label>
+        <Calendar className='h-10 w-[40%]' placeholder='Inicio - fin' />
+      </div>
+      <div className='items-center hidden lg:flex gap-4'>
+        <div className='flex flex-col'>
           <label className='text-xs mb-1'>Monto</label>
           <Dropdown
             value={selectedAmount}
@@ -61,6 +66,19 @@ const Filters: React.FC<IFiltersProps> = (props) => {
             optionLabel='name'
             optionValue='value'
             placeholder='Monto'
+            className='w-full md:w-14rem text-xs'
+          />
+        </div>
+
+        <div className='flex flex-col'>
+          <label className='text-xs mb-1'>Estado</label>
+          <Dropdown
+            value={selectedAmount}
+            onChange={(e) => setSelectedAmount(e.value)}
+            options={prices}
+            optionLabel='name'
+            optionValue='value'
+            placeholder='Estado'
             className='w-full md:w-14rem text-xs'
           />
         </div>
@@ -78,7 +96,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
           />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

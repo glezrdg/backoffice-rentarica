@@ -38,11 +38,7 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
             />
             <MenuItem url='admin/shopping' icon='fa fa-tag' title='Compras' />
             {/* <MenuItem url='admin/clients' icon='fa fa-user' title='Clientes' /> */}
-            <MenuItem
-              url='admin/delivery'
-              icon='fa fa-user'
-              title='Empleados'
-            />
+            <MenuItem url='admin/usuarios' icon='fa fa-user' title='Usuarios' />
             <MenuItem
               url='admin/reports'
               icon='fa fa-folder'
@@ -59,7 +55,7 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
               icon='fa fa-note-sticky'
               title='Notas'
             />
-            {!user?.subscribeId && (
+            {!user?.subscriptionId && (
               <MenuItem
                 url='admin/planes'
                 icon='fa fa-circle-check'

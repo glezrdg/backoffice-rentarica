@@ -21,7 +21,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
   const { brands, categories } = useCategoryBrandState()
 
   const [name, setName] = useState('')
-  const [productType, setProductType] = useState('product')
+  const [productType, setProductType] = useState(
+    product?.productType || 'product'
+  )
   const [price, setPrice] = useState(0)
   const [qty, setQty] = useState(0)
   const [category, setCategory] = useState('')
@@ -43,6 +45,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
       setDescription(product.description)
       setSize(product.sizes)
       setOfert(product.ofert)
+      setProductType(product.productType)
     } else {
       cleanInputs()
     }
@@ -138,6 +141,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
     setSize(sizesData)
     setOfert('')
     setImages([''])
+    setProductType(product?.productType || 'product')
   }
 
   // IMAGE JS
@@ -242,7 +246,9 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
 
         <div className='min-h-28'>
           {productType === 'sizes' ? (
-            <Sizes sizes={sizes} handleChangeSize={handleChangeSize} />
+            <div className='my-4'>
+              <Sizes sizes={sizes} handleChangeSize={handleChangeSize} />
+            </div>
           ) : (
             <InputNumber
               className='w-full my-8'

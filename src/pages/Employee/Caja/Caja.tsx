@@ -26,7 +26,8 @@ const Caja = ({}: CajaProps) => {
   }, 0)
   let itbis = subtotal * 0.18
   let tip = subtotal * 0.1
-  let total = subtotal + itbis + tip
+  // let total = subtotal + itbis + tip
+  let total = subtotal
   let itemsQty = selectedProducts.reduce(
     (acc, current: any) => acc + current.qty,
     0

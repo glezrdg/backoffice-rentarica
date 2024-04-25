@@ -24,7 +24,7 @@ const SuccessSubscription = () => {
         `/success_payment?session=${getItem('session')}`
       )
 
-      const auth = { ...getItem('auth'), subscribeId: data.subscriptionId }
+      const auth = { ...getItem('auth'), subscriptionId: data.subscriptionId }
 
       setItem('auth', auth)
       dispatch(setAuth(auth))

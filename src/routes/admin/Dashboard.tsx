@@ -71,7 +71,7 @@ export const adminPages: routerType[] = [
     title: 'home',
   },
   {
-    path: '/admin/Delivery',
+    path: '/admin/usuarios',
     element: <Delivery />,
     title: 'home',
   },

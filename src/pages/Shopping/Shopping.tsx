@@ -5,6 +5,8 @@ import ShoppingCard from './components/ShoppingCard'
 import SideCreateShopping from './components/SideCreateOfert/SideCreate'
 import { useShoppingState } from './context'
 import ShoppingModal from './components/ShoppingModal'
+import ShoppingTable from './components/tables/ShoppingTable'
+import { Filters } from './components/Filters'
 
 export interface ShoppingProps {}
 
@@ -36,14 +38,17 @@ const Shopping = ({}: ShoppingProps) => {
         />
 
         {/* <Header /> */}
-
+        <div className='mt-2 mb-4'>
+          <Filters />
+        </div>
         {/* TABLE */}
+        <ShoppingTable />
         {/* <ProductTable openCreate={() => setCreateProduct(true)} /> */}
-        <div className='grid grid-cols-3 gap-4'>
+        {/* <div className='grid grid-cols-3 gap-4'>
           {shoppings.map((shop) => (
             <ShoppingCard shopping={shop} />
           ))}
-        </div>
+        </div> */}
 
         <ShoppingModal />
       </>

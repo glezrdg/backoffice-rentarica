@@ -60,12 +60,12 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onClose }) => {
     setPrice(0)
     setQty(1)
     setDisable(false)
+    setSize([])
   }
 
   const handleAddShoppingList = () => {
     const selectedProduct = products.find((i) => i._id === product)!
     let qtyType: any = {}
-
     if (selectedProduct.productType === 'sizes') {
       qtyType.sizes = sizes.filter((i) => i.qty > 0)
       qtyType.qty = sizes.reduce((acc, cur) => acc + cur.qty, 0)
@@ -75,7 +75,7 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onClose }) => {
       ...prev,
       {
         price,
-        product: product || products[0]?._id,
+        product: selectedProduct._id || products[0]?._id,
         available: sizes.reduce((acc, cur) => acc + cur.qty, 0) || qty,
         ...qtyType,
       },

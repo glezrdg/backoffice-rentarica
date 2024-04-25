@@ -67,7 +67,7 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
         <p className='text-2xl font-bold'>Total</p>
         <p className='font-bold text-xl'>${total?.toFixed(2)}</p>
       </div>
-      <div className='flex justify-between items-center px-3 h-10 border-b-2 border-gray-200'>
+      {/* <div className='flex justify-between items-center px-3 h-10 border-b-2 border-gray-200'>
         <p className='font-medium'>Subtotal</p>
         <p>${subtotal?.toFixed(2)}</p>
       </div>
@@ -78,10 +78,10 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
       <div className='flex justify-between items-center px-3 h-10 border-b-2 border-gray-200'>
         <p>10% Propina</p>
         <p>${tip?.toFixed(2)}</p>
-      </div>
+      </div> */}
 
       <div className='p-3'>
-        <div className='flex justify-between items-center mb-3'>
+        {/* <div className='flex justify-between items-center mb-3'>
           <h4 className='text-lg'>Agregar Pago</h4>
           {userInfo?.position !== 'Hugo & Delivery' && (
             <button
@@ -91,66 +91,53 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
               Oficina
             </button>
           )}
-        </div>
-        {!openOffice ? (
-          <>
-            <div className='flex justify-between flex-wrap'>
-              <div
-                className={`flex-1 grid place-items-center py-4 bg-gray-200 rounded-3xl cursor-pointer ${
-                  paymentMethod?.includes('Efectivo')
-                    ? 'border-2 border-blue-400'
-                    : ''
-                }`}
-                onClick={() => setPaymentMethod('Efectivo')}
-              >
-                Efectivo
-              </div>
-              <div
-                className={`flex-1 grid place-items-center py-4 mx-3 bg-gray-200 rounded-3xl cursor-pointer ${
-                  paymentMethod?.includes('Tarjeta')
-                    ? 'border-2 border-blue-400'
-                    : ''
-                }`}
-                onClick={() => setPaymentMethod('Tarjeta')}
-              >
-                Tarjeta
-              </div>
-              <div
-                className={`flex-1 grid place-items-center py-4 bg-gray-200 rounded-3xl cursor-pointer ${
-                  paymentMethod?.includes('Transferencia')
-                    ? 'border-2 border-blue-400'
-                    : ''
-                }`}
-                onClick={() => setPaymentMethod('Transferencia')}
-              >
-                Transferencia
-              </div>
+        </div> */}
+        <>
+          <div className='flex justify-between flex-wrap mt-2'>
+            <div
+              className={`flex-1 grid place-items-center py-4 bg-gray-200 rounded-3xl cursor-pointer ${
+                paymentMethod?.includes('Efectivo')
+                  ? 'border-2 border-blue-400'
+                  : ''
+              }`}
+              onClick={() => setPaymentMethod('Efectivo')}
+            >
+              Efectivo
             </div>
-            {userInfo?.position === 'Hugo & Delivery' && (
-              <div
-                className={`flex-1 grid place-items-center py-4 mt-2 bg-gray-200 rounded-3xl cursor-pointer ${
-                  paymentMethod?.includes('Hugo')
-                    ? 'border-2 border-blue-400'
-                    : ''
-                }`}
-                onClick={() => setPaymentMethod('Hugo')}
-              >
-                Hugo
-              </div>
-            )}
-          </>
-        ) : (
-          <select
-            value={office}
-            onChange={(e) => setOffice(e.target.value)}
-            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-          >
-            <option value='Jorge'>Jorge</option>
-            <option value='Victor'>Victor</option>
-            <option value='Alfredo'>Alfredo</option>
-            <option value='Tete'>Tete</option>\
-          </select>
-        )}
+            <div
+              className={`flex-1 grid place-items-center py-4 mx-3 bg-gray-200 rounded-3xl cursor-pointer ${
+                paymentMethod?.includes('Tarjeta')
+                  ? 'border-2 border-blue-400'
+                  : ''
+              }`}
+              onClick={() => setPaymentMethod('Tarjeta')}
+            >
+              Tarjeta
+            </div>
+            <div
+              className={`flex-1 grid place-items-center py-4 bg-gray-200 rounded-3xl cursor-pointer ${
+                paymentMethod?.includes('Transferencia')
+                  ? 'border-2 border-blue-400'
+                  : ''
+              }`}
+              onClick={() => setPaymentMethod('Transferencia')}
+            >
+              Transferencia
+            </div>
+          </div>
+          {userInfo?.position === 'Hugo & Delivery' && (
+            <div
+              className={`flex-1 grid place-items-center py-4 mt-2 bg-gray-200 rounded-3xl cursor-pointer ${
+                paymentMethod?.includes('Hugo')
+                  ? 'border-2 border-blue-400'
+                  : ''
+              }`}
+              onClick={() => setPaymentMethod('Hugo')}
+            >
+              Hugo
+            </div>
+          )}
+        </>
       </div>
 
       {paymentMethod?.includes('Efectivo') && paymentMethod?.length === 1 && (
@@ -228,9 +215,10 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
           </div>
         )}
 
-      <div className='px-5'>
+      <div className='px-5 mt-2'>
         <div className='flex items-center justify-between'>
-          <h4 className='text-lg mb-3'>Lista</h4> <p>{client && client}</p>
+          <h4 className='text-base font-medium uppercase mb-3'>Lista</h4>{' '}
+          <p>{client && client}</p>
         </div>
         <div className='py-2 min-h-[200px]'>
           {products?.map((product: any) => (

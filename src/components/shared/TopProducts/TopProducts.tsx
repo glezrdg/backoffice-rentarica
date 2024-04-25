@@ -9,9 +9,14 @@ interface ITopProductsProps {
   children?: React.ReactNode
   orders?: IOrder[]
   value?: [{ product: IProduct; qty: number }]
+  className?: string
 }
 
-const TopProducts: React.FC<ITopProductsProps> = ({ orders, value }) => {
+const TopProducts: React.FC<ITopProductsProps> = ({
+  orders,
+  value,
+  className = '',
+}) => {
   const [data, setData] = useState<any>()
 
   const getProductsInfo = () => {
@@ -83,16 +88,11 @@ const TopProducts: React.FC<ITopProductsProps> = ({ orders, value }) => {
       {/* TOP SELLER */}
       <Card
         title='Top vendidos'
-        className='mt-8 md:mt-10'
-        bodyClassName='py-4'
-        footer={
-          <button className='w-full bg-purple-100 h-10 md:h-14 text-sm  sm:text-lg hover:bg-slate-50 hover:text-purple-500 transition-all'>
-            Ver todos
-          </button>
-        }
+        className={`h-full ${className}`}
+        bodyClassName='py-4 flex flex-column flex-1'
       >
         {data?.map((e: any, i: number) => (
-          <div key={i}>
+          <div className='flex-1' key={i}>
             <ProductItem {...e} />
           </div>
         ))}

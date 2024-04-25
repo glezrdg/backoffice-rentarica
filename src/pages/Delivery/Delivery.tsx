@@ -41,7 +41,7 @@ const Delivery: React.FC<IDeliveryProps> = (props) => {
         {/* Header */}
 
         <PageHeader
-          title='Delivery'
+          title='Usuarios'
           right={
             <div className='flex'>
               <Button
@@ -58,7 +58,7 @@ const Delivery: React.FC<IDeliveryProps> = (props) => {
         <Header />
 
         {/* TABLE */}
-        <Card title='Delivery personal' className='mt-6'>
+        <Card title='Usuarios registrados' className='mt-6'>
           <DeliveryPeopleTable />
         </Card>
       </>

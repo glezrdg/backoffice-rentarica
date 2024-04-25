@@ -43,7 +43,7 @@ const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen }) => {
           <DropdownProfile id='dropdow_messages_profile-mobile' />
         </div>
         <div className='gap-4 justify-between items-center hidden sm:flex'>
-          {!user?.subscribeId && (
+          {!user?.subscriptionId && (
             <div className='border border-purple-500 rounded-lg text-purple-500 p-3 mr-8'>
               Prueba gratis
             </div>

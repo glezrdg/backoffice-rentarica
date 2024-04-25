@@ -68,25 +68,11 @@ const Reports: React.FC<IReportsProps> = (props) => {
 
       {/* GRAPHS */}
       <div className='grid md:grid-cols-2 h-fit gap-5 mt-6'>
-        <Card
-          title='Provincias'
-          className='h-full'
-          bodyClassName='flex justify-center items-center'
-          eye
-        >
-          <PieChart
-            provinces={report?.sellsReport?.provincesQty.map((i) => ({
-              province: i.name,
-              qty: i.qty,
-            }))}
-          />
-        </Card>
+        <TopProducts value={report?.sellsReport?.productsQty} />
         <Card title='Metodos de pago'>
           <PaymentMethodsTable data={report?.sellsReport?.paymentMethodQty} />
         </Card>
       </div>
-
-      <TopProducts value={report?.sellsReport?.productsQty} />
     </>
   )
 }

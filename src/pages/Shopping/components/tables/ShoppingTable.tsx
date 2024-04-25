@@ -2,27 +2,28 @@ import React, { useState } from 'react'
 
 import commaNumber from 'comma-number'
 import { dateFormat } from '../../../../utility/dateFormat'
-import { useOrderState } from '../../context'
+import { useShoppingState } from '../../context'
 
 // Components
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
-import { IOrder } from '../../models/IOrder'
-import { OrderModal } from '../modal'
+import { IOrder } from '../../../Orders/models/IOrder'
+import { IShopping } from '../../models'
+// import { OrderModal } from '../modal'
 
-const OrdersTable = () => {
-  const { orders, selectOrder } = useOrderState()
+const ShoppingTable = () => {
+  const { shoppings, setShopping } = useShoppingState()
   const [selectedOrder, setSelectedOrder] = useState([])
 
   return (
     <div>
       <DataTable
-        value={orders}
+        value={shoppings}
         paginator
         rows={5}
         rowsPerPageOptions={[5, 10, 25, 50]}
         tableStyle={{ minWidth: '50rem' }}
-        selection={selectedOrder}
+        selection={[]}
         onSelectionChange={(e: any) => setSelectedOrder(e.value)}
         className='hover:bg-slate-200'
       >
@@ -41,20 +42,50 @@ const OrdersTable = () => {
           header='productos'
           className='text-sm'
           bodyClassName='text-center w-fit'
-          body={(data: IOrder) => (
-            <p>{data.orderItems.reduce((acc, curr) => curr.qty + acc, 0)}</p>
+          body={(data: IShopping) => (
+            <p>{data.shoppingList.reduce((acc, curr) => curr.qty + acc, 0)}</p>
           )}
         ></Column>
         <Column
-          field='paymentMethod'
-          header='Metodo de pago'
+          field='total'
+          header='Inversion'
+          body={(data: IShopping) => <p>${commaNumber(data.total)}</p>}
           className='text-sm'
         ></Column>
         <Column
           field='totalPrice'
-          header='Monto'
+          header='Valor'
           className='text-sm'
-          body={(data: IOrder) => <p>${commaNumber(data.totalPrice)}</p>}
+          body={(data: IShopping) => (
+            <p>
+              $
+              {commaNumber(
+                data?.shoppingList.reduce(
+                  (acc: any, curr: any) => acc + curr.product.price * curr.qty,
+                  0
+                ) || 0
+              )}
+            </p>
+          )}
+        ></Column>
+        <Column
+          field='totalPrice'
+          header='Ganancias'
+          className='text-sm'
+          body={(data: IShopping) => (
+            <p className='bg-green-400 text-slate-50 p-2 rounded-lg w-[50%] text-center'>
+              $
+              {commaNumber(
+                data?.shoppingList.reduce(
+                  (acc: any, curr: any) =>
+                    acc +
+                    (curr.product.price - curr.price) *
+                      (curr.qty - curr.available),
+                  0
+                ) || 0
+              )}
+            </p>
+          )}
         ></Column>
         <Column
           field='createdAt'
@@ -67,10 +98,10 @@ const OrdersTable = () => {
         <Column
           body={(data) => (
             <div className='flex'>
-              <div onClick={() => selectOrder(data._id)}>
+              <div onClick={() => setShopping(data)}>
                 <i
                   data-te-toggle='modal'
-                  data-te-target='#orderModal'
+                  data-te-target='#shoppingModal'
                   className='fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'
                 ></i>
               </div>
@@ -81,9 +112,9 @@ const OrdersTable = () => {
         ></Column>
       </DataTable>
 
-      <OrderModal />
+      {/* <OrderModal /> */}
     </div>
   )
 }
 
-export default OrdersTable
+export default ShoppingTable
