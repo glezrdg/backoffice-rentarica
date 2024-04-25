@@ -23,9 +23,7 @@ const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen }) => {
           onClick={() => handleOpen()}
         >
           <i className='fa fa-bars lg:text-2xl mr-1 md:mr-2 lg:mr-4 text-slate-400' />
-          <h1 className='font-mono text-lg  md:text-xl lg:text-2xl text-slate-600'>
-            SantoPago
-          </h1>
+          <img src='/logo.png' className='w-[100px] h-[40px]' />
         </div>
         <div className='w-[60%] flex items-center mx-4 border p-2 lg:p-3 rounded-lg box-border transition hover:shadow-sm'>
           <i className='fa fa-thing fa-magnifying-glass mr-2 text-slate-400 text-xs md:text-sm' />

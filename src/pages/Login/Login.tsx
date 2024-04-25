@@ -6,6 +6,7 @@ import { Button } from '../../components/shared'
 import { loginUser } from './services'
 import { useAppDispatch, useAppSelector } from '../../redux/store'
 import { setAuth } from '../../redux/reducers/auth'
+import Header from '../Home/Header'
 
 export interface PageLoginProps {
   className?: string
@@ -67,83 +68,86 @@ const PageLogin: FC<PageLoginProps> = ({ className = '' }) => {
   }
 
   return (
-    <div className={`nc-PageLogin ${className}`} data-nc-id='PageLogin'>
-      <div className='container mb-24 lg:mb-32'>
-        <h2 className='my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center'>
-          Iniciar Sesion
-        </h2>
-        <div className='max-w-md mx-auto space-y-6'>
-          <div className='grid gap-3'>
-            {loginSocials.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className='flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]'
-              >
-                <img
-                  className='flex-shrink-0 w-5'
-                  src={item.icon}
-                  alt={item.name}
+    <>
+      <Header />
+      <div className={`nc-PageLogin ${className}`} data-nc-id='PageLogin'>
+        <div className='container mx-auto mb-24 lg:mb-32 mt-44'>
+          <h2 className='my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center'>
+            Iniciar Sesion
+          </h2>
+          <div className='max-w-md mx-auto space-y-6'>
+            <div className='grid gap-3'>
+              {loginSocials.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.href}
+                  className='flex w-full rounded-lg bg-primary-50 dark:bg-neutral-800 px-4 py-3 transform transition-transform sm:px-6 hover:translate-y-[-2px]'
+                >
+                  <img
+                    className='flex-shrink-0 w-5'
+                    src={item.icon}
+                    alt={item.name}
+                  />
+                  <h3 className='flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm'>
+                    {item.name}
+                  </h3>
+                </a>
+              ))}
+            </div>
+            {/* OR */}
+            <div className='relative text-center'>
+              <span className='relative z-10 inline-block px-4 font-medium text-sm bg-white dark:text-neutral-400 dark:bg-neutral-900'>
+                OR
+              </span>
+              <div className='absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800'></div>
+            </div>
+            {/* FORM */}
+            <form className='grid grid-cols-1 gap-6 w-[450px]'>
+              <label className='grid grid-rows-2'>
+                <span className='text-neutral-800 dark:text-neutral-200'>
+                  Correo Electronico
+                </span>
+                <InputText
+                  type='email'
+                  placeholder='ejemplo@email.com'
+                  className='mt-1'
+                  value={email}
+                  onChange={(e: any) => setEmail(e.target.value)}
                 />
-                <h3 className='flex-grow text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm'>
-                  {item.name}
-                </h3>
-              </a>
-            ))}
-          </div>
-          {/* OR */}
-          <div className='relative text-center'>
-            <span className='relative z-10 inline-block px-4 font-medium text-sm bg-white dark:text-neutral-400 dark:bg-neutral-900'>
-              OR
-            </span>
-            <div className='absolute left-0 w-full top-1/2 transform -translate-y-1/2 border border-neutral-100 dark:border-neutral-800'></div>
-          </div>
-          {/* FORM */}
-          <form className='grid grid-cols-1 gap-6 w-[450px]'>
-            <label className='grid grid-rows-2'>
-              <span className='text-neutral-800 dark:text-neutral-200'>
-                Correo Electronico
-              </span>
-              <InputText
-                type='email'
-                placeholder='ejemplo@email.com'
-                className='mt-1'
-                value={email}
-                onChange={(e: any) => setEmail(e.target.value)}
+              </label>
+              <label className='grid grid-rows-2'>
+                <span className='flex justify-between items-center text-neutral-800 dark:text-neutral-200 flex-1'>
+                  Contraseña
+                  <Link to='/forgot-pass' className='text-sm text-green-600'>
+                    olvidaste la contraseña?
+                  </Link>
+                </span>
+                <InputText
+                  type='password'
+                  className='mt-1'
+                  value={password}
+                  onChange={(e: any) => setPassword(e.target.value)}
+                />
+              </label>
+              <Button
+                onClick={(e) => handleLogin(e)}
+                className='p-4'
+                buttonType='button'
+                text='Iniciar sesion'
               />
-            </label>
-            <label className='grid grid-rows-2'>
-              <span className='flex justify-between items-center text-neutral-800 dark:text-neutral-200 flex-1'>
-                Contraseña
-                <Link to='/forgot-pass' className='text-sm text-green-600'>
-                  olvidaste la contraseña?
-                </Link>
-              </span>
-              <InputText
-                type='password'
-                className='mt-1'
-                value={password}
-                onChange={(e: any) => setPassword(e.target.value)}
-              />
-            </label>
-            <Button
-              onClick={(e) => handleLogin(e)}
-              className='p-4'
-              buttonType='button'
-              text='Iniciar sesion'
-            />
-          </form>
+            </form>
 
-          {/* ==== */}
-          <span className='block text-center text-neutral-700 dark:text-neutral-300'>
-            No tienes cuenta? {` `}
-            <Link className='text-green-600' to='/register'>
-              Registrate aqui
-            </Link>
-          </span>
+            {/* ==== */}
+            <span className='block text-center text-neutral-700 dark:text-neutral-300'>
+              No tienes cuenta? {` `}
+              <Link className='text-green-600' to='/register'>
+                Registrate aqui
+              </Link>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

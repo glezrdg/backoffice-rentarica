@@ -38,20 +38,20 @@ const ProductsCard = ({ product, stripeDirect }: any) => {
           </span>
         </div>
         <div className='mb-8'>
-          <h3 className='text-2xl font-semibold text-white'>
+          <h3 className='text-2xl font-semibold text-purple-700'>
             {product.nickname}
           </h3>
-          <p className='mt-4 text-purple-200'>
+          <p className='mt-4 text-purple-400'>
             Perfecto para individuos y pequeñas empresas
           </p>
         </div>
         <div className='mb-8'>
-          <span className='text-5xl font-extrabold text-white'>
+          <span className='text-5xl font-extrabold text-purple-700'>
             ${product.unit_amount / 100}
           </span>
-          <span className='text-xl font-medium text-purple-200'>/mo</span>
+          <span className='text-xl font-medium text-purple-400'>/mo</span>
         </div>
-        <ul className='mb-8 space-y-4 text-purple-200'>
+        <ul className='mb-8 space-y-4 text-purple-400'>
           <li className='flex items-center'>
             <svg
               className='h-6 w-6 text-green-400 mr-2'

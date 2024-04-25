@@ -17,7 +17,7 @@ export const authPages: routerType[] = [
     title: 'home',
   },
   {
-    path: '/home',
+    path: '/',
     element: <Home />,
     title: 'home',
   },

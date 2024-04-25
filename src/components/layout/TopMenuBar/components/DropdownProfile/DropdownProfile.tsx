@@ -79,10 +79,10 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
         className='user-dropdwon__bottomAction text-slate-400 bg-slate-50 w-full hover:text-purple-500 hover:shadow-sm'
         onClick={() => {
           dispatch(logOut())
-          navigate('/home')
+          navigate('/')
         }}
       >
-        <i className='fa fa-sign-out' /> Sign Out
+        <i className='fa fa-sign-out' /> Cerrar session
       </button>
       <div data-popper-arrow></div>
     </div>

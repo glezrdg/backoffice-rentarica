@@ -10,7 +10,7 @@ const Router = () => {
   })
 
   return (
-    <div className='bg-white grid place-items-center w-full h-[100vh]'>
+    <div className='bg-white grid w-full'>
       <Routes>{pageRoutes}</Routes>
     </div>
   )

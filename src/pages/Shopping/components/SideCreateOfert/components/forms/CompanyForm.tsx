@@ -30,6 +30,7 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onClose }) => {
   const [name, setName] = useState('')
   const [product, setProduct] = useState(products[0]?._id || '')
   const [price, setPrice] = useState<any>(0)
+  const [productType, setProductType] = useState('product')
   const [qty, setQty] = useState<any>(1)
   const [disable, setDisable] = useState(false)
 

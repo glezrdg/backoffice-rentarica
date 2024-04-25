@@ -8,6 +8,7 @@ import { setAuth } from '../../redux/reducers/auth'
 import { useAppDispatch, useAppSelector } from '../../redux/store'
 import { signup } from './services'
 import { getItem } from '../../utility/localStorageControl'
+import Header from '../Home/Header'
 
 export interface PageLoginProps {
   className?: string
@@ -86,7 +87,8 @@ const PageRegister: FC<PageLoginProps> = ({ className = '' }) => {
 
   return (
     <div className={`nc-PageRegister ${className}`}>
-      <div className='container'>
+      <Header />
+      <div className='container mx-auto mt-36'>
         <h2 className='my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center'>
           Crear cuenta
         </h2>
