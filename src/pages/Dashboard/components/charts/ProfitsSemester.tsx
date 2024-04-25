@@ -15,7 +15,7 @@ export const ProfitsSemester: React.FC<ProfitsSemesterProps> = memo(
     let data: any = {}
 
     useEffect(() => {
-      if (reports.length) {
+      if (reports?.length) {
         ;(data.labels = reports.map((i) => monthString(i.month))),
           (data.datasets = [
             {

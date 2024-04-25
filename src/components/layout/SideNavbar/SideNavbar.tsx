@@ -38,7 +38,13 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
             />
             <MenuItem url='admin/shopping' icon='fa fa-tag' title='Compras' />
             {/* <MenuItem url='admin/clients' icon='fa fa-user' title='Clientes' /> */}
-            <MenuItem url='admin/usuarios' icon='fa fa-user' title='Usuarios' />
+            {user.subscriptionId !== 'Plan emprendedor' && (
+              <MenuItem
+                url='admin/usuarios'
+                icon='fa fa-user'
+                title='Usuarios'
+              />
+            )}
             <MenuItem
               url='admin/reports'
               icon='fa fa-folder'

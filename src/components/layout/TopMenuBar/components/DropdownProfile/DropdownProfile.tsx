@@ -26,7 +26,9 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
       <figure className='user-dropdwon__info'>
         <figcaption>
           <h5>{user.fullname}</h5>
-          <p>{user?.subscriptionId ? 'Subscrito' : 'Prueba gratis'}</p>
+          <p className='!text-[12px]'>
+            {user?.subscriptionId ? user.subscriptionId : 'Prueba gratis'}
+          </p>
         </figcaption>
       </figure>
       <ul className='user-dropdwon__links text-slate-500'>

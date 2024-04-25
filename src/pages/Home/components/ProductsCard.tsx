@@ -19,7 +19,7 @@ const ProductsCard = ({ product, stripeDirect }: any) => {
       }
 
       navigate(`/register?sessionI=${data.id}`)
-
+      setItem('session', data.id)
       setItem('stripe_url', data.url)
     } catch (error: any) {
       console.log(error.message)

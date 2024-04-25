@@ -27,6 +27,7 @@ const SuccessSubscription = () => {
       const auth = { ...getItem('auth'), subscriptionId: data.subscriptionId }
 
       setItem('auth', auth)
+      localStorage.removeItem('session')
       dispatch(setAuth(auth))
     } catch (error: any) {
       console.log(error.message)
