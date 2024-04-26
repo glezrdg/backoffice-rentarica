@@ -24,7 +24,7 @@ export const ProfitsSemester: React.FC<ProfitsSemesterProps> = memo(
                 (report) => report?.sellsReport?.totalAmonutSell
               ),
               fill: true,
-              borderColor: '#6184AA',
+              borderColor: getColor(color),
               backgroundColor: getColor(color),
               tension: 0.4,
             },

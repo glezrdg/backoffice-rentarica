@@ -28,7 +28,7 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
         ) : (
           <div>
             <Button
-              icon='fa fa-calendar text-purple-500'
+              icon='fa fa-calendar text-purple-900'
               color='white'
               text='Calendario'
               className='!px-3 !hover:shadow-none'

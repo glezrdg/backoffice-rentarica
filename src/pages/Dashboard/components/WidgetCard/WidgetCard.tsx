@@ -7,12 +7,13 @@ import commaNumber from 'comma-number'
 interface IWidgetCardProps {
   children?: React.ReactNode
   title: string
+  color: 'purple' | 'red' | 'blue' | 'green'
 }
 
 const WidgetCard: React.FC<IWidgetCardProps> = (props) => {
   const { report } = useReportState()
 
-  console.log(report)
+  console.log('COLOR', props.color)
 
   const info: any = {
     value: 0,
@@ -47,7 +48,7 @@ const WidgetCard: React.FC<IWidgetCardProps> = (props) => {
         </p>
       </div>
       <div className='w-1/2 self-center'>
-        <BarChart color='purple' />
+        <BarChart color={props.color} />
       </div>
     </div>
   )

@@ -36,16 +36,15 @@ const CategoryBrand: React.FC<ICategoryBrandProps> = (props) => {
             <div className='flex'>
               <Button
                 icon='fa fa-plus'
-                color='success'
                 text='Marcas'
-                className='!px-3 !hover:shadow-none mr-2'
+                className='!px-3 !hover:shadow-none mr-2 !bg-white !text-purple-900'
                 onClick={() => handleSide('brand')}
               />
               <Button
                 icon='fa fa-plus'
                 color='warning'
                 text='Categorias'
-                className='!px-3 !hover:shadow-none'
+                className='!px-3 !hover:shadow-none !bg-purple-900'
                 onClick={() => handleSide('category')}
               />
             </div>

@@ -28,7 +28,7 @@ const ReportsTable: React.FC<IReportsTableProps> = (props) => {
               <p> </p>
             </div>
             {reports?.map((report) => (
-              <div className='bg-purple-50 cursor-pointer transition text-slate-600 rounded-lg h-14 mb-3 grid grid-cols-6 place-items-center hover:scale-[1.01] hover:shadow-md hover:font-medium hover:text-purple-700'>
+              <div className='bg-purple-50 bg-opacity-50 cursor-pointer transition text-slate-600 rounded-lg h-14 mb-3 grid grid-cols-6 place-items-center hover:scale-[1.01] hover:shadow-sm hover:font-medium hover:text-purple-900'>
                 <p>{dateFormat(new Date(report.createdAt), 'date')}</p>
                 <p>{commaNumber(report?.sellsReport?.ordersQty) || 0}</p>
                 <p>${commaNumber(report?.sellsReport?.totalAmonutSell) || 0}</p>

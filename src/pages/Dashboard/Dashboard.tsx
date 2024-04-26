@@ -25,10 +25,10 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       <div
         className={`w-full grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4 lg:gap-6`}
       >
-        <WidgetCard title={'Ordenes'} />
-        <WidgetCard title={'Compras'} />
-        <WidgetCard title={'Ganancias'} />
-        <WidgetCard title={'Nuevos Usuarios'} />
+        <WidgetCard title={'Ordenes'} color={'blue'} />
+        <WidgetCard title={'Compras'} color={'purple'} />
+        <WidgetCard title={'Ganancias'} color={'green'} />
+        <WidgetCard title={'Nuevos Usuarios'} color={'red'} />
       </div>
 
       {/* PROFIT */}
@@ -37,7 +37,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
           <ShowMoney
             title='Periodo actual'
             money={report?.sellsReport?.totalAmonutSell! || 0}
-            titleClassName='text-purple-500'
+            titleClassName='text-purple-900'
             badgeClassName='bg-purple-500'
           />
           {/* <ShowMoney title='Periodo actual' money={24856} /> */}
@@ -46,7 +46,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
       </Card>
 
       {/* TOP */}
-      <TopProducts className=' mt-8' value={report?.sellsReport?.productsQty} />
+      <TopProducts className='mt-8' value={report?.sellsReport?.productsQty} />
 
       {/* <div className='grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-10 mt-6 lg:mt-10'>
         <Card title='Ordenes recientes' eye>

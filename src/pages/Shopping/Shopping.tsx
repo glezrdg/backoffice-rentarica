@@ -28,9 +28,8 @@ const Shopping = ({}: ShoppingProps) => {
             <div>
               <Button
                 icon='fa fa-plus'
-                color='success'
                 text='Registrar Compra'
-                className='!px-3 !hover:shadow-none'
+                className='!px-3 !hover:shadow-none !bg-purple-900'
                 onClick={() => setCreateShopping(true)}
               />
             </div>

@@ -31,7 +31,7 @@ const Orders: React.FC<IOrdersProps> = (props) => {
         right={
           <div className='flex'>
             <Button
-              icon='fa fa-calendar text-purple-500'
+              icon='fa fa-calendar text-purple-900'
               color='white'
               text='Calendario'
               className='!px-3 !hover:shadow-none mr-3'
@@ -40,7 +40,7 @@ const Orders: React.FC<IOrdersProps> = (props) => {
               icon='fa fa-file-export'
               color='warning'
               text='Exportar'
-              className='!px-3 !hover:shadow-none'
+              className='!px-3 !hover:shadow-none !bg-purple-900'
             />
           </div>
         }

@@ -138,7 +138,7 @@ const Caja = ({}: CajaProps) => {
             return (
               <div
                 key={item._id}
-                className={`h-32 bg-green-300 cursor-pointer grid place-items-center rounded-md`}
+                className={`h-32 bg-purple-900 text-white cursor-pointer grid place-items-center rounded-md`}
                 onClick={() =>
                   handleAddProduct(item.name, item.price, 1, item._id!)
                 }

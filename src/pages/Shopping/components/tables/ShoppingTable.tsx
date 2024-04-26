@@ -73,7 +73,7 @@ const ShoppingTable = () => {
           header='Ganancias'
           className='text-sm'
           body={(data: IShopping) => (
-            <p className='bg-green-400 text-slate-50 p-2 rounded-lg w-[50%] text-center'>
+            <p className='bg-purple-900 text-slate-50 p-2 rounded-lg w-[50%] text-center'>
               $
               {commaNumber(
                 data?.shoppingList.reduce(

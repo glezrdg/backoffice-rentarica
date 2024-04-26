@@ -23,10 +23,10 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
       id={id}
       className='user-dropdwon invisible transition-all shadow-md p-3 min-w-[260px] border rounded-md'
     >
-      <figure className='user-dropdwon__info'>
+      <figure className='user-dropdwon__info bg-purple-900 text-white'>
         <figcaption>
           <h5>{user.fullname}</h5>
-          <p className='!text-[12px]'>
+          <p className='!text-[12px] !text-slate-100'>
             {user?.subscriptionId ? user.subscriptionId : 'Prueba gratis'}
           </p>
         </figcaption>
@@ -35,7 +35,7 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
         <li>
           <Link
             to='#'
-            className='hover:text-purple-400 hover:bg-purple-50 hover:bg-opacity-50 hover:pl-6'
+            className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
           >
             <i className='fa fa-user' /> Profile
           </Link>
@@ -43,7 +43,7 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
         <li>
           <Link
             to='#'
-            className='hover:text-purple-400 hover:bg-purple-50 hover:bg-opacity-50 hover:pl-6'
+            className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
           >
             <i className='fa fa-gear' /> Settings
           </Link>
@@ -51,7 +51,7 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
         <li>
           <Link
             to='#'
-            className='hover:text-purple-400 hover:bg-purple-50 hover:bg-opacity-50 hover:pl-6'
+            className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
           >
             <i className='fa fa-wallet' /> Billing
           </Link>
@@ -59,7 +59,7 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
         <li>
           <Link
             to='#'
-            className='hover:text-purple-400 hover:bg-purple-50 hover:bg-opacity-50 hover:pl-6'
+            className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
           >
             <i className='fa fa-users' />
             Activity
@@ -68,7 +68,7 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
         <li>
           <Link
             to='#'
-            className='hover:text-purple-400 hover:bg-purple-50 hover:bg-opacity-50 hover:pl-6'
+            className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
           >
             <i className='fa fa-bell' />
             Help
@@ -76,7 +76,7 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
         </li>
       </ul>
       <button
-        className='user-dropdwon__bottomAction text-slate-400 bg-slate-50 w-full hover:text-purple-500 hover:shadow-sm'
+        className='user-dropdwon__bottomAction transition-all text-slate-400 w-full hover:text-white hover:bg-purple-900 hover:shadow-sm'
         onClick={() => {
           dispatch(logOut())
           navigate('/')

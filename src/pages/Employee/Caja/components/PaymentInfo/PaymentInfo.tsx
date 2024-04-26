@@ -63,7 +63,7 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
 
   return (
     <div className='bg-white w-full col-span-3 h-[75vh]'>
-      <div className='flex justify-between items-center px-3 bg-green-300 h-20'>
+      <div className='flex justify-between items-center px-3 bg-purple-900 text-white h-20'>
         <p className='text-2xl font-bold'>Total</p>
         <p className='font-bold text-xl'>${total?.toFixed(2)}</p>
       </div>
@@ -247,13 +247,13 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
       <div className='grid grid-cols-2 gap-x-2 mx-3 pb-3'>
         <button
           onClick={handleAddPendingOrder}
-          className='w-full py-5 font-medium rounded-xl bg-amber-400 hover:bg-amber-500'
+          className='w-full py-5 font-medium rounded-xl bg-white text-purple-900 border border-purple-900'
         >
           Guardar
         </button>
         <button
           onClick={handleCreateOrder}
-          className='w-full py-5 font-medium rounded-xl bg-green-300 hover:bg-green-400'
+          className='w-full py-5 font-medium rounded-xl bg-purple-900 text-white hover:bg-purple-800'
         >
           Facturar
         </button>

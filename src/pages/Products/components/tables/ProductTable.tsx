@@ -43,7 +43,7 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
           style={{ width: '25%' }}
           headerClassName=''
           body={(data) => (
-            <div className='p-2 px-3 bg-purple-400 w-8 h-8 text-white rounded-md'>
+            <div className='p-2 text-purple-900 rounded-md font-bold'>
               {!data.sizes || (!data.sizes.length && data.qty > 0)
                 ? data.qty
                 : data.sizes.reduce((acc: any, cur: any) => acc + cur.qty, 0)}
@@ -62,7 +62,7 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
             <div className='flex'>
               <div onClick={() => setProduct(data)}>
                 <i
-                  className='fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'
+                  className='fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-white hover:bg-purple-900'
                   data-te-toggle='modal'
                   data-te-target='#productModal'
                 ></i>
@@ -72,9 +72,9 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
                   setProduct(data)
                   openCreate()
                 }}
-                className='fa fa-regular fa-edit cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'
+                className='fa fa-regular fa-edit cursor-pointer p-2 transition rounded-full hover:text-white hover:bg-purple-900'
               ></i>
-              <i className='fa fa-ellipsis-vertical cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
+              <i className='fa fa-ellipsis-vertical cursor-pointer p-2 transition rounded-full hover:text-white hover:bg-purple-900'></i>
             </div>
           )}
         ></Column>

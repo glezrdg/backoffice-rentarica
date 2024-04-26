@@ -32,9 +32,8 @@ const Products: React.FC<IProductsProps> = (props) => {
             <div>
               <Button
                 icon='fa fa-plus'
-                color='success'
                 text='Producto'
-                className='!px-3 !hover:shadow-none'
+                className='!px-3 !hover:shadow-none !bg-purple-900'
                 onClick={() => setCreateProduct(true)}
               />
             </div>

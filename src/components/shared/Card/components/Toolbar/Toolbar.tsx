@@ -23,7 +23,7 @@ const Toolbar: React.FC<IToolbarProps> = (props) => {
         <li className='mr-2'>
           <a
             aria-current='page'
-            className='grid place-items-center px-4 h-full text-purple-600 bg-purple-50 rounded-t-lg active dark:bg-gray-800 dark:text-purple-500'
+            className='grid place-items-center px-4 h-full text-white bg-purple-900 rounded-t-lg active dark:bg-gray-800 dark:text-purple-500'
           >
             week
           </a>

@@ -28,16 +28,15 @@ const Reports: React.FC<IReportsProps> = (props) => {
         right={
           <div className='flex'>
             <Button
-              icon='fa fa-calendar text-purple-500'
+              icon='fa fa-calendar text-purple-900'
               color='white'
               text='Calendario'
               className='!px-3 !hover:shadow-none mr-3'
             />
             <Button
               icon='fa fa-file-export'
-              color='warning'
               text='Exportar'
-              className='!px-3 !hover:shadow-none'
+              className='!px-3 !hover:shadow-none !bg-purple-900'
             />
           </div>
         }
@@ -47,16 +46,19 @@ const Reports: React.FC<IReportsProps> = (props) => {
         <div className='grid sm:grid-cols-3 gap-5 w-full'>
           <CardWidget
             color='green'
+            background='green'
             title='Ganancias'
             value={report?.sellsReport?.totalAmonutWin!}
           />
           <CardWidget
-            color='indigo'
+            color='purple'
+            background='purple'
             title='Ventas'
             value={report?.sellsReport?.totalAmonutSell!}
           />
           <CardWidget
             color='blue'
+            background='blue'
             title='Compras'
             value={report?.shoppingReport?.totalAmountBuy!}
           />

@@ -3,7 +3,7 @@ import commaNumber from 'comma-number'
 
 import { Column } from 'primereact/column'
 import { DataTable } from 'primereact/datatable'
-import { useOrderState } from '../../context'
+// import { useOrderState } from '../../context'
 
 const data = [
   {
@@ -29,7 +29,9 @@ const data = [
 ]
 
 const PaymentMethosTable = () => {
-  const { orders } = useOrderState()
+  // const { orders } = useOrderState()
+
+  const orders: any[] = []
 
   return (
     <>
@@ -39,13 +41,16 @@ const PaymentMethosTable = () => {
           <DataTable
             value={data.map((i) => {
               let info = orders.filter(
-                (order) => order.paymentMethod === i.name
+                (order: any) => order.paymentMethod === i.name
               )
 
               return {
                 ...i,
                 cantidad: info.length,
-                monto: info.reduce((acc, curr) => acc + curr.totalPrice, 0),
+                monto: info.reduce(
+                  (acc: any, curr: any) => acc + curr.totalPrice,
+                  0
+                ),
               }
             })}
             paginator

@@ -2,6 +2,7 @@ import React from 'react'
 import { LineChart } from '../../charts'
 import { Toolbar } from './components/Toolbar'
 import './styles.css'
+import { Button } from '../Button'
 
 interface ICardProps {
   children?: React.ReactNode
@@ -32,7 +33,12 @@ const Card: React.FC<ICardProps> = ({
           </h4>
           {toolbar && <Toolbar />}
           {eye && (
-            <i className='fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full text-purple-500 bg-purple-100 hover:text-purple-600 hover:bg-purple-200'></i>
+            <Button
+              className='!bg-purple-900 hover:!bg-purple-800 !text-white'
+              iconButton
+              icon='fa fa-eye mt-1 mr-2'
+              text='Ver mas'
+            ></Button>
           )}
         </div>
       )}
