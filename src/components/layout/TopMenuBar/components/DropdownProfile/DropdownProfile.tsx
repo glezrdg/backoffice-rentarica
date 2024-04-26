@@ -34,44 +34,26 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
       <ul className='user-dropdwon__links text-slate-500'>
         <li>
           <Link
-            to='#'
+            to='/admin/perfil'
             className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
           >
-            <i className='fa fa-user' /> Profile
+            <i className='fa fa-user' /> Perfil
           </Link>
         </li>
         <li>
           <Link
-            to='#'
+            to='/admin/ajustes'
             className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
           >
-            <i className='fa fa-gear' /> Settings
+            <i className='fa fa-gear' /> Ajustes
           </Link>
         </li>
         <li>
           <Link
-            to='#'
+            to='/admin/mi_suscripcion'
             className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
           >
-            <i className='fa fa-wallet' /> Billing
-          </Link>
-        </li>
-        <li>
-          <Link
-            to='#'
-            className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
-          >
-            <i className='fa fa-users' />
-            Activity
-          </Link>
-        </li>
-        <li>
-          <Link
-            to='#'
-            className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
-          >
-            <i className='fa fa-bell' />
-            Help
+            <i className='fa fa-wallet' /> Mi subscripcion
           </Link>
         </li>
       </ul>

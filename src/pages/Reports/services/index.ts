@@ -20,10 +20,10 @@ export const getReports = async (query?: any): Promise<IReport[]> => {
   }
 }
 
-export const getReport = async (query?: any): Promise<IReport> => {
+export const getReport = async (id: string): Promise<IReport> => {
   console.log('report 2')
   try {
-    const { data } = await DataService.get('/reports/1')
+    const { data } = await DataService.get(`/reports/${id}`)
     return data
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)

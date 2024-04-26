@@ -23,7 +23,9 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
           active ? 'active' : ''
         }`}
       >
-        <p className='hidden lg:block uppercase text-xs mb-3'>Administracion</p>
+        <p className='hidden lg:block uppercase text-xs mb-3 text-purple-700'>
+          Administracion
+        </p>
         <ul className='sidenav-menu'>
           <>
             <MenuItem
@@ -89,7 +91,9 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
           </>
         </ul>
 
-        <p className='hidden lg:block uppercase text-xs my-3'>Facturacion</p>
+        <p className='hidden lg:block uppercase text-xs my-3 text-purple-700'>
+          Facturacion
+        </p>
 
         <ul className='sidenav-menu'>
           <>

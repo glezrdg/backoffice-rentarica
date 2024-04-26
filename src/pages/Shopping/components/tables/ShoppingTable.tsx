@@ -11,14 +11,20 @@ import { IOrder } from '../../../Orders/models/IOrder'
 import { IShopping } from '../../models'
 // import { OrderModal } from '../modal'
 
-const ShoppingTable = () => {
+const ShoppingTable = (props: any) => {
   const { shoppings, setShopping } = useShoppingState()
   const [selectedOrder, setSelectedOrder] = useState([])
 
   return (
     <div>
       <DataTable
-        value={shoppings}
+        value={
+          shoppings?.length
+            ? shoppings
+            : props?.shoppings?.length
+            ? props?.shoppings
+            : []
+        }
         paginator
         rows={5}
         rowsPerPageOptions={[5, 10, 25, 50]}
@@ -43,7 +49,9 @@ const ShoppingTable = () => {
           className='text-sm'
           bodyClassName='text-center w-fit'
           body={(data: IShopping) => (
-            <p>{data.shoppingList.reduce((acc, curr) => curr.qty + acc, 0)}</p>
+            <p>
+              {data?.shoppingList?.reduce((acc, curr) => curr.qty + acc, 0)}
+            </p>
           )}
         ></Column>
         <Column
@@ -60,7 +68,7 @@ const ShoppingTable = () => {
             <p>
               $
               {commaNumber(
-                data?.shoppingList.reduce(
+                data?.shoppingList?.reduce(
                   (acc: any, curr: any) => acc + curr.product.price * curr.qty,
                   0
                 ) || 0
@@ -76,7 +84,7 @@ const ShoppingTable = () => {
             <p className='bg-purple-900 text-slate-50 p-2 rounded-lg w-[50%] text-center'>
               $
               {commaNumber(
-                data?.shoppingList.reduce(
+                data?.shoppingList?.reduce(
                   (acc: any, curr: any) =>
                     acc +
                     (curr.product.price - curr.price) *
@@ -92,7 +100,7 @@ const ShoppingTable = () => {
           header='Fecha'
           className='text-sm'
           body={(data: IOrder) => (
-            <p>{dateFormat(new Date(data.createdAt!), 'date')}</p>
+            <p>{dateFormat(new Date(data?.createdAt!), 'date')}</p>
           )}
         ></Column>
         <Column

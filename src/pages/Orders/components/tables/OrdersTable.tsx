@@ -10,14 +10,16 @@ import { Column } from 'primereact/column'
 import { IOrder } from '../../models/IOrder'
 import { OrderModal } from '../modal'
 
-const OrdersTable = () => {
+const OrdersTable = (props: any) => {
   const { orders, selectOrder } = useOrderState()
   const [selectedOrder, setSelectedOrder] = useState([])
 
   return (
     <div>
       <DataTable
-        value={orders}
+        value={
+          orders?.length ? orders : props?.orders?.length ? props.orders : []
+        }
         paginator
         rows={5}
         rowsPerPageOptions={[5, 10, 25, 50]}
@@ -42,7 +44,7 @@ const OrdersTable = () => {
           className='text-sm'
           bodyClassName='text-center w-fit'
           body={(data: IOrder) => (
-            <p>{data.orderItems.reduce((acc, curr) => curr.qty + acc, 0)}</p>
+            <p>{data.orderItems?.reduce((acc, curr) => curr.qty + acc, 0)}</p>
           )}
         ></Column>
         <Column

@@ -21,6 +21,10 @@ import Caja from '../../pages/Employee/Caja'
 import Cuadre from '../../pages/Employee/Cuadre'
 import Planes from '../../pages/Planes'
 import SuccessSubscription from '../../pages/SuccessSubscription'
+import Profile from '../../pages/User/Profile'
+import MySubscription from '../../pages/User/MySubscription'
+import Settings from '../../pages/User/Settings'
+import ReportsPage from '../../pages/Reports/ReportPage'
 
 export const adminPages: routerType[] = [
   {
@@ -66,6 +70,11 @@ export const adminPages: routerType[] = [
     title: 'home',
   },
   {
+    path: '/admin/reports/:id',
+    element: <ReportsPage />,
+    title: 'home',
+  },
+  {
     path: '/admin/oferts',
     element: <Oferts />,
     title: 'home',
@@ -102,6 +111,21 @@ export const adminPages: routerType[] = [
   {
     path: '/admin/planes',
     element: <Planes />,
+    title: 'home',
+  },
+  {
+    path: '/admin/perfil',
+    element: <Profile />,
+    title: 'home',
+  },
+  {
+    path: '/admin/ajustes',
+    element: <Settings />,
+    title: 'home',
+  },
+  {
+    path: '/admin/mi_suscripcion',
+    element: <MySubscription />,
     title: 'home',
   },
   {

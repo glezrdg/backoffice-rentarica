@@ -4,12 +4,14 @@ import { Card } from '../../../../../components/shared'
 import { useReportState } from '../../../context'
 import { dateFormat } from '../../../../../utility/dateFormat'
 import commaNumber from 'comma-number'
+import { useNavigate } from 'react-router-dom'
 
 interface IReportsTableProps {
   children?: React.ReactNode
 }
 
 const ReportsTable: React.FC<IReportsTableProps> = (props) => {
+  const navigate = useNavigate()
   const { reports } = useReportState()
 
   return (
@@ -28,15 +30,22 @@ const ReportsTable: React.FC<IReportsTableProps> = (props) => {
               <p> </p>
             </div>
             {reports?.map((report) => (
-              <div className='bg-purple-50 bg-opacity-50 cursor-pointer transition text-slate-600 rounded-lg h-14 mb-3 grid grid-cols-6 place-items-center hover:scale-[1.01] hover:shadow-sm hover:font-medium hover:text-purple-900'>
+              <div
+                onClick={() => navigate(`/admin/reports/${report._id}`)}
+                className='bg-purple-50 bg-opacity-50 cursor-pointer transition text-slate-600 rounded-lg h-14 mb-3 grid grid-cols-6 place-items-center hover:scale-[1.01] hover:shadow-sm hover:font-medium hover:text-purple-900'
+              >
                 <p>{dateFormat(new Date(report.createdAt), 'date')}</p>
                 <p>{commaNumber(report?.sellsReport?.ordersQty) || 0}</p>
                 <p>${commaNumber(report?.sellsReport?.totalAmonutSell) || 0}</p>
                 <p>${commaNumber(report?.sellsReport?.totalAmonutWin) || 0}</p>
                 <p>0</p>
                 <p>
-                  <i className='fa fa-eye transition cursor-pointer text-slate-600 hover:bg-purple-300 p-2 rounded-full mr-1 md:mr-2' />
-                  <i className='fa fa-file-export transition cursor-pointer text-slate-600 hover:bg-purple-300 p-2 rounded-full' />
+                  <i
+                    data-te-toggle='modal'
+                    data-te-target='#reportmodal'
+                    className='fa fa-eye transition cursor-pointer text-slate-600 hover:bg-purple-900 hover:text-white p-2 rounded-full mr-1 md:mr-2'
+                  />
+                  <i className='fa fa-file-export transition cursor-pointer  text-slate-600 hover:bg-purple-900 hover:text-white p-2 rounded-full' />
                 </p>
               </div>
             ))}

@@ -1,3 +1,4 @@
+import { IOrder } from "../../../pages/Orders/models/IOrder"
 import { IProduct } from "src/pages/Products/models/IProduct"
 
 export interface ISellsReport {
@@ -5,6 +6,7 @@ export interface ISellsReport {
   ordersQty: number
   totalAmonutSell: number
   totalAmonutWin: number
+  orders: IOrder[]
   productsQty: [{
     product: IProduct
     qty: number

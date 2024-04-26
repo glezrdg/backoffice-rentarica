@@ -54,29 +54,11 @@ const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen }) => {
             <i className='text-sm md:text-lg xl:text-xl fa fa-thin fa-envelope text-slate-400'></i>
             <div className='absolute top-0 left-[38%]'>
               <span className='relative flex h-2 w-2'>
-                <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75'></span>
-                <span className='relative inline-flex rounded-full h-2 w-2 bg-sky-500'></span>
+                <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-900 opacity-75'></span>
+                <span className='relative inline-flex rounded-full h-2 w-2 bg-purple-900'></span>
               </span>
             </div>
             <DropdownMessages id='dropdow_messages_message' />
-          </div>
-          {/* Notifications */}
-          <div
-            data-popover-target='dropdow_messages_notification'
-            className='relative cursor-pointer hover:bg-slate-50 px-2 py-1 rounded-full'
-          >
-            <i className='text-sm md:text-lg xl:text-xl fa fa-sharp fa-light fa-bell text-slate-400'></i>
-            <div className='absolute top-0 left-[38%]'>
-              <span className='relative flex h-2 w-2'>
-                <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75'></span>
-                <span className='relative inline-flex rounded-full h-2 w-2 bg-red-400'></span>
-              </span>
-            </div>
-            <DropdownNotifications id='dropdow_messages_notification' />
-          </div>
-          {/* Settings */}
-          <div className='relative cursor-pointer hover:bg-slate-50 px-2 py-1 rounded-full'>
-            <i className='text-sm md:text-lg xl:text-xl fa fa-light fa-gear text-slate-400'></i>
           </div>
           {/* Profile */}
           <div
