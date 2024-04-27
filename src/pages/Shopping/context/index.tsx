@@ -16,6 +16,7 @@ export interface InitialProps {
   setShoppings: any
   setShopping: any
   createShopping: (body: Partial<IShopping>) => void
+  fetchShoppings: (queries?: any) => void
 }
 
 let initialState: InitialProps = {
@@ -24,6 +25,7 @@ let initialState: InitialProps = {
   setShoppings: () => {},
   setShopping: () => {},
   createShopping: () => {},
+  fetchShoppings: () => {},
 }
 
 const ShoppingContext = createContext<InitialProps>(initialState)
@@ -37,12 +39,12 @@ export const ShoppingProvider: FC<ShoppingProviderProps> = ({ children }) => {
   const [shopping, setShopping] = useState<IShopping | null>(null)
 
   useEffect(() => {
-    getInitialState()
+    fetchShoppings()
   }, [])
 
-  const getInitialState = async () => {
+  const fetchShoppings = async (queries?: any) => {
     try {
-      const shoppings = await getShoppings()
+      const shoppings = await getShoppings(queries)
       console.log('SHOPPINGS,', shoppings)
       setShoppings(shoppings)
     } catch (error: any) {
@@ -72,6 +74,7 @@ export const ShoppingProvider: FC<ShoppingProviderProps> = ({ children }) => {
         setShopping,
         setShoppings,
         createShopping,
+        fetchShoppings,
       }}
     >
       {children}
