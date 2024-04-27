@@ -15,16 +15,20 @@ import ReportModal from './components/modal/ReportModal'
 import { useParams } from 'react-router-dom'
 import { getReport } from './services'
 import ShoppingTable from '../Shopping/components/tables/ShoppingTable'
+import { Dropdown } from 'primereact/dropdown'
+import { Calendar } from 'primereact/calendar'
 
 interface IReportsPageProps {
   children?: React.ReactNode
 }
 
 const ReportsPage: React.FC<IReportsPageProps> = (props) => {
-  const { report, setReport } = useReportState()
+  const { report, setReport, date, setDate } = useReportState()
   const { id } = useParams()
 
-  console.log(report)
+  const [dateType, setDateType] = useState<'single' | 'range' | 'multiple'>(
+    'single'
+  )
 
   useEffect(() => {
     handleGetReport()
@@ -47,6 +51,27 @@ const ReportsPage: React.FC<IReportsPageProps> = (props) => {
         title='Detalle de reporte'
         right={
           <div className='flex'>
+            <Dropdown
+              className='h-[40px] mr-3'
+              options={[
+                { title: 'Fecha unica', value: 'single' },
+                { title: 'Fecha por rango', value: 'range' },
+              ]}
+              optionValue='value'
+              optionLabel='title'
+              value={dateType}
+              onChange={(e) => setDateType(e.target.value)}
+            />
+            <Calendar
+              className='h-[40px] mr-3'
+              inputClassName='!border-0 hover:outline-none '
+              showIcon
+              iconPos='left'
+              icon={<i className='fa fa-calendar '></i>}
+              value={date}
+              onChange={(e) => setDate(e.value)}
+              selectionMode={dateType}
+            />
             <Button
               icon='fa fa-file-export'
               text='Exportar'

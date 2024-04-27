@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // Components
 import { PageHeader } from '../../components/layout'
@@ -14,8 +14,12 @@ interface IDashboardProps {
 }
 
 const Dashboard: React.FC<IDashboardProps> = (props) => {
-  const { reports, report } = useReportState()
+  const { reports, report, getReports } = useReportState()
   const [sidenav, setSidenav] = useState(false)
+
+  useEffect(() => {
+    getReports({})
+  }, [])
 
   return (
     <>

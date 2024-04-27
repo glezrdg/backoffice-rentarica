@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './styles.css'
-import { useReportState } from './context'
 
 // Components
-import { Button } from '../../components/shared/Button'
-import { Card, TopProducts } from '../../components/shared'
-import { PaymentMethodsTable } from '../Clients/components'
 import { PageHeader } from '../../components/layout'
-import PieChart from '../../components/charts/PieChart'
+import { Card, TopProducts } from '../../components/shared'
+import { Button } from '../../components/shared/Button'
+import { PaymentMethodsTable } from '../Clients/components'
 import CardWidget from './components/CardWidget/CardWidget'
-import ReportsTable from './components/tables/ReportsTable/ReportsTable'
 import ReportModal from './components/modal/ReportModal'
+import ReportsTable from './components/tables/ReportsTable/ReportsTable'
+import { useReportState } from './context'
 
 interface IReportsProps {
   children?: React.ReactNode
@@ -19,8 +18,6 @@ interface IReportsProps {
 const Reports: React.FC<IReportsProps> = (props) => {
   const { report } = useReportState()
 
-  console.log(report)
-
   return (
     <>
       {/* Header */}
@@ -28,12 +25,6 @@ const Reports: React.FC<IReportsProps> = (props) => {
         title='Reportes'
         right={
           <div className='flex'>
-            <Button
-              icon='fa fa-calendar text-purple-900'
-              color='white'
-              text='Calendario'
-              className='!px-3 !hover:shadow-none mr-3'
-            />
             <Button
               icon='fa fa-file-export'
               text='Exportar'

@@ -70,7 +70,7 @@ const ReportModal: React.FC<IReportModalProps> = (props) => {
                   <h2 className='text-lg text-purple-900 font-medium'>
                     <span className='mr-2'>Productos:</span>
                     {commaNumber(
-                      report?.shoppingReport.productsQty.reduce(
+                      report?.shoppingReport?.productsQty?.reduce(
                         (acc, curr) => acc + curr.qty,
                         0
                       ) || 0

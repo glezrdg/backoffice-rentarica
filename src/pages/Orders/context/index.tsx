@@ -19,6 +19,7 @@ import { toast } from '../../../App'
 const initialState: InitialStateProps = {
   orders: [],
   order: null,
+  date: new Date(),
   getOrders: () => {},
   selectOrder: () => {},
   addOrder: () => {},
@@ -26,6 +27,7 @@ const initialState: InitialStateProps = {
   removeOrder: () => {},
   deliverOrder: () => {},
   setSearch: () => {},
+  setDate: () => {},
   setOrder: () => {},
 }
 
@@ -42,13 +44,27 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
   const [searchOrders, setSearchOrders] = useState<IOrder[]>([])
   const [search, setSearch] = useState<string>('')
   const [order, setOrder] = useState<IOrder | null>(initialState.order)
-  const [selectedOrder, setSelectedOrder] = useState('')
+  const [selectedOrder, setSelectedOrder] = useState<any>('')
+  const [date, setDate] = useState('')
 
   let activeOrder = search ? searchOrders : orders
 
   useEffect(() => {
-    getOrders()
-  }, [])
+    const queries: any = {}
+
+    if (date) {
+      console.log('DATE TYPEOF', typeof date)
+      console.log('DATE', date.length)
+      if (!date.length) {
+        queries.date = new Date(date).toISOString()
+      } else {
+        queries.startDate = new Date(date[0]).toISOString()
+        queries.endDate = new Date(date[1]).toISOString()
+      }
+    }
+
+    getOrders(queries)
+  }, [date])
 
   useEffect(() => {
     if (search) {
@@ -143,6 +159,8 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
         removeOrder,
         setOrder,
         setSearch,
+        setDate,
+        date,
       }}
     >
       {children}
@@ -155,6 +173,7 @@ export const useOrderState = () => useContext(OrderContext)
 export interface InitialStateProps {
   orders: IOrder[]
   order: IOrder | null
+  date: any
   getOrders: (queries?: any) => void
   selectOrder: (id: string) => void
   addOrder: (product: IOrder) => void
@@ -162,5 +181,6 @@ export interface InitialStateProps {
   removeOrder: (id: string) => void
   deliverOrder: (id: string) => void
   setSearch: (string: string) => void
+  setDate: (value: any) => void
   setOrder: (product: IOrder) => void
 }

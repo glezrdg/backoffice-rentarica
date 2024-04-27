@@ -22,7 +22,7 @@ const ProductModal: React.FC<IProductModalProps> = (props) => {
   const { report } = useReportState()
   const { product } = useInventoryState()
 
-  let productReport = report?.sellsReport?.productsQty.find(
+  let productReport = report?.sellsReport?.productsQty?.find(
     (i) => i.product._id === product?._id
   )
 
