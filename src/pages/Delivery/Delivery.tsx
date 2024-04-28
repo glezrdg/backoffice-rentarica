@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
-import './styles.css'
 import { ICompany } from './models'
+import './styles.css'
 
 // Components
-import { BarChart } from '../../components/charts'
 import { PageHeader } from '../../components/layout'
 import { Button, Card } from '../../components/shared'
-import { DeliveryPeopleTable, Header, SideCreate } from './components'
+import { Header, SideCreate, UsersTable } from './components'
 import { DeliveryProvider, useDeliveryState } from './context'
-import DeliveryTable from './components/table/DeliveryTable'
-import ProvincesTable from './components/table/ProvincesTable'
-import MunicipiosTable from './components/table/MunicipiosTable'
 
 interface IDeliveryProps {
   children?: React.ReactNode
@@ -47,20 +43,26 @@ const Delivery: React.FC<IDeliveryProps> = (props) => {
               <Button
                 icon='fa fa-plus'
                 color='warning'
-                text='Integrante'
-                className='!px-3 !hover:shadow-none'
+                text='Agregar usuario'
+                className='!px-3 !hover:shadow-none !bg-purple-900'
                 onClick={() => openCreate('delivery')}
               />
             </div>
           }
         />
 
-        <Header />
-
-        {/* TABLE */}
-        <Card title='Usuarios registrados' className='mt-6'>
-          <DeliveryPeopleTable />
+        <Card title=''>
+          <Header />
         </Card>
+
+        <Card title='Usuarios registrados' className='col-span-2 mt-6'>
+          <UsersTable />
+        </Card>
+        <div className='grid grid-cols-3 mt-6 gap-6'>
+          {/* TABLE */}
+
+          {/* <Card title='Informacion de cuenta' className='col-span-1'></Card> */}
+        </div>
       </>
     </DeliveryProvider>
   )

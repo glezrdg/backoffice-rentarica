@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { PageHeader } from '../../components/layout'
-import { Button } from '../../components/shared'
+import { Button, Card } from '../../components/shared'
 import ShoppingCard from './components/ShoppingCard'
 import SideCreateShopping from './components/SideCreateOfert/SideCreate'
 import { useShoppingState } from './context'
@@ -38,10 +38,14 @@ const Shopping = ({}: ShoppingProps) => {
 
         {/* <Header /> */}
         <div className='mt-2 mb-4'>
-          <Filters />
+          <Card title=''>
+            <Filters />
+          </Card>
         </div>
         {/* TABLE */}
-        <ShoppingTable />
+        <Card title=''>
+          <ShoppingTable />
+        </Card>
         {/* <ProductTable openCreate={() => setCreateProduct(true)} /> */}
         {/* <div className='grid grid-cols-3 gap-4'>
           {shoppings.map((shop) => (

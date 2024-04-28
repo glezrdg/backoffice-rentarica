@@ -5,7 +5,7 @@ import './styles.css'
 
 // Components
 import { PageHeader } from '../../components/layout'
-import { Button } from '../../components/shared'
+import { Button, Card } from '../../components/shared'
 import { Header, SideCreateProduct } from './components'
 import ProductTable from './components/tables/ProductTable'
 import { InventoryProvider } from './context'
@@ -40,10 +40,14 @@ const Products: React.FC<IProductsProps> = (props) => {
           }
         />
 
-        <Header />
+        <Card title='' className='mb-6'>
+          <Header />
+        </Card>
 
         {/* TABLE */}
-        <ProductTable openCreate={() => setCreateProduct(true)} />
+        <Card title=''>
+          <ProductTable openCreate={() => setCreateProduct(true)} />
+        </Card>
       </>
     </InventoryProvider>
   )

@@ -15,7 +15,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 
   return (
     <>
-      <div className='flex items-center mb-6 relative'>
+      <div className='flex items-center relative'>
         <div className='flex items-center self-end mr-2 rounded-2xl h-fit w-fit xl:mr-20 flex-1'>
           <span className='p-input-icon-left w-full'>
             <i className=' fa fa-search' />

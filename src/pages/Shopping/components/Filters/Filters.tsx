@@ -75,7 +75,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
         />
         <Calendar
           className='h-[40px] mr-3'
-          inputClassName='!border-0 hover:outline-none '
+          inputClassName='!border-purple-700 hover:outline-none '
           showIcon
           iconPos='left'
           icon={<i className='fa fa-calendar '></i>}

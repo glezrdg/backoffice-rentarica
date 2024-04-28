@@ -104,7 +104,9 @@ const DeliveryForm: React.FC<DeliveryFormProps> = ({ onClose }) => {
           />
         </div>
         <div className='flex flex-col'>
-          <label className='mb-2 text-xs'>Celular</label>
+          <label className='mb-2 text-xs'>
+            Celular <strong className='text-purple-900'>(opcional)</strong>
+          </label>
           <input
             value={phone}
             onChange={(e) => setPhone(e.target.value)}

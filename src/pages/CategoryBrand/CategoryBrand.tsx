@@ -51,7 +51,9 @@ const CategoryBrand: React.FC<ICategoryBrandProps> = (props) => {
           }
         />
 
-        <Header />
+        <Card title='' className='mb-6'>
+          <Header />
+        </Card>
 
         <div className='grid sm:grid-cols-[2fr_1fr] gap-5'>
           <Card title='Categorias' bodyClassName='p-4' eye>

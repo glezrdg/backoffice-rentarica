@@ -19,7 +19,7 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
   return (
     <>
       <div
-        className={` hidden md:block overflow-visible sidenav w-[3.5rem]  lg:w-[16rem] lg:block bg-slate-50 h-[100vh] p-4 transition-all ${
+        className={` hidden md:block overflow-visible sidenav w-[3.5rem]  lg:w-[16rem] lg:block bg-white h-[100vh] p-4 transition-all ${
           active ? 'active' : ''
         }`}
       >

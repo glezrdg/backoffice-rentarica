@@ -73,10 +73,14 @@ const Orders: React.FC<IOrdersProps> = (props) => {
       />
 
       {/* Header */}
-      <Header />
+      <Card title='' className='mb-6'>
+        <Header />
+      </Card>
 
       {/* TABLE */}
-      <OrdersTable />
+      <Card title=''>
+        <OrdersTable />
+      </Card>
 
       {/* GRAPHS */}
       <div className='grid md:grid-cols-2 h-fit gap-5 mt-8'>
