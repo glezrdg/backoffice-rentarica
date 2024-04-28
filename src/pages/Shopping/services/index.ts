@@ -10,7 +10,6 @@ export const getShoppings = async (queries: any): Promise<IShopping[]> => {
 
   if (keys.length) {
     queryString += '?'
-
     keys?.map((item, i) => queryString += `${item}=${queries[keys[i]]}&`)
   }
 
@@ -44,6 +43,17 @@ export const removeShopping = async (id: string): Promise<IShopping> => {
   try {
     const { data } = await DataService.delete(`/shopping/:${id}`)
     return data as IShopping
+  } catch (error: any) {
+    throw new Error(error.data.response.error || error.message)
+  }
+}
+
+//FILTERS
+
+export const getBestWinnings = async (): Promise<IShopping[]> => {
+  try {
+    const { data } = await DataService.get(`/shopping/filter/best-winnings`)
+    return data as IShopping[]
   } catch (error: any) {
     throw new Error(error.data.response.error || error.message)
   }

@@ -7,6 +7,7 @@ import { useShoppingState } from './context'
 import ShoppingModal from './components/ShoppingModal'
 import ShoppingTable from './components/tables/ShoppingTable'
 import { Filters } from './components/Filters'
+import InformationCards from './components/InformationCards'
 
 export interface ShoppingProps {}
 
@@ -46,6 +47,9 @@ const Shopping = ({}: ShoppingProps) => {
         <Card title=''>
           <ShoppingTable />
         </Card>
+
+        <InformationCards />
+
         {/* <ProductTable openCreate={() => setCreateProduct(true)} /> */}
         {/* <div className='grid grid-cols-3 gap-4'>
           {shoppings.map((shop) => (

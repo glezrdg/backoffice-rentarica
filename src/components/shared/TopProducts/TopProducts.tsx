@@ -89,7 +89,7 @@ const TopProducts: React.FC<ITopProductsProps> = ({
       <Card
         title='Top vendidos'
         className={`h-full ${className}`}
-        bodyClassName='py-4 flex flex-column flex-1'
+        bodyClassName='flex flex-column flex-1'
       >
         {data?.map((e: any, i: number) => (
           <div className='flex-1' key={i}>

@@ -5,10 +5,11 @@ import './styles.css'
 
 // Components
 import { PageHeader } from '../../components/layout'
-import { Button, Card } from '../../components/shared'
+import { Button, Card, TopProducts } from '../../components/shared'
 import { Header, SideCreateProduct } from './components'
-import ProductTable from './components/tables/ProductTable'
 import { InventoryProvider } from './context'
+import LowestProducts from './components/LowestProducts'
+import ProductTable from './components/tables/ProductTable'
 
 interface IProductsProps {
   children?: React.ReactNode
@@ -45,9 +46,16 @@ const Products: React.FC<IProductsProps> = (props) => {
         </Card>
 
         {/* TABLE */}
-        <Card title=''>
+        <Card title='Productos' bodyClassName='mt-4'>
           <ProductTable openCreate={() => setCreateProduct(true)} />
         </Card>
+
+        {/* INFO */}
+
+        <div className='grid grid-cols-2 gap-6 mt-6'>
+          <TopProducts />
+          <LowestProducts products={[]} />
+        </div>
       </>
     </InventoryProvider>
   )

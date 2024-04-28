@@ -55,3 +55,13 @@ export const deleteProduct = async (id: string): Promise<IProduct> => {
     throw new Error(error.data.response.error || error.message)
   }
 }
+
+export const getLowestProducts = async (): Promise<IProduct[]> => {
+  try {
+    const { data } = await DataService.get(`/products/filter/lowest`)
+    return data as IProduct[]
+  } catch (error: any) {
+    throw new Error(error.data.response.error || error.message)
+  }
+}
+

@@ -19,10 +19,10 @@ const ShoppingTable = (props: any) => {
     <div>
       <DataTable
         value={
-          shoppings?.length
-            ? shoppings
-            : props?.shoppings?.length
+          props?.shoppings?.length
             ? props?.shoppings
+            : shoppings?.length
+            ? shoppings
             : []
         }
         paginator
@@ -37,23 +37,20 @@ const ShoppingTable = (props: any) => {
           selectionMode='multiple'
           headerStyle={{ width: '3rem' }}
         ></Column> */}
-        <Column
-          field='_id'
-          body={(data) => <p>1</p>}
-          header='#Numero'
-          className='text-sm'
-        ></Column>
-        <Column
-          field='products'
-          header='productos'
-          className='text-sm'
-          bodyClassName='text-center w-fit'
-          body={(data: IShopping) => (
-            <p>
-              {data?.shoppingList?.reduce((acc, curr) => curr.qty + acc, 0)}
-            </p>
-          )}
-        ></Column>
+
+        {!props.showLess && (
+          <Column
+            field='products'
+            header='productos'
+            className='text-sm'
+            bodyClassName='text-center w-fit'
+            body={(data: IShopping) => (
+              <p>
+                {data?.shoppingList?.reduce((acc, curr) => curr.qty + acc, 0)}
+              </p>
+            )}
+          ></Column>
+        )}
         <Column
           field='total'
           header='Inversion'
@@ -95,14 +92,16 @@ const ShoppingTable = (props: any) => {
             </p>
           )}
         ></Column>
-        <Column
-          field='createdAt'
-          header='Fecha'
-          className='text-sm'
-          body={(data: IOrder) => (
-            <p>{dateFormat(new Date(data?.createdAt!), 'date')}</p>
-          )}
-        ></Column>
+        {!props.showLess && (
+          <Column
+            field='createdAt'
+            header='Fecha'
+            className='text-sm'
+            body={(data: IOrder) => (
+              <p>{dateFormat(new Date(data?.createdAt!), 'date')}</p>
+            )}
+          ></Column>
+        )}
         <Column
           body={(data) => (
             <div className='flex'>

@@ -51,6 +51,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
     }
   }, [product])
 
+  useEffect(() => {
+    setCategory(categories[0]?._id!)
+  }, [categories])
+
   const handleCreateProduct = async (e: any) => {
     e.preventDefault()
 
