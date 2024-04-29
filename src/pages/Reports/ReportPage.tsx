@@ -98,7 +98,7 @@ const ReportsPage: React.FC<IReportsPageProps> = (props) => {
           <CardWidget
             color='blue'
             background='blue'
-            title='Compras'
+            title='Inversiones'
             value={report?.shoppingReport?.totalAmountBuy!}
           />
         </div>

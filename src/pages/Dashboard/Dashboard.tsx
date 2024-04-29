@@ -30,7 +30,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
         className={`w-full grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4 lg:gap-6`}
       >
         <WidgetCard title={'Ordenes'} color={'blue'} />
-        <WidgetCard title={'Compras'} color={'purple'} />
+        <WidgetCard title={'Numero de inversiones'} color={'purple'} />
         <WidgetCard title={'Ganancias'} color={'green'} />
         <WidgetCard title={'Nuevos Usuarios'} color={'red'} />
       </div>

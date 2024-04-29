@@ -50,13 +50,13 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
               url='admin/inversiones'
               icon='fa fa-money-bill-trend-up'
               title='Inversiones'
-              active={current === 'shopping'}
+              active={current === 'inversiones'}
             />
             <MenuItem
               url='admin/gastos'
               icon='fa fa-dollar-sign'
               title='Gastos'
-              active={current === 'shopping'}
+              active={current === 'gastos'}
             />
             {/* <MenuItem url='admin/clients' icon='fa fa-user' title='Clientes' /> */}
             {user.subscriptionId !== 'Plan emprendedor' && (

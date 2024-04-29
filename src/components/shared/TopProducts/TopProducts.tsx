@@ -4,6 +4,7 @@ import { Card } from '../Card'
 import ProductItem from './components/ProductItem/ProductItem'
 import { IOrder } from 'src/pages/Orders/models/IOrder'
 import { IProduct } from 'src/pages/Products/models/IProduct'
+import NoInformation from '../NoInformation'
 
 interface ITopProductsProps {
   children?: React.ReactNode
@@ -89,13 +90,17 @@ const TopProducts: React.FC<ITopProductsProps> = ({
       <Card
         title='Top vendidos'
         className={`h-full ${className}`}
-        bodyClassName='flex flex-column flex-1'
+        bodyClassName='flex flex-column flex-1 mt-4'
       >
-        {data?.map((e: any, i: number) => (
-          <div className='flex-1' key={i}>
-            <ProductItem {...e} />
-          </div>
-        ))}
+        {data?.length ? (
+          data?.map((e: any, i: number) => (
+            <div className='flex-1' key={i}>
+              <ProductItem {...e} />
+            </div>
+          ))
+        ) : (
+          <NoInformation />
+        )}
       </Card>
     </>
   )

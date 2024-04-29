@@ -51,7 +51,7 @@ const Reports: React.FC<IReportsProps> = (props) => {
           <CardWidget
             color='blue'
             background='blue'
-            title='Compras'
+            title='Inversiones'
             value={report?.shoppingReport?.totalAmountBuy!}
           />
         </div>

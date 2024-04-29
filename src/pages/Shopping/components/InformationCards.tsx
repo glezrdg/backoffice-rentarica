@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { getBestWinnings } from '../services'
 import { IShopping } from '../models'
 import ShoppingTable from './tables/ShoppingTable'
+import NoInformation from '../../../components/shared/NoInformation'
 
 const InformationCards = () => {
   const [bestWinnings, setBestWinnigs] = useState<IShopping[]>([])
@@ -24,7 +25,9 @@ const InformationCards = () => {
 
   return (
     <div className='grid grid-cols-2 gap-6 mt-6'>
-      <Card title='Mejores ganancias'></Card>
+      <Card title='Mejores ganancias' bodyClassName='mt-4'>
+        <NoInformation />
+      </Card>
       <Card title='Mayores inversiones' bodyClassName='mt-4'>
         <ShoppingTable shoppings={bestWinnings} showLess />
       </Card>

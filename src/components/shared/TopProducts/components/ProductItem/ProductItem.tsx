@@ -45,7 +45,7 @@ const ProductItem: React.FC<IProductItemProps> = (props) => {
         <h4
           className={`text-${
             !props.forQty ? 'green' : 'red'
-          }-500 text-xl sm:text-2xl md:text-3xl`}
+          }-500 text-xl sm:text-2xl`}
         >
           {!props.forQty && '$'}
           {commaNumber(props?.amount)}
