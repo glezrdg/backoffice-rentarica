@@ -145,6 +145,9 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onClose }) => {
             value={price}
             onChange={(e) => setPrice(e.value)}
             className='outline-none rounded-md'
+            mode='currency'
+            currency='USD'
+            locale='en-US'
           />
         </div>
       </div>

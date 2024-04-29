@@ -8,6 +8,7 @@ interface ICardWidgetProps {
   title: string
   value: number
   background?: string
+  noCash?: boolean
 }
 
 const CardWidget: React.FC<ICardWidgetProps> = ({
@@ -15,6 +16,7 @@ const CardWidget: React.FC<ICardWidgetProps> = ({
   title,
   value = 0,
   background = 'white',
+  noCash = false,
 }) => {
   return (
     <>
@@ -26,20 +28,23 @@ const CardWidget: React.FC<ICardWidgetProps> = ({
         <div
           className={`text-${color}-500 text-opacity-70 text-xl md:text-2xl lg:text-3xl font-medium`}
         >
-          <p>${commaNumber(value)}</p>
+          <p>
+            {noCash ? '' : '$'}
+            {commaNumber(value)}
+          </p>
         </div>
         <label
           className={`uppercase block mt-1 mb-4 text-sm font-medium text-${color}-700`}
         >
           {title}
         </label>
-        <div className='w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700'>
+        {/* <div className='w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700'>
           <div
             className={`bg-${color}-400 h-2.5 rounded-full`}
             style={{ width: '45%' }}
           ></div>
         </div>
-        <span className='text-xs text-slate-400'>Meta establecida</span>
+        <span className='text-xs text-slate-400'>Meta establecida</span> */}
       </div>
     </>
   )

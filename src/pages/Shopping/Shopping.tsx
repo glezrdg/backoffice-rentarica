@@ -24,7 +24,7 @@ const Shopping = ({}: ShoppingProps) => {
         />
         {/* Header */}
         <PageHeader
-          title='Compras'
+          title='Inversiones'
           right={
             <div>
               <Button

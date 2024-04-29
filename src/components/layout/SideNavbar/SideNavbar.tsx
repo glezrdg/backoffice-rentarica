@@ -47,9 +47,15 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
               title='Inventario'
             />
             <MenuItem
-              url='admin/shopping'
-              icon='fa fa-tag'
-              title='Compras'
+              url='admin/inversiones'
+              icon='fa fa-money-bill-trend-up'
+              title='Inversiones'
+              active={current === 'shopping'}
+            />
+            <MenuItem
+              url='admin/gastos'
+              icon='fa fa-dollar-sign'
+              title='Gastos'
               active={current === 'shopping'}
             />
             {/* <MenuItem url='admin/clients' icon='fa fa-user' title='Clientes' /> */}

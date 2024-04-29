@@ -10,6 +10,7 @@ import { ISizes } from '../../../models/IProduct'
 import { sizes as sizesData } from '../../../utils/data'
 import Sizes from '../../Sizes'
 import { Checkbox } from 'primereact/checkbox'
+import { InputText } from 'primereact/inputtext'
 
 interface ProductFormProps {
   close: () => void
@@ -190,20 +191,22 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
         <div className='grid grid-cols-2 gap-5 mb-5'>
           <div className='flex flex-col'>
             <label className='mb-2 text-xs'>Nombre</label>
-            <input
+            <InputText
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className='outline-none rounded-md p-2 border focus:border-purple-300'
+              className='outline-none rounded-md '
             />
           </div>
           <div className='flex flex-col'>
             <label className='mb-2 text-xs'>Precio</label>
-            <input
+            <InputNumber
               value={price}
               min={1}
-              type='number'
-              onChange={(e) => setPrice(Number(e.target.value))}
-              className='outline-none rounded-md p-2 border focus:border-purple-300'
+              mode='currency'
+              currency='USD'
+              locale='en-US'
+              onChange={(e) => setPrice(Number(e.value))}
+              className='outline-none rounded-md  h-full'
             />
           </div>
         </div>

@@ -38,7 +38,12 @@ export const adminPages: routerType[] = [
     title: 'home',
   },
   {
-    path: '/admin/shopping',
+    path: '/admin/gastos',
+    element: <Products />,
+    title: 'home',
+  },
+  {
+    path: '/admin/inversiones',
     element: (
       <ShoppingProvider>
         <Shopping />
