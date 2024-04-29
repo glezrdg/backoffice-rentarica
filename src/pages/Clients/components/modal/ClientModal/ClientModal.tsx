@@ -4,12 +4,7 @@ import React, { useEffect } from 'react'
 import { Avatar } from 'primereact/avatar'
 import { TabPanel, TabView } from 'primereact/tabview'
 import { useClientstate } from '../../../context'
-import {
-  LatestBuy,
-  ClientCart,
-  ClientWishList,
-  ClientAddress,
-} from './components'
+import { LatestBuy } from './components'
 import './styles.css'
 import commaNumber from 'comma-number'
 
@@ -105,9 +100,6 @@ const ClientModal: React.FC<IClientModalProps> = (props) => {
             <TabView>
               <TabPanel headerClassName='text-sm' header='Ultimas compras'>
                 <LatestBuy orders={clientOrders} />
-              </TabPanel>
-              <TabPanel headerClassName='text-sm' header='Direccion'>
-                <ClientAddress />
               </TabPanel>
             </TabView>
           </div>

@@ -6,8 +6,6 @@ import { IOrder } from '../../pages/Orders/models/IOrder'
 const getProvincesQty = (orders: IOrder[]) => {
   let provinces = new Set<string>()
 
-  orders.map((order) => provinces.add(order.shippingAddress.province))
-
   let choosenProvinces = Array.from(provinces)
   let data = []
 
@@ -17,10 +15,6 @@ const getProvincesQty = (orders: IOrder[]) => {
       province: search,
       qty: 0,
     }
-
-    item.qty = orders.filter(
-      (o) => o.shippingAddress.province === search
-    ).length
 
     data.push(item)
   }

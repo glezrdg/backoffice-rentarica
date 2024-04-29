@@ -1,5 +1,4 @@
 import { IProduct } from "src/pages/Products/models/IProduct"
-import { IShipping } from "../../../models"
 
 export interface IOrder {
   _id?: string

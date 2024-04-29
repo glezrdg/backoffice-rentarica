@@ -1,11 +1,11 @@
 // import { useReportState } from '../../../../../pages/Reports/context'
 import commaNumber from 'comma-number'
 import React from 'react'
-import { IOrder } from '../../../../../Orders/models/IOrder'
-import './styles.css'
 import { InputNumber } from 'primereact/inputnumber'
-import { Button } from '../../../../../../components/shared'
 import { Textarea } from 'flowbite-react'
+import { IOrder } from '../../../../../Orders/models/IOrder'
+import { Button } from '../../../../../../components/shared'
+import './styles.css'
 
 interface ICuadreModalProps {
   children?: React.ReactNode

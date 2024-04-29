@@ -9,17 +9,7 @@ interface IOrderStateProps {
 const OrderState: React.FC<IOrderStateProps> = (props) => {
   const { order } = useOrderState()
 
-  return (
-    <>
-      <h2 className='text-center text-lg'>
-        {order?.completed
-          ? 'Completado'
-          : order?.isDelivered
-          ? 'Enviado'
-          : 'En revision'}
-      </h2>
-    </>
-  )
+  return <></>
 }
 
 export default OrderState

@@ -17,11 +17,6 @@ const OrderTimeProcess: React.FC<IOrderTimeProcessProps> = () => {
 
   const orderIndex = () => {
     let state: number
-
-    if (order?.isDelivered) state = 1
-    else state = 0
-
-    setIndex(state)
   }
 
   return (
