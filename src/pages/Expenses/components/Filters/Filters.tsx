@@ -60,55 +60,57 @@ const Filters: React.FC<IFiltersProps> = (props) => {
   // }
 
   return (
-    <div className='flex justify-between items-center'>
-      <div className='flex flex-1'>
-        <Dropdown
-          className='h-[40px] mr-3'
-          options={[
-            { title: 'Fecha unica', value: 'single' },
-            { title: 'Fecha por rango', value: 'range' },
-          ]}
-          optionValue='value'
-          optionLabel='title'
-          value={dateType}
-          onChange={(e) => setDateType(e.target.value)}
-        />
-        <Calendar
-          className='h-[40px] mr-3'
-          inputClassName='!border-purple-700 hover:outline-none '
-          showIcon
-          iconPos='left'
-          icon={<i className='fa fa-calendar '></i>}
-          value={date}
-          onChange={(e) => setDate(e.value)}
-          selectionMode={dateType}
-        />
-      </div>
-      <div className='items-center hidden lg:flex gap-4'>
-        <div className='flex flex-col'>
-          <label className='text-xs mb-1'>Inversion</label>
+    <div>
+      <div className='flex justify-between items-center'>
+        <div className='flex flex-1'>
           <Dropdown
-            value={selectInvestment}
-            onChange={(e) => setSelectedInvestment(e.value)}
-            options={prices}
-            optionLabel='name'
+            className='h-[40px] mr-3'
+            options={[
+              { title: 'Fecha unica', value: 'single' },
+              { title: 'Fecha por rango', value: 'range' },
+            ]}
             optionValue='value'
-            placeholder='Inversion'
-            className='w-full md:w-14rem text-xs'
+            optionLabel='title'
+            value={dateType}
+            onChange={(e) => setDateType(e.target.value)}
+          />
+          <Calendar
+            className='h-[40px] mr-3'
+            inputClassName='!border-purple-700 hover:outline-none '
+            showIcon
+            iconPos='left'
+            icon={<i className='fa fa-calendar '></i>}
+            value={date}
+            onChange={(e) => setDate(e.value)}
+            selectionMode={dateType}
           />
         </div>
+        <div className='items-center hidden lg:flex gap-4'>
+          <div className='flex flex-col'>
+            <label className='text-xs mb-1'>Inversion</label>
+            <Dropdown
+              value={selectInvestment}
+              onChange={(e) => setSelectedInvestment(e.value)}
+              options={prices}
+              optionLabel='name'
+              optionValue='value'
+              placeholder='Inversion'
+              className='w-full md:w-14rem text-xs'
+            />
+          </div>
 
-        <div className='flex flex-col'>
-          <label className='text-xs mb-1'>Estado</label>
-          <Dropdown
-            value={selectedState}
-            onChange={(e) => setSelectedState(e.value)}
-            options={states}
-            optionLabel='name'
-            optionValue='value'
-            placeholder='Estado'
-            className='w-full md:w-14rem text-xs'
-          />
+          <div className='flex flex-col'>
+            <label className='text-xs mb-1'>Estado</label>
+            <Dropdown
+              value={selectedState}
+              onChange={(e) => setSelectedState(e.value)}
+              options={states}
+              optionLabel='name'
+              optionValue='value'
+              placeholder='Estado'
+              className='w-full md:w-14rem text-xs'
+            />
+          </div>
         </div>
       </div>
     </div>

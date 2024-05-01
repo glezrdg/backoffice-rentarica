@@ -1,11 +1,13 @@
 // import { useReportState } from '../../../../../pages/Reports/context'
 import commaNumber from 'comma-number'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { InputNumber } from 'primereact/inputnumber'
 import { Textarea } from 'flowbite-react'
 import { IOrder } from '../../../../../Orders/models/IOrder'
 import { Button } from '../../../../../../components/shared'
+import { getExpenses } from '../../../../../Expenses/services'
 import './styles.css'
+import { IExpenses } from '@/pages/Expenses/models'
 
 interface ICuadreModalProps {
   children?: React.ReactNode
@@ -13,9 +15,23 @@ interface ICuadreModalProps {
 }
 
 const CuadreModal: React.FC<ICuadreModalProps> = (props) => {
-  let product: any
+  const [expenses, setExpenses] = useState<IExpenses[]>([])
 
-  let productReport: any
+  useEffect(() => {
+    handleGetExpenses()
+  }, [])
+
+  const handleGetExpenses = async () => {
+    try {
+      const data = await getExpenses({
+        date: new Date().toISOString(),
+        type: 'gasto',
+      })
+      setExpenses(data)
+    } catch (error: any) {
+      console.error(error.message)
+    }
+  }
 
   return (
     <div
@@ -113,51 +129,23 @@ const CuadreModal: React.FC<ICuadreModalProps> = (props) => {
                 role='list'
                 className='divide-y divide-gray-200 dark:divide-gray-700'
               >
-                <li className='py-3 sm:py-1'>
-                  <div className='flex items-center space-x-4'>
-                    <div className='flex-1 min-w-0'>
-                      <p className='text-xs font-medium text-gray-600 truncate dark:text-white'>
-                        Comida
-                      </p>
-                      <p className='text-sm text-gray-500 truncate dark:text-gray-400'>
-                        sin Descripcion
-                      </p>
+                {expenses?.map((e) => (
+                  <li key={e._id} className='py-3 sm:py-1'>
+                    <div className='flex items-center space-x-4'>
+                      <div className='flex-1 min-w-0'>
+                        <p className='text-xs font-medium text-gray-600 truncate dark:text-white'>
+                          {e.title}
+                        </p>
+                        <p className='text-sm text-gray-500 truncate dark:text-gray-400'>
+                          {e.note || 'sin descripcion'}
+                        </p>
+                      </div>
+                      <div className='inline-flex items-center text-base font-semibold text-red-800 dark:text-white'>
+                        ${commaNumber(e.cost)}
+                      </div>
                     </div>
-                    <div className='inline-flex items-center text-base font-semibold text-red-800 dark:text-white'>
-                      $320
-                    </div>
-                  </div>
-                </li>
-                <li className='py-3 sm:py-1'>
-                  <div className='flex items-center space-x-4'>
-                    <div className='flex-1 min-w-0'>
-                      <p className='text-xs font-medium text-gray-600 truncate dark:text-white'>
-                        Botellon de agua
-                      </p>
-                      <p className='text-sm text-gray-500 truncate dark:text-gray-400'>
-                        sin Descripcion
-                      </p>
-                    </div>
-                    <div className='inline-flex items-center text-base font-semibold text-red-800 dark:text-white'>
-                      $3467
-                    </div>
-                  </div>
-                </li>
-                <li className='py-3 sm:py-1'>
-                  <div className='flex items-center space-x-4'>
-                    <div className='flex-1 min-w-0'>
-                      <p className='text-xs font-medium text-gray-600 truncate dark:text-white'>
-                        Merienda
-                      </p>
-                      <p className='text-sm text-gray-500 truncate dark:text-gray-400'>
-                        sin Descripcion
-                      </p>
-                    </div>
-                    <div className='inline-flex items-center text-base font-semibold text-red-800 dark:text-white'>
-                      $67
-                    </div>
-                  </div>
-                </li>
+                  </li>
+                ))}
               </ul>
             </div>
 

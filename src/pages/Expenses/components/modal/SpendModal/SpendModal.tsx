@@ -1,13 +1,13 @@
 // import { useReportState } from '../../../../../pages/Reports/context'
-import commaNumber from 'comma-number'
-import React, { useState } from 'react'
-import { InputNumber } from 'primereact/inputnumber'
-import { Button } from '../../../../../components/shared'
 import { Textarea } from 'flowbite-react'
-import { ISpend } from './model/spend'
-import { InputTextarea } from 'primereact/inputtextarea'
-import { InputText } from 'primereact/inputtext'
 import { Dropdown } from 'primereact/dropdown'
+import { InputNumber } from 'primereact/inputnumber'
+import { InputText } from 'primereact/inputtext'
+import React, { useEffect, useState } from 'react'
+import { Button } from '../../../../../components/shared'
+import { ISpend } from './model/spend'
+import { useExpensesState } from '../../../context'
+import { toast } from '../../../../../App'
 
 interface ISpendModalProps {
   children?: React.ReactNode
@@ -15,10 +15,74 @@ interface ISpendModalProps {
 }
 
 const SpendModal: React.FC<ISpendModalProps> = (props) => {
+  const {
+    ctxPostExpenses,
+    expense: expenseState,
+    handleRemoveExpense,
+    handleUpdateExpense,
+  } = useExpensesState()
+
   const [title, setTile] = useState('')
   const [cost, setCost] = useState(0)
-  const [type, setType] = useState('no contabilizado')
+  const [type, setType] = useState<'fijo' | 'nomina' | 'gasto'>('gasto')
   const [note, setNote] = useState('')
+
+  const expensesTypes = [
+    { title: 'Fijo', value: 'fijo' },
+    { title: 'No contabilizado', value: 'gasto' },
+    { title: 'Nomina', value: 'nomina' },
+  ]
+
+  useEffect(() => {
+    if (expenseState) {
+      setTile(expenseState.title)
+      setCost(expenseState.cost)
+      setType(expenseState.type)
+      setNote(expenseState?.note)
+    }
+  }, [expenseState])
+
+  const postExpense = async () => {
+    try {
+      const expense = await ctxPostExpenses({ title, cost, type, note })
+      clearnInputs()
+      console.log('CREATED EXPENSE:', expense)
+    } catch (error: any) {
+      console.error('POSTING ERROR: ', error.message)
+    }
+  }
+
+  const updateExpense = async () => {
+    try {
+      const expense = await handleUpdateExpense(expenseState?._id!, {
+        title,
+        cost,
+        type,
+        note,
+      })
+      clearnInputs()
+      console.log('CREATED EXPENSE:', expense)
+    } catch (error: any) {
+      console.error('POSTING ERROR: ', error.message)
+    }
+  }
+
+  const removeExpense = async () => {
+    try {
+      const expense = await handleRemoveExpense(expenseState?._id!)
+      clearnInputs()
+      console.log('CREATED EXPENSE:', expense)
+    } catch (error: any) {
+      console.error('POSTING ERROR: ', error.message)
+    }
+  }
+
+  const clearnInputs = () => {
+    setTile('')
+    setCost(0)
+    setType('gasto')
+    setNote('')
+  }
 
   return (
     <div
@@ -50,6 +114,7 @@ const SpendModal: React.FC<ISpendModalProps> = (props) => {
                 className='box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none'
                 data-te-modal-dismiss
                 aria-label='Close'
+                onClick={() => clearnInputs()}
               >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -97,7 +162,25 @@ const SpendModal: React.FC<ISpendModalProps> = (props) => {
                   />
                 </div>
               </div>
-              <div className='mt-4'>
+              <div className='flex flex-col mt-4'>
+                <p className='mb-2 text-sm font-medium border-b border-slate-200 pb-1 text-gray-600'>
+                  Tipo
+                </p>
+                <select
+                  value={type}
+                  onChange={(e) =>
+                    setType(e.target.value as 'fijo' | 'nomina' | 'gasto')
+                  }
+                  className='outline-none border-slate-200 rounded-md p-3 border !focus:border-purple-300 text-sm'
+                >
+                  {expensesTypes?.map((type) => (
+                    <option key={type.value} value={type.value}>
+                      {type.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {/* <div className='mt-4'>
                 <p className='mb-2 text-sm font-medium border-b border-slate-200 pb-1 text-gray-600'>
                   Tipo
                 </p>
@@ -112,7 +195,7 @@ const SpendModal: React.FC<ISpendModalProps> = (props) => {
                   optionValue='value'
                   onChange={(e) => setType(e.target.value)}
                 />
-              </div>
+              </div> */}
             </div>
 
             <div className='mt-4 px-4'>
@@ -131,13 +214,29 @@ const SpendModal: React.FC<ISpendModalProps> = (props) => {
 
             <div className='mt-4 px-4'>
               <h4 className='mb-2 text-sm font-medium border-b border-slate-200 pb-1 text-gray-600'>
-                Registrar gasto:
+                {expenseState?._id ? 'Actualizar gasto' : 'Registrar gasto:'}
               </h4>
 
-              <div>
+              <div className='flex gap-2'>
+                {expenseState?._id && (
+                  <Button
+                    text={'Eliminar gasto'}
+                    className='!bg-red-800 hover:!bg-red-700'
+                    onClick={() => removeExpense()}
+                  />
+                )}
                 <Button
-                  text='Completar gasto'
-                  className='!bg-red-800 hover:!bg-red-700'
+                  text={
+                    expenseState?._id ? 'Modificar gasto' : 'Completar gasto:'
+                  }
+                  className={
+                    expenseState?._id
+                      ? '!bg-blue-800 hover:!bg-blue-700'
+                      : '!bg-red-800 hover:!bg-red-700'
+                  }
+                  onClick={() =>
+                    expenseState?._id ? updateExpense() : postExpense()
+                  }
                 />
               </div>
             </div>

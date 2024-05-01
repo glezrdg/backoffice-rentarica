@@ -37,17 +37,19 @@ const PaymentMethosTable = () => {
       <div className='py-4 md:p-4 bg-white rounded-lg shadow-sm w-full h-fit'>
         <div className='overflow-hidden rounded-xl'>
           <DataTable
-            value={data.map((i) => {
-              let info = orders.filter(
-                (order) => order.paymentMethod === i.name
-              )
+            value={
+              data?.map((i) => {
+                let info = orders.filter(
+                  (order) => order.paymentMethod === i.name
+                )
 
-              return {
-                ...i,
-                cantidad: info.length,
-                monto: info.reduce((acc, curr) => acc + curr.totalPrice, 0),
-              }
-            })}
+                return {
+                  ...i,
+                  cantidad: info.length,
+                  monto: info.reduce((acc, curr) => acc + curr.totalPrice, 0),
+                }
+              }) || []
+            }
             paginator
             rows={5}
             // tableStyle={{ minWidth: '50rem' }}

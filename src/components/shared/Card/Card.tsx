@@ -7,6 +7,7 @@ import { Button } from '../Button'
 interface ICardProps {
   children?: React.ReactNode
   footer?: React.ReactNode
+  rightHeader?: React.ReactNode
   title: string
   toolbar?: boolean
   eye?: boolean
@@ -22,6 +23,7 @@ const Card: React.FC<ICardProps> = ({
   footer,
   eye,
   className,
+  rightHeader,
 }) => {
   return (
     <div
@@ -42,6 +44,7 @@ const Card: React.FC<ICardProps> = ({
               text='Ver mas'
             ></Button>
           )}
+          {rightHeader && rightHeader}
         </div>
       )}
 

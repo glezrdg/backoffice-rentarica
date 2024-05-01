@@ -26,6 +26,7 @@ import MySubscription from '../../pages/User/MySubscription'
 import Settings from '../../pages/User/Settings'
 import ReportsPage from '../../pages/Reports/ReportPage'
 import Expenses from '../../pages/Expenses'
+import ExpensesProvider from '../../pages/Expenses/context'
 
 export const adminPages: routerType[] = [
   {
@@ -40,7 +41,11 @@ export const adminPages: routerType[] = [
   },
   {
     path: '/admin/gastos',
-    element: <Expenses />,
+    element: (
+      <ExpensesProvider>
+        <Expenses />
+      </ExpensesProvider>
+    ),
     title: 'home',
   },
   {

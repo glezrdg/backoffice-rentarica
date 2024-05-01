@@ -18,7 +18,7 @@ const OrdersTable = (props: any) => {
     <div>
       <DataTable
         value={
-          orders?.length ? orders : props?.orders?.length ? props.orders : []
+          props?.orders?.length ? props.orders : orders?.length ? orders : []
         }
         paginator
         rows={5}

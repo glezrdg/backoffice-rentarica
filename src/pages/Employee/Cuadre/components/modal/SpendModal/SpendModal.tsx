@@ -7,6 +7,8 @@ import { Textarea } from 'flowbite-react'
 import { ISpend } from './model/spend'
 import { InputTextarea } from 'primereact/inputtextarea'
 import { InputText } from 'primereact/inputtext'
+import { postExpenses } from '../../../../../Expenses/services'
+import { toast } from '../../../../../../App'
 
 interface ISpendModalProps {
   children?: React.ReactNode
@@ -17,6 +19,20 @@ const SpendModal: React.FC<ISpendModalProps> = (props) => {
   const [title, setTile] = useState('')
   const [cost, setCost] = useState(0)
   const [note, setNote] = useState('')
+
+  const handlePostExpense = async () => {
+    try {
+      if (!title || !cost || !note) return
+
+      await postExpenses({ title, cost, note, type: 'gasto' })
+      toast.current.show({
+        severity: 'success',
+        summary: 'Has registrado el gasto',
+      })
+    } catch (error: any) {
+      console.error(error.message)
+    }
+  }
 
   return (
     <div
@@ -120,6 +136,7 @@ const SpendModal: React.FC<ISpendModalProps> = (props) => {
                 <Button
                   text='Completar gasto'
                   className='!bg-red-800 hover:!bg-red-700'
+                  onClick={() => handlePostExpense()}
                 />
               </div>
             </div>
