@@ -27,6 +27,7 @@ import Settings from '../../pages/User/Settings'
 import ReportsPage from '../../pages/Reports/ReportPage'
 import Expenses from '../../pages/Expenses'
 import ExpensesProvider from '../../pages/Expenses/context'
+import Contabilidad from '../../pages/Contabilidad'
 
 export const adminPages: routerType[] = [
   {
@@ -98,6 +99,11 @@ export const adminPages: routerType[] = [
   {
     path: '/admin/category_brand',
     element: <CategoryBrand />,
+    title: 'home',
+  },
+  {
+    path: '/admin/contabilidad',
+    element: <Contabilidad />,
     title: 'home',
   },
   {

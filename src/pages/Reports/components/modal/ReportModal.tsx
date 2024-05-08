@@ -78,7 +78,7 @@ const ReportModal: React.FC<IReportModalProps> = (props) => {
                   </h2>
                   <h2 className='text-lg text-red-500 font-medium'>
                     <span className='mr-2'>Gastado:</span>$
-                    {commaNumber(report?.shoppingReport.totalAmountBuy || 0)}
+                    {commaNumber(report?.shoppingReport?.totalAmountBuy || 0)}
                   </h2>
                 </div>
               </div>
@@ -90,11 +90,11 @@ const ReportModal: React.FC<IReportModalProps> = (props) => {
                 <div className='flex items-center justify-between dpb-3 mb-2'>
                   <h2 className='text-lg text-purple-900 font-medium'>
                     <span className='mr-2'>Vendido:</span>$
-                    {commaNumber(report?.sellsReport.totalAmonutSell || 0)}
+                    {commaNumber(report?.sellsReport?.totalAmonutSell || 0)}
                   </h2>
                   <h2 className='text-lg text-green-500 font-medium'>
                     <span className='mr-2'>Ganancias:</span>$
-                    {commaNumber(report?.sellsReport.totalAmonutWin || 0)}
+                    {commaNumber(report?.sellsReport?.totalAmonutWin || 0)}
                   </h2>
                 </div>
               </div>

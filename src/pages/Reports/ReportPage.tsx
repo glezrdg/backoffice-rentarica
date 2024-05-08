@@ -110,7 +110,7 @@ const ReportsPage: React.FC<IReportsPageProps> = (props) => {
       </Card>
 
       <Card title='Historial de compras' bodyClassName='mt-4' className='mt-6'>
-        <ShoppingTable shoppings={report?.shoppingReport.shoppings} />
+        <ShoppingTable shoppings={report?.shoppingReport?.shoppings} />
       </Card>
       {/* <ReportsTable /> */}
 

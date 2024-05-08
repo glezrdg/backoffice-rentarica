@@ -80,12 +80,12 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
               active={current === 'category_brand'}
               title='Marcas y categorias'
             />
-            {/* <MenuItem
-              url='admin/notes'
+            <MenuItem
+              url='admin/contabilidad'
               icon='fa fa-note-sticky'
-              active={current === ''}
-              title='Notas'
-            /> */}
+              active={current === 'contabilidad'}
+              title='Contabilidad'
+            />
             {!user?.subscriptionId && (
               <MenuItem
                 url='admin/planes'
