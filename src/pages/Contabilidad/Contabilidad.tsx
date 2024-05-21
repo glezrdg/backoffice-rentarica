@@ -1,13 +1,16 @@
 import commaNumber from 'comma-number'
 import { Card } from '../../components/shared'
-import React from 'react'
+import React, { useState } from 'react'
 import { Filters } from './components/Filters'
 import { PageHeader } from '../../components/layout'
 import CardWidget from '../Reports/components/CardWidget'
+import { useReportState } from '../Reports/context'
 
 export interface ContabilidadProps {}
 
 const Contabilidad = ({}: ContabilidadProps) => {
+  const { report } = useReportState()
+
   return (
     <>
       {/* Header */}
@@ -42,14 +45,22 @@ const Contabilidad = ({}: ContabilidadProps) => {
             color='green'
             background='green'
             title='Ganancias'
-            value={0}
+            value={report?.sellsReport?.totalAmonutWin || 0}
           />
-          <CardWidget color='red' background='red' title='Gastos' value={0} />
+          <CardWidget
+            color='red'
+            background='red'
+            title='Gastos'
+            value={report?.expensesReport?.totalAmountExpense || 0}
+          />
           <CardWidget
             color='blue'
             background='blue'
             title='Utilidad'
-            value={0}
+            value={
+              report?.sellsReport?.totalAmonutWin! -
+                report?.expensesReport?.totalAmountExpense! || 0
+            }
           />
         </div>
       </Card>

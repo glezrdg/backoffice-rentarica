@@ -90,7 +90,7 @@ const TopProducts: React.FC<ITopProductsProps> = ({
       <Card
         title='Top vendidos'
         className={`h-full ${className}`}
-        bodyClassName='flex flex-column flex-1 mt-4'
+        bodyClassName='grid flex-1 mt-4'
       >
         {data?.length ? (
           data?.map((e: any, i: number) => (

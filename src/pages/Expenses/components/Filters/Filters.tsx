@@ -6,6 +6,7 @@ import { MultiSelect } from 'primereact/multiselect'
 import { Dropdown } from 'primereact/dropdown'
 import { paymentMethods, provinces } from '../../../../utility/data'
 import { Calendar } from 'primereact/calendar'
+import { useExpensesState } from '../../context'
 // import { useShoppingState } from '../../context'
 // import { useOrderState } from '../../context'
 
@@ -15,6 +16,7 @@ interface IFiltersProps {
 
 const Filters: React.FC<IFiltersProps> = (props) => {
   // const { fetchShoppings } = useShoppingState()
+  const { handleGetExpenses } = useExpensesState()
 
   const [selectedState, setSelectedState] = useState('')
   const [selectInvestment, setSelectedInvestment] = useState('')
@@ -48,16 +50,16 @@ const Filters: React.FC<IFiltersProps> = (props) => {
     if (selectInvestment) query.investment = selectInvestment
     if (selectedState) query.state = selectedState
 
-    // handleGetShoppings(query)
+    getExepenses(query)
   }, [date, selectInvestment, selectedState])
 
-  // const handleGetShoppings = async (query: any) => {
-  //   try {
-  //     await fetchShoppings(query)
-  //   } catch (error: any) {
-  //     console.log('FETCH FROM FILTERS ORDERS:', error.message)
-  //   }
-  // }
+  const getExepenses = async (query: any) => {
+    try {
+      await handleGetExpenses(query)
+    } catch (error: any) {
+      console.log('FETCH FROM FILTERS ORDERS:', error.message)
+    }
+  }
 
   return (
     <div>
