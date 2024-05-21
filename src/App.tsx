@@ -12,6 +12,7 @@ import Router from './routes/Router'
 import { CategoryBrandProvider } from './pages/CategoryBrand/context'
 import { ReportProvider } from './pages/Reports/context'
 import { useAppSelector } from './redux/store'
+import { InventoryProvider } from './pages/Products/context'
 
 export let toast: any
 
@@ -33,7 +34,9 @@ function App() {
         >
           <ReportProvider>
             <CategoryBrandProvider>
-              <ProtectedRouter />
+              <InventoryProvider>
+                <ProtectedRouter />
+              </InventoryProvider>
             </CategoryBrandProvider>
           </ReportProvider>
 

@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 // Components
 import { InputNumber } from 'primereact/inputnumber'
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '../..../../../../../../../redux/store'
+import { toast } from '../../../../../../App'
 import { Button } from '../../../../../../components/shared'
-import { useShoppingState } from '../../../../context'
-import { ShoppingList } from '../../../../models'
-import { ShoppingService } from '../../services/shopping'
 import { ISizes } from '../../../../../../pages/Products/models/IProduct'
 import { sizes as sizesData } from '../../../../../../pages/Products/utils/data'
-import { toast } from '../../../../../../App'
-import Sizes from '../../../../../../pages/Products/components/Sizes'
+import Sizes from '../../../../../Products/components/Sizes'
+import { useInventoryState } from '../../../../../Products/context'
+import { useShoppingState } from '../../../../context'
+import { ShoppingList } from '../../../../models'
 
 interface CompanyFormProps {
   onClose: () => void
 }
 
 const CompanyForm: React.FC<CompanyFormProps> = ({ onClose }) => {
-  const { products } = useAppSelector((state) => state.products)
+  const { products } = useInventoryState()
   const { shopping, createShopping } = useShoppingState()
 
   console.log('PRODUCTS', shopping)
@@ -117,99 +113,111 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ onClose }) => {
   }
 
   return (
-    <form className='mt-3 relative flex flex-col'>
-      <div className='flex flex-col'>
-        <label className='mb-2 text-xs'>Producto</label>
-        <select
-          value={product}
-          onChange={(e) => setProduct(e.target.value)}
-          className='outline-none border-none rounded-md p-3 border !focus:border-purple-300 text-sm'
-        >
-          {products?.map((product) => (
-            <option key={product._id} value={product._id}>
-              {product.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className='mt-6'>
-        <label className='mb-4 text-xs'>Cantidad</label>
-        <DisplayQty />
-      </div>
-
-      <div className='grid grid-cols-2 mb-5 mt-3'>
+    <>
+      <form className='mt-3 relative flex flex-col'>
         <div className='flex flex-col'>
-          <label className='mb-2 text-xs'>Precio</label>
-          <InputNumber
-            value={price}
-            onChange={(e) => setPrice(e.value)}
-            className='outline-none rounded-md'
-            mode='currency'
-            currency='USD'
-            locale='en-US'
-          />
-        </div>
-      </div>
-
-      {shoppingList.length ? (
-        <div className='mt-6'>
-          <div className='grid grid-cols-3 place-items-center gap-2 p-2 w-full bg-white'>
-            <p>Producto</p>
-            <p className='text-center'>Precio</p>
-            <p className='text-center'>Cantidad</p>
-            {/* {item.available && <p className='text-center'>{item.available}</p>} */}
+          <div className='flex justify-between items-center w-full mb-2'>
+            <label className='mb-2 text-xs'>Producto</label>
+            <button
+              data-te-toggle='modal'
+              data-te-target='#createProductModal'
+              className='bg-blue-600 text-white text-[10px] p-2 rounded-md'
+              type='button'
+            >
+              Añadir producto
+            </button>
           </div>
-          {shoppingList?.map((item) => (
-            <div className='grid grid-cols-3 gap-2 p-2 place-items-center w-full'>
-              <p>{products.find((i) => i._id === item.product)?.name}</p>
-              <p className='text-center'>{item.price}</p>
-              <p className='text-center'>{item.qty}</p>
+          <select
+            value={product}
+            onChange={(e) => setProduct(e.target.value)}
+            className='outline-none border-none rounded-md p-3 border !focus:border-purple-300 text-sm'
+          >
+            {products?.map((product) => (
+              <option key={product._id} value={product._id}>
+                {product.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className='mt-6'>
+          <label className='mb-4 text-xs'>Cantidad</label>
+          <DisplayQty />
+        </div>
+
+        <div className='grid grid-cols-2 mb-5 mt-3'>
+          <div className='flex flex-col'>
+            <label className='mb-2 text-xs'>Precio</label>
+            <InputNumber
+              value={price}
+              onChange={(e) => setPrice(e.value)}
+              className='outline-none rounded-md'
+              mode='currency'
+              currency='USD'
+              locale='en-US'
+            />
+          </div>
+        </div>
+
+        {shoppingList.length ? (
+          <div className='mt-6'>
+            <div className='grid grid-cols-3 place-items-center gap-2 p-2 w-full bg-white'>
+              <p>Producto</p>
+              <p className='text-center'>Precio</p>
+              <p className='text-center'>Cantidad</p>
               {/* {item.available && <p className='text-center'>{item.available}</p>} */}
             </div>
-          ))}
-        </div>
-      ) : (
-        ''
-      )}
+            {shoppingList?.map((item) => (
+              <div className='grid grid-cols-3 gap-2 p-2 place-items-center w-full'>
+                <p>{products.find((i) => i._id === item.product)?.name}</p>
+                <p className='text-center'>{item.price}</p>
+                <p className='text-center'>{item.qty}</p>
+                {/* {item.available && <p className='text-center'>{item.available}</p>} */}
+              </div>
+            ))}
+          </div>
+        ) : (
+          ''
+        )}
 
-      {shopping?._id ? (
-        <div className='grid grid-cols-2 gap-1 mb-5 mt-8'>
-          <Button
-            onClick={handleRemoveCompany}
-            buttonType='button'
-            text='Eliminar'
-            color='danger'
-            icon='fa fa-x'
-          />
-          <Button text='Guardar' icon='fa fa-floppy-disk' />
-        </div>
-      ) : (
-        <div className='grid grid-cols-3 gap-1 mb-5 mt-8'>
-          <Button
-            buttonType='button'
-            text='Cancelar'
-            color='danger'
-            icon='fa fa-x'
-            onClick={onClose}
-          />
-          <Button
-            buttonType='button'
-            text='Añadir'
-            color='success'
-            icon='fa fa-plus'
-            onClick={handleAddShoppingList}
-          />
-          <Button
-            text='Guardar'
-            icon='fa fa-floppy-disk'
-            onClick={(e) =>
-              !shopping?._id ? handleCreateCompany(e) : handleUpdateCompany(e)
-            }
-          />
-        </div>
-      )}
-    </form>
+        {shopping?._id ? (
+          <div className='grid grid-cols-2 gap-1 mb-5 mt-8'>
+            <Button
+              onClick={handleRemoveCompany}
+              buttonType='button'
+              text='Eliminar'
+              color='danger'
+              icon='fa fa-x'
+            />
+            <Button text='Guardar' icon='fa fa-floppy-disk' />
+          </div>
+        ) : (
+          <div className='grid grid-cols-3 gap-1 mb-5 mt-8'>
+            <Button
+              buttonType='button'
+              text='Cancelar'
+              color='danger'
+              icon='fa fa-x'
+              onClick={onClose}
+            />
+            <Button
+              buttonType='button'
+              text='Añadir'
+              color='success'
+              icon='fa fa-plus'
+              onClick={handleAddShoppingList}
+            />
+            <Button
+              text='Guardar'
+              icon='fa fa-floppy-disk'
+              onClick={(e) =>
+                !shopping?._id ? handleCreateCompany(e) : handleUpdateCompany(e)
+              }
+            />
+          </div>
+        )}
+      </form>
+    </>
   )
 }
 

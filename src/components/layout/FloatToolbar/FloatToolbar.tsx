@@ -7,7 +7,7 @@ interface IFloatToolbarProps {
 
 const FloatToolbar: React.FC<IFloatToolbarProps> = (props) => {
   return (
-    <div className='fixed flex gap-8 left-1/2 bottom-8 z-[5000] bg-purple-900 p-3 rounded-3xl hover:scale-125 transition-all shadow-lg'>
+    <div className='fixed flex gap-8 left-1/2 bottom-8 z-[1000] bg-purple-900 p-3 rounded-3xl hover:scale-125 transition-all shadow-lg'>
       <div
         data-te-toggle='modal'
         data-te-target='#createNoteModal'

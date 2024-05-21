@@ -20,44 +20,42 @@ const Products: React.FC<IProductsProps> = (props) => {
   const [productModal, setProductModal] = useState(false)
 
   return (
-    <InventoryProvider>
-      <>
-        <SideCreateProduct
-          active={createProduct}
-          close={() => setCreateProduct(false)}
-        />
-        {/* Header */}
-        <PageHeader
-          title='Inventario'
-          right={
-            <div>
-              <Button
-                icon='fa fa-plus'
-                text='Producto'
-                className='!px-3 !hover:shadow-none !bg-purple-900'
-                onClick={() => setCreateProduct(true)}
-              />
-            </div>
-          }
-        />
+    <>
+      <SideCreateProduct
+        active={createProduct}
+        close={() => setCreateProduct(false)}
+      />
+      {/* Header */}
+      <PageHeader
+        title='Inventario'
+        right={
+          <div>
+            <Button
+              icon='fa fa-plus'
+              text='Producto'
+              className='!px-3 !hover:shadow-none !bg-purple-900'
+              onClick={() => setCreateProduct(true)}
+            />
+          </div>
+        }
+      />
 
-        <Card title='' className='mb-6'>
-          <Header />
-        </Card>
+      <Card title='' className='mb-6'>
+        <Header />
+      </Card>
 
-        {/* TABLE */}
-        <Card title='Productos' bodyClassName='mt-4'>
-          <ProductTable openCreate={() => setCreateProduct(true)} />
-        </Card>
+      {/* TABLE */}
+      <Card title='Productos' bodyClassName='mt-4'>
+        <ProductTable openCreate={() => setCreateProduct(true)} />
+      </Card>
 
-        {/* INFO */}
+      {/* INFO */}
 
-        <div className='grid grid-cols-2 gap-6 mt-6'>
-          <TopProducts />
-          <LowestProducts products={[]} />
-        </div>
-      </>
-    </InventoryProvider>
+      <div className='grid grid-cols-2 gap-6 mt-6'>
+        <TopProducts />
+        <LowestProducts products={[]} />
+      </div>
+    </>
   )
 }
 
