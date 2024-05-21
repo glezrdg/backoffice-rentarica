@@ -24,7 +24,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 
             <InputText
               placeholder='Buscar por nombre o codigo...'
-              className='rounded-lg placeholder:text-xs outline-none p-2 w-full min-w-[200px]'
+              className='rounded-lg placeholder:text-xs outline-none p-2 w-full min-w-[200px] dark:bg-transparent'
               onChange={(e) => setSearch(e.target.value)}
             />
           </span>

@@ -31,7 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <NotesModal />
           </div>
           <main
-            className={`md:px-4 pt-[75px] ml-0 md:ml-[3rem] transition-all ${
+            className={`md:px-4 pt-[75px] ml-0 md:ml-[3rem] transition-all dark:bg-slate-700 ${
               sidenav ? 'lg:ml-[16rem]' : 'md:ml-[3.5rem]'
             }`}
           >

@@ -26,7 +26,13 @@ const OrdersTable = (props: any) => {
         tableStyle={{ minWidth: '50rem' }}
         selection={selectedOrder}
         onSelectionChange={(e: any) => setSelectedOrder(e.value)}
-        className='hover:bg-slate-200'
+        className='hover:bg-slate-200 !bg-transparent'
+        paginatorClassName='!bg-transparent'
+        rowClassName={(data) => {
+          return {
+            '!bg-transparent': data,
+          }
+        }}
       >
         {/* <Column
           selectionMode='multiple'
@@ -36,12 +42,13 @@ const OrdersTable = (props: any) => {
           field='_id'
           body={(data) => <p>1</p>}
           header='#Numero'
-          className='text-sm'
+          className='text-sm !bg-transparent'
+          bodyClassName='!bg-transparent'
         ></Column>
         <Column
           field='products'
           header='productos'
-          className='text-sm'
+          className='text-sm !bg-transparent'
           bodyClassName='text-center w-fit'
           body={(data: IOrder) => (
             <p>{data.orderItems?.reduce((acc, curr) => curr.qty + acc, 0)}</p>
@@ -50,23 +57,24 @@ const OrdersTable = (props: any) => {
         <Column
           field='paymentMethod'
           header='Metodo de pago'
-          className='text-sm'
+          className='text-sm !bg-transparent'
         ></Column>
         <Column
           field='totalPrice'
           header='Monto'
-          className='text-sm'
+          className='text-sm !bg-transparent'
           body={(data: IOrder) => <p>${commaNumber(data.totalPrice)}</p>}
         ></Column>
         <Column
           field='createdAt'
           header='Fecha'
-          className='text-sm'
+          className='text-sm !bg-transparent'
           body={(data: IOrder) => (
             <p>{dateFormat(new Date(data.createdAt!), 'date')}</p>
           )}
         ></Column>
         <Column
+          className='text-sm !bg-transparent'
           body={(data) => (
             <div className='flex'>
               <div onClick={() => selectOrder(data._id)}>

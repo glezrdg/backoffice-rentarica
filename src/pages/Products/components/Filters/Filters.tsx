@@ -59,7 +59,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
             display='chip'
             placeholder='Categorias'
             maxSelectedLabels={3}
-            className='w-full max-w-[150px] text-xs md:w-20rem'
+            className='w-full max-w-[150px] text-xs md:w-20rem dark:bg-transparent'
           />
         </div>
         <div className='flex flex-col mr-3'>
@@ -73,7 +73,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
             display='chip'
             placeholder='Marcas'
             maxSelectedLabels={3}
-            className='w-full max-w-[150px] text-xs md:w-20rem'
+            className='w-full max-w-[150px] text-xs md:w-20rem dark:bg-transparent'
           />
         </div>
         <div className='flex flex-col mr-3'>
@@ -85,7 +85,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
             optionLabel='name'
             optionValue='value'
             placeholder='Orden'
-            className='w-full md:w-14rem text-xs'
+            className='w-full md:w-14rem text-xs dark:bg-transparent'
           />
         </div>
         <div className='flex flex-col'>
@@ -99,7 +99,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
             display='chip'
             placeholder='Metodo de pago'
             maxSelectedLabels={3}
-            className='w-full max-w-[150px] text-xs md:w-20rem'
+            className='w-full max-w-[150px] text-xs md:w-20rem dark:bg-transparent'
           />
         </div>
       </div>

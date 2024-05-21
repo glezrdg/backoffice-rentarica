@@ -34,7 +34,7 @@ const PaymentMethosTable = () => {
   return (
     <>
       {/* TABLE */}
-      <div className='py-4 md:p-4 bg-white rounded-lg shadow-sm w-full h-fit'>
+      <div className='py-4 md:p-4 bg-white rounded-lg shadow-sm w-full h-fit dark:bg-transparent'>
         <div className='overflow-hidden rounded-xl'>
           <DataTable
             value={
@@ -53,28 +53,35 @@ const PaymentMethosTable = () => {
             paginator
             rows={5}
             // tableStyle={{ minWidth: '50rem' }}
-            className='hover:bg-slate-200'
+            className='dark:hover:bg-transparent'
+            rowClassName={(data) => {
+              return {
+                '!bg-transparent': data,
+              }
+            }}
+            paginatorClassName='!bg-transparent'
           >
             <Column
               field='name'
               header='Tipo'
-              className='text-[10px] md:text-sm'
+              className='text-[10px] md:text-sm !bg-transparent'
               style={{ width: '50%' }}
             ></Column>
             <Column
               field='cantidad'
               header='Cantidad'
-              className='text-[10px] md:text-sm'
+              className='text-[10px] md:text-sm !bg-transparent'
               style={{ width: '30%' }}
             ></Column>
             <Column
               field='monto'
               header='Monto'
-              className='text-[10px] md:text-sm'
+              className='text-[10px] md:text-sm !bg-transparent'
               style={{ width: '25%' }}
               body={(data) => <p>${commaNumber(data.monto)}</p>}
             ></Column>
             <Column
+              className='!bg-transparent '
               body={(data) => (
                 <div className='flex'>
                   <i className='hidden sm:inline fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>

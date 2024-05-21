@@ -35,9 +35,9 @@ const WidgetCard: React.FC<IWidgetCardProps> = (props) => {
   }
 
   return (
-    <div className='bg-white rounded-lg shadow-sm w-full h-52 flex justify-between p-[25PX]'>
+    <div className='bg-white dark:bg-slate-900 rounded-lg shadow-sm w-full h-52 flex justify-between p-[25PX]'>
       <div className=' self-end w-1/2'>
-        <h5 className='text-slate-800 text-3xl md:text-3xl lg:text-2xl xl:text-4xl mb-2'>
+        <h5 className='text-slate-800 text-3xl md:text-3xl lg:text-2xl xl:text-4xl mb-2 dark:text-slate-200'>
           {commaNumber(info.value)}
         </h5>
         <p className='text-slate-400 mb-5'>{props.title}</p>

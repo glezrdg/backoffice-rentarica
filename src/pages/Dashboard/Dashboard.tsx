@@ -41,7 +41,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
           <ShowMoney
             title='Periodo actual'
             money={report?.sellsReport?.totalAmonutSell! || 0}
-            titleClassName='text-purple-900'
+            titleClassName='text-purple-900 dark:text-purple-300'
             badgeClassName='bg-purple-500'
           />
           {/* <ShowMoney title='Periodo actual' money={24856} /> */}

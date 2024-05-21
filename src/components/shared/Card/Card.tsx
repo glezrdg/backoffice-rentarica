@@ -27,7 +27,7 @@ const Card: React.FC<ICardProps> = ({
 }) => {
   return (
     <div
-      className={`p-4 bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700 h-fit ${className}`}
+      className={`p-4 bg-white rounded-lg border shadow-md sm:p-8 dark:bg-slate-900 dark:border-gray-700 h-fit ${className}`}
     >
       {/* Header */}
       {title && (

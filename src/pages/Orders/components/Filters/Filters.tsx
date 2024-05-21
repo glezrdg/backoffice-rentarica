@@ -61,7 +61,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
             optionLabel='name'
             optionValue='value'
             placeholder='Monto'
-            className='w-full md:w-14rem text-xs'
+            className='w-full md:w-14rem text-xs dark:bg-transparent'
           />
         </div>
 
@@ -74,7 +74,7 @@ const Filters: React.FC<IFiltersProps> = (props) => {
             display='chip'
             placeholder='Metodo de pago'
             maxSelectedLabels={3}
-            className='w-full max-w-[150px] text-xs md:w-20rem'
+            className='w-full max-w-[150px] text-xs md:w-20rem dark:bg-transparent'
           />
         </div>
       </div>

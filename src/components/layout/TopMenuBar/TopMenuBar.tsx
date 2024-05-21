@@ -7,6 +7,7 @@ import {
 } from './components'
 import './styles.css'
 import { useAppSelector } from '../../../redux/store'
+import DarkSwitch from '../../../components/shared/DarkSwitch'
 
 interface ITopMenuBarProps {
   children?: React.ReactNode
@@ -17,7 +18,7 @@ const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen }) => {
   const { user } = useAppSelector((state) => state.auth)
   return (
     <>
-      <div className=' fixed right-0 left-0 flex items-center justify-between h-[70px] px-5 bg-white z-[1000] '>
+      <div className='fixed right-0 left-0 flex items-center justify-between h-[70px] px-5 bg-white dark:bg-slate-900 z-[1000] '>
         <div
           className='flex items-center cursor-pointer'
           onClick={() => handleOpen()}
@@ -25,14 +26,15 @@ const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen }) => {
           <i className='fa fa-bars lg:text-2xl mr-1 md:mr-2 lg:mr-4 text-slate-400' />
           <img src='/logo.png' className='w-[100px] h-[40px]' />
         </div>
-        <div className='w-[60%] flex items-center mx-4 border p-2 lg:p-3 rounded-lg box-border transition hover:shadow-sm'>
+        <div className='w-[60%] flex items-center mx-4 p-2 lg:p-3 rounded-lg box-border transition hover:shadow-sm'>
           <i className='fa fa-thing fa-magnifying-glass mr-2 text-slate-400 text-xs md:text-sm' />
           <input
             placeholder='Buscar...'
-            className='outline-none w-[95%] h-full text-slate-500 placeholder:italic placeholder:text-slate-400 placeholder:text-sm'
+            className='outline-none w-[95%] h-full bg-transparent text-slate-500 placeholder:italic placeholder:text-slate-400 placeholder:text-sm dark:border-0'
           />
         </div>
 
+        <DarkSwitch />
         <div
           data-popover-target='dropdow_messages_profile-mobile'
           className='block sm:hidden relative cursor-pointer bg-slate-50 px-2 py-1 rounded-full'

@@ -25,8 +25,15 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
         rowsPerPageOptions={[5, 10, 25, 50]}
         tableStyle={{ minWidth: '50rem' }}
         className='text-sm'
+        paginatorClassName='!bg-transparent'
+        rowClassName={(data) => {
+          return {
+            '!bg-transparent': data,
+          }
+        }}
       >
         <Column
+          className='!bg-transparent'
           style={{ width: '10%' }}
           body={(data) => (
             <img
@@ -36,8 +43,14 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
             />
           )}
         ></Column>
-        <Column field='name' header='Nombre' style={{ width: '25%' }}></Column>
         <Column
+          className='!bg-transparent'
+          field='name'
+          header='Nombre'
+          style={{ width: '25%' }}
+        ></Column>
+        <Column
+          className='!bg-transparent'
           field='qty'
           header='Cantidad'
           style={{ width: '25%' }}
@@ -51,12 +64,14 @@ const ProductTable: React.FC<ProductTableProps> = ({ openCreate }) => {
           )}
         ></Column>
         <Column
+          className='!bg-transparent'
           field='price'
           header='Precio'
           style={{ width: '25%' }}
           body={(data) => `$${commaNumber(data.price)}`}
         ></Column>
         <Column
+          className='!bg-transparent'
           style={{ width: '15%' }}
           body={(data) => (
             <div className='flex'>

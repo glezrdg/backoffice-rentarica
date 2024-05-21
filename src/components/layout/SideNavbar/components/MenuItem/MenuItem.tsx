@@ -30,7 +30,11 @@ const MenuItem: React.FC<IMenuItemProps> = ({
           onClick={() => setOpenMenu(!openMenu)}
           className={`sidenav-menu__submenu_title relative h-[3rem] rounded-3xl ${
             active ? 'bg-purple-900 !text-white mx-auto' : ''
-          } ${children ? 'hover:text-slate-700' : 'hover:text-purple-900'}`}
+          } ${
+            children
+              ? 'hover:text-slate-700'
+              : 'hover:text-purple-900 dark:hover:text-purple-400'
+          }`}
         >
           <div
             className={`flex items-center transition-all ${

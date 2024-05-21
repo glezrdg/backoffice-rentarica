@@ -31,7 +31,9 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
           onClick={() => goBack && navigate(-1)}
         >
           {goBack && <i className='fa fa-arrow-left mr-2' />}
-          <h3 className='text-lg md:text-2xl  uppercase'>{title}</h3>
+          <h3 className='text-lg md:text-2xl  uppercase dark:text-slate-200'>
+            {title}
+          </h3>
         </div>
         {right ? (
           right

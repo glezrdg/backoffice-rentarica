@@ -30,7 +30,7 @@ const ProductItem: React.FC<IProductItemProps> = (props) => {
             <h4
               className={`${
                 !props.forQty ? 'mb-3' : '!text-xl mb-0'
-              } text-slate-600 text-xs sm:text-sm`}
+              } text-slate-600 text-xs sm:text-sm dark:text-slate-200`}
             >
               {props.product?.name || props.name}
             </h4>
