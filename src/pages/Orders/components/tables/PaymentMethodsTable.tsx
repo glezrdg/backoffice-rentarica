@@ -4,6 +4,7 @@ import commaNumber from 'comma-number'
 import { Column } from 'primereact/column'
 import { DataTable } from 'primereact/datatable'
 import { useOrderState } from '../../context'
+import { IOrder } from '../../models/IOrder'
 
 const data = [
   {
@@ -28,60 +29,58 @@ const data = [
   },
 ]
 
-const PaymentMethosTable = () => {
+const PaymentMethosTable = (props: any) => {
   const { orders } = useOrderState()
+
+  let choosen: IOrder[] = props.orders ? props.orders : orders
 
   return (
     <>
       {/* TABLE */}
-      <div className='py-4 md:p-4 bg-white rounded-lg shadow-sm w-full h-fit dark:bg-transparent'>
+      <div className='py-4 md:p-4 bg-white rounded-lg shadow-sm w-full h-fit'>
         <div className='overflow-hidden rounded-xl'>
           <DataTable
             value={
               data?.map((i) => {
-                let info = orders.filter(
+                let info = choosen.filter(
                   (order) => order.paymentMethod === i.name
                 )
 
                 return {
                   ...i,
                   cantidad: info.length,
-                  monto: info.reduce((acc, curr) => acc + curr.totalPrice, 0),
+                  monto: info.reduce(
+                    (acc, curr) => acc + (curr?.totalPrice || 0),
+                    0
+                  ),
                 }
               }) || []
             }
             paginator
             rows={5}
             // tableStyle={{ minWidth: '50rem' }}
-            className='dark:hover:bg-transparent'
-            rowClassName={(data) => {
-              return {
-                '!bg-transparent': data,
-              }
-            }}
-            paginatorClassName='!bg-transparent'
+            className='hover:bg-slate-200'
           >
             <Column
               field='name'
               header='Tipo'
-              className='text-[10px] md:text-sm !bg-transparent'
+              className='text-[10px] md:text-sm'
               style={{ width: '50%' }}
             ></Column>
             <Column
               field='cantidad'
               header='Cantidad'
-              className='text-[10px] md:text-sm !bg-transparent'
+              className='text-[10px] md:text-sm'
               style={{ width: '30%' }}
             ></Column>
             <Column
               field='monto'
               header='Monto'
-              className='text-[10px] md:text-sm !bg-transparent'
+              className='text-[10px] md:text-sm'
               style={{ width: '25%' }}
               body={(data) => <p>${commaNumber(data.monto)}</p>}
             ></Column>
             <Column
-              className='!bg-transparent '
               body={(data) => (
                 <div className='flex'>
                   <i className='hidden sm:inline fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>

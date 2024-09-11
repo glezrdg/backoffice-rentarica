@@ -9,11 +9,13 @@ import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { IOrder } from '../../../Orders/models/IOrder'
 import { IShopping } from '../../models'
+import ShoppingModal from '../ShoppingModal'
 // import { OrderModal } from '../modal'
 
 const ShoppingTable = (props: any) => {
   const { shoppings, setShopping } = useShoppingState()
   const [selectedOrder, setSelectedOrder] = useState([])
+  const [openModal, setOpenModal] = useState(false)
 
   return (
     <div>
@@ -66,7 +68,8 @@ const ShoppingTable = (props: any) => {
               $
               {commaNumber(
                 data?.shoppingList?.reduce(
-                  (acc: any, curr: any) => acc + curr.product.price * curr.qty,
+                  (acc: any, curr: any) =>
+                    acc + curr?.product?.price * curr.qty,
                   0
                 ) || 0
               )}
@@ -105,12 +108,13 @@ const ShoppingTable = (props: any) => {
         <Column
           body={(data) => (
             <div className='flex'>
-              <div onClick={() => setShopping(data)}>
-                <i
-                  data-te-toggle='modal'
-                  data-te-target='#shoppingModal'
-                  className='fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'
-                ></i>
+              <div
+                onClick={() => {
+                  setShopping(data)
+                  setOpenModal(true)
+                }}
+              >
+                <i className='fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
               </div>
               <i className='fa fa-regular fa-edit cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
               <i className='fa fa-ellipsis-vertical cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
@@ -118,6 +122,8 @@ const ShoppingTable = (props: any) => {
           )}
         ></Column>
       </DataTable>
+
+      <ShoppingModal open={openModal} onClose={() => setOpenModal(false)} />
 
       {/* <OrderModal /> */}
     </div>

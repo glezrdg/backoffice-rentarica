@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 // Componentes
 import { InputNumber } from 'primereact/inputnumber'
+import { InputTextarea } from 'primereact/inputtextarea'
 import { toast } from '../../../../../App'
 import { Button } from '../../../../../components/shared'
 import { useCategoryBrandState } from '../../../../CategoryBrand/context'
@@ -11,7 +12,7 @@ import { sizes as sizesData } from '../../../utils/data'
 import Sizes from '../../Sizes'
 import { Checkbox } from 'primereact/checkbox'
 import { InputText } from 'primereact/inputtext'
-import { InputTextarea } from 'primereact/inputtextarea'
+import { Dropdown } from 'primereact/dropdown'
 
 interface ProductFormProps {
   close: () => void
@@ -67,34 +68,26 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
       qtyType.qty = sizes.reduce((acc, cur) => acc + cur.qty, 0)
     } else qtyType.qty = qty
 
-    try {
-      if (!name) {
-        toast.current?.show({
-          severity: 'error',
-          summary: 'Llena el campo encabezado',
-          detail: `Debes de llenar el campo para agregar una categoria!`,
-        })
-      } else {
-        await addProduct({
-          name,
-          price,
-          description,
-          category,
-          brand,
-          images: file!,
-          ofert,
-          ...qtyType,
-          productType,
-        })
-        cleanInputs()
-        close()
-      }
-    } catch (error) {
+    if (!name) {
       toast.current?.show({
         severity: 'error',
-        summary: 'Ha ocurrido un error',
-        // detail: ,
+        summary: 'Llena el campo encabezado',
+        detail: `Debes de llenar el campo para agregar una categoria!`,
       })
+    } else {
+      await addProduct({
+        name,
+        price,
+        description,
+        category: category || categories[0]?._id!,
+        brand: brand || brands[0]?._id!,
+        images: file!,
+        ofert,
+        ...qtyType,
+        productType,
+      })
+      cleanInputs()
+      close()
     }
   }
 
@@ -149,8 +142,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
   const cleanInputs = () => {
     setName('')
     setPrice(0)
-    setCategory('')
-    setBrand('')
+    setCategory(categories[0]?._id!)
+    setBrand(brands[0]?._id!)
     setDescription('')
     setSize(sizesData)
     setOfert('')
@@ -187,7 +180,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
   return (
     <>
       <form
-        className='mt-3'
+        className='mt-3 relative'
         onSubmit={(e) =>
           !product?._id ? handleCreateProduct(e) : handleUpdateProduct(e)
         }
@@ -219,11 +212,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
           <InputTextarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className='rounded-md h-40 p-2 !border-slate-200'
+            className='outline-none border-none rounded-md h-40 p-2 border border-50 !focus:border-purple-300'
           />
         </div>
 
-        <div className='my-8'>
+        <div className='my-5'>
           <label className='mb-3 text-xs block'>
             Administrar cantidad por:
           </label>
@@ -248,14 +241,26 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
                 onChange={() => setProductType('sizes')}
                 checked={productType === 'sizes'}
               />
-              <label htmlFor='sizes' className='ml-2'>
+              <label htmlFor='sizes' className='mx-2'>
                 Sizes
+              </label>
+            </div>
+            <div className='flex items-center'>
+              <Checkbox
+                inputId='not'
+                name='not'
+                value='not'
+                onChange={() => setProductType('not')}
+                checked={productType === 'not'}
+              />
+              <label htmlFor='not' className='ml-2'>
+                Sin cantidad
               </label>
             </div>
           </div>
         </div>
-        {/* 
-        <div className='min-h-28'>
+
+        {/* <div className='min-h-28'>
           {productType === 'sizes' ? (
             <div className='my-4'>
               <Sizes sizes={sizes} handleChangeSize={handleChangeSize} />
@@ -273,31 +278,45 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
         <div className='grid grid-cols-2 gap-5'>
           <div className='flex flex-col'>
             <label className='mb-2 text-xs'>Categoria</label>
-            <select
+            <Dropdown
+              value={category}
+              options={categories}
+              optionLabel='name'
+              optionValue='_id'
+              onChange={(e) => setCategory(e.target.value)}
+            />
+            {/* <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className='outline-none !border-slate-200 rounded-md p-3 border !focus:border-purple-300 text-sm'
+              className='outline-none border-none rounded-md p-3 border !focus:border-purple-300 text-sm'
             >
               {categories?.map((category) => (
                 <option key={category._id} value={category._id}>
                   {category.name}
                 </option>
               ))}
-            </select>
+            </select> */}
           </div>
           <div className='flex flex-col'>
             <label className='mb-2 text-xs'>Marcas</label>
-            <select
+            <Dropdown
+              value={brand}
+              options={brands}
+              optionLabel='name'
+              optionValue='_id'
+              onChange={(e) => setBrand(e.target.value)}
+            />
+            {/* <select
               value={brand}
               onChange={(e) => setBrand(e.target.value)}
-              className='outline-none !border-slate-200 rounded-md p-3 border !focus:border-purple-300 text-sm'
+              className='outline-none border-none rounded-md p-3 border !focus:border-purple-300 text-sm'
             >
               {brands?.map((brand) => (
                 <option key={brand._id} value={brand._id}>
                   {brand.name}
                 </option>
               ))}
-            </select>
+            </select> */}
           </div>
         </div>
 
@@ -306,7 +325,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
           <select
             value={ofert}
             onChange={(e) => setOfert(e.target.value)}
-            className='outline-none !border-slate-200 rounded-md p-3 border !focus:border-purple-300 text-sm'
+            className='outline-none border-none rounded-md p-3 border !focus:border-purple-300 text-sm'
           >
             <option>ninguna</option>
             <option>10%</option>
@@ -327,7 +346,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
               <input
                 type='file'
                 id='add-single-img'
-                accept='image/jpeg'
+                accept='image/jpeg image/png image/webp'
                 onChange={addImgHandler}
               />
             </div>
@@ -335,7 +354,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
               type='file'
               id='image-input'
               name='photos'
-              accept='image/jpeg'
+              accept='image/jpeg image/png image/webp'
               multiple
             />
             <br />
@@ -365,9 +384,8 @@ const ProductForm: React.FC<ProductFormProps> = ({ close }) => {
             <Button text='Guardar' icon='fa fa-floppy-disk' />
           </div>
         ) : (
-          <div className='grid grid-cols-3 gap-1 mb-5'>
+          <div className='grid grid-cols-2 gap-1 mb-5'>
             <Button text='Cancelar' color='danger' icon='fa fa-x' />
-            <Button text='Añadir' color='success' icon='fa fa-plus' />
             <Button text='Guardar' icon='fa fa-floppy-disk' />
           </div>
         )}

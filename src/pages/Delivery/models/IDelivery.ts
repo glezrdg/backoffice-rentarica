@@ -1,7 +1,7 @@
 export interface IDelivery {
   _id?: string
-  name: string
+  fullname: string
   phone: string
-  cedula: string
+  email: string
   role: string | 'empleado' | 'administrador'
 } 

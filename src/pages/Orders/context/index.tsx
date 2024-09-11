@@ -13,12 +13,17 @@ import {
   getOneOrder,
   deliverOrder as fetchDeliverOrder,
   postOrder,
+  fetchCuadres,
+  fetchOneCuadre,
 } from '../services'
 import { toast } from '../../../App'
+import { ICuadre } from '../models/ICuadre'
 
 const initialState: InitialStateProps = {
   orders: [],
+  cuadres: [],
   order: null,
+  cuadre: null,
   date: new Date(),
   getOrders: () => {},
   selectOrder: () => {},
@@ -29,6 +34,9 @@ const initialState: InitialStateProps = {
   setSearch: () => {},
   setDate: () => {},
   setOrder: () => {},
+  getOneCuadre: (id: string) => {},
+  setCuadre: (body: ICuadre) => {},
+  getCuadres: () => {},
 }
 
 const OrderContext = createContext(initialState)
@@ -46,6 +54,8 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
   const [order, setOrder] = useState<IOrder | null>(initialState.order)
   const [selectedOrder, setSelectedOrder] = useState<any>('')
   const [date, setDate] = useState('')
+  const [cuadres, setCuadres] = useState<ICuadre[]>([])
+  const [cuadre, setCuadre] = useState<ICuadre | null>(null)
 
   let activeOrder = search ? searchOrders : orders
 
@@ -62,6 +72,8 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
         queries.endDate = new Date(date[1]).toISOString()
       }
     }
+
+    getCuadres({})
 
     getOrders(queries)
   }, [date])
@@ -142,6 +154,24 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
     } catch (error) {}
   }
 
+  const getCuadres = async (queries?: any) => {
+    try {
+      const ordersData = await fetchCuadres(queries)
+
+      setCuadres(ordersData)
+    } catch (error) {}
+  }
+
+  const getOneCuadre = async (id: string) => {
+    console.log('GET ONE CUADRE')
+    try {
+      const cuadre = await fetchOneCuadre(id)
+      setCuadre(cuadre)
+    } catch (error: any) {
+      console.error('ERROR GETTING ONE CUADRE', error.message)
+    }
+  }
+
   const removeOrder = (id: string) => {
     setOrders((prev) => prev.filter((i) => i._id !== id))
   }
@@ -151,6 +181,11 @@ export const OrderProvider: React.FC<InventoryProviderProps> = ({
       value={{
         orders: activeOrder,
         selectOrder: setSelectedOrder,
+        getOneCuadre,
+        getCuadres,
+        cuadre,
+        cuadres,
+        setCuadre,
         getOrders,
         order,
         addOrder,
@@ -173,7 +208,10 @@ export const useOrderState = () => useContext(OrderContext)
 export interface InitialStateProps {
   orders: IOrder[]
   order: IOrder | null
+  cuadres: ICuadre[]
+  cuadre: ICuadre | null
   date: any
+  getOneCuadre: (id: string) => void
   getOrders: (queries?: any) => void
   selectOrder: (id: string) => void
   addOrder: (product: IOrder) => void
@@ -182,5 +220,7 @@ export interface InitialStateProps {
   deliverOrder: (id: string) => void
   setSearch: (string: string) => void
   setDate: (value: any) => void
+  setCuadre: (value: ICuadre) => void
+  getCuadres: (queries?: any) => void
   setOrder: (product: IOrder) => void
 }

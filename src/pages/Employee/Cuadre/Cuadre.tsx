@@ -19,6 +19,9 @@ const Cuadre = ({}: CuadreProps) => {
     transfer: number
   }>({ orders: [], cash: 0, card: 0, transfer: 0 })
 
+  const [openModalCuadre, setOpenModalCuadre] = useState(false)
+  const [openModalSpend, setOpenModalSpend] = useState(false)
+
   useEffect(() => {
     handleGetOrders()
   }, [])
@@ -40,8 +43,7 @@ const Cuadre = ({}: CuadreProps) => {
         right={
           <div className='flex items-center gap-4'>
             <i
-              data-te-toggle='modal'
-              data-te-target='#spendModal'
+              onClick={() => setOpenModalSpend(true)}
               data-te-ripple-init
               data-te-ripple-color={'dark'}
               className='btn !bg-white !text-red-600 !shadow-red-100 cursor-pointer'
@@ -49,11 +51,10 @@ const Cuadre = ({}: CuadreProps) => {
               Registrar gasto
             </i>
             <i
-              data-te-toggle='modal'
-              data-te-target='#cuadrarModal'
               data-te-ripple-init
               data-te-ripple-color={'light'}
               // text='Cuadrar'
+              onClick={() => setOpenModalCuadre(true)}
               className='btn !bg-purple-900 text-white cursor-pointer'
             >
               Cuadrar
@@ -99,11 +100,19 @@ const Cuadre = ({}: CuadreProps) => {
 
       {/* Table */}
       <Card title='Ordenes' className='mt-6' bodyClassName='mt-4'>
-        <OrdersTable orders={orders.orders} />
+        <OrdersTable orders={orders.orders} local />
       </Card>
 
-      <CuadreModal orders={orders.orders} />
-      <SpendModal orders={[]} />
+      <CuadreModal
+        orders={orders.orders}
+        open={openModalCuadre}
+        onClose={() => setOpenModalCuadre(false)}
+      />
+      <SpendModal
+        orders={[]}
+        open={openModalSpend}
+        onClose={() => setOpenModalSpend(false)}
+      />
     </div>
   )
 }

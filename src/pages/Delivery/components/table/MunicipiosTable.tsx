@@ -45,8 +45,6 @@ const MUNICIPIOS = [
 ]
 
 const MunicipiosTable: React.FC<MunicipiosTableProps> = ({}) => {
-  const { companies, setCompany } = useDeliveryState()
-
   return (
     <div className='overflow-hidden rounded-xl'>
       <h4 className='my-4 text-xl font-medium'>Municipios</h4>

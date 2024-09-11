@@ -10,7 +10,7 @@ import { getItem } from '../utility/localStorageControl'
 const pagesData: routerType[] = [...adminPages]
 
 const ProtectedRouter = () => {
-  const { user } = useAppSelector((state) => state.auth)
+  const { user } = useAppSelector((state: any) => state.auth)
 
   const pageRoutes = pagesData.map(({ path, title, element }: routerType) => {
     return <Route key={title} path={`/${path}`} element={element} />

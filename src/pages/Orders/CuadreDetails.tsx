@@ -1,43 +1,46 @@
 import React, { useEffect, useState } from 'react'
+import { useOrderState } from './context'
 import './styles.css'
-import { useReportState } from './context'
 
 // Components
-import { Button } from '../../components/shared/Button'
-import { Card, TopProducts } from '../../components/shared'
-import { PaymentMethodsTable } from '../Clients/components'
 import { PageHeader } from '../../components/layout'
-import PieChart from '../../components/charts/PieChart'
-import CardWidget from './components/CardWidget/CardWidget'
-import ReportsTable from './components/tables/ReportsTable/ReportsTable'
+import { Card, TopProducts } from '../../components/shared'
+import { Button } from '../../components/shared/Button'
+import CardWidget from '../Reports/components/CardWidget/CardWidget'
+// import ReportsTable from './components/tables/ReportsTable/ReportsTable'
 import OrdersTable from '../Orders/components/tables/OrdersTable'
-import ReportModal from './components/modal/ReportModal'
-import { useParams } from 'react-router-dom'
-import { getReport } from './services'
-import ShoppingTable from '../Shopping/components/tables/ShoppingTable'
-import { Dropdown } from 'primereact/dropdown'
+// import ReportModal from './components/modal/ReportModal'
 import { Calendar } from 'primereact/calendar'
+import { Dropdown } from 'primereact/dropdown'
+import { useParams } from 'react-router-dom'
+import { fetchOneCuadre } from './services'
+import { ICuadre } from './models/ICuadre'
+import { PaymentMethodsTable } from './components'
 
-interface IReportsPageProps {
+interface ICuadreDetailsProps {
   children?: React.ReactNode
 }
 
-const ReportsPage: React.FC<IReportsPageProps> = (props) => {
-  const { report, setReport, date, setDate } = useReportState()
+const CuadreDetail: React.FC<ICuadreDetailsProps> = (props) => {
+  const { cuadres, date, setDate } = useOrderState()
+  const [cuadre, setCuadre] = useState<ICuadre>()
   const { id } = useParams()
 
   const [dateType, setDateType] = useState<'single' | 'range' | 'multiple'>(
     'single'
   )
 
+  console.log('CUADRE', cuadre)
+
   useEffect(() => {
     handleGetReport()
-  }, [])
+  }, [id])
 
   const handleGetReport = async () => {
     try {
-      const data = await getReport(id!)
-      setReport(data)
+      const cuadre = await fetchOneCuadre(id!)
+      setCuadre(cuadre)
+      console.log('ID', cuadre)
     } catch (error) {
       console.error(error)
     }
@@ -48,7 +51,7 @@ const ReportsPage: React.FC<IReportsPageProps> = (props) => {
       {/* Header */}
       <PageHeader
         goBack
-        title='Detalle de reporte'
+        title='Detalle de cuadre'
         right={
           <div className='flex'>
             <Dropdown
@@ -86,45 +89,43 @@ const ReportsPage: React.FC<IReportsPageProps> = (props) => {
           <CardWidget
             color='green'
             background='green'
-            title='Ganancias'
-            value={report?.sellsReport?.totalAmonutWin!}
+            title='Efectivo'
+            value={cuadre?.cash || 0}
           />
           <CardWidget
             color='purple'
             background='purple'
-            title='Ventas'
-            value={report?.sellsReport?.totalAmonutSell!}
+            title='Tarjeta'
+            value={cuadre?.card || 0}
           />
           <CardWidget
             color='blue'
             background='blue'
-            title='Inversiones'
-            value={report?.shoppingReport?.totalAmountBuy!}
+            title='Total'
+            value={cuadre?.totalAmonutSell || 0}
           />
         </div>
       </Card>
 
       {/* TABLE */}
       <Card title='Historial de ventas' bodyClassName='mt-4'>
-        <OrdersTable orders={report?.sellsReport?.orders} />
+        {cuadre ? <OrdersTable orders={cuadre?.orders} /> : <p>Cargando...</p>}
       </Card>
 
-      <Card title='Historial de compras' bodyClassName='mt-4' className='mt-6'>
-        <ShoppingTable shoppings={report?.shoppingReport?.shoppings} />
-      </Card>
-      {/* <ReportsTable /> */}
+      <div className='grid lg:grid-cols-2 h-fit gap-5 my-8'>
+        {/* Payment Methods */}
 
-      {/* GRAPHS */}
-      <div className='grid lg:grid-cols-2 h-fit gap-5 mt-6'>
-        <TopProducts value={report?.sellsReport?.productsQty} />
-        <Card title='Metodos de pago'>
-          <PaymentMethodsTable data={report?.sellsReport?.paymentMethodQty} />
+        <TopProducts orders={cuadre?.orders} />
+
+        {/* Payment methods */}
+        <Card title='Metodos de pago' eye>
+          <PaymentMethodsTable orders={cuadre?.orders} />
         </Card>
       </div>
 
-      <ReportModal />
+      {/* <ReportModal /> */}
     </>
   )
 }
 
-export default ReportsPage
+export default CuadreDetail

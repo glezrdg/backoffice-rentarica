@@ -13,6 +13,7 @@ import { CategoryBrandProvider } from './pages/CategoryBrand/context'
 import { ReportProvider } from './pages/Reports/context'
 import { useAppSelector } from './redux/store'
 import { InventoryProvider } from './pages/Products/context'
+import ScrollToTop from './components/layout/ScrollToTop'
 
 export let toast: any
 
@@ -25,6 +26,7 @@ function App() {
     <>
       <Toast ref={toast} />
       <BrowserRouter>
+        <ScrollToTop />
         <Suspense
           fallback={
             <div className='spin'>

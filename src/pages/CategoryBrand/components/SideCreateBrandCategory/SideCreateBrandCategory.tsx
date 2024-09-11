@@ -5,6 +5,7 @@ import './styles.css'
 // Components
 import BrandForm from './components/BrandForm'
 import CategoryForm from './components/CategoryForm'
+import { Sidebar } from 'primereact/sidebar'
 
 interface ISideCreateBrandCategoryProps {
   children?: React.ReactNode
@@ -19,10 +20,11 @@ const SideCreateBrandCategory: React.FC<ISideCreateBrandCategoryProps> = ({
   type,
 }) => {
   return (
-    <div
-      className={`fixed  overflow-y-auto top-0 z-[2000] w-[100vw] lg:w-[40%] h-[100vh] bg-slate-100 shadow-md px-6 transition-all duration-300 ${
-        active ? 'right-0' : '-right-full'
-      }`}
+    <Sidebar
+      visible={active}
+      onHide={close}
+      position='right'
+      className={`md:!w-[70vw] lg:!w-[40vw]`}
     >
       {/* Header */}
 
@@ -30,10 +32,6 @@ const SideCreateBrandCategory: React.FC<ISideCreateBrandCategoryProps> = ({
         <h3 className='text-xl'>
           Agregar {type === 'brand' ? 'Marca' : 'Categoria'}
         </h3>
-        <i
-          className='fa fa-regular fa-rectangle-xmark cursor-pointer text-xl transition-all hover:text-purple-500 hover:scale-105'
-          onClick={close}
-        />
       </div>
 
       {type === 'brand' ? (
@@ -41,7 +39,7 @@ const SideCreateBrandCategory: React.FC<ISideCreateBrandCategoryProps> = ({
       ) : (
         <CategoryForm close={close} />
       )}
-    </div>
+    </Sidebar>
   )
 }
 

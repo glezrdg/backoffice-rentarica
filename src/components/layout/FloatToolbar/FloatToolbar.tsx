@@ -24,7 +24,7 @@ const FloatToolbar: React.FC<IFloatToolbarProps> = (props) => {
       </div>
       <div
         data-te-toggle='modal'
-        data-te-target='#createNoteModal'
+        data-te-target='#createProductModal'
         className='bg-white cursor-pointer p-4 hover:scale-[1.05] transition text-purple-900 rounded-full grid place-items-center'
       >
         <i className='fa fa-bag-shopping' />

@@ -10,6 +10,12 @@ export interface IShoppingReport {
     product: IProduct
     qty: number
   }]
+  categoryQty: [{
+    category: string,
+    amount: number
+    shoppings: string[]
+    qty: number,
+  }]
   month: number
   year: number
   createdAt: string

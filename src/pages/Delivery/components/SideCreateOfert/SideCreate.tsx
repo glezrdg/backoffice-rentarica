@@ -3,7 +3,7 @@ import React from 'react'
 import './styles.css'
 
 // Components
-import { CompanyForm, DeliveryForm } from './components/forms'
+import { DeliveryForm } from './components/forms'
 import { ICompany, IDelivery } from '../../models'
 import { useDeliveryState } from '../../context'
 
@@ -15,7 +15,7 @@ interface ISideCreateProps {
 }
 
 const SideCreate: React.FC<ISideCreateProps> = ({ active, close, type }) => {
-  const { setCompany, setDelivery } = useDeliveryState()
+  const { setDelivery } = useDeliveryState()
 
   return (
     <div
@@ -30,7 +30,7 @@ const SideCreate: React.FC<ISideCreateProps> = ({ active, close, type }) => {
         <i
           className='fa fa-regular fa-rectangle-xmark cursor-pointer text-xl transition-all hover:text-purple-500 hover:scale-105'
           onClick={() => {
-            setCompany({} as ICompany)
+            setDelivery({} as IDelivery)
             close()
           }}
         />

@@ -2,6 +2,7 @@ import { Card, ProductItem } from '../../../components/shared'
 import React, { useEffect, useState } from 'react'
 import { IProduct } from '../models/IProduct'
 import { getLowestProducts } from '../services'
+import NoInformation from '../../../components/shared/NoInformation'
 
 const LowestProducts = ({ products }: { products: IProduct[] }) => {
   const [data, setData] = useState<IProduct[]>([])
@@ -21,12 +22,16 @@ const LowestProducts = ({ products }: { products: IProduct[] }) => {
   }
 
   return (
-    <Card title='Productos agotados'>
-      {data?.map((e: any, i: number) => (
-        <div className='flex-1' key={i}>
-          <ProductItem {...e} amount={e.qty} forQty />
-        </div>
-      ))}
+    <Card title='Productos agotados' bodyClassName='mt-4'>
+      {data.length ? (
+        data?.map((e: any, i: number) => (
+          <div className='flex-1' key={i}>
+            <ProductItem {...e} amount={e.qty} forQty />
+          </div>
+        ))
+      ) : (
+        <NoInformation />
+      )}
     </Card>
   )
 }

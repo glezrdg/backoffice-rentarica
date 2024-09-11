@@ -53,8 +53,8 @@ const DeliveryForm: React.FC<DeliveryFormProps> = ({ onClose }) => {
   const handleCreateOfert = (e: any) => {
     e.preventDefault()
     addDelivery({
-      name,
-      cedula,
+      fullname: name,
+      email: cedula,
       phone,
       role,
     })

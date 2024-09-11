@@ -63,6 +63,11 @@ export const ShoppingProvider: FC<ShoppingProviderProps> = ({ children }) => {
       })
     } catch (error: any) {
       console.log('error posting shoppings', error.message)
+      toast.current?.show({
+        severity: 'error',
+        summary: 'Ocurrio un error',
+        detail: error.message,
+      })
     }
   }
 

@@ -85,8 +85,6 @@ export const InventoryProvider: React.FC<InventoryProviderProps> = ({
         summary: 'Producto agregado',
         detail: `Has agregado el producto ${name} exitosamente!`,
       })
-
-      setProducts((prev) => [...prev, product])
     } catch (error: any) {
       console.log('CONTEXT ADD PRODUCT', error.message)
     }

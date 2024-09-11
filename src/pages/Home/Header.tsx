@@ -5,7 +5,7 @@ const Header = () => {
   const navigate = useNavigate()
 
   return (
-    <header className=' fixed z-30 left-1/2 transform -translate-x-1/2 bg-white w-full'>
+    <header className=' fixed z-30 left-1/2 transform -translate-x-1/2 bg-white w-full xl:px-12'>
       <nav className='w-full py-1 container mx-auto'>
         <div className='w-full flex items-center justify-between mt-0 px-6 py-2'>
           <label

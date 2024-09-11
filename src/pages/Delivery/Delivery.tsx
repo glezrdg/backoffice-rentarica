@@ -7,16 +7,18 @@ import { PageHeader } from '../../components/layout'
 import { Button, Card } from '../../components/shared'
 import { Header, SideCreate, UsersTable } from './components'
 import { DeliveryProvider, useDeliveryState } from './context'
+import EmployeeModal from './components/modal/EmployeeModal'
 
 interface IDeliveryProps {
   children?: React.ReactNode
 }
 
 const Delivery: React.FC<IDeliveryProps> = (props) => {
-  const { setCompany } = useDeliveryState()
+  const {} = useDeliveryState()
 
   const [createDelivery, setCreateDelivery] = useState(false)
   const [formType, setFormType] = useState('')
+  const [openModal, setOpenModal] = useState(false)
 
   const openCreate = (type: string) => {
     setFormType(type)
@@ -29,7 +31,6 @@ const Delivery: React.FC<IDeliveryProps> = (props) => {
         <SideCreate
           active={createDelivery}
           close={() => {
-            setCompany({} as ICompany)
             setCreateDelivery(false)
           }}
           type={formType}
@@ -56,13 +57,14 @@ const Delivery: React.FC<IDeliveryProps> = (props) => {
         </Card>
 
         <Card title='Usuarios registrados' className='col-span-2 mt-6'>
-          <UsersTable />
+          <UsersTable openModal={() => setOpenModal(true)} />
         </Card>
         <div className='grid grid-cols-3 mt-6 gap-6'>
           {/* TABLE */}
 
           {/* <Card title='Informacion de cuenta' className='col-span-1'></Card> */}
         </div>
+        <EmployeeModal open={openModal} onClose={() => setOpenModal(false)} />
       </>
     </DeliveryProvider>
   )

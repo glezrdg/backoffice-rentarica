@@ -28,6 +28,8 @@ import ReportsPage from '../../pages/Reports/ReportPage'
 import Expenses from '../../pages/Expenses'
 import ExpensesProvider from '../../pages/Expenses/context'
 import Contabilidad from '../../pages/Contabilidad'
+import InversionPage from '../../pages/Shopping/InversionPage'
+import CuadreDetail from '../../pages/Orders/CuadreDetails'
 
 export const adminPages: routerType[] = [
   {
@@ -59,6 +61,15 @@ export const adminPages: routerType[] = [
     title: 'home',
   },
   {
+    path: '/admin/inversiones/:id',
+    element: (
+      <ShoppingProvider>
+        <InversionPage />
+      </ShoppingProvider>
+    ),
+    title: 'home',
+  },
+  {
     path: '/admin/orders',
     element: (
       <OrderProvider>
@@ -66,6 +77,15 @@ export const adminPages: routerType[] = [
       </OrderProvider>
     ),
     title: 'home',
+  },
+  {
+    path: '/admin/cuadres/:id',
+    element: (
+      <OrderProvider>
+        <CuadreDetail />
+      </OrderProvider>
+    ),
+    title: 'Cuadre',
   },
   {
     path: '/admin/clients',
@@ -117,12 +137,16 @@ export const adminPages: routerType[] = [
   },
   {
     path: '/admin/caja',
-    element: <Caja />,
+    element: <Caja open={true} onClose={() => false} />,
     title: 'home',
   },
   {
     path: '/admin/cuadre',
-    element: <Cuadre />,
+    element: (
+      <OrderProvider>
+        <Cuadre />
+      </OrderProvider>
+    ),
     title: 'home',
   },
   {

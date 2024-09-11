@@ -170,7 +170,6 @@ const PROVINCES = [
 ]
 
 const ProvincesTable: React.FC<ProvincesTableProps> = ({}) => {
-  const { companies, setCompany } = useDeliveryState()
   return (
     <div className='overflow-hidden rounded-xl'>
       <h4 className='my-4 text-xl font-medium'>Provincias</h4>

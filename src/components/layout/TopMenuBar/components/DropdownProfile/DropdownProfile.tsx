@@ -8,21 +8,15 @@ import { logOut } from '../../../../../redux/reducers/auth'
 
 interface IDropdownProfileProps {
   children?: React.ReactNode
-  id: string
 }
 
-const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
+const DropdownProfile: React.FC<IDropdownProfileProps> = ({}) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { user } = useAppSelector((state) => state.auth)
 
   return (
-    <div
-      data-popover
-      role='tooltip'
-      id={id}
-      className='user-dropdwon invisible transition-all shadow-md p-3 min-w-[260px] border rounded-md'
-    >
+    <div className='user-dropdwon'>
       <figure className='user-dropdwon__info bg-purple-900 text-white'>
         <figcaption>
           <h5>{user.fullname}</h5>
@@ -46,14 +40,6 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({ id }) => {
             className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
           >
             <i className='fa fa-gear' /> Ajustes
-          </Link>
-        </li>
-        <li>
-          <Link
-            to='/admin/mi_suscripcion'
-            className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
-          >
-            <i className='fa fa-wallet' /> Mi subscripcion
           </Link>
         </li>
       </ul>

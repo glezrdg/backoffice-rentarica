@@ -11,12 +11,7 @@ interface IDropdownMessagesProps {
 
 const DropdownMessages: React.FC<IDropdownMessagesProps> = ({ id }) => {
   return (
-    <div
-      data-popover
-      role='tooltip'
-      id={id}
-      className='dropdown-messages transition-[all_0.3s_ease] border p-3 shadow-md rounded-md invisible'
-    >
+    <div id={id} className='dropdown-messages'>
       {/* h5 */}
       <h5 className='dropdown-messages__title'>
         <span className='mr-2'>Mensajes</span>

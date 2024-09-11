@@ -9,6 +9,7 @@ interface IMenuItemProps {
   icon: string
   url: string
   active?: boolean
+  activeMenu?: boolean
 }
 
 const MenuItem: React.FC<IMenuItemProps> = ({
@@ -17,6 +18,7 @@ const MenuItem: React.FC<IMenuItemProps> = ({
   icon,
   url,
   active = false,
+  activeMenu,
 }) => {
   const [openMenu, setOpenMenu] = useState(false)
 
@@ -30,19 +32,21 @@ const MenuItem: React.FC<IMenuItemProps> = ({
           onClick={() => setOpenMenu(!openMenu)}
           className={`sidenav-menu__submenu_title relative h-[3rem] rounded-3xl ${
             active ? 'bg-purple-900 !text-white mx-auto' : ''
-          } ${
-            children
-              ? 'hover:text-slate-700'
-              : 'hover:text-purple-900 dark:hover:text-purple-400'
-          }`}
+          } ${children ? 'hover:text-slate-700' : 'hover:text-purple-900'}`}
         >
           <div
-            className={`flex items-center transition-all ${
-              active ? ' translate-x-5' : 'translate-x-0'
+            className={`flex translate-x-1 items-center transition-all ${
+              active ? 'lg:translate-x-5' : 'lg:translate-x-1'
             }`}
           >
             <i className={`${icon} text-base`} />
-            <p className='hidden lg:block pl-[12px]'>{title}</p>
+            <p
+              className={`pl-[12px] ${
+                activeMenu ? 'hidden lg:block' : 'hidden lg:hidden'
+              }`}
+            >
+              {title}
+            </p>
             {children && (
               <i className={`submenu-arrow ${openMenu ? 'active' : ''}`} />
             )}

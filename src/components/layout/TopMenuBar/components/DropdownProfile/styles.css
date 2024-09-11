@@ -1,8 +1,5 @@
 .user-dropdwon{
   max-width: 280px;
-  position: absolute;
-  left: -230px;
-  top: 45px;
   background: white;
 }
 
@@ -34,7 +31,7 @@
 
 
 .user-dropdwon__links a {
-  width: calc(100% + 30px);
+  width: 100%;
   left: -15px;
   right: -15px;
   display: inline-flex;

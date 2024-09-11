@@ -1,6 +1,6 @@
 {
   "name": "ecommerce-1",
-  "proxy": "http://127.0.0.1:3000/api",
+  "proxy": "https://santo-pago-backend.onrender.com/api",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -29,7 +29,8 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
     "styled-components": "^5.3.9",
-    "tw-elements": "^1.0.0-beta1"
+    "tw-elements": "^1.0.0-beta1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

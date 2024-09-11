@@ -29,7 +29,7 @@ const Home = () => {
   }
 
   return (
-    <div className='h-full'>
+    <div className='h-full xl:px-12'>
       <Header />
       {/* <section>
         <section className='sticky'>
@@ -94,7 +94,7 @@ const Home = () => {
                   </div>
                   <div className='order-first block h-fit w-full  aspect-square'>
                     <img
-                      className='absolute w-[800px] top-[15%] mx-auto shadow-md bg-gray-300 lg:ml-auto '
+                      className='absolute w-[55%] h-[400px] top-[15%] mx-auto shadow-md bg-gray-300 lg:ml-auto '
                       alt='hero'
                       src='/santopago_home.png'
                     />
@@ -108,9 +108,9 @@ const Home = () => {
         <div className='mt-32' />
 
         {/* FEATURES */}
-        <div className='flex flex-col justify-center border-t-[20px] border-purple-800 min-h-[70vh]'>
+        <div className='flex flex-col justify-center border-t-[20px]  border-purple-800 min-h-[70vh]'>
           <div className='w-full draggable container mx-auto'>
-            <div className='container flex flex-col items-center gap-16 mx-auto my-32'>
+            <div className='container flex flex-col items-center justify-center gap-16 mx-auto h-[80vh]'>
               <div className='grid w-full grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3'>
                 <div className='flex flex-col items-center gap-3 px-8 py-10 bg-white rounded-3xl shadow-main'>
                   <span>
@@ -152,7 +152,7 @@ const Home = () => {
 
         {/* Information */}
 
-        <div className='min-h-[90vh] bg-gradient-to-r from-purple-900 to-purple-900 grid place-items-center '>
+        <div className='min-h-[90vh] bg-gradient-to-r from-purple-900 to-purple-900 grid place-items-center rounded-3xl '>
           <section className='relative flex items-center w-full container mx-auto'>
             <div className='relative items-center w-full px-5 max-w-7xl'>
               <div className='relative flex-col items-start m-auto align-middle'>
@@ -183,7 +183,7 @@ const Home = () => {
                   </div>
                   <div className='order-first block h-fit w-full  aspect-square'>
                     <img
-                      className='absolute w-[800px] top-[15%] mx-auto shadow-md bg-gray-300 lg:ml-auto '
+                      className='absolute w-[55%] h-[400px] top-[15%] mx-auto shadow-md bg-gray-300 lg:ml-auto '
                       alt='hero'
                       src='/santopago_home.png'
                     />
@@ -194,7 +194,7 @@ const Home = () => {
           </section>
         </div>
 
-        <div className='min-h-[90vh] grid place-items-center container mx-auto'>
+        <div className='min-h-[100vh] grid place-items-center container mx-auto'>
           <section className='relative flex items-center w-full'>
             <div className='flex flex-col lg:flex-row-reverse w-full gap-6 lg:gap-24'>
               <div className='relative items-center gap-12 m-auto lg:inline-flex md:order-first w-[70%]'>
@@ -223,7 +223,7 @@ const Home = () => {
               </div>
               <div className='order-first block h-fit w-full'>
                 <img
-                  className='lg:absolute w-[800px] -top-[100px] mx-auto shadow-md bg-gray-300 lg:ml-auto '
+                  className='lg:absolute w-[55%] h-[400px] -top-[100px] mx-auto shadow-md bg-gray-300 lg:ml-auto '
                   alt='hero'
                   src='/santopago_home.png'
                 />

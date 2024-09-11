@@ -11,17 +11,16 @@ interface DeliveryTableProps {
 }
 
 const DeliveryTable: React.FC<DeliveryTableProps> = ({ openCreate }) => {
-  const { companies, setCompany } = useDeliveryState()
+  const {} = useDeliveryState()
 
   const updateCompany = (company: ICompany) => {
-    setCompany(company)
     openCreate()
   }
 
   return (
     <div className='overflow-hidden rounded-xl'>
       <DataTable
-        value={companies}
+        value={[]}
         paginator
         rows={5}
         rowsPerPageOptions={[5, 10, 25, 50]}

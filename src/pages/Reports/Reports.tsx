@@ -10,6 +10,7 @@ import CardWidget from './components/CardWidget/CardWidget'
 import ReportModal from './components/modal/ReportModal'
 import ReportsTable from './components/tables/ReportsTable/ReportsTable'
 import { useReportState } from './context'
+import NoInformation from '../../components/shared/NoInformation'
 
 interface IReportsProps {
   children?: React.ReactNode
@@ -61,10 +62,14 @@ const Reports: React.FC<IReportsProps> = (props) => {
       <ReportsTable />
 
       {/* GRAPHS */}
-      <div className='grid md:grid-cols-2 h-fit gap-5 mt-6'>
+      <div className='grid lg:grid-cols-2 h-fit gap-5 mt-6'>
         <TopProducts value={report?.sellsReport?.productsQty} />
-        <Card title='Metodos de pago'>
-          <PaymentMethodsTable data={report?.sellsReport?.paymentMethodQty} />
+        <Card title='Metodos de pago' bodyClassName='my-4'>
+          {report?.sellsReport?.paymentMethodQty ? (
+            <PaymentMethodsTable data={report?.sellsReport?.paymentMethodQty} />
+          ) : (
+            <NoInformation />
+          )}
         </Card>
       </div>
 

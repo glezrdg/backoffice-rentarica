@@ -1,18 +1,15 @@
 .sidenav {
-  margin: 70px 0px 0px;
   padding: 25px 25px 55px;
   overflow-y: auto;
   height: 100vh;
   position: fixed;
-  left: -280px;
+  left: 0px;
   z-index: 998;
   box-shadow: rgba(0, 0, 0, 0.125) 0px 0px 10px;
   transition: all 0.3s ease;
 }
 
-.sidenav.active {
-  left: 0px
-}
+
 
 .sidenav-menu {
   box-sizing: border-box;

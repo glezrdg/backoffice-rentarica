@@ -22,12 +22,14 @@ interface IPaymentInfoProps {
   client?: any
   clientName?: any
   setClientName?: any
+  tarifaId?: number
 }
 
 //Components
 import { BsTrash } from 'react-icons/bs'
 import { useState } from 'react'
 import { useAppSelector } from '../../../../../redux/store'
+import { Dropdown } from 'primereact/dropdown'
 
 const PaymentInfo: React.FC<IPaymentInfoProps> = ({
   paymentMethod,
@@ -51,6 +53,7 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
   client,
   clientName,
   setClientName,
+  tarifaId,
 }) => {
   const { user: userInfo } = useAppSelector((state) => state.auth)
 
@@ -62,10 +65,10 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
   }
 
   return (
-    <div className='bg-white w-full col-span-3 h-[75vh]'>
-      <div className='flex justify-between items-center px-3 bg-purple-900 text-white h-20'>
-        <p className='text-2xl font-bold'>Total</p>
-        <p className='font-bold text-xl'>${total?.toFixed(2)}</p>
+    <div className='bg-white w-full h-[85vh]'>
+      <div className='flex justify-between items-center px-3 bg-indigo-700 text-white h-20'>
+        <p className='text-xl font-bold'>Tarifa {tarifaId}</p>
+        <p className='font-bold text-2xl'>${total?.toFixed(2)}</p>
       </div>
       {/* <div className='flex justify-between items-center px-3 h-10 border-b-2 border-gray-200'>
         <p className='font-medium'>Subtotal</p>
@@ -80,8 +83,8 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
         <p>${tip?.toFixed(2)}</p>
       </div> */}
 
-      <div className='p-3'>
-        {/* <div className='flex justify-between items-center mb-3'>
+      {/* <div className='p-3'>
+        <div className='flex justify-between items-center mb-3'>
           <h4 className='text-lg'>Agregar Pago</h4>
           {userInfo?.position !== 'Hugo & Delivery' && (
             <button
@@ -91,7 +94,7 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
               Oficina
             </button>
           )}
-        </div> */}
+        </div>
         <>
           <div className='flex justify-between flex-wrap mt-2'>
             <div
@@ -138,6 +141,21 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
             </div>
           )}
         </>
+      </div> */}
+
+      <div className='p-3'>
+        <Dropdown
+          options={[
+            { title: 'Efectivo' },
+            { title: 'Tarjeta' },
+            { title: 'Transferencia' },
+          ]}
+          optionLabel='title'
+          optionValue='title'
+          onChange={(e) => setPaymentMethod(e.value)}
+          value={paymentMethod}
+          className='w-full'
+        />
       </div>
 
       {paymentMethod?.includes('Efectivo') && paymentMethod?.length === 1 && (
@@ -217,7 +235,6 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
 
       <div className='px-5 mt-2'>
         <div className='flex items-center justify-between'>
-          <h4 className='text-base font-medium uppercase mb-3'>Lista</h4>{' '}
           <p>{client && client}</p>
         </div>
         <div className='py-2 min-h-[200px]'>
@@ -235,7 +252,7 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
           ))}
         </div>
       </div>
-      <div className='px-4 mb-2'>
+      {/* <div className='px-4 mb-2'>
         <input
           type={'text'}
           placeholder='Nombre'
@@ -243,13 +260,13 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
           onChange={(e) => setClientName(e.target.value)}
           value={clientName}
         />
-      </div>
-      <div className='grid grid-cols-2 gap-x-2 mx-3 pb-3'>
+      </div> */}
+      {/* <div className='grid grid-cols-2 gap-x-2 mx-3 pb-3'>
         <button
           onClick={handleAddPendingOrder}
           className='w-full py-5 font-medium rounded-xl bg-white text-purple-900 border border-purple-900'
         >
-          Guardar
+          Cancelar
         </button>
         <button
           onClick={handleCreateOrder}
@@ -257,7 +274,7 @@ const PaymentInfo: React.FC<IPaymentInfoProps> = ({
         >
           Facturar
         </button>
-      </div>
+      </div> */}
     </div>
   )
 }

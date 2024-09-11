@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { toast } from '../../../../../App'
 import { Button } from '../../../../../components/shared'
 import { useCategoryBrandState } from '../../../context'
+import { InputText } from 'primereact/inputtext'
 
 export interface CategoryFormProps {
   close: () => void
@@ -55,7 +56,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ close }) => {
     >
       <div className='flex flex-col'>
         <label className='mb-2 text-xs'>Encabezado</label>
-        <input
+        <InputText
           value={name}
           onChange={(e) => setName(e.target.value)}
           className='outline-none rounded-md p-2 border focus:border-purple-300'
@@ -64,9 +65,9 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ close }) => {
 
       <div className='flex flex-col mt-4'>
         <label className='mb-2 text-xs'>Categoria</label>
-        <div className='flex'>
-          <input
-            className='flex-1 mr-2 outline-none rounded-md p-2 border focus:border-purple-300'
+        <div className='flex gap-2'>
+          <InputText
+            className='flex-1 outline-none rounded-md p-2 border focus:border-purple-300'
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           />

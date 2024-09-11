@@ -7,9 +7,10 @@ import { useLocation } from 'react-router-dom'
 interface ISideNavbarProps {
   children?: React.ReactNode
   active: boolean
+  handleOpen: () => void
 }
 
-const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
+const SideNavbar: React.FC<ISideNavbarProps> = ({ active, handleOpen }) => {
   const { user } = useAppSelector((state) => state.auth)
   const location = useLocation()
 
@@ -19,48 +20,75 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
   return (
     <>
       <div
-        className={` hidden md:block overflow-visible sidenav w-[3.5rem]  lg:w-[16rem] lg:block bg-white dark:bg-slate-900 h-[100vh] p-4 transition-all ${
-          active ? 'active' : ''
+        className={` hidden md:block overflow-visible sidenav lg:block bg-white h-[100vh] p-4 transition-all ${
+          active ? 'w-[3.5rem] lg:w-[14rem]' : 'w-[3.5rem]'
         }`}
       >
-        <p className='hidden lg:block uppercase text-xs mb-3 text-purple-700 dark:text-purple-500'>
+        <div
+          className='flex items-center cursor-pointer mb-6'
+          onClick={() => handleOpen()}
+        >
+          <i className='fa fa-bars lg:text-2xl mr-1 md:mr-2 lg:mr-4 text-slate-400' />
+          <img
+            src='/logo.png'
+            className={`hidden w-[100px] h-[40px] ${
+              active ? 'lg:block' : 'hidden'
+            }`}
+          />
+        </div>
+        <p
+          className={`hidden lg:block uppercase text-xs my-3 text-purple-700 ${
+            active ? '' : 'hidden lg:hidden'
+          }`}
+        >
           Administracion
         </p>
         <ul className='sidenav-menu'>
           <>
             <MenuItem
+              activeMenu={active}
               url='admin/dashboard'
               icon='fa fa-home'
               active={current === 'dashboard'}
               title='Dashboard'
             />
             <MenuItem
+              activeMenu={active}
               url='admin/orders'
               icon='fa fa-bag-shopping'
               active={current === 'orders'}
               title='Ventas'
             />
             <MenuItem
+              activeMenu={active}
               url='admin/inventory'
               icon='fa fa-box'
               active={current === 'inventory'}
               title='Inventario'
             />
             <MenuItem
+              activeMenu={active}
               url='admin/inversiones'
               icon='fa fa-money-bill-trend-up'
               title='Inversiones'
               active={current === 'inversiones'}
             />
-            <MenuItem
+            {/* <MenuItem
+              activeMenu={active}
               url='admin/gastos'
               icon='fa fa-dollar-sign'
               title='Gastos'
               active={current === 'gastos'}
-            />
-            {/* <MenuItem url='admin/clients' icon='fa fa-user' title='Clientes' /> */}
+            /> */}
+            {/* <MenuItem
+              activeMenu={active}
+              url='admin/clients'
+              icon='fa fa-user'
+              title='Clientes'
+            /> */}
             {user.subscriptionId !== 'Plan emprendedor' && (
               <MenuItem
+                activeMenu={active}
                 url='admin/usuarios'
                 icon='fa fa-user'
                 title='Usuarios'
@@ -68,52 +96,54 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active }) => {
               />
             )}
             <MenuItem
+              activeMenu={active}
               url='admin/reports'
               icon='fa fa-folder'
               active={current === 'reports'}
               title='Reportes'
             />
-            {/* <MenuItem url='admin/oferts' icon='fa fa-percent' title='Ofertas' /> */}
+            {/* <MenuItem
+            activeMenu={active} url='admin/oferts' icon='fa fa-percent' title='Ofertas' /> */}
             <MenuItem
+              activeMenu={active}
               url='admin/category_brand'
               icon='fa fa-code-branch'
               active={current === 'category_brand'}
               title='Marcas y categorias'
             />
-            <MenuItem
+            {/* <MenuItem
+              activeMenu={active}
               url='admin/contabilidad'
               icon='fa fa-note-sticky'
               active={current === 'contabilidad'}
               title='Contabilidad'
-            />
-            {!user?.subscriptionId && (
-              <MenuItem
-                url='admin/planes'
-                icon='fa fa-circle-check'
-                title='Planes'
-                active={current === 'planes'}
-              />
-            )}
+            /> */}
           </>
         </ul>
 
-        <p className='hidden lg:block uppercase text-xs my-3 text-purple-700'>
+        <p
+          className={`hidden lg:block uppercase text-xs my-3 text-purple-700 ${
+            active ? '' : 'hidden lg:hidden'
+          }`}
+        >
           Facturacion
         </p>
 
         <ul className='sidenav-menu'>
           <>
-            <MenuItem
+            {/* <MenuItem
               url='admin/caja'
               icon='fa fa-user'
               title='Caja'
               active={current === 'caja'}
-            />
+              activeMenu={active}
+            /> */}
             <MenuItem
               url='admin/cuadre'
               icon='fa fa-folder'
               title='Cuadre'
               active={current === 'cuadre'}
+              activeMenu={active}
             />
           </>
         </ul>

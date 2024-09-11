@@ -16,7 +16,7 @@ const LatestBuy: React.FC<ILatestBuyProps> = (props) => {
           className='!bg-slate-50 shadow-md mr-4 w-full'
           bodyClassName='p-2'
         >
-          <BarChart color='purple' />
+          <BarChart color='purple' title='' />
         </Card>
 
         <Card
@@ -24,7 +24,7 @@ const LatestBuy: React.FC<ILatestBuyProps> = (props) => {
           className='!bg-slate-50 shadow-md'
           bodyClassName='p-2'
         >
-          <BarChart color='purple' />
+          <BarChart color='purple' title='' />
         </Card>
       </div>
     </>

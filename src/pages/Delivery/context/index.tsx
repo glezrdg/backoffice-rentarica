@@ -7,27 +7,22 @@ import React, {
 } from 'react'
 import { ICompany, IDelivery } from '../models'
 import { getCompanies, postCompany } from '../services/company'
-import { getDeliveries, postDelivery } from '../services/delivery'
+import { getEmployees, getUserOrders, postEmployee } from '../services/delivery'
+import { IOrder } from '../../../pages/Orders/models/IOrder'
 
 // Services
 
 const initialState: InitialStateProps = {
-  companies: [],
-  searchCompany: [],
-  company: null,
-  addCompany: () => {},
-  updateCompany: () => {},
-  removeCompany: () => {},
-  setSearchCompany: () => {},
-  setCompany: () => {},
   deliveries: [],
   searchDelivery: [],
   delivery: null,
+  userOrders: [],
   addDelivery: () => {},
   updateDelivery: () => {},
   removeDelivery: () => {},
   setSearchDelivery: () => {},
   setDelivery: () => {},
+  handleGetUserOrders: (id: string) => {},
 }
 
 const DeliveryContext = createContext(initialState)
@@ -39,10 +34,8 @@ export interface InventoryProviderProps {
 export const DeliveryProvider: React.FC<InventoryProviderProps> = ({
   children,
 }) => {
-  const [companies, setCompanies] = useState<ICompany[]>(initialState.companies)
   const [searchCompanies, setSearchCompanies] = useState<ICompany[]>([])
   const [searchCompany, setSearchCompany] = useState<string>('')
-  const [company, setCompany] = useState<ICompany | null>(initialState.company)
 
   const [deliveries, setDeliveries] = useState<IDelivery[]>(
     initialState.deliveries
@@ -53,7 +46,8 @@ export const DeliveryProvider: React.FC<InventoryProviderProps> = ({
     initialState.delivery
   )
 
-  let activeCompany = searchCompany ? searchCompanies : companies
+  const [userOrders, setUserOrders] = useState<IOrder[]>([])
+
   let activeDelivery = searchDelivery ? searchDeliveries : deliveries
 
   useEffect(() => {
@@ -61,50 +55,35 @@ export const DeliveryProvider: React.FC<InventoryProviderProps> = ({
   }, [])
 
   useEffect(() => {
-    if (searchDelivery || searchCompany) {
-      handleSearch()
+    if (delivery?._id) {
+      handleGetUserOrders(delivery?._id)
     }
-  }, [searchDelivery, searchCompany])
-
-  const handleSearch = () => {
-    let searched = companies.filter((p) =>
-      p.name.toLowerCase().includes(searchCompany.toLowerCase())
-    )
-
-    setSearchCompanies(searched)
-  }
+  }, [delivery])
 
   const getInitialState = async () => {
     try {
       const companyData = await getCompanies()
-      const deliveryData = await getDeliveries()
-      setCompanies(companyData)
+      const deliveryData = await getEmployees()
       setDeliveries(deliveryData)
     } catch (error) {}
-  }
-
-  const addCompany = async (body: ICompany) => {
-    try {
-      const company = await postCompany(body)
-      setCompanies((prev) => [company, ...prev])
-    } catch (error) {}
-  }
-
-  const updateCompany = (body: ICompany) => {
-    setCompanies((prev) => prev.map((p) => (p._id === body._id ? body : p)))
-  }
-
-  const removeCompany = (id: string) => {
-    setCompanies((prev) => prev.filter((i) => i._id !== id))
   }
 
   // DELIVERY
 
   const addDelivery = async (body: IDelivery) => {
     try {
-      const delivery = await postDelivery(body)
+      const delivery = await postEmployee(body)
       setDeliveries((prev) => [delivery, ...prev])
     } catch (error) {}
+  }
+
+  const handleGetUserOrders = async (user: string) => {
+    try {
+      const orders = await getUserOrders(user)
+      setUserOrders(orders)
+    } catch (error: any) {
+      console.log('ERROR GETTINGU USER ORDERS: ', error.message)
+    }
   }
 
   const updateDelivery = (body: IDelivery) => {
@@ -118,20 +97,15 @@ export const DeliveryProvider: React.FC<InventoryProviderProps> = ({
   return (
     <DeliveryContext.Provider
       value={{
-        companies: activeCompany,
-        company,
-        addCompany,
-        updateCompany,
-        removeCompany,
-        setCompany,
-        setSearchCompany,
         deliveries: activeDelivery,
+        userOrders,
         delivery,
         setDelivery,
         addDelivery,
         removeDelivery,
         updateDelivery,
         setSearchDelivery,
+        handleGetUserOrders,
       }}
     >
       {children}
@@ -142,21 +116,14 @@ export const DeliveryProvider: React.FC<InventoryProviderProps> = ({
 export const useDeliveryState = () => useContext(DeliveryContext)
 
 export interface InitialStateProps {
-  companies: ICompany[]
-  company: ICompany | null
-  searchCompany?: ICompany[]
-  setSearchCompany: (string: string) => void
-  addCompany: (product: ICompany) => void
-  updateCompany: (product: ICompany) => void
-  removeCompany: (id: string) => void
-  setCompany: (product: ICompany) => void
-
   deliveries: IDelivery[]
   delivery: IDelivery | null
+  userOrders: IOrder[]
   searchDelivery?: IDelivery[]
   setSearchDelivery: (string: string) => void
   addDelivery: (product: IDelivery) => void
   updateDelivery: (product: IDelivery) => void
   removeDelivery: (id: string) => void
+  handleGetUserOrders: (id: string) => void
   setDelivery: (product: IDelivery) => void
 }

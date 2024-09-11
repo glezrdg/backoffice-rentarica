@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Button } from '../../../../../components/shared'
 import { useCategoryBrandState } from '../../../context'
 import { toast } from '../../../../../App'
+import { InputText } from 'primereact/inputtext'
 
 export interface BrandFormProps {
   close: () => void
@@ -32,7 +33,7 @@ const BrandForm: React.FC<BrandFormProps> = ({ close }) => {
     >
       <div className='flex flex-col'>
         <label className='mb-2 text-xs'>Nombre</label>
-        <input
+        <InputText
           value={name}
           onChange={(e) => setName(e.target.value)}
           className='outline-none rounded-md p-2 border focus:border-purple-300'

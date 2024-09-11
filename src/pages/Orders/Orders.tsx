@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import './styles.css'
 
 // Components
-import PieChart from '../../components/charts/PieChart'
-import { PageHeader } from '../../components/layout'
-import { Button, Card, TopProducts } from '../../components/shared'
-import Spin from '../../components/shared/Spin/Spin'
-import { Header, OrdersTable, PaymentMethodsTable } from './components'
-import { useOrderState } from './context'
-import { IOrder } from './models/IOrder'
 import { Calendar } from 'primereact/calendar'
 import { Dropdown } from 'primereact/dropdown'
+import { PageHeader } from '../../components/layout'
+import { Button, Card, TopProducts } from '../../components/shared'
+import { Header, PaymentMethodsTable } from './components'
+import CuadresTable from './components/tables/CuadresTable'
+import { useOrderState } from './context'
+// import PdfReportModal from './components/modal/PdfReportModal'
 
 interface IOrdersProps {
   children?: React.ReactNode
@@ -22,6 +21,7 @@ const Orders: React.FC<IOrdersProps> = (props) => {
   const [dateType, setDateType] = useState<'single' | 'range' | 'multiple'>(
     'single'
   )
+  const [reportModal, setReportModal] = useState(false)
 
   useEffect(() => {
     if (orders) {
@@ -35,12 +35,6 @@ const Orders: React.FC<IOrdersProps> = (props) => {
         title='Ventas'
         right={
           <div className='flex'>
-            {/* <Button
-              icon='fa fa-calendar text-purple-900'
-              color='white'
-              text='Calendario'
-              className='!px-3 !hover:shadow-none mr-3'
-            /> */}
             <Dropdown
               className='h-[40px] mr-3'
               options={[
@@ -64,6 +58,7 @@ const Orders: React.FC<IOrdersProps> = (props) => {
             />
             <Button
               icon='fa fa-file-export'
+              onClick={() => setReportModal(true)}
               color='warning'
               text='Exportar'
               className='!px-3 !hover:shadow-none !bg-purple-900'
@@ -78,19 +73,25 @@ const Orders: React.FC<IOrdersProps> = (props) => {
       </Card>
 
       {/* TABLE */}
-      <Card title=''>
-        <OrdersTable />
+      <Card title='Cuadres'>
+        <CuadresTable />
       </Card>
-
       {/* GRAPHS */}
-      <div className='grid md:grid-cols-2 h-fit gap-5 mt-8'>
+      <div className='grid lg:grid-cols-2 h-fit gap-5 my-8'>
+        {/* Payment Methods */}
+
         <TopProducts orders={orders} />
 
-        {/* Payment methos */}
+        {/* Payment methods */}
         <Card title='Metodos de pago' eye>
           <PaymentMethodsTable />
         </Card>
       </div>
+
+      {/* <PdfReportModal
+        open={reportModal}
+        onClose={() => setReportModal(false)}
+      /> */}
     </>
   )
 }
