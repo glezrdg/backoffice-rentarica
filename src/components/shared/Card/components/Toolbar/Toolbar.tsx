@@ -23,18 +23,18 @@ const Toolbar: React.FC<IToolbarProps> = (props) => {
         <li className='mr-2'>
           <a
             aria-current='page'
-            className='grid place-items-center px-4 h-full text-white bg-purple-900 rounded-t-lg active dark:bg-gray-800 dark:text-purple-500'
+            className='grid place-items-center px-4 h-full text-white bg-blue-900 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500'
           >
             week
           </a>
         </li>
         <li className='mr-2'>
-          <a className='grid place-items-center px-4 h-full rounded-t-lg hover:text-purple-500 hover:border-b-2 border-b-purple-500 dark:hover:bg-gray-800 dark:hover:text-gray-300'>
+          <a className='grid place-items-center px-4 h-full rounded-t-lg hover:text-blue-500 hover:border-b-2 border-b-blue-500 dark:hover:bg-gray-800 dark:hover:text-gray-300'>
             month
           </a>
         </li>
         <li className='mr-2'>
-          <a className='grid place-items-center px-4 h-full rounded-t-lg hover:text-purple-500 hover:border-b-2 border-b-purple-500 dark:hover:bg-gray-800 dark:hover:text-gray-300'>
+          <a className='grid place-items-center px-4 h-full rounded-t-lg hover:text-blue-500 hover:border-b-2 border-b-blue-500 dark:hover:bg-gray-800 dark:hover:text-gray-300'>
             year
           </a>
         </li>

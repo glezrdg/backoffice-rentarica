@@ -12,7 +12,19 @@ export interface ProfitsSemesterProps {
 export const ProfitsSemester: React.FC<ProfitsSemesterProps> = memo(
   function BarVertical({ color }) {
     const { reports } = useReportState()
-    let data: any = {}
+    let data: any = {
+      labels: ['Enero', 'Febrero', 'Marzo', 'Abril'],
+      datasets: [
+        {
+          label: ['registrados'],
+          data: [74, 45, 86, 63],
+          fill: true,
+          borderColor: getColor('blue'),
+          backgroundColor: getColor('blue'),
+          tension: 0.4,
+        },
+      ],
+    }
 
     useEffect(() => {
       if (reports?.length) {
@@ -20,12 +32,10 @@ export const ProfitsSemester: React.FC<ProfitsSemesterProps> = memo(
           (data.datasets = [
             {
               label: 'Ganancias',
-              data: reports?.map(
-                (report) => report?.sellsReport?.totalAmonutSell
-              ),
+              data: [8],
               fill: true,
-              borderColor: getColor(color),
-              backgroundColor: getColor(color),
+              borderColor: getColor('blue'),
+              backgroundColor: getColor('blue'),
               tension: 0.4,
             },
           ])
@@ -63,7 +73,7 @@ export const ProfitsSemester: React.FC<ProfitsSemesterProps> = memo(
 
     const { basicOptions } = getLightTheme()
     return (
-      <div className='w-full'>
+      <div className='w-full h-full flex items-end'>
         <Chart
           type='bar'
           data={data}

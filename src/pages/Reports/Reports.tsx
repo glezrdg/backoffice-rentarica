@@ -5,7 +5,6 @@ import './styles.css'
 import { PageHeader } from '../../components/layout'
 import { Card, TopProducts } from '../../components/shared'
 import { Button } from '../../components/shared/Button'
-import { PaymentMethodsTable } from '../Clients/components'
 import CardWidget from './components/CardWidget/CardWidget'
 import ReportModal from './components/modal/ReportModal'
 import ReportsTable from './components/tables/ReportsTable/ReportsTable'
@@ -29,7 +28,7 @@ const Reports: React.FC<IReportsProps> = (props) => {
             <Button
               icon='fa fa-file-export'
               text='Exportar'
-              className='!px-3 !hover:shadow-none !bg-purple-900'
+              className='!px-3 !hover:shadow-none !bg-blue-900'
             />
           </div>
         }
@@ -41,13 +40,13 @@ const Reports: React.FC<IReportsProps> = (props) => {
             color='green'
             background='green'
             title='Ganancias'
-            value={report?.sellsReport?.totalAmonutWin!}
+            value={0}
           />
           <CardWidget
             color='purple'
             background='purple'
             title='Ventas'
-            value={report?.sellsReport?.totalAmonutSell!}
+            value={0}
           />
           <CardWidget
             color='blue'
@@ -63,14 +62,7 @@ const Reports: React.FC<IReportsProps> = (props) => {
 
       {/* GRAPHS */}
       <div className='grid lg:grid-cols-2 h-fit gap-5 mt-6'>
-        <TopProducts value={report?.sellsReport?.productsQty} />
-        <Card title='Metodos de pago' bodyClassName='my-4'>
-          {report?.sellsReport?.paymentMethodQty ? (
-            <PaymentMethodsTable data={report?.sellsReport?.paymentMethodQty} />
-          ) : (
-            <NoInformation />
-          )}
-        </Card>
+        <Card title='Metodos de pago' bodyClassName='my-4'></Card>
       </div>
 
       <ReportModal />

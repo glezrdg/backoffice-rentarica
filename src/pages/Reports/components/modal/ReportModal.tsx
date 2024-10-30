@@ -67,14 +67,8 @@ const ReportModal: React.FC<IReportModalProps> = (props) => {
 
               <div className='relative p-4'>
                 <div className='flex items-center justify-between border-b pb-3 mb-2'>
-                  <h2 className='text-lg text-purple-900 font-medium'>
-                    <span className='mr-2'>Productos:</span>
-                    {commaNumber(
-                      report?.shoppingReport?.productsQty?.reduce(
-                        (acc, curr) => acc + curr.qty,
-                        0
-                      ) || 0
-                    )}
+                  <h2 className='text-lg text-blue-900 font-medium'>
+                    <span className='mr-2'>Productos:</span>0
                   </h2>
                   <h2 className='text-lg text-red-500 font-medium'>
                     <span className='mr-2'>Gastado:</span>$
@@ -88,13 +82,11 @@ const ReportModal: React.FC<IReportModalProps> = (props) => {
 
               <div className='relative p-4'>
                 <div className='flex items-center justify-between dpb-3 mb-2'>
-                  <h2 className='text-lg text-purple-900 font-medium'>
-                    <span className='mr-2'>Vendido:</span>$
-                    {commaNumber(report?.sellsReport?.totalAmonutSell || 0)}
+                  <h2 className='text-lg text-blue-900 font-medium'>
+                    <span className='mr-2'>Vendido:</span>${commaNumber(0)}
                   </h2>
                   <h2 className='text-lg text-green-500 font-medium'>
-                    <span className='mr-2'>Ganancias:</span>$
-                    {commaNumber(report?.sellsReport?.totalAmonutWin || 0)}
+                    <span className='mr-2'>Ganancias:</span>${commaNumber(0)}
                   </h2>
                 </div>
               </div>
@@ -104,7 +96,7 @@ const ReportModal: React.FC<IReportModalProps> = (props) => {
 
               <div className='relative p-4'>
                 <div className='flex items-center justify-between border-b pb-3 mb-2'>
-                  <h2 className='text-lg text-purple-900 font-medium'>
+                  <h2 className='text-lg text-blue-900 font-medium'>
                     <span className='mr-2'>Vendido:</span>${commaNumber(0)}
                   </h2>
                   <h2 className='text-lg text-green-500 font-medium'>

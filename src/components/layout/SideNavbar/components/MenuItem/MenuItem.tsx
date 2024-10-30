@@ -6,7 +6,7 @@ import './styles.css'
 interface IMenuItemProps {
   children?: React.ReactNode
   title: string
-  icon: string
+  icon: React.ReactNode
   url: string
   active?: boolean
   activeMenu?: boolean
@@ -30,16 +30,16 @@ const MenuItem: React.FC<IMenuItemProps> = ({
       >
         <div
           onClick={() => setOpenMenu(!openMenu)}
-          className={`sidenav-menu__submenu_title relative h-[3rem] rounded-3xl ${
-            active ? 'bg-purple-900 !text-white mx-auto' : ''
-          } ${children ? 'hover:text-slate-700' : 'hover:text-purple-900'}`}
+          className={`sidenav-menu__submenu_title relative h-[3rem] ${
+            active ? 'bg-blue-50' : ''
+          } ${children ? '' : ''}`}
         >
           <div
-            className={`flex translate-x-1 items-center transition-all ${
-              active ? 'lg:translate-x-5' : 'lg:translate-x-1'
+            className={`flex translate-x-1 items-center h-full w-full transition-all ${
+              active ? 'border-r-4 border-blue-200 pl-3 text-blue-500' : ''
             }`}
           >
-            <i className={`${icon} text-base`} />
+            {icon}
             <p
               className={`pl-[12px] ${
                 activeMenu ? 'hidden lg:block' : 'hidden lg:hidden'

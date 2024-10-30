@@ -5,7 +5,6 @@ import { useReportState } from './context'
 // Components
 import { Button } from '../../components/shared/Button'
 import { Card, TopProducts } from '../../components/shared'
-import { PaymentMethodsTable } from '../Clients/components'
 import { PageHeader } from '../../components/layout'
 import PieChart from '../../components/charts/PieChart'
 import CardWidget from './components/CardWidget/CardWidget'
@@ -14,7 +13,6 @@ import OrdersTable from '../Orders/components/tables/OrdersTable'
 import ReportModal from './components/modal/ReportModal'
 import { useParams } from 'react-router-dom'
 import { getReport } from './services'
-import ShoppingTable from '../Shopping/components/tables/ShoppingTable'
 import { Dropdown } from 'primereact/dropdown'
 import { Calendar } from 'primereact/calendar'
 
@@ -75,7 +73,7 @@ const ReportsPage: React.FC<IReportsPageProps> = (props) => {
             <Button
               icon='fa fa-file-export'
               text='Exportar'
-              className='!px-3 !hover:shadow-none !bg-purple-900'
+              className='!px-3 !hover:shadow-none !bg-blue-900'
             />
           </div>
         }
@@ -87,13 +85,13 @@ const ReportsPage: React.FC<IReportsPageProps> = (props) => {
             color='green'
             background='green'
             title='Ganancias'
-            value={report?.sellsReport?.totalAmonutWin!}
+            value={0}
           />
           <CardWidget
             color='purple'
             background='purple'
             title='Ventas'
-            value={report?.sellsReport?.totalAmonutSell!}
+            value={0}
           />
           <CardWidget
             color='blue'
@@ -105,21 +103,18 @@ const ReportsPage: React.FC<IReportsPageProps> = (props) => {
       </Card>
 
       {/* TABLE */}
-      <Card title='Historial de ventas' bodyClassName='mt-4'>
-        <OrdersTable orders={report?.sellsReport?.orders} />
-      </Card>
+      <Card title='Historial de ventas' bodyClassName='mt-4'></Card>
 
-      <Card title='Historial de compras' bodyClassName='mt-4' className='mt-6'>
-        <ShoppingTable shoppings={report?.shoppingReport?.shoppings} />
-      </Card>
+      <Card
+        title='Historial de compras'
+        bodyClassName='mt-4'
+        className='mt-6'
+      ></Card>
       {/* <ReportsTable /> */}
 
       {/* GRAPHS */}
       <div className='grid lg:grid-cols-2 h-fit gap-5 mt-6'>
-        <TopProducts value={report?.sellsReport?.productsQty} />
-        <Card title='Metodos de pago'>
-          <PaymentMethodsTable data={report?.sellsReport?.paymentMethodQty} />
-        </Card>
+        <Card title='Metodos de pago'></Card>
       </div>
 
       <ReportModal />

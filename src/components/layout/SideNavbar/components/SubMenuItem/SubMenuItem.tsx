@@ -10,7 +10,7 @@ const SubMenuItem: React.FC<ISubMenuItemProps> = ({ title }) => {
   return (
     <>
       <li className='sidenav-menu__submenu cursor-pointer'>
-        <div className='sidenav-menu__submenu_title h-[3rem] p-3 hover:bg-purple-50 hover:text-purple-500'>
+        <div className='sidenav-menu__submenu_title h-[3rem] p-3 hover:bg-blue-50 hover:text-blue-500'>
           <p className='pl-[20px]'>{title}</p>
         </div>
       </li>

@@ -18,7 +18,7 @@ const ProtectedRouter = () => {
 
   return (
     <>
-      {user && !getItem('stripe_url') ? (
+      {user ? (
         <Layout>
           <Routes>{pageRoutes}</Routes>
         </Layout>

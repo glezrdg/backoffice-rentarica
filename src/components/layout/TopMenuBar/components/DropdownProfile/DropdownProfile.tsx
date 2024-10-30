@@ -17,7 +17,7 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({}) => {
 
   return (
     <div className='user-dropdwon'>
-      <figure className='user-dropdwon__info bg-purple-900 text-white'>
+      <figure className='user-dropdwon__info bg-blue-900 text-white'>
         <figcaption>
           <h5>{user.fullname}</h5>
           <p className='!text-[12px] !text-slate-100'>
@@ -29,7 +29,7 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({}) => {
         <li>
           <Link
             to='/admin/perfil'
-            className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
+            className='hover:text-blue-900 hover:bg-blue-400 hover:bg-opacity-50 hover:pl-6'
           >
             <i className='fa fa-user' /> Perfil
           </Link>
@@ -37,14 +37,14 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({}) => {
         <li>
           <Link
             to='/admin/ajustes'
-            className='hover:text-purple-900 hover:bg-purple-400 hover:bg-opacity-50 hover:pl-6'
+            className='hover:text-blue-900 hover:bg-blue-400 hover:bg-opacity-50 hover:pl-6'
           >
             <i className='fa fa-gear' /> Ajustes
           </Link>
         </li>
       </ul>
       <button
-        className='user-dropdwon__bottomAction transition-all text-slate-400 w-full hover:text-white hover:bg-purple-900 hover:shadow-sm'
+        className='user-dropdwon__bottomAction transition-all text-slate-400 w-full hover:text-white hover:bg-blue-900 hover:shadow-sm'
         onClick={() => {
           dispatch(logOut())
           navigate('/')

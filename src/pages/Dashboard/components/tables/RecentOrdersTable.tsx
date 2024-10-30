@@ -40,9 +40,9 @@ const RecentOrdersTable = () => {
             <Column
               body={(data) => (
                 <div className='flex'>
-                  <i className='hidden sm:inline fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
-                  <i className='hidden sm:visible fa fa-regular fa-edit cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
-                  <i className='fa fa-ellipsis-vertical cursor-pointer p-2 transition rounded-full hover:text-purple-500 hover:bg-purple-50'></i>
+                  <i className='hidden sm:inline fa fa-regular fa-eye cursor-pointer p-2 transition rounded-full hover:text-blue-500 hover:bg-blue-50'></i>
+                  <i className='hidden sm:visible fa fa-regular fa-edit cursor-pointer p-2 transition rounded-full hover:text-blue-500 hover:bg-blue-50'></i>
+                  <i className='fa fa-ellipsis-vertical cursor-pointer p-2 transition rounded-full hover:text-blue-500 hover:bg-blue-50'></i>
                 </div>
               )}
             ></Column>

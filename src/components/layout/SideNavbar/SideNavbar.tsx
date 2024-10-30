@@ -3,6 +3,10 @@ import { MenuItem, SubMenuItem } from './components'
 import './styles.css'
 import { useAppSelector } from '../../../redux/store'
 import { useLocation } from 'react-router-dom'
+import { RiHome6Line, RiCalendarCheckFill } from 'react-icons/ri'
+import { CiCalendarDate } from 'react-icons/ci'
+import { BsPerson, BsPersonGear } from 'react-icons/bs'
+import { FaHandHoldingMedical } from 'react-icons/fa'
 
 interface ISideNavbarProps {
   children?: React.ReactNode
@@ -25,125 +29,57 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active, handleOpen }) => {
         }`}
       >
         <div
-          className='flex items-center cursor-pointer mb-6'
+          className='flex items-center cursor-pointer mb-6 text-xl'
           onClick={() => handleOpen()}
         >
           <i className='fa fa-bars lg:text-2xl mr-1 md:mr-2 lg:mr-4 text-slate-400' />
-          <img
-            src='/logo.png'
-            className={`hidden w-[100px] h-[40px] ${
-              active ? 'lg:block' : 'hidden'
-            }`}
-          />
+          Tucita
         </div>
-        <p
-          className={`hidden lg:block uppercase text-xs my-3 text-purple-700 ${
-            active ? '' : 'hidden lg:hidden'
-          }`}
-        >
-          Administracion
-        </p>
         <ul className='sidenav-menu'>
           <>
             <MenuItem
               activeMenu={active}
               url='admin/dashboard'
-              icon='fa fa-home'
+              icon={<RiHome6Line className='text-lg' />}
               active={current === 'dashboard'}
               title='Dashboard'
             />
             <MenuItem
               activeMenu={active}
-              url='admin/orders'
-              icon='fa fa-bag-shopping'
-              active={current === 'orders'}
-              title='Ventas'
+              url='admin/citas'
+              icon={<CiCalendarDate className='text-lg' />}
+              active={current === 'citas'}
+              title='Citas'
             />
             <MenuItem
               activeMenu={active}
-              url='admin/inventory'
-              icon='fa fa-box'
-              active={current === 'inventory'}
-              title='Inventario'
+              url='admin/pacientes'
+              icon={<BsPerson className='text-lg' />}
+              active={current === 'pacientes'}
+              title='Pacientes'
             />
             <MenuItem
               activeMenu={active}
-              url='admin/inversiones'
-              icon='fa fa-money-bill-trend-up'
-              title='Inversiones'
-              active={current === 'inversiones'}
+              url='admin/agenda'
+              icon={<RiCalendarCheckFill className='text-lg' />}
+              active={current === 'agenda'}
+              title='Agenda'
             />
-            {/* <MenuItem
-              activeMenu={active}
-              url='admin/gastos'
-              icon='fa fa-dollar-sign'
-              title='Gastos'
-              active={current === 'gastos'}
-            /> */}
-            {/* <MenuItem
-              activeMenu={active}
-              url='admin/clients'
-              icon='fa fa-user'
-              title='Clientes'
-            /> */}
-            {user.subscriptionId !== 'Plan emprendedor' && (
+            {user?.role === 'administrador' && (
               <MenuItem
                 activeMenu={active}
-                url='admin/usuarios'
-                icon='fa fa-user'
-                title='Usuarios'
-                active={current === 'usuarios'}
+                url='admin/doctores'
+                icon={<FaHandHoldingMedical className='text-lg' />}
+                title='Doctores'
+                active={current === 'doctores'}
               />
             )}
             <MenuItem
               activeMenu={active}
-              url='admin/reports'
-              icon='fa fa-folder'
-              active={current === 'reports'}
-              title='Reportes'
-            />
-            {/* <MenuItem
-            activeMenu={active} url='admin/oferts' icon='fa fa-percent' title='Ofertas' /> */}
-            <MenuItem
-              activeMenu={active}
-              url='admin/category_brand'
-              icon='fa fa-code-branch'
-              active={current === 'category_brand'}
-              title='Marcas y categorias'
-            />
-            {/* <MenuItem
-              activeMenu={active}
-              url='admin/contabilidad'
-              icon='fa fa-note-sticky'
-              active={current === 'contabilidad'}
-              title='Contabilidad'
-            /> */}
-          </>
-        </ul>
-
-        <p
-          className={`hidden lg:block uppercase text-xs my-3 text-purple-700 ${
-            active ? '' : 'hidden lg:hidden'
-          }`}
-        >
-          Facturacion
-        </p>
-
-        <ul className='sidenav-menu'>
-          <>
-            {/* <MenuItem
-              url='admin/caja'
-              icon='fa fa-user'
-              title='Caja'
-              active={current === 'caja'}
-              activeMenu={active}
-            /> */}
-            <MenuItem
-              url='admin/cuadre'
-              icon='fa fa-folder'
-              title='Cuadre'
-              active={current === 'cuadre'}
-              activeMenu={active}
+              url='admin/perfil'
+              icon={<BsPersonGear className='text-lg' />}
+              title='Perfil'
+              active={current === 'perfil'}
             />
           </>
         </ul>

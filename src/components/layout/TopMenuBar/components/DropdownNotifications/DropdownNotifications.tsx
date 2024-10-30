@@ -68,7 +68,7 @@ const DropdownNotifications: React.FC<IDropdownNotificationsProps> = ({
         </ul>
       </div>
 
-      <button className='w-full text-center text-sm p-3 text-purple-500 hover:bg-purple-500 hover:bg-opacity-5'>
+      <button className='w-full text-center text-sm p-3 text-blue-500 hover:bg-blue-500 hover:bg-opacity-5'>
         Ver todos
       </button>
       <div data-popper-arrow></div>

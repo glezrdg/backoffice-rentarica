@@ -22,14 +22,14 @@ const WidgetCard: React.FC<IWidgetCardProps> = (props) => {
   }
 
   if (props.title === 'Ordenes') {
-    info.value = report?.sellsReport?.ordersQty || 0
+    info.value = 0
   }
   if (props.title === 'Numero de inversiones') {
     info.value = report?.shoppingReport?.shoppingQty || 0
   }
 
   if (props.title === 'Ganancias') {
-    info.value = report?.sellsReport?.totalAmonutWin || 0
+    info.value = 0
   }
 
   if (props.title === 'Nuevos Usuarios') {

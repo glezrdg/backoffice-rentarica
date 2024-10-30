@@ -4,13 +4,12 @@ import { TypedUseSelectorHook } from "react-redux";
 import { useSelector } from "react-redux";
 
 // Reducers
-import { auth, products } from "./reducers";
+import { auth } from "./reducers";
 
 // Store
 export const store = configureStore({
   reducer: {
     auth,
-    products
   },
 });
 

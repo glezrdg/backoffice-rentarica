@@ -8,12 +8,11 @@ import Spin from './components/shared/Spin'
 
 //Router
 import ProtectedRouter from './routes/ProtectedRouter'
-import Router from './routes/Router'
-import { CategoryBrandProvider } from './pages/CategoryBrand/context'
 import { ReportProvider } from './pages/Reports/context'
 import { useAppSelector } from './redux/store'
-import { InventoryProvider } from './pages/Products/context'
 import ScrollToTop from './components/layout/ScrollToTop'
+import { ProfileProvider } from './pages/Profile/context'
+import { AppointmentProvider } from './pages/Appointment/context'
 
 export let toast: any
 
@@ -35,11 +34,11 @@ function App() {
           }
         >
           <ReportProvider>
-            <CategoryBrandProvider>
-              <InventoryProvider>
+            <ProfileProvider>
+              <AppointmentProvider>
                 <ProtectedRouter />
-              </InventoryProvider>
-            </CategoryBrandProvider>
+              </AppointmentProvider>
+            </ProfileProvider>
           </ReportProvider>
 
           {/* <Router /> */}

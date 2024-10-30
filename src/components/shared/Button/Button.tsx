@@ -12,7 +12,7 @@ interface IButtonProps {
   rounded?: boolean
   text?: string
   tooltip?: string
-  icon?: string
+  icon?: any
   iconButton?: boolean
   disabled?: boolean
   onClick?: (e: any) => void
@@ -37,7 +37,6 @@ const Button: React.FC<IButtonProps> = ({
 
     if (iconButton) classText += ' p-2'
     if (rounded || iconButton) classText += ' rounded-full'
-    if (icon) classText += ' flex items-center'
 
     return classText
   }
@@ -51,7 +50,7 @@ const Button: React.FC<IButtonProps> = ({
       type={buttonType}
       disabled={disabled}
     >
-      {icon && <i className={`h-4 w-4 ${icon} ${text && 'mr-1 '}`} />}
+      {icon && icon}
       {text}
       {tooltip && (
         <div className='group-hover:[transform:perspective(0px)_translateZ(0)_rotateX(0deg)] absolute bottom-8 mb-6 origin-bottom transform rounded text-white opacity-0 transition-all duration-300 group-hover:opacity-100'>

@@ -35,18 +35,7 @@ const PageHeader: React.FC<IPageHeaderProps> = ({
             {title}
           </h3>
         </div>
-        {right ? (
-          right
-        ) : (
-          <div>
-            <Button
-              icon='fa fa-calendar text-purple-900'
-              color='white'
-              text='Calendario'
-              className='!px-3 !hover:shadow-none'
-            />
-          </div>
-        )}
+        {right ? right : <div></div>}
       </div>
     </>
   )

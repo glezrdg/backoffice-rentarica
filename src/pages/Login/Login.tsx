@@ -6,7 +6,6 @@ import { Button } from '../../components/shared'
 import { loginUser } from './services'
 import { useAppDispatch, useAppSelector } from '../../redux/store'
 import { setAuth } from '../../redux/reducers/auth'
-import Header from '../Home/Header'
 
 export interface PageLoginProps {
   className?: string
@@ -69,9 +68,8 @@ const PageLogin: FC<PageLoginProps> = ({ className = '' }) => {
 
   return (
     <>
-      <Header />
       <div className={`nc-PageLogin ${className}`} data-nc-id='PageLogin'>
-        <div className='container mx-auto mb-24 lg:mb-32 mt-44'>
+        <div className='container mx-auto'>
           <h2 className='my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-100 justify-center'>
             Iniciar Sesion
           </h2>

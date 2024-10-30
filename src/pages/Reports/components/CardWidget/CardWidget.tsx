@@ -21,9 +21,9 @@ const CardWidget: React.FC<ICardWidgetProps> = ({
   return (
     <>
       <div
-        className={`flex-1 ${
+        className={`flex-1 flex gap-5 items-center shadow-md ${
           !background ? ' bg-white' : ` bg-${color}-400 bg-opacity-10 `
-        } text-xl pt-8 px-10 pb-4 rounded-2xl`}
+        } text-xl px-10 h-24`}
       >
         <div
           className={`text-${color}-500 text-opacity-70 text-xl md:text-2xl lg:text-3xl font-medium`}
@@ -34,7 +34,7 @@ const CardWidget: React.FC<ICardWidgetProps> = ({
           </p>
         </div>
         <label
-          className={`uppercase block mt-1 mb-4 text-sm font-medium text-${color}-700`}
+          className={`uppercase block mt-1 text-sm font-medium text-${color}-700`}
         >
           {title}
         </label>

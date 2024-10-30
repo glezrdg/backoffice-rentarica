@@ -32,7 +32,7 @@ const ProvinceChart = memo(function ProvinceChart(props: any) {
     animation: true,
     plugins: {
       legend: {
-        position: 'right',
+        position: 'top',
         labels: {
           color: '#495057',
         },
@@ -41,21 +41,12 @@ const ProvinceChart = memo(function ProvinceChart(props: any) {
   })
 
   const pieData = {
-    labels: props.provinces
-      ?.filter((i: any) => i.qty > 0)
-      .map((i: any) => i.province || i.name),
+    labels: ['Nuevos Pacientes'],
     datasets: [
       {
-        data: props.provinces?.map((i: any) => i.qty),
-        backgroundColor: [
-          'rgb(107,111,243, 0.6',
-          'rgb(32,201,151, 0.6)',
-          'rgb(250,139,12, 0.6)',
-          'rgb(07,202,22, 0.6',
-          'rgb(142,201,151, 0.6)',
-          'rgb(111,55,12, 0.6)',
-        ],
-        border: ['rgb(107,111,243', 'rgb(32,201,151)', 'rgb(250,139,12)'],
+        data: [12],
+        backgroundColor: ['#EBF5FF'],
+        border: ['rgb(107,111,243'],
       },
     ],
   }

@@ -13,6 +13,7 @@ interface ICardProps {
   eye?: boolean
   bodyClassName?: string
   className?: string
+  pd?: number
 }
 
 const Card: React.FC<ICardProps> = ({
@@ -24,21 +25,24 @@ const Card: React.FC<ICardProps> = ({
   eye,
   className,
   rightHeader,
+  pd,
 }) => {
   return (
     <div
-      className={`p-4 bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700 h-fit ${className}`}
+      className={`p-4 bg-white rounded-lg border shadow-md sm:${
+        pd ? `p-${pd}` : 'p-8'
+      } dark:bg-gray-800 dark:border-gray-700 h-fit ${className}`}
     >
       {/* Header */}
       {title && (
-        <div className='flex items-center justify-between py-6 px-3 sm:px-6 sm:py-0 h-10 md:h-12 lg:h-14 border-b'>
-          <h4 className='text-[1.1rem] font-bold leading-none text-gray-600 dark:text-white'>
+        <div className='flex items-center justify-between py-6 px-3 sm:py-0 h-10 border-b'>
+          <h4 className='text-[1.1rem] leading-none text-gray-800 dark:text-white'>
             {title}
           </h4>
           {toolbar && <Toolbar />}
           {eye && (
             <Button
-              className='!bg-purple-900 hover:!bg-purple-800 !text-white'
+              className='!bg-blue-900 hover:!bg-blue-800 !text-white'
               iconButton
               icon='fa fa-eye mt-1 mr-2'
               text='Ver mas'

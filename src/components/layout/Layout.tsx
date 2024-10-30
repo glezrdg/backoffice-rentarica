@@ -1,15 +1,10 @@
-import React, { ReactNode, useEffect, useState } from 'react'
-
-import { BarChart } from '../charts'
+import React, { ReactNode, useState } from 'react'
 
 // Components
-import { FloatToolbar } from './FloatToolbar'
+import { useNavigate } from 'react-router-dom'
+import { useAppSelector } from '../../redux/store'
 import { SideNavbar } from './SideNavbar'
 import { TopMenuBar } from './TopMenuBar'
-import { NotesModal } from '../../pages/Notes/components/NotesModal'
-import { useAppSelector } from '../../redux/store'
-import { useNavigate } from 'react-router-dom'
-import CreateProductModal from '../../pages/Products/components/modal/CreateProductModal'
 
 export interface LayoutProps {
   children: ReactNode

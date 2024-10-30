@@ -8,6 +8,9 @@ import { useReportState } from '../Reports/context'
 import ShowMoney from './components/ShowMoney/ShowMoney'
 import { WidgetCard } from './components/WidgetCard'
 import { ProfitsSemester } from './components/charts/ProfitsSemester'
+import DailySchedule from '../../components/DailySchedule'
+import CardWidget from '../Reports/components/CardWidget'
+import ProvinceChart from '../../components/charts/PieChart'
 
 interface IDashboardProps {
   children?: React.ReactNode
@@ -23,44 +26,41 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
 
   return (
     <>
-      <PageHeader title='Dashboard' />
-
-      {/* Cards */}
-      <div
-        className={`w-full grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4 lg:gap-6`}
-      >
-        <WidgetCard title={'Ordenes'} color={'blue'} />
-        <WidgetCard title={'Numero de inversiones'} color={'purple'} />
-        <WidgetCard title={'Ganancias'} color={'green'} />
-        <WidgetCard title={'Nuevos Usuarios'} color={'red'} />
+      <div className='grid sm:grid-cols-3 gap-5 w-full mb-2'>
+        <CardWidget
+          color='green'
+          background='green'
+          title='Completadas hoy'
+          noCash
+          value={6}
+        />
+        <CardWidget
+          color='yellow'
+          background='yellow'
+          title='Semana pasada'
+          noCash
+          value={10}
+        />
+        <CardWidget
+          color='blue'
+          background='blue'
+          noCash
+          title='Mes pasado'
+          value={33}
+        />
       </div>
 
-      {/* PROFIT */}
-      <Card title='Total vendido' className='mt-6 md:mt-10' toolbar>
-        <div className='my-8 flex justify-evenly sm:justify-center'>
-          <ShowMoney
-            title='Periodo actual'
-            money={report?.sellsReport?.totalAmonutSell! || 0}
-            titleClassName='text-purple-900 dark:text-purple-300'
-            badgeClassName='bg-purple-500'
-          />
-          {/* <ShowMoney title='Periodo actual' money={24856} /> */}
+      <Card title='' bodyClassName='h-[300px]' className='mb-6'></Card>
+
+      <Card title='Usuarios' bodyClassName='grid grid-cols-[300px_1fr] h-full'>
+        <div className='h-[300px] w-full text-center grid place-items-center'>
+          <div>
+            <h3 className='text-8xl'>8</h3>
+            <p>Nuevos pacientes</p>
+          </div>
         </div>
-        <ProfitsSemester color='purple' />
+        <ProfitsSemester color='blue' />
       </Card>
-
-      {/* TOP */}
-      <TopProducts className='mt-8' value={report?.sellsReport?.productsQty} />
-
-      {/* <div className='grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-10 mt-6 lg:mt-10'>
-        <Card title='Ordenes recientes' eye>
-          <RecentOrdersTable />
-        </Card>
-
-        <Card title='Usuarios Registrados' eye>
-          <RecentOrdersTable />
-        </Card>
-      </div> */}
     </>
   )
 }

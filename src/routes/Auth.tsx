@@ -2,23 +2,17 @@ import { routerType } from '../types/router.types'
 
 // Pages | Components
 
-import { Login, Notes, Register } from '../pages'
-import Home from '../pages/Home'
+import { Login, Register } from '../pages'
 
 export const authPages: routerType[] = [
   {
-    path: '/login',
+    path: '/',
     element: <Login />,
     title: 'home',
   },
   {
     path: '/register',
     element: <Register />,
-    title: 'home',
-  },
-  {
-    path: '/',
-    element: <Home />,
     title: 'home',
   },
 ]
