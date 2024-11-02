@@ -1,8 +1,7 @@
 import React from 'react'
-import { LineChart } from '../../charts'
+import { Button } from '../Button'
 import { Toolbar } from './components/Toolbar'
 import './styles.css'
-import { Button } from '../Button'
 
 interface ICardProps {
   children?: React.ReactNode
