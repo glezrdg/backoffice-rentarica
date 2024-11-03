@@ -1,32 +1,20 @@
 import React, { useEffect, useState } from 'react'
 
 // Components
-import { PageHeader } from '../../components/layout'
 import { Card } from '../../components/shared/Card'
-import TopProducts from '../../components/shared/TopProducts/TopProducts'
-import { useReportState } from '../Reports/context'
 import ShowMoney from './components/ShowMoney/ShowMoney'
-import { WidgetCard } from './components/WidgetCard'
 import { ProfitsSemester } from './components/charts/ProfitsSemester'
-import DailySchedule from '../../components/DailySchedule'
-import CardWidget from '../Reports/components/CardWidget'
-import ProvinceChart from '../../components/charts/PieChart'
 
 interface IDashboardProps {
   children?: React.ReactNode
 }
 
 const Dashboard: React.FC<IDashboardProps> = (props) => {
-  const { reports, report, getReports } = useReportState()
   const [sidenav, setSidenav] = useState(false)
-
-  useEffect(() => {
-    getReports({})
-  }, [])
 
   return (
     <>
-      <div className='grid sm:grid-cols-3 gap-5 w-full mb-2'>
+      {/* <div className='grid sm:grid-cols-3 gap-5 w-full mb-2'>
         <CardWidget
           color='green'
           background='green'
@@ -48,7 +36,7 @@ const Dashboard: React.FC<IDashboardProps> = (props) => {
           title='Mes pasado'
           value={33}
         />
-      </div>
+      </div> */}
 
       <Card title='' bodyClassName='h-[300px]' className='mb-6'></Card>
 

@@ -1,18 +1,11 @@
 import { routerType } from '../../types/router.types'
 
 // Pages | Components
-import { Dashboard, Reports } from '../../pages'
-import Appointments from '../../pages/Appointment'
-import { AppointmentProvider } from '../../pages/Appointment/context'
-import Doctors from '../../pages/Doctors'
-import { DoctorProvider } from '../../pages/Doctors/context'
-import Patients from '../../pages/Patients'
-import { PatientProvider } from '../../pages/Patients/context'
+import { Dashboard } from '../../pages'
 import Profile from '../../pages/Profile'
-import { ProfileProvider } from '../../pages/Profile/context'
-import Schedule from '../../pages/Schedule'
-import { ScheduleProvider } from '../../pages/Schedule/context'
-import PatientPage from '../../pages/Patients/PatientPage'
+import Properties from '../../pages/Properties'
+import { PropertiesProvider } from '../../pages/Properties/context'
+import PropertyPage from '../../pages/Properties/PropertyPage'
 
 export const adminPages: routerType[] = [
   {
@@ -20,53 +13,26 @@ export const adminPages: routerType[] = [
     element: <Dashboard />,
     title: 'home',
   },
-  {
-    path: '/admin/citas',
-    element: <Appointments />,
-    title: 'home',
-  },
-  {
-    path: '/admin/pacientes',
-    element: (
-      <PatientProvider>
-        <Patients />
-      </PatientProvider>
-    ),
-    title: 'Cuadre',
-  },
-  {
-    path: '/admin/pacientes/:id',
-    element: (
-      <PatientProvider>
-        <PatientPage />
-      </PatientProvider>
-    ),
-    title: 'Cuadre',
-  },
-  {
-    path: '/admin/doctores',
-    element: (
-      <DoctorProvider>
-        <Doctors />
-      </DoctorProvider>
-    ),
-    title: 'Cuadre',
-  },
-  {
-    path: '/admin/reports',
-    element: <Reports />,
-    title: 'home',
-  },
 
   {
-    path: '/admin/agenda',
+    path: '/admin/propiedades',
     element: (
-      <ScheduleProvider>
-        <Schedule />
-      </ScheduleProvider>
+      <PropertiesProvider>
+        <Properties />
+      </PropertiesProvider>
     ),
-    title: 'home',
+    title: 'Cuadre',
   },
+  {
+    path: '/admin/propiedades/:id',
+    element: (
+      <PropertiesProvider>
+        <PropertyPage />
+      </PropertiesProvider>
+    ),
+    title: 'Cuadre',
+  },
+
   {
     path: '/admin/perfil',
     element: (

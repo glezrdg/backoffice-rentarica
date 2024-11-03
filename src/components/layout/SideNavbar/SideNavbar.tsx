@@ -33,53 +33,20 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active, handleOpen }) => {
           onClick={() => handleOpen()}
         >
           <i className='fa fa-bars lg:text-2xl mr-1 md:mr-2 lg:mr-4 text-slate-400' />
-          Tucita
+          <img
+            src='https://static.wixstatic.com/media/ae56f5_2c84bc9055b94c9b97193cea332fe85e~mv2.png/v1/fill/w_248,h_87,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Asset%201.png'
+            alt=''
+            className='w-[100px]'
+          />
         </div>
         <ul className='sidenav-menu'>
           <>
             <MenuItem
               activeMenu={active}
-              url='admin/dashboard'
-              icon={<RiHome6Line className='text-lg' />}
-              active={current === 'dashboard'}
-              title='Dashboard'
-            />
-            <MenuItem
-              activeMenu={active}
-              url='admin/citas'
-              icon={<CiCalendarDate className='text-lg' />}
-              active={current === 'citas'}
-              title='Citas'
-            />
-            <MenuItem
-              activeMenu={active}
-              url='admin/pacientes'
+              url='admin/propiedades'
               icon={<BsPerson className='text-lg' />}
-              active={current === 'pacientes'}
-              title='Pacientes'
-            />
-            <MenuItem
-              activeMenu={active}
-              url='admin/agenda'
-              icon={<RiCalendarCheckFill className='text-lg' />}
-              active={current === 'agenda'}
-              title='Agenda'
-            />
-            {user?.role === 'administrador' && (
-              <MenuItem
-                activeMenu={active}
-                url='admin/doctores'
-                icon={<FaHandHoldingMedical className='text-lg' />}
-                title='Doctores'
-                active={current === 'doctores'}
-              />
-            )}
-            <MenuItem
-              activeMenu={active}
-              url='admin/perfil'
-              icon={<BsPersonGear className='text-lg' />}
-              title='Perfil'
-              active={current === 'perfil'}
+              active={current === 'propiedades'}
+              title='Propiedades'
             />
           </>
         </ul>

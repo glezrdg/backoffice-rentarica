@@ -2,7 +2,6 @@ import React, { memo, useEffect } from 'react'
 import { Chart } from 'primereact/chart'
 
 import { barChartData, Colors, getColor } from '../../../../utility/data'
-import { useReportState } from '../../../../pages/Reports/context'
 import { monthString } from '../../../../utility/monthString'
 
 export interface ProfitsSemesterProps {
@@ -11,7 +10,7 @@ export interface ProfitsSemesterProps {
 
 export const ProfitsSemester: React.FC<ProfitsSemesterProps> = memo(
   function BarVertical({ color }) {
-    const { reports } = useReportState()
+    const reports: any = []
     let data: any = {
       labels: ['Enero', 'Febrero', 'Marzo', 'Abril'],
       datasets: [
@@ -28,7 +27,7 @@ export const ProfitsSemester: React.FC<ProfitsSemesterProps> = memo(
 
     useEffect(() => {
       if (reports?.length) {
-        ;(data.labels = reports.map((i) => monthString(i.month))),
+        ;(data.labels = ['']),
           (data.datasets = [
             {
               label: 'Ganancias',

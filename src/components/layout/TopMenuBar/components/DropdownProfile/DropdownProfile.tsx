@@ -20,12 +20,9 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({}) => {
       <figure className='user-dropdwon__info bg-blue-900 text-white'>
         <figcaption>
           <h5>{user.fullname}</h5>
-          <p className='!text-[12px] !text-slate-100'>
-            {user?.subscriptionId ? user.subscriptionId : 'Prueba gratis'}
-          </p>
         </figcaption>
       </figure>
-      <ul className='user-dropdwon__links text-slate-500'>
+      {/* <ul className='user-dropdwon__links text-slate-500'>
         <li>
           <Link
             to='/admin/perfil'
@@ -42,7 +39,7 @@ const DropdownProfile: React.FC<IDropdownProfileProps> = ({}) => {
             <i className='fa fa-gear' /> Ajustes
           </Link>
         </li>
-      </ul>
+      </ul> */}
       <button
         className='user-dropdwon__bottomAction transition-all text-slate-400 w-full hover:text-white hover:bg-blue-900 hover:shadow-sm'
         onClick={() => {

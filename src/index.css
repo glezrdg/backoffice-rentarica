@@ -4,8 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import url('styles/tailwindChanges.css'); */
-
 body {
   /* background-color: #F3F4F6; */
   @apply
@@ -48,4 +46,57 @@ body {
   background: #20c997;
   @apply
   text-white
+}
+
+.super-shadow {
+  @apply
+  shadow-[0_3px_10px_rgb(0,0,0,0.2)]
+}
+
+/* UPLOAD FILE */
+.custom__form input {
+  opacity: 0;
+  height: 0;
+}
+
+.custom__image-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.custom__image-container label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 150%;
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+  border: solid 1px black;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.custom__image-container img {
+  width: 150px;
+  height: 150px;
+  border: solid 1px black;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.p-dropdown{
+  @apply
+  !border-2
+  !border-slate-300
+  focus:border-transparent
+}
+
+input, select  {
+  @apply
+  !border-2
+  !border-slate-300
+  !p-[0.9rem]
+  focus:border-transparent
 }

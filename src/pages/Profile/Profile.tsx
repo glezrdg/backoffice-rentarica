@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Button } from '../../components/shared'
-import { DayCard } from '../Schedule/Schedule'
 import { useAppSelector } from '../../redux/store'
 import { CiCirclePlus, CiCircleRemove } from 'react-icons/ci'
 import { Checkbox } from 'primereact/checkbox'
@@ -121,17 +120,7 @@ const Profile: React.FC<IProfileProps> = (props) => {
           <h2 className='text-2xl text-blue-900'>Horario de Trabajo</h2>
           <Button text='Guardar horario' onClick={handleUpdateSchedule} />
         </div>
-        <div className='flex w-full mb-2'>
-          {Object.keys(doctorSchedule).map((i: any) => (
-            <DayCard
-              className={`w-full`}
-              badge
-              onClick={() => setSelectedDay(i)}
-              title={i}
-              btnClassName={`${selectedDay === i && 'bg-gray-200'}`}
-            />
-          ))}
-        </div>
+
         <div className='grid grid-cols-1 md:grid-cols-5 gap-6'>
           <div className='flex items-center justify-between bg-blue-50 p-4 rounded-lg col-span-5'>
             <div>

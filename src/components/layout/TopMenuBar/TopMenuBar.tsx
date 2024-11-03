@@ -4,6 +4,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAppSelector } from '../../../redux/store'
 import { DropdownMessages, DropdownProfile } from './components'
 import './styles.css'
+import { Link } from 'react-router-dom'
 
 interface ITopMenuBarProps {
   children?: React.ReactNode
@@ -14,39 +15,12 @@ interface ITopMenuBarProps {
 const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen, active }) => {
   const { user } = useAppSelector((state) => state.auth)
   const location = useLocation()
+  const [mobileNav, setMobileNav] = useState(false)
 
   const title = location.pathname.split('/')[2]
 
   const op: any = useRef(null)
   const perfil: any = useRef(null)
-
-  const items = [
-    {
-      label: 'Add',
-      icon: 'pi pi-pencil',
-      command: () => {},
-    },
-    {
-      label: 'Update',
-      icon: 'pi pi-refresh',
-      command: () => {},
-    },
-    {
-      label: 'Delete',
-      icon: 'pi pi-trash',
-      command: () => {},
-    },
-    {
-      label: 'Upload',
-      icon: 'pi pi-upload',
-      command: () => {},
-    },
-    {
-      label: 'React Website',
-      icon: 'pi pi-external-link',
-      command: () => {},
-    },
-  ]
 
   return (
     <>
@@ -63,15 +37,20 @@ const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen, active }) => {
           />
         </div> */}
         <div className='text-xl'>{title}</div>
-
-        <div
-          className='block sm:hidden relative cursor-pointer bg-slate-50 px-2 py-1 rounded-full'
-          onClick={(e) => perfil.current.toggle(e)}
-        >
-          <i className='text-sm md:text-lg xl:text-xl fa fa-light fa-user text-slate-400'></i>
-          <OverlayPanel ref={perfil}>
-            <DropdownProfile />
-          </OverlayPanel>
+        <div className='flex gap-4 items-center'>
+          <i
+            onClick={() => setMobileNav(!mobileNav)}
+            className={`block md:!hidden pi pi-align-right text-slate-500 text-lg hover:text-blue-800`}
+          />
+          <div
+            className='block sm:hidden relative cursor-pointer bg-slate-50 px-2 py-1 rounded-full'
+            onClick={(e) => perfil.current.toggle(e)}
+          >
+            <i className='text-sm md:text-lg xl:text-xl fa fa-light fa-user text-slate-400'></i>
+            <OverlayPanel ref={perfil}>
+              <DropdownProfile />
+            </OverlayPanel>
+          </div>
         </div>
         <div className='gap-4 justify-between items-center hidden sm:flex relative'>
           {/* <DarkSwitch /> */}
@@ -84,7 +63,7 @@ const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen, active }) => {
             buttonStyle={{ width: '2.5rem', height: '2.5rem' }}
           /> */}
           {/* Messages */}
-          <div
+          {/* <div
             className='relative cursor-pointer hover:bg-slate-50 px-2 py-1 rounded-full z-50'
             onClick={(e) => op.current.toggle(e)}
           >
@@ -98,7 +77,9 @@ const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen, active }) => {
             <OverlayPanel ref={op}>
               <DropdownMessages id='dropdow_messages_message' />
             </OverlayPanel>
-          </div>
+          </div> */}
+          {/* MOBILE NAV */}
+
           {/* Profile */}
           <div
             className='relative cursor-pointer hover:bg-slate-50 px-2 py-1 rounded-full'
@@ -109,6 +90,22 @@ const TopMenuBar: React.FC<ITopMenuBarProps> = ({ handleOpen, active }) => {
               <DropdownProfile />
             </OverlayPanel>
           </div>
+        </div>
+
+        <div
+          className={`fixed md:hidden w-[100vw] h-[100vh] top-16 bg-blue-800 transition-all ${
+            mobileNav ? 'right-0' : '!right-full'
+          } `}
+        >
+          <ul className='grid h-[60%] place-items-center text-white gap-0 lg:gap-8'>
+            <Link
+              onClick={() => setMobileNav(false)}
+              to={'/admin/propiedades'}
+              className='cursor-pointer'
+            >
+              Propiedades
+            </Link>
+          </ul>
         </div>
       </div>
     </>
