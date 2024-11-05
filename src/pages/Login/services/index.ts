@@ -1,5 +1,22 @@
-import { Auth, CreateAuthDtop, LoginDto } from "@/models/Auth";
+// import { Auth, CreateAuthDtop, LoginDto } from "@/models/Auth";
 import { DataService } from "../../../config/api";
+
+type Auth = {
+  _id: string
+  email: string
+  fullname: string
+}
+
+type LoginDto = {
+  email: string
+  password: string
+}
+
+type CreateAuthDtop = {
+  fullname: string
+  email: string
+  password: string
+}
 
 export const loginUser = async (body: LoginDto): Promise<Auth> => {
   try {

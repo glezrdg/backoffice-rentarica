@@ -66,8 +66,6 @@ const PageRegister: FC<PageLoginProps> = ({ className = '' }) => {
         email,
         password,
         fullname,
-        role: 'administrador',
-        sessionId: query.get('sessionId') || '',
       })
       localStorage.setItem('auth', JSON.stringify(loggedUser))
       dispatch(setAuth(loggedUser))
