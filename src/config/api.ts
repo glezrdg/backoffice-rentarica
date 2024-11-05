@@ -1,7 +1,8 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { getItem } from '../utility/localStorageControl';
+import { API_URL } from '../utility/constants';
 
-const API_ENDPOINT = 'http://localhost:3000/api';
+const API_ENDPOINT = `${API_URL}api`;
 
 const authHeader = () => ({
   Authorization: `Bearer ${getItem('auth')?.token}`,
