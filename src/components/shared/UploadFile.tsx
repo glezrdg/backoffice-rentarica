@@ -1,14 +1,21 @@
 import { API_URL } from '../../utility/constants'
 import { useEffect, useState } from 'react'
 
-export default function UploadFile({ setFiles, imgFiles, images }: any) {
+export default function UploadFile({
+  setFiles,
+  imgFiles,
+  images,
+  imageId,
+  labelId,
+  containerClass,
+}: any) {
   // IMAGE JS
 
   useEffect(() => {
     if (images.length) {
-      const imgInputHelper: any = document.getElementById('add-single-img')!
-      const imgInputHelperLabel = document.getElementById('add-img-label')!
-      const imgContainer = document.querySelector('.custom__image-container')!
+      const imgInputHelper: any = document.getElementById(imageId)!
+      const imgInputHelperLabel = document.getElementById(labelId)!
+      const imgContainer = document.querySelector(`.${containerClass}`)!
 
       images.map((i: string) => {
         const newImg = document.createElement('img')
@@ -19,9 +26,10 @@ export default function UploadFile({ setFiles, imgFiles, images }: any) {
   }, [images])
 
   const addImgHandler = () => {
-    const imgInputHelper: any = document.getElementById('add-single-img')!
-    const imgInputHelperLabel = document.getElementById('add-img-label')!
-    const imgContainer = document.querySelector('.custom__image-container')!
+    const imgInputHelper: any = document.getElementById(imageId)!
+    const imgInputHelperLabel = document.getElementById(labelId)!
+    const imgContainer = document.querySelector(`.${containerClass}`)!
+    console.log(imgContainer)
 
     const IMG_FILES: File[] = []
 
@@ -48,13 +56,13 @@ export default function UploadFile({ setFiles, imgFiles, images }: any) {
   return (
     <div className='flex flex-col my-5'>
       <div className='custom__form'>
-        <div className='custom__image-container'>
-          <label id='add-img-label' htmlFor='add-single-img'>
+        <div className={containerClass}>
+          <label id={labelId} htmlFor={imageId}>
             +
           </label>
           <input
             type='file'
-            id='add-single-img'
+            id={imageId}
             name='images'
             accept='image/jpeg image/png image/webp'
             onChange={addImgHandler}

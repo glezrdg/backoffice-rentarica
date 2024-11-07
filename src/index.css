@@ -59,13 +59,13 @@ body {
   height: 0;
 }
 
-.custom__image-container {
+.custom__image-container, .custom__image-container-title, .custom__image-container-captacion {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.custom__image-container label {
+.custom__image-container label, .custom__image-container-title label, .custom__image-container-captacion label {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,7 +78,7 @@ body {
   object-fit: cover;
 }
 
-.custom__image-container img {
+.custom__image-container img, .custom__image-container-title img, .custom__image-container-captacion img {
   width: 150px;
   height: 150px;
   border: solid 1px black;

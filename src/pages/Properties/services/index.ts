@@ -36,7 +36,9 @@ export const deleteProperty = async (id: string): Promise<Property> => {
 export const postProperty = async (body: CreatePropertyDto): Promise<Property> => {
   try {
     const { data: property } = await DataService.post('/properties', body)
-    let data = await handleAddImages(property._id, body.images)
+    await handleAddImages(property._id, body.images)
+    await handleAddTitleImages(property._id, body.titleImages)
+    let data = await handleAddCaptacionImages(property._id, body.captacionImages)
 
     return data
   } catch (error: any) {
@@ -53,6 +55,38 @@ const handleAddImages = async (id: string, images: any[]) => {
 
   try {
     const { data } = await DataService.post(`/properties/${id}/images`, formData, {
+      'Content-Type': 'multipart/form-data'
+    })
+    return data
+  } catch (error: any) {
+    throw new Error(error.data.response.error || error.message)
+  }
+}
+const handleAddTitleImages = async (id: string, images: any[]) => {
+  var formData = new FormData();
+
+  for (let i = 0; i < images.length; i++) {
+    formData.append('images', images[i]); // 'images' es el nombre que el servidor espera.
+  }
+
+  try {
+    const { data } = await DataService.post(`/properties/${id}/title_images`, formData, {
+      'Content-Type': 'multipart/form-data'
+    })
+    return data
+  } catch (error: any) {
+    throw new Error(error.data.response.error || error.message)
+  }
+}
+const handleAddCaptacionImages = async (id: string, images: any[]) => {
+  var formData = new FormData();
+
+  for (let i = 0; i < images.length; i++) {
+    formData.append('images', images[i]); // 'images' es el nombre que el servidor espera.
+  }
+
+  try {
+    const { data } = await DataService.post(`/properties/${id}/captacion_images`, formData, {
       'Content-Type': 'multipart/form-data'
     })
     return data
