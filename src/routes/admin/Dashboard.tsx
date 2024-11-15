@@ -8,11 +8,11 @@ import { PropertiesProvider } from '../../pages/Properties/context'
 import PropertyPage from '../../pages/Properties/PropertyPage'
 
 export const adminPages: routerType[] = [
-  {
-    path: '/admin/dashboard',
-    element: <Dashboard />,
-    title: 'home',
-  },
+  // {
+  //   path: '/admin/dashboard',
+  //   element: <Dashboard />,
+  //   title: 'home',
+  // },
 
   {
     path: '/admin/propiedades',
@@ -33,19 +33,23 @@ export const adminPages: routerType[] = [
     title: 'Cuadre',
   },
 
-  {
-    path: '/admin/perfil',
-    element: (
-      <>
-        <Profile />
-      </>
-    ),
-    title: 'home',
-  },
+  // {
+  //   path: '/admin/perfil',
+  //   element: (
+  //     <>
+  //       <Profile />
+  //     </>
+  //   ),
+  //   title: 'home',
+  // },
 
   {
     path: '*',
-    element: <Dashboard />,
+    element: (
+      <PropertiesProvider>
+        <Properties />
+      </PropertiesProvider>
+    ),
     title: 'home',
   },
 ]

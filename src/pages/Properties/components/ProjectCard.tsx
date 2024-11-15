@@ -70,7 +70,7 @@ const ProjectCard: React.FC<IProjectCardProps> = ({ project }) => {
             {project.unitPrice} USD${project.price}
           </p>
           <p className='bg-yellow-400 px-2 h-9 leading-9 rounded-sm text-black'>
-            202327
+            {project.code}
           </p>
         </div>
       </div>

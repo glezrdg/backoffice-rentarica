@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Galeria from './components/Galeria'
 import { usePropertyState } from './context'
 import Toolbar from './components/Toolbar'
+import { propertyFeatures } from '../../utility/data'
 
 interface IPatientPageProps {
   children?: React.ReactNode
@@ -58,12 +59,33 @@ const PatientPage: React.FC<IPatientPageProps> = (props) => {
             />
 
             {/*  */}
-            {/* <h3 className='text-xl font-semibold py-6'>Características:</h3>
-            <ul className='text-lg list-disc text-justify p-4 text-slate-600'>
-              {property?.items?.map((i) => (
-                <li className='list-item'>{i}</li>
-              ))}
-            </ul> */}
+            {property?.items?.length ? (
+              <>
+                <ul className='text-lg flex items-center gap-4 flex-wrap max-w-[700px] text-justify py-4 my-4 text-slate-600'>
+                  {property?.items?.map((i) => {
+                    const feature = propertyFeatures.find((e) => e.value == i)
+                    return (
+                      <button
+                        key={i}
+                        className={`flex items-center gap-2 p-2 rounded-lg transition-colors borderbg-yellow-300 border-yellow-500`}
+                      >
+                        <img
+                          src={feature?.icon}
+                          alt={feature?.label}
+                          className='w-6 h-6'
+                        />
+                        <span className='text-base font-semibold'>
+                          {' '}
+                          {propertyFeatures.find((e) => e.value == i)?.label}
+                        </span>
+                      </button>
+                    )
+                  })}
+                </ul>
+              </>
+            ) : (
+              ''
+            )}
 
             {/*  */}
             <h3 className='text-xl font-semibold py-6'>

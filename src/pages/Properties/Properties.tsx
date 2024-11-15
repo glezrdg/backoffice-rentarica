@@ -1,5 +1,5 @@
 import { InputText } from 'primereact/inputtext'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '../../components/shared'
 import CreatePropertyModal from './components/modals/CreatePropertyModal'
 import ProjectCard from './components/ProjectCard'
@@ -8,6 +8,7 @@ import { CiCircleRemove } from 'react-icons/ci'
 import { VscSettings } from 'react-icons/vsc'
 import FilterProperties from './components/Filter/FilterProperties'
 import { Dialog } from 'primereact/dialog'
+import { Property } from './models/property.model'
 
 interface IPropertiesProps {
   children?: React.ReactNode
@@ -17,6 +18,10 @@ const Properties: React.FC<IPropertiesProps> = (props) => {
   const { properties, handleGetProperties } = usePropertyState()
   const [create, setCreate] = useState(false)
   const [visible, setVisible] = useState(false)
+  const [code, setCode] = useState('')
+  const [searchProperties, setSearchProperties] = useState<Property[]>(
+    properties || []
+  )
   const [filters, setFilters] = useState({
     category: '',
     title: '',
@@ -36,6 +41,13 @@ const Properties: React.FC<IPropertiesProps> = (props) => {
     selectedFeatures: [],
     active: '',
   })
+
+  useEffect(() => {
+    if (code) {
+      setSearchProperties(properties.filter((i) => i.code.includes(code)))
+      console.log(searchProperties)
+    } else setSearchProperties(properties)
+  }, [code])
 
   const handleCleanFilters = () => {
     setFilters({
@@ -72,6 +84,8 @@ const Properties: React.FC<IPropertiesProps> = (props) => {
         <InputText
           className=' w-[40vw] px-10'
           placeholder='Buscar por nombre o codigo'
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
         />
         {/* FILTERS */}
         <div className='flex items-center gap-4'>
@@ -103,7 +117,7 @@ const Properties: React.FC<IPropertiesProps> = (props) => {
         />
       </div>
       <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
-        {properties?.map((p) => (
+        {searchProperties?.map((p) => (
           <ProjectCard project={p} />
         ))}
       </div>
