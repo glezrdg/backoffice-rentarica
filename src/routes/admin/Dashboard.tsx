@@ -1,11 +1,11 @@
-import { routerType } from '../../types/router.types'
+import { routerType } from "../../types/router.types";
 
 // Pages | Components
-import { Dashboard } from '../../pages'
-import Profile from '../../pages/Profile'
-import Properties from '../../pages/Properties'
-import { PropertiesProvider } from '../../pages/Properties/context'
-import PropertyPage from '../../pages/Properties/PropertyPage'
+import { Dashboard } from "../../pages";
+// import Profile from '../../pages/Profile'
+import Properties from "../../pages/Properties";
+import { PropertiesProvider } from "../../pages/Properties/context";
+import PropertyPage from "../../pages/Properties/PropertyPage";
 
 export const adminPages: routerType[] = [
   // {
@@ -15,22 +15,22 @@ export const adminPages: routerType[] = [
   // },
 
   {
-    path: '/admin/propiedades',
+    path: "/admin/propiedades",
     element: (
       <PropertiesProvider>
         <Properties />
       </PropertiesProvider>
     ),
-    title: 'Cuadre',
+    title: "Cuadre",
   },
   {
-    path: '/admin/propiedades/:id',
+    path: "/admin/propiedades/:id",
     element: (
       <PropertiesProvider>
         <PropertyPage />
       </PropertiesProvider>
     ),
-    title: 'Cuadre',
+    title: "Cuadre",
   },
 
   // {
@@ -44,12 +44,12 @@ export const adminPages: routerType[] = [
   // },
 
   {
-    path: '*',
+    path: "*",
     element: (
       <PropertiesProvider>
         <Properties />
       </PropertiesProvider>
     ),
-    title: 'home',
+    title: "home",
   },
-]
+];
