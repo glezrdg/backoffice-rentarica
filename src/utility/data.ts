@@ -5,6 +5,10 @@ export type Colors = "red" | "blue" | "green" | "purple";
 export function barChartData(color: Colors) {
   let ChoosenColor = getColor(color);
 
+
+
+
+  
   return {
     labels: ["ene", "feb", "mar", "abr", "may", "jun"],
     datasets: [
