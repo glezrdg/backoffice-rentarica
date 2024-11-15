@@ -6,6 +6,7 @@ import ProjectCard from './components/ProjectCard'
 import { usePropertyState } from './context'
 import { CiCircleRemove } from 'react-icons/ci'
 import { VscSettings } from 'react-icons/vsc'
+import { IoMdSearch } from 'react-icons/io'
 import FilterProperties from './components/Filter/FilterProperties'
 import { Dialog } from 'primereact/dialog'
 import { Property } from './models/property.model'
@@ -30,7 +31,7 @@ const Properties: React.FC<IPropertiesProps> = (props) => {
     priceMin: 0,
     priceMax: 8000000,
     bedMin: 1,
-    bedMax: 3,
+    bedMax: 6,
     floorMin: 1,
     floorMax: 3,
     sizeMin: 1,
@@ -47,7 +48,7 @@ const Properties: React.FC<IPropertiesProps> = (props) => {
       setSearchProperties(properties.filter((i) => i.code.includes(code)))
       console.log(searchProperties)
     } else setSearchProperties(properties)
-  }, [code])
+  }, [code, properties])
 
   const handleCleanFilters = () => {
     setFilters({
@@ -80,13 +81,17 @@ const Properties: React.FC<IPropertiesProps> = (props) => {
 
   return (
     <>
-      <div className='mb-6 flex justify-between items-center'>
-        <InputText
-          className=' w-[40vw] px-10'
-          placeholder='Buscar por nombre o codigo'
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-        />
+      <div className='mb-6 grid md:flex justify-between items-center'>
+        <div className='self-center flex items-center border-black rounded-lg border-b-2 mt-7'>
+          <input
+            className=' focus:outline-none  border-none'
+            placeholder='Buscar por código'
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+          />{' '}
+          <IoMdSearch className='text-xl' />
+        </div>
+
         {/* FILTERS */}
         <div className='flex items-center gap-4'>
           <div
