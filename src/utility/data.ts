@@ -8,6 +8,8 @@ export function barChartData(color: Colors) {
   let ChoosenColor = getColor(color)
 
 
+  
+
   return {
     labels: [
       "ene",
