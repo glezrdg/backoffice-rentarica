@@ -4,8 +4,7 @@ export interface Property {
   category: string
   type: string
   price: number
-  province: string
-  sector: string
+  zone: string
   description: string
   items: string[]
   images: string[]
@@ -22,6 +21,7 @@ export interface Property {
   isNegotiable: boolean
   code: string
   isActive: boolean
+  unitPrice: string
 }
 
 export interface CreatePropertyDto {
@@ -30,7 +30,7 @@ export interface CreatePropertyDto {
   category: string
   price: number
   description: string
-  province: string
+  zone: string
   items: string[]
   images: any[]
   titleImages: any[]
@@ -39,7 +39,6 @@ export interface CreatePropertyDto {
   rooms: number
   size: number
   floors: number
-  sector: string
   owner_name: string
   owner_contact: string
   airbnb: string
@@ -47,4 +46,5 @@ export interface CreatePropertyDto {
   isNegotiable: boolean
   code: string
   isActive: boolean
+  unitPrice: string
 }

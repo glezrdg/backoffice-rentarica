@@ -38,13 +38,13 @@ const PatientPage: React.FC<IPatientPageProps> = (props) => {
             <div className='mt-4 md:mt-0 md:text-right'>
               <p className={`text-lg`}>{property?.category}</p>
               <p className='font-bold text-xl lg:text-3xl uppercase'>
-                Desde USD${property?.price}
+                {property?.unitPrice} USD${property?.price}
               </p>
             </div>
           </div>
           <div className='text-slate-600 mt-3 text-lg'>
             <i className='pi pi-map-marker mr-2' />
-            <span>{property?.province}</span>
+            <span>{property?.zone}</span>
           </div>
         </div>
         <div className='grid gap-12 my-6 md:my-14'>
@@ -58,14 +58,12 @@ const PatientPage: React.FC<IPatientPageProps> = (props) => {
             />
 
             {/*  */}
-            {/* <h3 className='text-xl font-semibold py-6'>
-            Características de los Apartamentos:
-          </h3>
-          <ul className='text-lg list-disc text-justify p-4 text-slate-600'>
-            {property?.items?.map((i) => (
-              <li className='list-item'>{i}</li>
-            ))}
-          </ul> */}
+            {/* <h3 className='text-xl font-semibold py-6'>Características:</h3>
+            <ul className='text-lg list-disc text-justify p-4 text-slate-600'>
+              {property?.items?.map((i) => (
+                <li className='list-item'>{i}</li>
+              ))}
+            </ul> */}
 
             {/*  */}
             <h3 className='text-xl font-semibold py-6'>

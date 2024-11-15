@@ -6,11 +6,17 @@ import { Inplace, InplaceContent, InplaceDisplay } from 'primereact/inplace'
 import { InputNumber } from 'primereact/inputnumber'
 import { InputText } from 'primereact/inputtext'
 import { SelectButton } from 'primereact/selectbutton'
-import React, { useState } from 'react'
+import { InputMask } from 'primereact/inputmask'
+import React, { useEffect, useState } from 'react'
 import { toast } from '../../../../App'
 import { Button, Card } from '../../../../components/shared'
 import UploadFile from '../../../../components/shared/UploadFile'
-import { categories, propertyTypes, provincias } from '../../../../utility/data'
+import {
+  categories,
+  propertyFeatures,
+  propertyTypes,
+  provincias,
+} from '../../../../utility/data'
 import { usePropertyState } from '../../context'
 import { CreatePropertyDto, Property } from '../../models/property.model'
 
@@ -30,12 +36,11 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
   const [property, setProperty] = useState<CreatePropertyDto>({
     title: propertyProps?.title || '',
     type: propertyProps?.type || '',
-    province: propertyProps?.province || '',
-    sector: propertyProps?.sector || '',
+    zone: propertyProps?.zone || '',
     price: propertyProps?.price || 0,
     category: propertyProps?.category || '',
     description: propertyProps?.description || '',
-    items: propertyProps?.items || [''],
+    items: propertyProps?.items || [],
     images: propertyProps?.images || [],
     bathrooms: propertyProps?.bathrooms || 1,
     rooms: propertyProps?.rooms || 1,
@@ -50,6 +55,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
     titleImages: propertyProps?.titleImages || [],
     captacionImages: propertyProps?.captacionImages || [],
     isActive: propertyProps?.isActive || false,
+    unitPrice: propertyProps?.unitPrice || '',
   })
 
   const [file, setFile] = useState()
@@ -75,6 +81,26 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
     }
   }
 
+  useEffect(() => {
+    console.log(property)
+  }, [property])
+
+  const handleAddItem = (item: string) => {
+    console.log(item)
+    let index = property?.items?.find((i) => i === item)
+    console.log('index', index)
+    let newItems: any
+    if (index) {
+      newItems = property.items.filter((i) => i !== item)
+      handleInputChange({}, newItems, 'items')
+    } else {
+      if (property.items.length) {
+        newItems = [...property.items, item]
+      } else newItems = [item]
+      handleInputChange({}, newItems, 'items')
+    }
+  }
+
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     try {
@@ -96,17 +122,16 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
       setProperty({
         title: '',
         type: '',
-        province: '',
+        zone: '',
         price: 0,
         category: '',
         description: '',
-        items: [''],
+        items: [],
         images: [],
         bathrooms: 1,
         rooms: 1,
         size: 1,
         floors: 1,
-        sector: '',
         owner_contact: '',
         owner_name: '',
         airbnb: '',
@@ -116,6 +141,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
         titleImages: [],
         captacionImages: [],
         isActive: false,
+        unitPrice: '',
       })
       setFile(undefined)
       setFiles([])
@@ -170,12 +196,14 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
             {/* PROPERTYY  TYPE */}
             <div className='flex flex-col space-y-2 col-span-2 lg:col-span-1 !mt-0'>
               <label className='text-sm'>Contacto del propietario</label>
-              <InputText
-                value={property.owner_contact}
+              <InputMask
+                id='phone'
+                mask='(999) 999-9999'
+                placeholder='(809) 999-9999'
                 name='owner_contact'
                 onChange={handleInputChange}
-                placeholder='849-859-9658'
-              />
+                value={property.owner_contact}
+              ></InputMask>
             </div>
           </div>
         </Card>
@@ -216,6 +244,8 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                 <Dropdown
                   value={property.type}
                   options={propertyTypes}
+                  optionLabel='label'
+                  optionValue='value'
                   name='type'
                   onChange={handleInputChange}
                 />
@@ -238,9 +268,9 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
               <label className='text-sm'>Precio de propiedad</label>
               <div className='flex flex-col md:flex-row gap-4 w-full'>
                 <Dropdown
-                  value={property.category}
-                  options={['Fijo', 'Desde', 'Mt2']}
-                  name='category'
+                  value={property.unitPrice}
+                  options={['Desde', 'Mt2']}
+                  name='unitPrice'
                   onChange={handleInputChange}
                 />
                 <InputNumber
@@ -304,25 +334,19 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
             </div>
 
             {/* Location */}
-            <div className='col-span-2 gap-4 grid lg:grid-cols-2 w-full'>
+            <div className='col-span-2 gap-4 w-full'>
               <div className='flex flex-col space-y-2 col-span-2 lg:col-span-1 !mt-0'>
-                <label className='text-sm'>Provincia</label>
+                <label className='text-sm'>Zona</label>
                 <Dropdown
-                  className='w-full'
-                  value={property.province}
+                  value={property.zone}
+                  onChange={(e) => handleInputChange({}, e.value, 'zone')}
                   options={provincias}
-                  name='province'
-                  onChange={handleInputChange}
-                  filter
-                />
-              </div>
-              <div className='flex flex-col space-y-2 col-span-2 lg:col-span-1 !mt-0'>
-                <label className='text-sm'>Sector</label>
-                <InputText
+                  optionLabel='label'
+                  optionGroupLabel='label'
+                  optionGroupChildren='items'
+                  placeholder='Selecciona una zona'
                   className='w-full'
-                  value={property.sector}
-                  name='sector'
-                  onChange={handleInputChange}
+                  filter
                 />
               </div>
             </div>
@@ -385,64 +409,14 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
               <label className='text-sm'>Caracteristicas</label>
               <div className='grid  gap-2'>
                 <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 text-sm'>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Piscina
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Jacuzzi | Picuzzi
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Jardin
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Patio
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Terraza
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Garaje
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Balcon
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Gimnasio
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Areas deportivas
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Area de juego
-                    para niños
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Cancha de Tenis
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Cancha de
-                    Basketball
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Cancha de Padel
-                  </label>
-                  <label className='flex items-center gap-8'>
-                    {' '}
-                    <input type='checkbox' className='!p-2' /> Cancha de Squash
-                  </label>
+                  {propertyFeatures.map((i) => (
+                    <label
+                      className='flex items-center gap-8'
+                      onClick={() => handleAddItem(i.value)}
+                    >
+                      <input type='checkbox' className='!p-2' /> {i.label}
+                    </label>
+                  ))}
                 </div>
               </div>
             </div>

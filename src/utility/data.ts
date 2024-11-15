@@ -47,217 +47,119 @@ export function getColor(color: Colors) {
   }
 }
 
-export const workSchedule: IDoctorSchedule = {
-  lunes: {
-    hours: []
-  },
-  martes: {
-    hours: []
-  },
-  miercoles: {
-    hours: []
-  },
-  jueves: {
-    hours: []
-  },
-  viernes: {
-    hours: []
-  },
-  sabado: {
-    hours: []
-  },
-  domingo: {
-    hours: []
-  }
-}
+export const categories = ['En venta', 'En Alquiler', 'Terreno', 'Airbnb', 'Renta Corta']
 
-export const categories = ['En venta', 'En Alquiler', 'Terreno', 'Airbnb',]
-export const propertyTypes = ['Casa', 'Apartamento', 'Terreno', 'Villa', 'Treehouse', 'bungalow', 'Casa de Veraneo', 'Otro']
+export const propertyFeatures = [
+  {
+    label: "En Planos",
+    value: "en_planos",
+    icon: "/assets/icons/blueprint.svg",
+  },
+  { label: "Studio", value: "studio", icon: "/assets/icons/studio.svg" },
+  { label: "Piscina", value: "piscina", icon: "/assets/icons/pool.svg" },
+  { label: "Terraza", value: "terraza", icon: "/assets/icons/terrace.svg" },
+  { label: "Balcón", value: "balcon", icon: "/assets/icons/balcony.svg" },
+  {
+    label: "Área Social",
+    value: "area_social",
+    icon: "/assets/icons/social-area.svg",
+  },
+  { label: "Lobby", value: "lobby", icon: "/assets/icons/lobby.svg" },
+  {
+    label: "Seguridad",
+    value: "seguridad",
+    icon: "/assets/icons/security.svg",
+  },
+  { label: "Parqueo", value: "parqueo", icon: "/assets/icons/parking.svg" },
+  { label: "Gym", value: "gym", icon: "/assets/icons/gym.svg" },
+  {
+    label: "Áreas Deportivas",
+    value: "areas_deportivas",
+    icon: "/assets/icons/sports-area.svg",
+  },
+  {
+    label: "Pet Friendly",
+    value: "petfriendly",
+    icon: "/assets/icons/pet-friendly.svg",
+  },
+  {
+    label: "Beach Front",
+    value: "beach_front",
+    icon: "/assets/icons/beach-front.svg",
+  },
+  {
+    label: "Amueblado",
+    value: "amueblado",
+    icon: "/assets/icons/furnished.svg",
+  },
+  {
+    label: "Sin Amueblar",
+    value: "sin_amueblar",
+    icon: "/assets/icons/unfurnished.svg",
+  },
+];
 
-export const projects = [
+export const propertyTypes = [
   {
-    id: 1,
-    title: 'Beautiful Beachfront Apartments',
-    category: 'En Venta',
-    categories: [1],
-    first_description: 'Te presentamos un proyecto cerrado excepcionalmente ubicado en Boca Chica, Santo Domingo, República Dominicana. Primera linea de playa y una vista expetacular al oceano. A tan solo diez minutos del Aeropuerto Internacional de las Américas, este enclave ofrece impresionantes vistas de las aguas turquesas del Mar Caribe, su blanca arena y el resplandeciente sol tropical, todo a solo dos minutos de la playa.',
-    second_description: 'Este residencial se encuentra en una de las zonas más seguras y tranquilas de la región, y está convenientemente cerca de diversas atracciones. Estás a 15 minutos de campos de golf de renombre, a 10 minutos del mega puerto y a solo 35 minutos de Santo Domingo, la ciudad capital.',
-    third_description: 'Este proyecto ha sido diseñado en el lugar perfecto para ti y tu familia. Sus áreas comunes son cómodas y acogedoras, con un estilo contemporáneo caracterizado por la simplicidad y la sofisticación, lo que crea un ambiente elegante y fresco. Además, el entorno está rodeado por las aguas turquesas del Mar Caribe, su blanca arena y el sol radiante.',
+    label: "Apartamentos",
+    value: "apartment",
+    icon: "/assets/icons/apartment.svg",
+  },
+  { label: "Casas", value: "house", icon: "/assets/icons/house.svg" },
+  { label: "Villas", value: "villa", icon: "/assets/icons/villa.svg" },
+  { label: "Solares", value: "land", icon: "/assets/icons/land.svg" },
+  { label: "Fincas", value: "farm", icon: "/assets/icons/farm.svg" },
+  { label: "Naves", value: "warehouse", icon: "/assets/icons/warehouse.svg" },
+  { label: "Oficinas", value: "office", icon: "/assets/icons/office.svg" },
+
+  {
+    label: "Penthouses",
+    value: "penthouse",
+    icon: "/assets/icons/penthouse.svg",
+  },
+  { label: "Negocios", value: "business", icon: "/assets/icons/business.svg" },
+];
+
+export const provincias = [
+  {
+    label: 'Santo Domingo y Santiago',
+    code: 'DO',
     items: [
-      'Ofrecemos apartamentos de una (1) y dos (2) habitaciones con una distribución pensada para el máximo confort',
-      'Los apartamentos cuentan con cocina, sala, comedor y balcón terraza.',
-      'Acabados de alta calidad, que incluyen pisos de porcelanato, cristales blue green o similares, puertas de madera preciosa y cocinas modulares.',
-      'Estufas empotradas eléctricas y preinstalación para aire acondicionado.',
-    ],
-    images: [
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
-      'https://static.wixstatic.com/media/828c94_6ec6b2797b414a2184af6025a0bb3cd0~mv2.jpg/v1/fit/w_1216,h_515,q_90/828c94_6ec6b2797b414a2184af6025a0bb3cd0~mv2.jpg',
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
+      { label: 'Santo Domingo Centro', value: 'Santo Domingo Centro' },
+      { label: 'Santo Domingo Este', value: 'Santo Domingo Este' },
+      { label: 'Santo Domingo Norte', value: 'Santo Domingo Norte' },
+      { label: 'Santo Domingo Oeste', value: 'Santo Domingo Oeste' },
+      { label: 'Santiago', value: 'Santiago' },
     ],
   },
   {
-    id: 2,
-    title: 'Beautiful Beachfront Apartments',
-    category: 'En Venta',
-    categories: [1],
-    first_description: 'GRUPO INAP, hemos llevado a cabo la transformación completa de la fábrica Caribbean Glass, especializada en la producción de envases de vidrio. Este proyecto integral incluyó la implementación de tecnologías avanzadas y sistemas eficientes que han revolucionado la infraestructura existente:',
+    label: 'Zonas Turísticas',
+    code: 'TO',
     items: [
-      'Sistemas de Aire Comprimido y de Ventilación: Diseñados para maximizar la eficiencia operativa y garantizar condiciones óptimas en el proceso de fabricación.',
-      'Sistemas de Agua Helada y Tratada: Esenciales para mantener los estándares de calidad y seguridad del vidrio producido, asegurando procesos consistentes y eficientes.',
-      'Sistemas de Transporte Automatizado (Conveyors): Estos sistemas facilitan una logística fluida y eficiente dentro de la planta, mejorando significativamente los tiempos de producción y la manipulación de materiales.',
-      'La reingeniería no solo ha incrementado la capacidad de producción sino que también ha fortalecido nuestro compromiso con la sostenibilidad y la innovación, estableciendo nuevos estándares de excelencia en la industria del vidrio.',
-    ],
-    images: [
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
+      { label: 'Bávaro, Punta Cana y la Altagracia', value: 'Bávaro' },
+      { label: 'La Romana', value: 'La Romana' },
+      { label: 'Puerto Plata', value: 'Puerto Plata' },
+      { label: 'Samaná', value: 'Samaná' },
+      { label: 'San Pedro de Macorís', value: 'San Pedro de Macorís' },
     ],
   },
   {
-    id: 3,
-    title: 'Beautiful Beachfront Apartments',
-    category: 'En Venta',
-    categories: [1],
-    first_description: 'GRUPO INAP, hemos llevado a cabo la transformación completa de la fábrica Caribbean Glass, especializada en la producción de envases de vidrio. Este proyecto integral incluyó la implementación de tecnologías avanzadas y sistemas eficientes que han revolucionado la infraestructura existente:',
+    label: 'Otras Zonas',
+    code: 'OZ',
     items: [
-      'Sistemas de Aire Comprimido y de Ventilación: Diseñados para maximizar la eficiencia operativa y garantizar condiciones óptimas en el proceso de fabricación.',
-      'Sistemas de Agua Helada y Tratada: Esenciales para mantener los estándares de calidad y seguridad del vidrio producido, asegurando procesos consistentes y eficientes.',
-      'Sistemas de Transporte Automatizado (Conveyors): Estos sistemas facilitan una logística fluida y eficiente dentro de la planta, mejorando significativamente los tiempos de producción y la manipulación de materiales.',
-      'La reingeniería no solo ha incrementado la capacidad de producción sino que también ha fortalecido nuestro compromiso con la sostenibilidad y la innovación, estableciendo nuevos estándares de excelencia en la industria del vidrio.',
-    ],
-    images: [
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
-    ],
-  },
-  {
-    id: 4,
-    title: 'Beautiful Beachfront Apartments',
-    category: 'En Venta',
-    categories: [1],
-    first_description: 'GRUPO INAP, hemos llevado a cabo la transformación completa de la fábrica Caribbean Glass, especializada en la producción de envases de vidrio. Este proyecto integral incluyó la implementación de tecnologías avanzadas y sistemas eficientes que han revolucionado la infraestructura existente:',
-    items: [
-      'Sistemas de Aire Comprimido y de Ventilación: Diseñados para maximizar la eficiencia operativa y garantizar condiciones óptimas en el proceso de fabricación.',
-      'Sistemas de Agua Helada y Tratada: Esenciales para mantener los estándares de calidad y seguridad del vidrio producido, asegurando procesos consistentes y eficientes.',
-      'Sistemas de Transporte Automatizado (Conveyors): Estos sistemas facilitan una logística fluida y eficiente dentro de la planta, mejorando significativamente los tiempos de producción y la manipulación de materiales.',
-      'La reingeniería no solo ha incrementado la capacidad de producción sino que también ha fortalecido nuestro compromiso con la sostenibilidad y la innovación, estableciendo nuevos estándares de excelencia en la industria del vidrio.',
-    ],
-    images: [
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
-    ],
-  },
-  {
-    id: 5,
-    title: 'Beautiful Beachfront Apartments',
-    category: 'En Venta',
-    categories: [1],
-    first_description: 'GRUPO INAP, hemos llevado a cabo la transformación completa de la fábrica Caribbean Glass, especializada en la producción de envases de vidrio. Este proyecto integral incluyó la implementación de tecnologías avanzadas y sistemas eficientes que han revolucionado la infraestructura existente:',
-    items: [
-      'Sistemas de Aire Comprimido y de Ventilación: Diseñados para maximizar la eficiencia operativa y garantizar condiciones óptimas en el proceso de fabricación.',
-      'Sistemas de Agua Helada y Tratada: Esenciales para mantener los estándares de calidad y seguridad del vidrio producido, asegurando procesos consistentes y eficientes.',
-      'Sistemas de Transporte Automatizado (Conveyors): Estos sistemas facilitan una logística fluida y eficiente dentro de la planta, mejorando significativamente los tiempos de producción y la manipulación de materiales.',
-      'La reingeniería no solo ha incrementado la capacidad de producción sino que también ha fortalecido nuestro compromiso con la sostenibilidad y la innovación, estableciendo nuevos estándares de excelencia en la industria del vidrio.',
-    ],
-    images: [
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
-    ],
-  },
-  {
-    id: 6,
-    title: 'Beautiful Beachfront Apartments',
-    category: 'En Venta',
-    categories: [1],
-    first_description: 'GRUPO INAP, hemos llevado a cabo la transformación completa de la fábrica Caribbean Glass, especializada en la producción de envases de vidrio. Este proyecto integral incluyó la implementación de tecnologías avanzadas y sistemas eficientes que han revolucionado la infraestructura existente:',
-    items: [
-      'Sistemas de Aire Comprimido y de Ventilación: Diseñados para maximizar la eficiencia operativa y garantizar condiciones óptimas en el proceso de fabricación.',
-      'Sistemas de Agua Helada y Tratada: Esenciales para mantener los estándares de calidad y seguridad del vidrio producido, asegurando procesos consistentes y eficientes.',
-      'Sistemas de Transporte Automatizado (Conveyors): Estos sistemas facilitan una logística fluida y eficiente dentro de la planta, mejorando significativamente los tiempos de producción y la manipulación de materiales.',
-      'La reingeniería no solo ha incrementado la capacidad de producción sino que también ha fortalecido nuestro compromiso con la sostenibilidad y la innovación, estableciendo nuevos estándares de excelencia en la industria del vidrio.',
-    ],
-    images: [
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
-    ],
-  },
-  {
-    id: 7,
-    title: 'Beautiful Beachfront Apartments',
-    category: 'En Venta',
-    categories: [1],
-    first_description: 'GRUPO INAP, hemos llevado a cabo la transformación completa de la fábrica Caribbean Glass, especializada en la producción de envases de vidrio. Este proyecto integral incluyó la implementación de tecnologías avanzadas y sistemas eficientes que han revolucionado la infraestructura existente:',
-    items: [
-      'Sistemas de Aire Comprimido y de Ventilación: Diseñados para maximizar la eficiencia operativa y garantizar condiciones óptimas en el proceso de fabricación.',
-      'Sistemas de Agua Helada y Tratada: Esenciales para mantener los estándares de calidad y seguridad del vidrio producido, asegurando procesos consistentes y eficientes.',
-      'Sistemas de Transporte Automatizado (Conveyors): Estos sistemas facilitan una logística fluida y eficiente dentro de la planta, mejorando significativamente los tiempos de producción y la manipulación de materiales.',
-      'La reingeniería no solo ha incrementado la capacidad de producción sino que también ha fortalecido nuestro compromiso con la sostenibilidad y la innovación, estableciendo nuevos estándares de excelencia en la industria del vidrio.',
-    ],
-    images: [
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
-    ],
-  },
-  {
-    id: 8,
-    title: 'Beautiful Beachfront Apartments',
-    category: 'En Venta',
-    categories: [1],
-    first_description: 'GRUPO INAP, hemos llevado a cabo la transformación completa de la fábrica Caribbean Glass, especializada en la producción de envases de vidrio. Este proyecto integral incluyó la implementación de tecnologías avanzadas y sistemas eficientes que han revolucionado la infraestructura existente:',
-    items: [
-      'Sistemas de Aire Comprimido y de Ventilación: Diseñados para maximizar la eficiencia operativa y garantizar condiciones óptimas en el proceso de fabricación.',
-      'Sistemas de Agua Helada y Tratada: Esenciales para mantener los estándares de calidad y seguridad del vidrio producido, asegurando procesos consistentes y eficientes.',
-      'Sistemas de Transporte Automatizado (Conveyors): Estos sistemas facilitan una logística fluida y eficiente dentro de la planta, mejorando significativamente los tiempos de producción y la manipulación de materiales.',
-      'La reingeniería no solo ha incrementado la capacidad de producción sino que también ha fortalecido nuestro compromiso con la sostenibilidad y la innovación, estableciendo nuevos estándares de excelencia en la industria del vidrio.',
-    ],
-    images: [
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
-    ],
-  },
-  {
-    id: 9,
-    title: 'Beautiful Beachfront Apartments',
-    category: 'En Venta',
-    categories: [1],
-    first_description: 'GRUPO INAP, hemos llevado a cabo la transformación completa de la fábrica Caribbean Glass, especializada en la producción de envases de vidrio. Este proyecto integral incluyó la implementación de tecnologías avanzadas y sistemas eficientes que han revolucionado la infraestructura existente:',
-    items: [
-      'Sistemas de Aire Comprimido y de Ventilación: Diseñados para maximizar la eficiencia operativa y garantizar condiciones óptimas en el proceso de fabricación.',
-      'Sistemas de Agua Helada y Tratada: Esenciales para mantener los estándares de calidad y seguridad del vidrio producido, asegurando procesos consistentes y eficientes.',
-      'Sistemas de Transporte Automatizado (Conveyors): Estos sistemas facilitan una logística fluida y eficiente dentro de la planta, mejorando significativamente los tiempos de producción y la manipulación de materiales.',
-      'La reingeniería no solo ha incrementado la capacidad de producción sino que también ha fortalecido nuestro compromiso con la sostenibilidad y la innovación, estableciendo nuevos estándares de excelencia en la industria del vidrio.',
-    ],
-    images: [
-      'https://static.wixstatic.com/media/828c94_571dd2ee74c24cb6a2502af72856b3d7~mv2.jpg/v1/fill/w_382,h_318,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Image-empty-state.jpg',
+      { label: 'Azua', value: 'Azua' },
+      { label: 'Bahoruco', value: 'Bahoruco' },
+      { label: 'Barahona', value: 'Barahona' },
+      { label: 'Dajabón', value: 'Dajabón' },
+      { label: 'Duarte', value: 'Duarte' },
+      { label: 'El Seibo', value: 'El Seibo' },
+      { label: 'Elías Piña', value: 'Elías Piña' },
+      { label: 'Espaillat', value: 'Espaillat' },
+      { label: 'Hato Mayor', value: 'Hato Mayor' },
+      { label: 'Independencia', value: 'Independencia' },
+      { label: 'La Vega', value: 'La Vega' },
+      { label: 'Monte Cristi', value: 'Monte Cristi' },
+      { label: 'Pedernales', value: 'Pedernales' },
     ],
   },
 ]
-export const provincias = [
-  "Azua",
-  "Baoruco",
-  "Barahona",
-  "Dajabón",
-  "Distrito Nacional",
-  "Duarte",
-  "Elías Piña",
-  "El Seibo",
-  "Espaillat",
-  "Hato Mayor",
-  "Hermanas Mirabal",
-  "Independencia",
-  "La Altagracia",
-  "La Romana",
-  "La Vega",
-  "María Trinidad Sánchez",
-  "Monseñor Nouel",
-  "Monte Cristi",
-  "Monte Plata",
-  "Pedernales",
-  "Peravia",
-  "Puerto Plata",
-  "Samaná",
-  "San Cristóbal",
-  "San José de Ocoa",
-  "San Juan",
-  "San Pedro de Macorís",
-  "Sánchez Ramírez",
-  "Santiago",
-  "Santiago Rodríguez",
-  "Santo Domingo",
-  "Valverde"
-];

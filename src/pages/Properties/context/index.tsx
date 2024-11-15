@@ -38,12 +38,12 @@ export const PropertiesProvider = ({ children }: any) => {
   const [property, setProperty] = useState<Property | null>(null)
 
   useEffect(() => {
-    handleGetProperties()
+    handleGetProperties({})
   }, [])
 
-  const handleGetProperties = async () => {
+  const handleGetProperties = async (queries?: any) => {
     try {
-      const data = await getProperties()
+      const data = await getProperties(queries)
       setProperties(data)
     } catch (error: any) {
       console.log('Error get Properties:', error.message)
@@ -110,7 +110,7 @@ export interface InitialStateProps {
   properties: Property[]
   property: Property | null
   setProperty: (body: any) => void
-  handleGetProperties: () => void
+  handleGetProperties: (queries: any) => void
   handleGetProperty: (id: string) => void
   handleRemoveProperty: (id: string) => void
   handlePostProperty: (body: CreatePropertyDto) => void

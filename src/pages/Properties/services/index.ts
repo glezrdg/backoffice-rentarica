@@ -1,10 +1,11 @@
+import { queryMapper } from "../../../utility/queryMapper"
 import { DataService } from "../../../config/api"
 import { CreatePropertyDto, Property } from "../models/property.model"
 
 
-export const getProperties = async (): Promise<Property[]> => {
+export const getProperties = async (queries: any): Promise<Property[]> => {
   try {
-    const { data } = await DataService.get('/properties')
+    const { data } = await DataService.get('/properties' + queryMapper(queries))
     return data
   } catch (error: any) {
     console.log('error', error)
