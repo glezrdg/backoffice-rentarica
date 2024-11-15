@@ -62,7 +62,7 @@ const PageLogin: FC<PageLoginProps> = ({ className = '' }) => {
           </h2>
           <div className='max-w-md mx-auto space-y-6'>
             {/* FORM */}
-            <form className='grid grid-cols-1 gap-6 w-[450px]'>
+            <form className='grid grid-cols-1 gap-6 md:w-[450px]'>
               <label className='grid grid-rows-2'>
                 <span className='text-neutral-800 dark:text-neutral-200'>
                   Correo Electronico
