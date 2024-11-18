@@ -56,6 +56,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
     captacionImages: propertyProps?.captacionImages || [],
     isActive: propertyProps?.isActive || false,
     unitPrice: propertyProps?.unitPrice || '',
+    agent: propertyProps?.agent || '',
   })
 
   const [file, setFile] = useState()
@@ -142,6 +143,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
         captacionImages: [],
         isActive: false,
         unitPrice: '',
+        agent: '',
       })
       setFile(undefined)
       setFiles([])
@@ -204,6 +206,21 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                 onChange={handleInputChange}
                 value={property.owner_contact}
               ></InputMask>
+            </div>
+          </div>
+        </Card>
+        <Card title='Informacion del agente' className='mb-4'>
+          <div className='grid gap-4 w-full mt-4'>
+            {/* Nombre del Paciente */}
+            <div className='flex flex-col space-y-2 col-span-2 lg:col-span-1'>
+              <label className='text-sm'>Nombre del agente</label>
+              <InputText
+                value={property.agent}
+                onChange={handleInputChange}
+                name='agent'
+                placeholder='Ingrese el nombre del agente'
+                className=' w-full border rounded-md'
+              />
             </div>
           </div>
         </Card>

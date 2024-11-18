@@ -14,6 +14,7 @@ export interface Property {
   rooms: number
   size: number
   floors: number
+  agent: string
   owner_name: string
   owner_contact: string
   airbnb: string
@@ -40,6 +41,7 @@ export interface CreatePropertyDto {
   size: number
   floors: number
   owner_name: string
+  agent: string
   owner_contact: string
   airbnb: string
   isShared: boolean
