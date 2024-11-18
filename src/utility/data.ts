@@ -5,10 +5,6 @@ export type Colors = "red" | "blue" | "green" | "purple";
 export function barChartData(color: Colors) {
   let ChoosenColor = getColor(color);
 
-
-
-
-  
   return {
     labels: ["ene", "feb", "mar", "abr", "may", "jun"],
     datasets: [
@@ -96,6 +92,16 @@ export const propertyFeatures = [
     label: "Sin Amueblar",
     value: "sin_amueblar",
     icon: "/assets/icons/unfurnished.svg",
+  },
+  {
+    label: "Cocina Caliente",
+    value: "cocina_caliente",
+    icon: "/assets/icons/cocina-caliente.svg",
+  },
+  {
+    label: "Habitación Servicio",
+    value: "habitacion_servicio",
+    icon: "/assets/icons/habitacion-servicio.svg",
   },
 ];
 

@@ -57,6 +57,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
     isActive: propertyProps?.isActive || false,
     unitPrice: propertyProps?.unitPrice || "",
     agent: propertyProps?.agent || "",
+    sharedAgent: propertyProps?.sharedAgent || "",
   });
 
   const [file, setFile] = useState();
@@ -65,6 +66,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
   const [titleImgFiles, setTitleImgFiles] = useState<File[]>([]);
   const [captImg, setCaptImg] = useState();
   const [captImgFile, setCapImgFile] = useState<File[]>([]);
+  const [isSharedChecked, setIsSharedChecked] = useState(property.isShared);
 
   const handleInputChange = (e: any, body?: any, nm?: string) => {
     if (e?.target) {
@@ -144,6 +146,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
         isActive: false,
         unitPrice: "",
         agent: "",
+        sharedAgent: "",
       });
       setFile(undefined);
       setFiles([]);
@@ -293,6 +296,8 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                 />
                 <InputNumber
                   inputId="currency-us"
+                  placeholder="$"
+                  prefix="USD"
                   value={property.price}
                   onValueChange={(e) => handleInputChange(e, e.value, "price")}
                   mode="currency"
@@ -398,13 +403,33 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                   className="border-2 border-blue-400"
                 ></Checkbox>
               </div>
-              <div className="flex flex-col space-y-2 col-span-2 lg:col-span-1 !mt-0">
-                <label className="text-sm">Captacion compartida</label>
-                <Checkbox
-                  onChange={(e) => handleInputChange(e, e.checked, "isShared")}
-                  checked={property.isShared}
-                  className="border-2 border-blue-400"
-                ></Checkbox>
+              <div className="">
+                <div className="flex flex-col space-y-2 col-span-2 lg:col-span-1 !mt-0">
+                  <label className="text-sm">Captacion compartida</label>
+                  <Checkbox
+                    onChange={(e) => {
+                      setIsSharedChecked(e.checked!);
+                      handleInputChange(e, e.checked, "isShared");
+                    }}
+                    checked={property.isShared}
+                    className="border-2 border-blue-400"
+                  ></Checkbox>
+                </div>
+                {/* InputText Condicional */}
+                {isSharedChecked && (
+                  <div className="flex flex-col space-y-2 col-span-2 lg:col-span-1 mt-4">
+                    <label className="text-sm">
+                      Nombre del captador o compañia
+                    </label>
+                    <InputText
+                      placeholder="Ingresa el nombre"
+                      onChange={(e) =>
+                        handleInputChange(e, e.target.value, "sharedName")
+                      }
+                      className="border-2 border-gray-300 p-2"
+                    />
+                  </div>
+                )}
               </div>
             </div>
 
@@ -479,15 +504,15 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
             </div>
 
             <SelectButton
-              value={property.isActive ? "Publicar" : "Draft"}
+              value={property.isActive ? "Publicar" : "Oculto"}
               onChange={(e: any) =>
                 handleInputChange(
                   {},
-                  e.value === "Draft" ? false : true,
+                  e.value === "Oculto" ? false : true,
                   "isActive"
                 )
               }
-              options={["Publicar", "Draft"]}
+              options={["Publicar", "Oculto"]}
             />
 
             {/* Botón de Enviar */}

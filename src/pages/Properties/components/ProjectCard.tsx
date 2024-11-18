@@ -26,7 +26,7 @@ const ProjectCard: React.FC<IProjectCardProps> = ({ project }) => {
             : ' bg-red-300 text-black'
         }`}
       >
-        {project?.isActive ? 'Publicado' : 'Draft'}
+        {project?.isActive ? 'Publicado' : 'Oculto'}
       </div>
       {/* IMAGE */}
       <div className='mb-4'>
