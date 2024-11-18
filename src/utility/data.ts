@@ -1,22 +1,16 @@
-import { IDoctorSchedule } from "@/pages/Profile/models/doctorSchedule"
+import { IDoctorSchedule } from "@/pages/Profile/models/doctorSchedule";
 
-
-export type Colors = 'red' | 'blue' | 'green' | 'purple'
+export type Colors = "red" | "blue" | "green" | "purple";
 
 export function barChartData(color: Colors) {
+  let ChoosenColor = getColor(color);
 
-  let ChoosenColor = getColor(color)
 
 
+
+  
   return {
-    labels: [
-      "ene",
-      "feb",
-      "mar",
-      "abr",
-      "may",
-      "jun",
-    ],
+    labels: ["ene", "feb", "mar", "abr", "may", "jun"],
     datasets: [
       {
         label: "Neto",
@@ -25,29 +19,35 @@ export function barChartData(color: Colors) {
         data: [20, 65, 59, 80, 81, 56, 55, 40],
       },
     ],
-  }
+  };
 }
 
 export function getColor(color: Colors) {
   switch (color) {
-    case 'red':
-      return 'rgb(255,240,246)'
+    case "red":
+      return "rgb(255,240,246)";
 
-    case 'purple':
-      return 'rgb(239,239,254)'
+    case "purple":
+      return "rgb(239,239,254)";
 
-    case 'green':
-      return 'rgb(232,250,244)'
+    case "green":
+      return "rgb(232,250,244)";
 
-    case 'blue':
-      return 'rgb(233,245,255)'
+    case "blue":
+      return "rgb(233,245,255)";
 
     default:
       break;
   }
 }
 
-export const categories = ['En venta', 'En Alquiler', 'Terreno', 'Airbnb', 'Renta Corta']
+export const categories = [
+  "En venta",
+  "En Alquiler",
+  "Terreno",
+  "Airbnb",
+  "Renta Corta",
+];
 
 export const propertyFeatures = [
   {
@@ -122,44 +122,44 @@ export const propertyTypes = [
 
 export const provincias = [
   {
-    label: 'Santo Domingo y Santiago',
-    code: 'DO',
+    label: "Santo Domingo y Santiago",
+    code: "DO",
     items: [
-      { label: 'Santo Domingo Centro', value: 'Santo Domingo Centro' },
-      { label: 'Santo Domingo Este', value: 'Santo Domingo Este' },
-      { label: 'Santo Domingo Norte', value: 'Santo Domingo Norte' },
-      { label: 'Santo Domingo Oeste', value: 'Santo Domingo Oeste' },
-      { label: 'Santiago', value: 'Santiago' },
+      { label: "Santo Domingo Centro", value: "Santo Domingo Centro" },
+      { label: "Santo Domingo Este", value: "Santo Domingo Este" },
+      { label: "Santo Domingo Norte", value: "Santo Domingo Norte" },
+      { label: "Santo Domingo Oeste", value: "Santo Domingo Oeste" },
+      { label: "Santiago", value: "Santiago" },
     ],
   },
   {
-    label: 'Zonas Turísticas',
-    code: 'TO',
+    label: "Zonas Turísticas",
+    code: "TO",
     items: [
-      { label: 'Bávaro, Punta Cana y la Altagracia', value: 'Bávaro' },
-      { label: 'La Romana', value: 'La Romana' },
-      { label: 'Puerto Plata', value: 'Puerto Plata' },
-      { label: 'Samaná', value: 'Samaná' },
-      { label: 'San Pedro de Macorís', value: 'San Pedro de Macorís' },
+      { label: "Bávaro, Punta Cana y la Altagracia", value: "Bávaro" },
+      { label: "La Romana", value: "La Romana" },
+      { label: "Puerto Plata", value: "Puerto Plata" },
+      { label: "Samaná", value: "Samaná" },
+      { label: "San Pedro de Macorís", value: "San Pedro de Macorís" },
     ],
   },
   {
-    label: 'Otras Zonas',
-    code: 'OZ',
+    label: "Otras Zonas",
+    code: "OZ",
     items: [
-      { label: 'Azua', value: 'Azua' },
-      { label: 'Bahoruco', value: 'Bahoruco' },
-      { label: 'Barahona', value: 'Barahona' },
-      { label: 'Dajabón', value: 'Dajabón' },
-      { label: 'Duarte', value: 'Duarte' },
-      { label: 'El Seibo', value: 'El Seibo' },
-      { label: 'Elías Piña', value: 'Elías Piña' },
-      { label: 'Espaillat', value: 'Espaillat' },
-      { label: 'Hato Mayor', value: 'Hato Mayor' },
-      { label: 'Independencia', value: 'Independencia' },
-      { label: 'La Vega', value: 'La Vega' },
-      { label: 'Monte Cristi', value: 'Monte Cristi' },
-      { label: 'Pedernales', value: 'Pedernales' },
+      { label: "Azua", value: "Azua" },
+      { label: "Bahoruco", value: "Bahoruco" },
+      { label: "Barahona", value: "Barahona" },
+      { label: "Dajabón", value: "Dajabón" },
+      { label: "Duarte", value: "Duarte" },
+      { label: "El Seibo", value: "El Seibo" },
+      { label: "Elías Piña", value: "Elías Piña" },
+      { label: "Espaillat", value: "Espaillat" },
+      { label: "Hato Mayor", value: "Hato Mayor" },
+      { label: "Independencia", value: "Independencia" },
+      { label: "La Vega", value: "La Vega" },
+      { label: "Monte Cristi", value: "Monte Cristi" },
+      { label: "Pedernales", value: "Pedernales" },
     ],
   },
-]
+];
