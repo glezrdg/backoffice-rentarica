@@ -28,6 +28,7 @@ export interface Property {
 }
 
 export interface CreatePropertyDto {
+  [key: string]: any;
   title: string;
   type: string;
   category: string;

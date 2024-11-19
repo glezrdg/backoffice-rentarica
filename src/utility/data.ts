@@ -37,13 +37,7 @@ export function getColor(color: Colors) {
   }
 }
 
-export const categories = [
-  "En venta",
-  "En Alquiler",
-  "Terreno",
-  "Airbnb",
-  "Renta Corta",
-];
+export const categories = ["En venta", "En Alquiler", "Renta Corta"];
 
 export const propertyFeatures = [
   {

@@ -19,7 +19,6 @@ import {
 } from "../../../../utility/data";
 import { usePropertyState } from "../../context";
 import { CreatePropertyDto, Property } from "../../models/property.model";
-import { ConfirmPopup, confirmPopup } from "primereact/confirmpopup";
 
 interface ICreatePropertyModalProps {
   children?: React.ReactNode;
@@ -69,26 +68,74 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
   const [captImg, setCaptImg] = useState();
   const [captImgFile, setCapImgFile] = useState<File[]>([]);
   const [isSharedChecked, setIsSharedChecked] = useState(property.isShared);
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof CreatePropertyDto, boolean>>
+  >({});
 
-  const handleInputChange = (e: any, body?: any, nm?: string) => {
-    if (e?.target) {
-      const { name, value } = e.target;
-      setProperty((prevState) => ({
-        ...prevState,
-        [name]: value || body,
-      }));
-    }
-    if (nm) {
-      setProperty((prevState) => ({
-        ...prevState,
-        [nm]: body,
-      }));
+  // const handleInputChange = (e: any, body?: any, nm?: string) => {
+  //   if (e?.target) {
+  //     const { name, value } = e.target;
+  //     setProperty((prevState) => ({
+  //       ...prevState,
+  //       [name]: value || body,
+  //     }));
+  //   }
+  //   if (nm) {
+  //     setProperty((prevState) => ({
+  //       ...prevState,
+  //       [nm]: body,
+  //     }));
+  //   }
+  // };
+  const handleInputChange = (e: any, value: any, fieldName: any) => {
+    // Actualiza el estado del formulario
+    setProperty({ ...property, [fieldName]: value });
+
+    // Validaciones dinámicas por campo
+    const validateField = (
+      field: keyof CreatePropertyDto,
+      value: any
+    ): boolean => {
+      switch (field) {
+        case "title":
+          return value.trim() !== ""; // El título no puede estar vacío
+        case "price":
+          return value > 0; // El precio debe ser mayor a 0
+        case "zone":
+          return value.trim() !== ""; // La zona no puede estar vacía
+        case "type":
+          return value.trim() !== ""; // El tipo de propiedad no puede estar vacío
+        case "category":
+          return value.trim() !== ""; // La categoría no puede estar vacía
+        case "rooms":
+          return value >= 1; // Debe tener al menos 1 habitación
+        case "bathrooms":
+          return value >= 1; // Debe tener al menos 1 baño
+        // case "description":
+        //   return value.trim() !== ""; // La descripción no puede estar vacía
+        case "owner_name":
+          return value.trim() !== ""; // El nombre del propietario no puede estar vacío
+        // case "owner_contact":
+        //   return /^[0-9]{10}$/.test(value); // Validación simple para número de teléfono (10 dígitos)
+        case "images":
+          return value.length > 0; // Debe haber al menos una imagen
+        // case "titleImages":
+        //   return value.length > 0; // Debe haber al menos una imagen de título
+        case "code":
+          return value > 0; // El precio debe ser mayor a 0
+
+        default:
+          return true; // Por defecto, no se valida
+      }
+    };
+
+    // Verifica si el campo tiene error y lo actualiza
+    if (!validateField(fieldName, value)) {
+      setErrors({ ...errors, [fieldName]: true });
+    } else {
+      setErrors({ ...errors, [fieldName]: false });
     }
   };
-
-  useEffect(() => {
-    console.log(property);
-  }, [property]);
 
   const handleAddItem = (item: string) => {
     console.log(item);
@@ -106,8 +153,45 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
     }
   };
 
+  const validateForm = () => {
+    const requiredFields: (keyof CreatePropertyDto)[] = [
+      "title", // El título no puede estar vacío
+      "price", // El precio debe ser mayor a 0
+      "zone", // La zona no puede estar vacía
+      "type", // El tipo de propiedad no puede estar vacío
+      "category", // La categoría no puede estar vacía
+      // "description", // La descripción no puede estar vacía
+      "rooms", // Debe tener al menos 1 habitación
+      "bathrooms", // Debe tener al menos 1 baño
+      "owner_name", // El nombre del propietario no puede estar vacío
+      "owner_contact", // El contacto del propietario debe ser válido
+      "images", // Debe haber al menos una imagen
+      // "titleImages", // Debe haber al menos una imagen de título
+      "code", // El código no puede estar vacío
+      "agent", // El agente responsable no puede estar vacío
+    ];
+
+    const newErrors: Partial<Record<keyof CreatePropertyDto, boolean>> = {};
+
+    requiredFields.forEach((field) => {
+      if (!property[field] || property[field] === 0) {
+        newErrors[field] = true; // Campo inválido
+      }
+    });
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Retorna true si no hay errores
+  };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      toast.current.show({
+        severity: "error",
+        summary: "Chequea bien ombe! faltan vainas...",
+      });
+      return;
+    }
     try {
       if (propertyProps) {
         await handlePutProperty({ _id: propertyProps._id, ...property });
@@ -174,34 +258,6 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
 
   const header = renderHeader();
 
-  const accept = () => {
-    toast.current.show({
-      severity: "info",
-      summary: "Confirmed",
-      detail: "You have accepted",
-      life: 3000,
-    });
-  };
-  const reject = () => {
-    toast.current.show({
-      severity: "warn",
-      summary: "Rejected",
-      detail: "You have rejected",
-      life: 3000,
-    });
-  };
-
-  const confirm1 = (event: any) => {
-    confirmPopup({
-      target: event.currentTarget,
-      message: "Are you sure you want to proceed?",
-      icon: "pi pi-exclamation-triangle",
-      defaultFocus: "accept",
-      accept,
-      reject,
-    });
-  };
-
   return (
     <div className="card flex justify-content-center">
       <Dialog
@@ -222,11 +278,18 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
               <label className="text-sm">Nombre del propietario</label>
               <InputText
                 value={property.owner_name}
-                onChange={handleInputChange}
+                onChange={(e) =>
+                  handleInputChange(e, e.target.value, "owner_name")
+                }
                 name="owner_name"
                 placeholder="Ingrese el nombre del propietario"
                 className=" w-full border rounded-md"
               />
+              {/* {errors.owner_name && (
+                <span className="text-red-500 text-sm">
+                  Este campo es obligatorio.
+                </span>
+              )} */}
             </div>
 
             {/* PROPERTYY  TYPE */}
@@ -237,10 +300,17 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                 mask="(999) 999-9999"
                 placeholder="(809) 999-9999"
                 name="owner_contact"
-                onChange={handleInputChange}
+                onChange={(e) =>
+                  handleInputChange(e, e.target.value, "owner_contact")
+                }
                 value={property.owner_contact}
               ></InputMask>
             </div>
+            {/* {errors.owner_contact && (
+              <span className="text-red-500 text-sm">
+                Este campo es obligatorio.
+              </span>
+            )} */}
           </div>
         </Card>
         <Card title="Informacion del agente" className="mb-4">
@@ -250,11 +320,16 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
               <label className="text-sm">Nombre del agente</label>
               <InputText
                 value={property.agent}
-                onChange={handleInputChange}
+                onChange={(e) => handleInputChange(e, e.target.value, "agent")}
                 name="agent"
                 placeholder="Ingrese el nombre del agente"
                 className=" w-full border rounded-md"
               />
+              {/* {errors.agent && (
+                <span className="text-red-500 text-sm">
+                  Este campo es obligatorio.
+                </span>
+              )} */}
             </div>
           </div>
         </Card>
@@ -269,16 +344,22 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                 <label className="text-sm">Codigo de propiedad</label>
                 <InputText
                   value={property.code}
-                  onChange={handleInputChange}
+                  maxLength={10}
+                  onChange={(e) => handleInputChange(e, e.target.value, "code")}
                   name="code"
                   type="number"
                   placeholder="Ingrese el codigo de la propiedad"
                   className=" w-full border rounded-md"
                 />
+                {/* {errors.code && (
+                  <span className="text-red-500 text-sm">
+                    Este campo es obligatorio.
+                  </span>
+                )} */}
               </div>
 
               {/* Nombre de propiedad */}
-              <div className="flex flex-col space-y-2 col-span-2 lg:col-span-1">
+              {/* <div className="flex flex-col space-y-2 col-span-2 lg:col-span-1">
                 <label className="text-sm">Nombre de propiedad</label>
                 <InputText
                   value={property.title}
@@ -287,6 +368,25 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                   placeholder="Ingrese el nombre de la propiedad"
                   className=" w-full border rounded-md"
                 />
+              </div> */}
+              <div className="flex flex-col space-y-2 col-span-2 lg:col-span-1 !mt-0">
+                <label className="text-sm">Nombre de propiedad</label>
+                <InputText
+                  type="text"
+                  value={property.title}
+                  onChange={(e) =>
+                    handleInputChange(e, e.target.value, "title")
+                  }
+                  className={`border p-2 rounded ${
+                    errors.title ? "border-red-500" : "border-gray-300"
+                  }`}
+                  placeholder="Ingrese el nombre de la propiedad"
+                />
+                {/* {errors.title && (
+                  <span className="text-red-500 text-sm">
+                    Este campo es obligatorio.
+                  </span>
+                )} */}
               </div>
 
               {/* PROPERTYY  TYPE */}
@@ -298,8 +398,13 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                   optionLabel="label"
                   optionValue="value"
                   name="type"
-                  onChange={handleInputChange}
+                  onChange={(e) => handleInputChange(e, e.target.value, "type")}
                 />
+                {/* {errors.type && (
+                  <span className="text-red-500 text-sm">
+                    Este campo es obligatorio.
+                  </span>
+                )} */}
               </div>
             </div>
 
@@ -310,8 +415,15 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                 value={property.category}
                 options={categories}
                 name="category"
-                onChange={handleInputChange}
+                onChange={(e) =>
+                  handleInputChange(e, e.target.value, "category")
+                }
               />
+              {/* {errors.category && (
+                <span className="text-red-500 text-sm">
+                  Este campo es obligatorio.
+                </span>
+              )} */}
             </div>
 
             {/* CATEGORY */}
@@ -323,7 +435,9 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                   options={["Desde", "Mt2"]}
                   name="unitPrice"
                   placeholder="Fijo"
-                  onChange={handleInputChange}
+                  onChange={(e) =>
+                    handleInputChange(e, e.target.value, "unitPrice")
+                  }
                 />
                 <InputNumber
                   inputId="currency-us"
@@ -336,6 +450,11 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                   locale="en-US"
                   className="w-full"
                 />
+                {/* {errors.price && (
+                  <span className="text-red-500 text-sm">
+                    Este campo es obligatorio.
+                  </span>
+                )} */}
               </div>
             </div>
 
@@ -347,7 +466,9 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                   value={String(property.rooms)}
                   min={1}
                   type="number"
-                  onChange={handleInputChange}
+                  onChange={(e) =>
+                    handleInputChange(e, e.target.value, "rooms")
+                  }
                   name="rooms"
                   className="w-full border rounded-md"
                 />
@@ -358,7 +479,9 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                   value={String(property.bathrooms)}
                   min={1}
                   type="number"
-                  onChange={handleInputChange}
+                  onChange={(e) =>
+                    handleInputChange(e, e.target.value, "bathrooms")
+                  }
                   name="bathrooms"
                   className="w-full border rounded-md"
                 />
@@ -369,7 +492,9 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                   value={String(property.floors)}
                   min={1}
                   type="number"
-                  onChange={handleInputChange}
+                  onChange={(e) =>
+                    handleInputChange(e, e.target.value, "floors")
+                  }
                   name="floors"
                   className=" w-full border rounded-md"
                 />
@@ -380,7 +505,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                   value={String(property.size)}
                   min={1}
                   type="number"
-                  onChange={handleInputChange}
+                  onChange={(e) => handleInputChange(e, e.target.value, "size")}
                   name="size"
                   className="w-full border rounded-md"
                 />
@@ -416,7 +541,9 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                   <InplaceContent>
                     <InputText
                       value={property.airbnb}
-                      onChange={handleInputChange}
+                      onChange={(e) =>
+                        handleInputChange(e, e.target.value, "airbnb")
+                      }
                       autoFocus
                       name="airbnb"
                       className="w-[80%]"
@@ -455,7 +582,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                     <InputText
                       placeholder="Ingresa el nombre"
                       onChange={(e) =>
-                        handleInputChange(e, e.target.value, "sharedName")
+                        handleInputChange(e, e.target.value, "sharedAgent")
                       }
                       className="border-2 border-gray-300 p-2"
                     />
@@ -472,7 +599,9 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                 <InplaceContent>
                   <InputText
                     value={property.youtube}
-                    onChange={handleInputChange}
+                    onChange={(e) =>
+                      handleInputChange(e, e.target.value, "youtube")
+                    }
                     autoFocus
                     name="youtube"
                     className="w-[80%]"
@@ -564,7 +693,6 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
             />
             {/* Botón de Enviar */}
             <div className="flex justify-center col-span-2">
-              <ConfirmPopup />
               <Button
                 // onClick={confirm1}
                 text={`${propertyProps ? "Actualizar" : "Crear"} Propiedad`}
