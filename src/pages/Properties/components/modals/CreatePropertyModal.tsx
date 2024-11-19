@@ -19,6 +19,7 @@ import {
 } from "../../../../utility/data";
 import { usePropertyState } from "../../context";
 import { CreatePropertyDto, Property } from "../../models/property.model";
+import { ConfirmPopup, confirmPopup } from "primereact/confirmpopup";
 
 interface ICreatePropertyModalProps {
   children?: React.ReactNode;
@@ -58,6 +59,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
     unitPrice: propertyProps?.unitPrice || "",
     agent: propertyProps?.agent || "",
     sharedAgent: propertyProps?.sharedAgent || "",
+    youtube: propertyProps?.youtube || "",
   });
 
   const [file, setFile] = useState();
@@ -147,6 +149,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
         unitPrice: "",
         agent: "",
         sharedAgent: "",
+        youtube: "",
       });
       setFile(undefined);
       setFiles([]);
@@ -170,6 +173,34 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
   };
 
   const header = renderHeader();
+
+  const accept = () => {
+    toast.current.show({
+      severity: "info",
+      summary: "Confirmed",
+      detail: "You have accepted",
+      life: 3000,
+    });
+  };
+  const reject = () => {
+    toast.current.show({
+      severity: "warn",
+      summary: "Rejected",
+      detail: "You have rejected",
+      life: 3000,
+    });
+  };
+
+  const confirm1 = (event: any) => {
+    confirmPopup({
+      target: event.currentTarget,
+      message: "Are you sure you want to proceed?",
+      icon: "pi pi-exclamation-triangle",
+      defaultFocus: "accept",
+      accept,
+      reject,
+    });
+  };
 
   return (
     <div className="card flex justify-content-center">
@@ -375,7 +406,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
             </div>
 
             {/* PLUS */}
-            <div className="col-span-2 grid md:grid-cols-3 gap-4 w-full">
+            <div className="col-span-2 grid md:grid-cols-3 gap-4 w-full ">
               <div className="flex flex-col space-y-2 col-span-2 lg:col-span-1 !mt-0">
                 <label className="text-sm">Airbnb</label>
                 <Inplace closable>
@@ -393,7 +424,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                   </InplaceContent>
                 </Inplace>
               </div>
-              <div className="flex flex-col space-y-2 col-span-2 lg:col-span-1 !mt-0">
+              <div className="flex flex-col space-y-2 col-span-2 lg:col-span-1 !mt-0 ">
                 <label className="text-sm">Negociable</label>
                 <Checkbox
                   onChange={(e) =>
@@ -431,6 +462,23 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                   </div>
                 )}
               </div>
+            </div>
+            <div className="flex flex-col space-y-2 col-span-2 lg:col-span-1 !mt-0">
+              <label className="text-sm">Youtube</label>
+              <Inplace closable>
+                <InplaceDisplay>{`Youtube ${
+                  property.youtube ? "online" : "Link"
+                }`}</InplaceDisplay>
+                <InplaceContent>
+                  <InputText
+                    value={property.youtube}
+                    onChange={handleInputChange}
+                    autoFocus
+                    name="youtube"
+                    className="w-[80%]"
+                  />
+                </InplaceContent>
+              </Inplace>
             </div>
 
             {/* EDITOR */}
@@ -514,10 +562,11 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
               }
               options={["Publicar", "Oculto"]}
             />
-
             {/* Botón de Enviar */}
             <div className="flex justify-center col-span-2">
+              <ConfirmPopup />
               <Button
+                // onClick={confirm1}
                 text={`${propertyProps ? "Actualizar" : "Crear"} Propiedad`}
                 className="p-button p-button-rounded w-full"
               />
