@@ -47,6 +47,32 @@ export const postProperty = async (body: CreatePropertyDto): Promise<Property> =
   }
 }
 
+export const putProperty = async (body: Partial<Property>): Promise<Property> => {
+  try {
+    if (body?.images[0]?.name) {
+      const { images, ...BodyWithNoImages } = body
+      const { data: property } = await DataService.patch(`/properties/${body?._id}`, BodyWithNoImages)
+      await handleAddImages(property._id, body.images)
+      return property
+    } else {
+      const { data: property } = await DataService.patch(`/properties/${body?._id}`, body)
+      return property
+    }
+  } catch (error: any) {
+    throw new Error(error.data.response.error || error.message)
+  }
+}
+
+export const deleteImage = async (propertyId: string, image: string): Promise<Property> => {
+  try {
+    const { data } = await DataService.delete(`/properties/${propertyId}/images?image=${image}`)
+    return data
+  } catch (error: any) {
+    console.log('error', error)
+    throw new Error(error.response.data.message || error.message)
+  }
+}
+
 const handleAddImages = async (id: string, images: any[]) => {
   var formData = new FormData();
 
@@ -96,12 +122,3 @@ const handleAddCaptacionImages = async (id: string, images: any[]) => {
   }
 }
 
-export const putProperty = async (body: Partial<Property>): Promise<Property> => {
-  try {
-    const { data: property } = await DataService.patch(`/properties/${body?._id}`, body)
-
-    return property
-  } catch (error: any) {
-    throw new Error(error.data.response.error || error.message)
-  }
-}

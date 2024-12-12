@@ -7,7 +7,7 @@ export interface Property {
   zone: string;
   description: string;
   items: string[];
-  images: string[];
+  images: any;
   titleImages: any[];
   captacionImages: any[];
   bathrooms: number;

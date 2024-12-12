@@ -114,5 +114,5 @@ export interface InitialStateProps {
   handleGetProperty: (id: string) => void
   handleRemoveProperty: (id: string) => void
   handlePostProperty: (body: CreatePropertyDto) => void
-  handlePutProperty: (body: Partial<Property>) => void
+  handlePutProperty: (body: Partial<CreatePropertyDto>) => void
 }

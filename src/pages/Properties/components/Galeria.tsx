@@ -18,8 +18,8 @@ export default function Galeria(props: any) {
   const itemTemplate = (item: any) => {
     return (
       <img
-        src={API_URL + `uploads/${item.itemImageSrc}`}
-        alt={item.alt}
+        src={API_URL + `uploads/${item?.itemImageSrc}`}
+        alt={item?.alt}
         className='w-[100%] h-[300px] md:h-[450px] lg:h-[650px] rounded-3xl text-center object-contain'
       />
     )
@@ -27,8 +27,8 @@ export default function Galeria(props: any) {
   const thumbItemTemplate = (item: any) => {
     return (
       <img
-        src={API_URL + `uploads/${item.itemImageSrc}`}
-        alt={item.alt}
+        src={API_URL + `uploads/${item?.itemImageSrc}`}
+        alt={item?.alt}
         className='h-[100px] text-center object-contain'
       />
     )
