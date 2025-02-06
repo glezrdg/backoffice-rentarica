@@ -1,14 +1,14 @@
-import { InputText } from 'primereact/inputtext'
 import React, { useEffect, useState } from 'react'
+import { Dialog } from 'primereact/dialog'
+import { CiCircleRemove } from 'react-icons/ci'
+import { IoMdSearch } from 'react-icons/io'
+import { VscSettings } from 'react-icons/vsc'
 import { Button } from '../../components/shared'
+import FilterProperties from './components/Filter/FilterProperties'
 import CreatePropertyModal from './components/modals/CreatePropertyModal'
 import ProjectCard from './components/ProjectCard'
+import { PropertyCardSkeleton } from './components/PropertyCardSkeleton'
 import { usePropertyState } from './context'
-import { CiCircleRemove } from 'react-icons/ci'
-import { VscSettings } from 'react-icons/vsc'
-import { IoMdSearch } from 'react-icons/io'
-import FilterProperties from './components/Filter/FilterProperties'
-import { Dialog } from 'primereact/dialog'
 import { Property } from './models/property.model'
 
 interface IPropertiesProps {
@@ -16,7 +16,7 @@ interface IPropertiesProps {
 }
 
 const Properties: React.FC<IPropertiesProps> = (props) => {
-  const { properties, handleGetProperties } = usePropertyState()
+  const { properties, handleGetProperties, loadingProperties } = usePropertyState()
   const [create, setCreate] = useState(false)
   const [visible, setVisible] = useState(false)
   const [code, setCode] = useState('')
@@ -81,10 +81,10 @@ const Properties: React.FC<IPropertiesProps> = (props) => {
 
   return (
     <>
-      <div className='mb-6 grid md:flex justify-between items-center'>
-        <div className='self-center flex items-center border-black rounded-lg border-b-2 mt-7'>
+      <div className='mb-6 bg-white shadow-md p-3 grid md:flex justify-between rounded-2xl items-center'>
+        <div className='self-center flex items-center rounded-lg border-gray-100 hover:border-blue-400 border-2 overflow-hidden'>
           <input
-            className=' focus:outline-none  border-none'
+            className=' focus:outline-none  border-none !py-2'
             placeholder='Buscar por código'
             value={code}
             onChange={(e) => setCode(e.target.value)}
@@ -95,14 +95,14 @@ const Properties: React.FC<IPropertiesProps> = (props) => {
         {/* FILTERS */}
         <div className='flex items-center gap-4'>
           <div
-            className='flex items-center justify-center cursor-pointer self-start mt-10 lg:my-0 lg:self-autocursor-pointer rounded-xl border border-zinc-200 py-4 px-6 lg:px-3 hover:border-zinc-500 hover:bg-zinc-100 transition-button '
+            className='flex items-center justify-center cursor-pointer self-start mt-10 lg:my-0 lg:self-autocursor-pointer rounded-xl border border-zinc-200 py-3 px-6 lg:px-3 hover:border-zinc-500 hover:bg-zinc-100 transition-button '
             onClick={() => setVisible(true)}
           >
             <VscSettings className='text-xl mr-2' />
             <span className='font-semibold transition-all'>Más Filtros:</span>
           </div>
           <div
-            className='flex items-center cursor-pointer justify-center self-start mt-10 lg:my-0 lg:self-autocursor-pointer rounded-xl border border-zinc-200 py-4 px-6 lg:px-3 hover:border-zinc-500 hover:bg-zinc-100 transition-button '
+            className='flex items-center cursor-pointer justify-center self-start mt-10 lg:my-0 lg:self-autocursor-pointer rounded-xl border border-zinc-200 py-3 px-6 lg:px-3 hover:border-zinc-500 hover:bg-zinc-100 transition-button '
             onClick={() => {
               handleCleanFilters()
               handleGetProperties({}) // Fetch properties with cleared filters
@@ -116,15 +116,21 @@ const Properties: React.FC<IPropertiesProps> = (props) => {
         </div>
 
         <Button
-          className='text-xl px-4'
+          className=' px-4'
+          icon={<i className='pi pi-plus mr-2' />}
           onClick={() => setCreate(true)}
-          text='Crear'
+          text='Crear propiedad'
         />
       </div>
       <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
-        {searchProperties?.map((p) => (
-          <ProjectCard project={p} />
-        ))}
+        {loadingProperties ? <>
+          <PropertyCardSkeleton />
+          <PropertyCardSkeleton />
+          <PropertyCardSkeleton />
+        </>
+          : searchProperties?.map((p) => (
+            <ProjectCard project={p} />
+          ))}
       </div>
       <Dialog
         visible={visible}
@@ -132,11 +138,11 @@ const Properties: React.FC<IPropertiesProps> = (props) => {
         className=' px-0'
         header='Filtros'
       >
-        <div className='flex items-center flex-col '>
+        <div className='relative flex items-center flex-col '>
           <FilterProperties filters={filters} updateFilters={updateFilter} />
-          <div className='flex justify-between w-full pt-5'>
+          <div className='sticky bg-white shadow-2xl -bottom-5 flex justify-between rounded-2xl w-full p-4'>
             <div
-              className='flex items-center justify-center self-start lg:my-0 lg:self-auto cursor-pointer rounded-xl border border-zinc-200 py-2 px-6 lg:px-3 hover:border-zinc-500 hover:bg-zinc-100 transition-button '
+              className='bottom-0 flex items-center justify-center self-start lg:my-0 lg:self-auto cursor-pointer rounded-xl border border-zinc-200 py-2 px-6 lg:px-3 hover:border-zinc-500 hover:bg-zinc-100 transition-button '
               onClick={() => {
                 handleCleanFilters()
                 handleGetProperties({}) // Fetch properties with cleared filters

@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Property } from '../models/property.model'
 import { usePropertyState } from '../context'
+import commaNumber from 'comma-number'
 
 export interface IProjectCardProps {
   project: Property
@@ -20,11 +21,10 @@ const ProjectCard: React.FC<IProjectCardProps> = ({ project }) => {
         {project?.category}
       </div>
       <div
-        className={`absolute left-5 top-2 p-2 px-3 rounded-md text-xs uppercase font-semibold ${
-          project?.isActive
-            ? 'bg-green-400 text-white'
-            : ' bg-red-300 text-black'
-        }`}
+        className={`absolute left-5 top-2 p-2 px-3 rounded-md text-xs uppercase font-semibold ${project?.isActive
+          ? 'bg-green-400 text-white'
+          : ' bg-red-300 text-black'
+          }`}
       >
         {project?.isActive ? 'Publicado' : 'Oculto'}
       </div>
@@ -67,7 +67,7 @@ const ProjectCard: React.FC<IProjectCardProps> = ({ project }) => {
         </div>
         <div className='flex items-center justify-between'>
           <p className='font-bold text-base uppercase'>
-            {project.unitPrice} USD${project.price}
+            {project.unitPrice} USD${commaNumber(project.price)}
           </p>
           <p className='bg-yellow-400 px-2 h-9 leading-9 rounded-sm text-black'>
             {project.code}

@@ -19,12 +19,13 @@ import {
 const initialState: InitialStateProps = {
   properties: [],
   property: null,
-  setProperty: () => {},
-  handleGetProperties: () => {},
-  handleGetProperty: () => {},
-  handleRemoveProperty: () => {},
-  handlePostProperty: () => {},
-  handlePutProperty: () => {},
+  loadingProperties: false,
+  setProperty: () => { },
+  handleGetProperties: () => { },
+  handleGetProperty: () => { },
+  handleRemoveProperty: () => { },
+  handlePostProperty: () => { },
+  handlePutProperty: () => { },
 }
 
 const PropertiesContext = createContext(initialState)
@@ -36,6 +37,7 @@ export interface PropertiesProviderProps {
 export const PropertiesProvider = ({ children }: any) => {
   const [properties, setProperties] = useState<Property[]>([])
   const [property, setProperty] = useState<Property | null>(null)
+  const [loadingProperties, setLoadingProperties] = useState(false)
 
   useEffect(() => {
     handleGetProperties({})
@@ -43,7 +45,9 @@ export const PropertiesProvider = ({ children }: any) => {
 
   const handleGetProperties = async (queries?: any) => {
     try {
+      setLoadingProperties(true)
       const data = await getProperties(queries)
+      setLoadingProperties(false)
       setProperties(data)
     } catch (error: any) {
       console.log('Error get Properties:', error.message)
@@ -90,6 +94,7 @@ export const PropertiesProvider = ({ children }: any) => {
     <PropertiesContext.Provider
       value={{
         properties,
+        loadingProperties,
         handleRemoveProperty,
         handleGetProperties,
         handleGetProperty,
@@ -109,6 +114,7 @@ export const usePropertyState = () => useContext(PropertiesContext)
 export interface InitialStateProps {
   properties: Property[]
   property: Property | null
+  loadingProperties: boolean
   setProperty: (body: any) => void
   handleGetProperties: (queries: any) => void
   handleGetProperty: (id: string) => void

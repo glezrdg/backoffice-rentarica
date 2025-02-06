@@ -5,6 +5,7 @@ import Galeria from "./components/Galeria";
 import { usePropertyState } from "./context";
 import Toolbar from "./components/Toolbar";
 import { propertyFeatures } from "../../utility/data";
+import commaNumber from "comma-number";
 
 interface IPatientPageProps {
   children?: React.ReactNode;
@@ -43,7 +44,7 @@ const PatientPage: React.FC<IPatientPageProps> = (props) => {
             <div className="mt-4 md:mt-0 md:text-right">
               <p className={`text-lg`}>{property?.category}</p>
               <p className="font-bold text-xl lg:text-3xl uppercase">
-                {property?.unitPrice} USD${property?.price}
+                {property?.unitPrice} USD${commaNumber(property?.price || 0)}
               </p>
             </div>
           </div>
@@ -83,10 +84,8 @@ const PatientPage: React.FC<IPatientPageProps> = (props) => {
                         key={i}
                         className={`flex items-center gap-2 p-2 rounded-lg transition-colors borderbg-yellow-300 border-yellow-500`}
                       >
-                        <img
-                          src={feature?.icon}
-                          alt={feature?.label}
-                          className="w-6 h-6"
+                        <i
+                          className={feature?.icon}
                         />
                         <span className="text-base font-semibold">
                           {" "}

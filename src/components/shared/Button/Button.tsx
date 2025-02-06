@@ -45,7 +45,7 @@ const Button: React.FC<IButtonProps> = ({
     <button
       data-te-ripple-init
       data-te-ripple-color={type === "fill" ? "light" : "dark"}
-      className={`text-xl group btn ${type} ${color} ${className} ${showClases()}`}
+      className={`text-base group btn ${type} ${color} ${className} ${showClases()}`}
       onClick={(e) => onClick && onClick(e)}
       type={buttonType}
       disabled={disabled}

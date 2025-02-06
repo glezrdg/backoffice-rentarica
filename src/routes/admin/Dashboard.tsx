@@ -6,6 +6,7 @@ import { Dashboard } from "../../pages";
 import Properties from "../../pages/Properties";
 import { PropertiesProvider } from "../../pages/Properties/context";
 import PropertyPage from "../../pages/Properties/PropertyPage";
+import { Fase2 } from "../../pages/Fase2";
 
 export const adminPages: routerType[] = [
   // {
@@ -45,11 +46,7 @@ export const adminPages: routerType[] = [
 
   {
     path: "*",
-    element: (
-      <PropertiesProvider>
-        <Properties />
-      </PropertiesProvider>
-    ),
+    element: (<Fase2 />),
     title: "home",
   },
 ];

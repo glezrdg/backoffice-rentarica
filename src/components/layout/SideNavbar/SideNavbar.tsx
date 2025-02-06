@@ -1,12 +1,12 @@
 import React from 'react'
-import { MenuItem, SubMenuItem } from './components'
-import './styles.css'
-import { useAppSelector } from '../../../redux/store'
+import { BiBuildingHouse } from "react-icons/bi"
+import { CiSettings } from 'react-icons/ci'
+import { IoIosPeople } from "react-icons/io"
+import { VscRequestChanges } from "react-icons/vsc"
 import { useLocation } from 'react-router-dom'
-import { RiHome6Line, RiCalendarCheckFill } from 'react-icons/ri'
-import { CiCalendarDate } from 'react-icons/ci'
-import { BsPerson, BsPersonGear } from 'react-icons/bs'
-import { FaHandHoldingMedical } from 'react-icons/fa'
+import { useAppSelector } from '../../../redux/store'
+import { MenuItem } from './components'
+import './styles.css'
 
 interface ISideNavbarProps {
   children?: React.ReactNode
@@ -24,9 +24,8 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active, handleOpen }) => {
   return (
     <>
       <div
-        className={` hidden md:block overflow-visible sidenav lg:block bg-white h-[100vh] p-4 transition-all ${
-          active ? 'w-[3.5rem] lg:w-[14rem]' : 'w-[3.5rem]'
-        }`}
+        className={` hidden md:block overflow-visible sidenav lg:block bg-white h-[100vh] p-4 transition-all ${active ? 'w-[3.5rem] lg:w-[14rem]' : 'w-[3.5rem]'
+          }`}
       >
         <div
           className='flex items-center cursor-pointer mb-6 text-xl'
@@ -41,12 +40,39 @@ const SideNavbar: React.FC<ISideNavbarProps> = ({ active, handleOpen }) => {
         </div>
         <ul className='sidenav-menu'>
           <>
+            <p className='mt-3 mb-4 text-blue-500'>Administrador</p>
+
             <MenuItem
               activeMenu={active}
               url='admin/propiedades'
-              icon={<BsPerson className='text-lg' />}
+              icon={<BiBuildingHouse className='text-lg' />}
               active={current === 'propiedades'}
               title='Propiedades'
+            />
+
+            <p className='mt-6 mb-4 text-blue-500'>Fase 2</p>
+
+            <MenuItem
+              activeMenu={active}
+              url='admin/agentes'
+              icon={<IoIosPeople className='text-lg' />}
+              active={current === 'agentes'}
+              title='Agentes'
+            />
+            <MenuItem
+              activeMenu={active}
+              url='admin/solicitudes'
+              icon={<VscRequestChanges className='text-lg' />}
+              active={current === 'solicitudes'}
+              title='Solicitudes'
+            />
+
+            <MenuItem
+              activeMenu={active}
+              url='admin/mantenimiento'
+              icon={<CiSettings className='text-lg' />}
+              active={current === 'mantenimiento'}
+              title='Mantenimiento'
             />
           </>
         </ul>

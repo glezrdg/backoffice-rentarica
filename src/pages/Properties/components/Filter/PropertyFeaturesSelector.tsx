@@ -25,14 +25,13 @@ const PropertyFeaturesSelector: React.FC<IPropertyFeaturesSelectorProps> = ({
         <button
           key={feature.value}
           onClick={() => toggleFeature(feature.value)}
-          className={`flex items-center gap-2 p-2 rounded-lg transition-colors border ${
-            selectedFeatures.includes(feature.value)
-              ? 'bg-yellow-300 border-yellow-500'
-              : 'bg-white border-gray-300'
-          }`}
+          className={`flex items-center gap-2 p-2 rounded-lg transition-colors border ${selectedFeatures.includes(feature.value)
+            ? 'bg-yellow-300 border-yellow-500'
+            : 'bg-white border-gray-300'
+            }`}
         >
-          <img src={feature.icon} alt={feature.label} className='w-6 h-6' />
-          <span className='text-base font-semibold'>{feature.label}</span>
+          <i className={`${feature.icon}`} />
+          <span className='text-base font-semibold  m-0'>{feature.label}</span>
         </button>
       ))}
     </div>
