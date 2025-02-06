@@ -158,18 +158,18 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
     const requiredFields: (keyof CreatePropertyDto)[] = [
       "title", // El título no puede estar vacío
       "price", // El precio debe ser mayor a 0
-      "zone", // La zona no puede estar vacía
+      // "zone", // La zona no puede estar vacía
       "type", // El tipo de propiedad no puede estar vacío
       "category", // La categoría no puede estar vacía
       // "description", // La descripción no puede estar vacía
       "rooms", // Debe tener al menos 1 habitación
       "bathrooms", // Debe tener al menos 1 baño
-      "owner_name", // El nombre del propietario no puede estar vacío
-      "owner_contact", // El contacto del propietario debe ser válido
+      // "owner_name", // El nombre del propietario no puede estar vacío
+      // "owner_contact", // El contacto del propietario debe ser válido
       "images", // Debe haber al menos una imagen
       // "titleImages", // Debe haber al menos una imagen de título
       "code", // El código no puede estar vacío
-      "agent", // El agente responsable no puede estar vacío
+      // "agent", // El agente responsable no puede estar vacío
     ];
 
     const newErrors: Partial<Record<keyof CreatePropertyDto, boolean>> = {};
