@@ -20,6 +20,7 @@ export interface Property {
   owner_contact: string;
   airbnb: string;
   youtube: string;
+  googleMapsLink: string;
   isShared: boolean;
   isNegotiable: boolean;
   code: string;
@@ -49,6 +50,7 @@ export interface CreatePropertyDto {
   owner_contact: string;
   airbnb: string;
   youtube: string;
+  googleMapsLink: string;
   isShared: boolean;
   isNegotiable: boolean;
   code: string;
