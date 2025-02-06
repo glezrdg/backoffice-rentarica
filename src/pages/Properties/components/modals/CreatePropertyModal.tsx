@@ -689,6 +689,7 @@ const CreatePropertyModal: React.FC<ICreatePropertyModalProps> = ({
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 text-sm">
                   {propertyFeatures.map((i) => (
                     <label
+                      key={i.value}
                       className="flex items-center gap-8"
                       onClick={() => handleAddItem(i.value)}
                     >
